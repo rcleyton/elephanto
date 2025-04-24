@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+english:
+  name: Curso de Inglês
+  description: Cards para aumentar vocabulário em inglês
+
+chemical:
+  name: Química
+  description: Cards para decorar o elementos da tabela periódica
