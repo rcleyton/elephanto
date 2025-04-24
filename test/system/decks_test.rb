@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class DecksTest < ApplicationSystemTestCase
   setup do
-    @deck = decks(:one)
+    @deck = decks(:english)
   end
 
   test "visiting the index" do
