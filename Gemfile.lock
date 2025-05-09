@@ -187,6 +187,8 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.25.5)
+    minitest-focus (1.4.0)
+      minitest (>= 4, < 6)
     minitest-rails (8.0.0)
       minitest (~> 5.20)
       railties (>= 8.0.0, < 8.1.0)
@@ -438,6 +440,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
+  minitest-focus
   minitest-rails (~> 8.0.0)
   minitest-reporters
   pg (~> 1.1)

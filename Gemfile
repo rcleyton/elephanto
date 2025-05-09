@@ -30,6 +30,7 @@ group :test do
   gem "capybara"
   gem "guard"
   gem "guard-minitest"
+  gem "minitest-focus"
   gem "minitest-rails", "~> 8.0.0"
   gem "minitest-reporters"
   gem "selenium-webdriver"

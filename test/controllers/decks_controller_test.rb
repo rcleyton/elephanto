@@ -1,3 +1,6 @@
+# typed: false
+# frozen_string_literal: true
+
 require "test_helper"
 
 class DecksControllerTest < ActionDispatch::IntegrationTest
@@ -5,17 +8,17 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
     @deck = decks(:english)
   end
 
-  test "should get index" do
+  it "should get index" do
     get decks_url
     assert_response :success
   end
-
-  test "should get new" do
+  
+  it "should get new" do
     get new_deck_url
     assert_response :success
   end
 
-  test "should create deck" do
+  it "should create deck" do
     assert_difference("Deck.count") do
       post decks_url, params: { deck: { description: @deck.description, name: @deck.name } }
     end
@@ -23,22 +26,22 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to deck_url(Deck.last)
   end
 
-  test "should show deck" do
+  it "should show deck" do
     get deck_url(@deck)
     assert_response :success
   end
 
-  test "should get edit" do
+  it "should get edit" do
     get edit_deck_url(@deck)
     assert_response :success
   end
 
-  test "should update deck" do
+  it "should update deck" do
     patch deck_url(@deck), params: { deck: { description: @deck.description, name: @deck.name } }
     assert_redirected_to deck_url(@deck)
   end
 
-  test "should destroy deck" do
+  it "should destroy deck" do
     assert_difference("Deck.count", -1) do
       delete deck_url(@deck)
     end

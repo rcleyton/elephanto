@@ -5,7 +5,9 @@ class DecksController < ApplicationController
     @decks = Deck.all
   end
 
-  def show; end
+  def show;
+    @flashcards = @deck.flashcards
+  end
 
   def new
     @deck = Deck.new
@@ -36,7 +38,7 @@ class DecksController < ApplicationController
 
   private
     def set_deck
-      @deck = Deck.find(params.expect(:id))
+      @deck = Deck.find(params[:id])
     end
 
     def deck_params

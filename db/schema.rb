@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_23_020815) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_24_010516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,4 +20,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_23_020815) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "flashcards", force: :cascade do |t|
+    t.text "front"
+    t.text "back"
+    t.integer "difficulty"
+    t.datetime "last_reviewed_at"
+    t.bigint "deck_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_flashcards_on_deck_id"
+  end
+
+  add_foreign_key "flashcards", "decks"
 end
