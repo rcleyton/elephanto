@@ -6,12 +6,10 @@ require "minitest/rails"
 require "minitest/reporters"
 require "simplecov"
 
-unless ARGV.any? { |env|env=~/guard/ }
-  SimpleCov.start 'rails' do
-    add_filter 'app/channels'
-    add_filter 'app/jobs'
-    add_filter 'app/mailers'
-  end
+SimpleCov.start "rails" do
+  add_filter "app/channels"
+  add_filter "app/jobs"
+  add_filter "app/mailers"
 end
 
 Minitest::Reporters.use! Minitest::Reporters::ProgressReporter.new

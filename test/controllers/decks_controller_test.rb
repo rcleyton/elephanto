@@ -12,7 +12,7 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
     get decks_url
     assert_response :success
   end
-  
+
   it "should get new" do
     get new_deck_url
     assert_response :success

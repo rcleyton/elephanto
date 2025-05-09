@@ -33,6 +33,7 @@ group :test do
   gem "minitest-focus"
   gem "minitest-rails", "~> 8.0.0"
   gem "minitest-reporters"
+  gem "rails-controller-testing"
   gem "selenium-webdriver"
   gem "simplecov", require: false
 end
