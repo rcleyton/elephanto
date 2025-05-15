@@ -1,9 +1,13 @@
 <% content_for :title, "New deck" %>
 
-<div class="w-full">
-  <h1 class="font-bold text-4xl">New deck</h1>
+<div class="w-full border bg-gray-100 border-gray-300">
+  <div class="border-b p-3 bg-gray-200 border-gray-300">
+    <h1 class="font-bold text-4xl">New deck</h1>
+  </div>
 
   <%= render "form", deck: @deck %>
 
-  <%= link_to "Back to decks", decks_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <div class="flex justify-end space-x-3 m-3">
+    <%= link_to "Back to decks", decks_path, class: "w-full text-center sm:w-auto float-right sm:mt-0 rounded-md px-3.5 py-2.5 bg-gray-500 hover:bg-gray-400 inline-block font-medium text-white" %>
+  </div>
 </div>
