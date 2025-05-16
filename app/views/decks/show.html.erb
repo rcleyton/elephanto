@@ -1,23 +1,36 @@
 <% content_for :title, "Showing deck" %>
 
-<div class="w-full">
+<div class="w-full border bg-gray-100 border-gray-300">
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <h1 class="font-bold text-4xl">Showing deck</h1>
-
-  <%= render @deck %>
-
-   <h2 class="text-lg my-3 font-bold">Flashcards</h2>
-    <% if @flashcards.any? %>
-      <p class="mb-3">Esse deck possui <%= @flashcards.count %> flashcards.</p> 
-    <% else %>
-      <p class="mb-3">No flashcards yet.</p>
+  <div class="flex justify-between items-center border-b p-3 bg-gray-200 border-gray-300">
+    <h1 class="font-bold text-4xl">Showing deck</h1>
+    <%= link_to new_deck_flashcard_path(@deck), class: "flex rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" do %>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg> 
+      <strong class="pl-2">Add flashcard</strong>
     <% end %>
+  </div>
 
-  <%= link_to "Edit this deck", edit_deck_path(@deck), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= link_to "Back to decks", decks_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-  <%= button_to "Destroy this deck", @deck, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-  <%= link_to "New flashcard", new_deck_flashcard_path(@deck) %>
+  <div class="flex justify-between items-center border m-3 p-3 border-gray-300 bg-gray-50">
+    <%= render @deck %>
+  </div>
+
+  <div class="flex flex-col border m-3 p-3 border-gray-300 bg-gray-50">
+    <h2 class="text-lg my-3 font-bold">Flashcards</h2>
+      <% if @flashcards.any? %>
+        <p>Esse deck possui <%= @flashcards.count %> flashcards.</p> 
+      <% else %>
+        <p>No flashcards yet.</p>
+      <% end %>
+  </div>
+
+  <div class="flex justify-end flex-col sm:flex-row space-x-3 m-3">
+    <%= link_to "Edit this deck", edit_deck_path(@deck), class: "w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white mb-3 md:mb-0 text-center rounded-md px-3.5 py-2.5 font-medium" %>
+    <%= link_to "Back to decks", decks_path, class: "w-full sm:w-auto bg-gray-500 hover:bg-gray-400 text-white mb-3 md:mb-0 text-center rounded-md px-3.5 py-2.5 font-medium" %>
+    <%= button_to "Destroy this deck", @deck, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  </div>
 </div>

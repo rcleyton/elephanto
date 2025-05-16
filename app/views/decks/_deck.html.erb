@@ -2,4 +2,9 @@
   <div class="text-lg font-bold">
     <%= deck.name %>
   </div>
+  <% if action_name == "show" %>
+    <div class="text-lg">
+      <p><%= deck.description %></p>
+    </div>
+  <% end %>
 </div>
