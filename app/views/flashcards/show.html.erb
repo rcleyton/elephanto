@@ -1,13 +1,19 @@
 <% content_for :title, "Showing flashcard" %>
 
-<div class="w-full">
+<div class="w-full border bg-gray-100 border-gray-300">
   <% if notice.present? %>
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <h1 class="font-bold text-4xl">Showing flashcard</h1>
+  <div class="flex justify-between items-center border-b p-3 bg-gray-200 border-gray-300">
+    <h1 class="font-bold text-4xl">Showing flashcard</h1>
+  </div>
 
-  <%= render @flashcard %>
+  <div class="border m-3 p-3 border-gray-300 bg-gray-50">
+    <%= render @flashcard %>
+  </div>
 
-  <%= link_to "Back to deck", deck_path(@deck), class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <div class="flex justify-end space-x-3 m-3">
+    <%= link_to "Back to deck", deck_path(@deck), class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-500 hover:bg-gray-400 text-white font-medium" %>
+  </div>
 </div>
