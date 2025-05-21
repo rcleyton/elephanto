@@ -14,7 +14,8 @@ class FlashcardsController < ApplicationController
   def create
     @flashcard = @deck.flashcards.build(flashcard_params)
     if @flashcard.save
-      redirect_to deck_flashcard_path(@deck, @flashcard), notice: "Flashcard was successfully created."
+      flash[:success] = "Flashcard was successfully created."
+      redirect_to new_deck_flashcard_path(@deck)
     else
       render :new, status: :unprocessable_entity
     end
