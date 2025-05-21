@@ -18,22 +18,28 @@ class DecksController < ApplicationController
   def create
     @deck = Deck.new(deck_params)
     if @deck.save
-      redirect_to @deck, notice: "Deck was successfully created." 
+      flash[:success] = "Deck was successfully created." 
+      redirect_to @deck
     else
+      flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
       render :new, status: :unprocessable_entity 
     end
   end
 
   def update
     if @deck.update(deck_params)
-      redirect_to @deck, notice: "Deck was successfully updated." 
+      flash[:notice] = "Deck was successfully updated."
+      redirect_to @deck
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    redirect_to decks_path, status: :see_other, notice: "Deck was successfully destroyed." if @deck.destroy!
+    if @deck.destroy!
+      flash[:success] = "Deck was successfully destroyed."
+      redirect_to decks_path, status: :see_other
+    end
   end
 
   private

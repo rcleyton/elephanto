@@ -17,6 +17,7 @@ class FlashcardsController < ApplicationController
       flash[:success] = "Flashcard was successfully created."
       redirect_to new_deck_flashcard_path(@deck)
     else
+      flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
       render :new, status: :unprocessable_entity
     end
   end
