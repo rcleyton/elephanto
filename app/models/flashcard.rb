@@ -3,7 +3,8 @@ class Flashcard < ApplicationRecord
 
   enum :difficulty, { easy: 0, medium: 1, hard: 2, again: 3 }
 
-  validates :front,      presence: true
-  validates :back,       presence: true
+  validates :front,            presence: true
+  validates :back,             presence: true
+  validates :last_reviewed_at, presence: true, allow_nil: true
   validates :difficulty, inclusion: { in: difficulties.keys }, allow_nil: true 
 end
