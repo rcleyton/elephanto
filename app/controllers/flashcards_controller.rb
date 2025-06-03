@@ -3,7 +3,7 @@
 
 class FlashcardsController < ApplicationController
   before_action :set_deck
-  before_action :set_flashcard, only: %i[show]
+  before_action :set_flashcard, only: %i[show review]
 
   def show; end
 
@@ -19,6 +19,20 @@ class FlashcardsController < ApplicationController
     else
       flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def review
+    @flashcard.update(last_reviewed_at: Time.current, difficulty: params[:difficulty])
+
+    flashcards     = @deck.flashcards.order(:created_at)
+    current_index  = flashcards.index(@flashcard)
+    next_flashcard = flashcards[current_index + 1]
+
+    if next_flashcard
+      redirect_to deck_flashcard_path(@deck, next_flashcard)
+    else
+      redirect_to deck_path(@deck), notice: "Você revisou todos os flashcards!"
     end
   end
 

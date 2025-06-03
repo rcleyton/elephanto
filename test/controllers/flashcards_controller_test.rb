@@ -5,8 +5,9 @@ require "test_helper"
 
 class FlashcardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @deck      = decks(:english)
-    @flashcard = @deck.flashcards.create(front: "Question", back: "Answer", difficulty: "easy")
+    @deck       = decks(:english)
+    @flashcard  = @deck.flashcards.create(front: "Question",  back: "Answer", difficulty: "easy")
+    @flashcard2 = @deck.flashcards.create(front: "Question2", back: "Answer2")
   end
 
   it "should get new" do
@@ -48,6 +49,30 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       end
 
       must_redirect_to new_deck_flashcard_url(@deck)
+    end
+  end
+
+  context 'review flashcards' do
+    it "should review flashcard and redirect to next one" do
+      post review_deck_flashcard_path(@deck, @flashcard), params: { difficulty: "easy" }
+
+      @flashcard.reload
+      assert_not_nil @flashcard.last_reviewed_at
+      assert_equal "easy", @flashcard.difficulty
+
+      assert_redirected_to deck_flashcard_path(@deck, @flashcard2)
+    end
+
+    it "should redirect to deck when no next flashcard" do
+      post review_deck_flashcard_path(@deck, @flashcard2), params: { difficulty: "medium" }
+
+      @flashcard2.reload
+      assert_not_nil @flashcard2.last_reviewed_at
+      assert_equal "medium", @flashcard2.difficulty
+
+      assert_redirected_to deck_path(@deck)
+      follow_redirect!
+      assert_match "Você revisou todos os flashcards!", response.body
     end
   end
 end

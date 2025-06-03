@@ -4,11 +4,17 @@
       <strong class="block font-medium mb-1">Front:</strong>
       <%= flashcard.front %>
     </div>
-    <button data-action="reveal#show" type="button" class="text-center rounded-md px-3.5 py-2.5 bg-green-600 hover:bg-green-500 font-medium text-white">Answer</button>
+    <button data-action="reveal#show" type="button" class="text-center rounded-md px-3.5 py-2.5 bg-green-600 hover:bg-green-500 font-medium text-white cursor-pointer">Answer</button>
   </div>
 
   <div data-reveal-target="item" class="hidden">
     <strong  class="block font-medium mb-1">Back:</strong>
     <%= flashcard.back %>
+    <div class="my-3 flex justify-center space-x-3">
+      <%= button_to "Again", review_deck_flashcard_path(@deck, flashcard),  params: { difficulty: "again" }, method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
+      <%= button_to "Easy", review_deck_flashcard_path(@deck, flashcard),   params: { difficulty: "easy" },   method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
+      <%= button_to "Medium", review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" }, method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
+      <%= button_to "Hard", review_deck_flashcard_path(@deck, flashcard),   params: { difficulty: "hard" }, method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
+    </div>
   </div>
 </div>
