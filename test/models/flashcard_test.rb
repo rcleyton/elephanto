@@ -1,7 +1,21 @@
+# typed: false
+# frozen_string_literal: true
+
 require "test_helper"
 
 describe Flashcard do
-  # it "does a thing" do
-  #   value(1+1).must_equal 2
-  # end
+  setup do
+    @deck = decks(:english)
+  end
+
+  describe "difficulties" do
+    it "accepts valid difficulties" do
+      valid_difficulties = ["again", "easy", "medium", "hard", "", nil]
+
+      valid_difficulties.each do |difficulty|
+        flashcard = Flashcard.new(deck: @deck, front: "Question", back: "Answer", difficulty: difficulty)
+        expect(flashcard.valid?).must_equal true
+      end
+    end
+  end
 end
