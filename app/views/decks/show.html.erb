@@ -1,36 +1,85 @@
 <% content_for :title, "Showing deck" %>
 
-<div class="w-full border bg-gray-100 border-gray-300">
-  <div class="flex justify-between items-center border-b p-3 bg-gray-200 border-gray-300">
-    <h1 class="font-bold text-4xl">Showing deck</h1>
-    <%= link_to new_deck_flashcard_path(@deck), class: "flex rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" do %>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-      </svg> 
-      <strong class="pl-2">Add flashcard</strong>
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+  <div class="flex flex-wrap justify-between gap-3 p-4">
+    <div class="flex min-w-72 flex-col gap-3">
+      <p class="text-[#111418] tracking-light text-[32px] font-bold leading-tight"><%= @deck.name %></p>
+      <p class="text-[#637488] text-sm font-normal leading-normal">
+        <%= @deck.description %>
+      </p>
+    </div>
+    <button
+      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal"
+    >
+      <span class="truncate">Start Studying</span>
+    </button>
+  </div>
+  <div class="flex justify-stretch">
+    <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
+      <%= link_to edit_deck_path(@deck), class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f1f2f4] text-[#121416] text-sm font-bold leading-normal tracking-[0.015em]" do %>
+        <span class="truncate">Edit Deck</span>
+      <% end %>
+      <%= button_to @deck, method: :delete, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f1f2f4] text-[#121416] text-sm font-bold leading-normal tracking-[0.015em]" do %>
+        <span class="truncate">Delete Deck</span>
+      <% end %>
+    </div>
+  </div>
+
+  <h3 class="text-[#121416] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Deck Overview</h3>
+
+  <div class="p-4 grid grid-cols-[20%_1fr] gap-x-6">
+    <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
+      <p class="text-[#6a7581] text-sm font-normal leading-normal">Flashcards</p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @flashcards.count %></p>
+    </div>
+    <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
+      <p class="text-[#6a7581] text-sm font-normal leading-normal">Created</p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @deck.created_at %></p>
+    </div>
+    <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
+      <p class="text-[#6a7581] text-sm font-normal leading-normal">Last Studied</p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @deck.created_at %></p>
+    </div>
+  </div>
+
+  <h3 class="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Flashcards</h3>
+
+  <div class="flex px-4 py-3 justify-start">
+    <%= link_to new_deck_flashcard_path(@deck), class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1978e5] text-white text-sm font-bold leading-normal tracking-[0.015em]" do %>
+      <span class="truncate">Add Flashcard</span>
     <% end %>
   </div>
 
-  <turbo-frame id="flash">
-    <%= render "shared/flash" %>
-  </turbo-frame>
-
-  <div class="flex justify-between items-center border m-3 p-3 border-gray-300 bg-gray-50">
-    <%= render @deck %>
-  </div>
-
-  <div class="flex flex-col border m-3 p-3 border-gray-300 bg-gray-50">
-    <h2 class="text-lg my-3 font-bold">Flashcards</h2>
-      <% if @flashcards.any? %>
-        <p>Esse deck possui <%= @flashcards.count %> flashcards.</p> 
-      <% else %>
-        <p>No flashcards yet.</p>
-      <% end %>
-  </div>
-
-  <div class="flex justify-end flex-col sm:flex-row space-x-3 m-3">
-    <%= link_to "Edit this deck", edit_deck_path(@deck), class: "w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white mb-3 md:mb-0 text-center rounded-md px-3.5 py-2.5 font-medium" %>
-    <%= link_to "Back to decks", decks_path, class: "w-full sm:w-auto bg-gray-500 hover:bg-gray-400 text-white mb-3 md:mb-0 text-center rounded-md px-3.5 py-2.5 font-medium" %>
-    <%= button_to "Destroy this deck", @deck, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+  <div class="px-4 py-3 @container">
+    <div class="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white">
+      <table class="flex-1">
+        <thead>
+          <tr class="bg-white">
+            <th class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
+              Question
+            </th>
+            <th
+              class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 px-4 py-3 text-left text-[#111418] w-60 text-[#637488] text-sm font-medium leading-normal"
+            ></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @deck.flashcards.each do |flashcard| %>
+            <tr class="border-t border-t-[#dce0e5]">
+              <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
+                <%= flashcard.front %>
+              </td>
+              <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
+                Edit | Delete
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <style>
+      @container(max-width:120px){.table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120{display: none;}}
+      @container(max-width:240px){.table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240{display: none;}}
+    </style>
   </div>
 </div>

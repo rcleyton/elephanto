@@ -1,10 +1,21 @@
-<div id="<%= dom_id deck %>">
-  <div class="text-lg font-bold">
-    <%= deck.name %>
-  </div>
-  <% if action_name == "show" %>
-    <div class="text-lg">
-      <p><%= deck.description %></p>
+<%= link_to deck do %>
+  <div id="<%= dom_id deck %>" class="flex gap-4">
+    <div class="text-[#121416] flex items-center justify-center rounded-lg bg-[#f1f2f4] shrink-0 size-12" data-icon="Cards" data-size="24px" data-weight="regular">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
+        <path
+          d="M184,72H40A16,16,0,0,0,24,88V200a16,16,0,0,0,16,16H184a16,16,0,0,0,16-16V88A16,16,0,0,0,184,72Zm0,128H40V88H184V200ZM232,56V176a8,8,0,0,1-16,0V56H64a8,8,0,0,1,0-16H216A16,16,0,0,1,232,56Z"
+        ></path>
+      </svg>
     </div>
-  <% end %>
-</div>
+
+      <div class="flex flex-col justify-center">
+        <p class="text-[#121416] text-base font-semibold leading-normal line-clamp-1"><%= deck.name %></p>
+
+        <% if deck.flashcards.any? %>
+          <p class="text-[#6a7581] text-sm font-normal leading-normal line-clamp-2"><%= deck.flashcards.count %> cards</p>
+        <% else %>
+          <p class="text-[#6a7581] text-sm font-normal leading-normal line-clamp-2">No flashcards yet.</p>
+        <% end %>
+      </div>
+  </div>
+<% end %>
