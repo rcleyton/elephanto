@@ -1,15 +1,21 @@
-<div class="border m-3 p-3 bg-gray-50 border-gray-300">
-  <%= simple_form_for [@deck, @flashcard], class: "contents" do |form| %>
-    <div class="my-5">
-      <%= form.input :front, input_html: { class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": flashcard.errors[:front].none?, "border-red-400 focus:outline-red-600": flashcard.errors[:front].any?}] } %>
-    </div>
+<%= simple_form_for [@deck, @flashcard], class: "contents" do |form| %>
+  <div class="px-4 py-3">
+    <%= form.input :front, as: "text", input_html: { class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", 
+                                                {"border-gray-400 focus:outline-blue-600": flashcard.errors[:front].none?, 
+                                                "border-red-400 focus:outline-red-600": flashcard.errors[:front].any?}] },
+                           placeholder: "Enter front flashcard" %>
+  </div>
 
-    <div class="my-5">
-      <%= form.input :back, input_html: { class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": flashcard.errors[:back].none?, "border-red-400 focus:outline-red-600": flashcard.errors[:back].any?}] } %>
-    </div>
+  <div class="px-4 py-3">
+    <%= form.input :back, as: "text", input_html: { class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", 
+                                               {"border-gray-400 focus:outline-blue-600": flashcard.errors[:back].none?, 
+                                               "border-red-400 focus:outline-red-600": flashcard.errors[:back].any?}] },
+                          placeholder: "Enter back flashcard" %>
+  </div>
 
-    <div class="inline">
-      <%= form.submit class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-    </div>
-  <% end %>
-</div>
+  <div class="flex px-4 py-3 space-x-3">
+    <%= form.submit class: "cursor-pointer overflow-hidden rounded-full h-10 px-4 bg-[#1978e5] text-white text-sm font-bold leading-normal tracking-[0.015em]" %>
+    <%= link_to "Cancel", deck_path(@deck), class: "flex items-center overflow-hidden rounded-full h-10 px-4 bg-[#F1F2F4] text-black text-sm font-bold leading-normal tracking-[0.015em]" %>
+  </div>
+<% end %>
+

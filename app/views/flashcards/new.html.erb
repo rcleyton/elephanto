@@ -1,8 +1,8 @@
 <% content_for :title, "New flashcard" %>
 
-<div class="w-full border bg-gray-100 border-gray-300">
-  <div class="border-b p-3 bg-gray-200 border-gray-300">
-    <h1 class="font-bold text-4xl">New flashcard</h1>
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+  <div class="flex flex-wrap justify-between gap-3 p-4">
+    <p class="text-[#121416] tracking-light text-[32px] font-bold leading-tight min-w-72">Create flashcard</p>
   </div>
 
   <turbo-frame id="flash">
@@ -10,8 +10,4 @@
   </turbo-frame>
   
   <%= render "form", flashcard: @flashcard %>
-
-  <div class="flex justify-end space-x-3 m-3">
-    <%= link_to "Back to deck", deck_path(@deck), class: "w-full text-center sm:w-auto float-right sm:mt-0 rounded-md px-3.5 py-2.5 bg-gray-500 hover:bg-gray-400 inline-block font-medium text-white" %>
-  </div>
 </div>

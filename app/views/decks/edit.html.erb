@@ -1,14 +1,13 @@
 <% content_for :title, "Editing deck" %>
 
-<div class="w-full border bg-gray-100 border-gray-300">
-  <div class="border-b p-3 bg-gray-200 border-gray-300">
-    <h1 class="font-bold text-4xl">Editing deck</h1>
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+  <div class="flex flex-wrap justify-between gap-3 p-4">
+    <p class="text-[#121416] tracking-light text-[32px] font-bold leading-tight min-w-72">Editing Deck</p>
   </div>
+
+  <turbo-frame id="flash">
+    <%= render "shared/flash" %>
+  </turbo-frame>
 
   <%= render "form", deck: @deck %>
-
-  <div class="flex justify-end space-x-3 m-3">
-    <%= link_to "Show this deck", @deck, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-green-600 hover:bg-green-500 font-medium text-white" %>
-    <%= link_to "Back to decks", decks_path, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-500 hover:bg-gray-400 font-medium text-white" %>
-  </div>
 </div>
