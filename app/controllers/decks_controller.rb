@@ -19,7 +19,7 @@ class DecksController < ApplicationController
     @deck = Deck.new(deck_params)
     if @deck.save
       flash[:success] = "Deck was successfully created." 
-      redirect_to @deck
+      redirect_to deck_path(@deck)
     else
       flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
       render :new, status: :unprocessable_entity 
@@ -29,8 +29,9 @@ class DecksController < ApplicationController
   def update
     if @deck.update(deck_params)
       flash[:notice] = "Deck was successfully updated."
-      redirect_to @deck
+      redirect_to deck_path(@deck)
     else
+      flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
       render :edit, status: :unprocessable_entity
     end
   end

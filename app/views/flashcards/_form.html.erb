@@ -1,14 +1,14 @@
 <%= simple_form_for [@deck, @flashcard], class: "contents" do |form| %>
   <div class="px-4 py-3">
-    <%= form.input :front, as: "text", input_html: { class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", 
-                                                {"border-gray-400 focus:outline-blue-600": flashcard.errors[:front].none?, 
+    <%= form.input :front, as: "text", input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full", 
+                                                {"border-none focus:outline-blue-600": flashcard.errors[:front].none?, 
                                                 "border-red-400 focus:outline-red-600": flashcard.errors[:front].any?}] },
                            placeholder: "Enter front flashcard" %>
   </div>
 
   <div class="px-4 py-3">
-    <%= form.input :back, as: "text", input_html: { class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", 
-                                               {"border-gray-400 focus:outline-blue-600": flashcard.errors[:back].none?, 
+    <%= form.input :back, as: "text", input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full", 
+                                               {"border-none focus:outline-blue-600": flashcard.errors[:back].none?, 
                                                "border-red-400 focus:outline-red-600": flashcard.errors[:back].any?}] },
                           placeholder: "Enter back flashcard" %>
   </div>
