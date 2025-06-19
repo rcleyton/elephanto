@@ -1,0 +1,9 @@
+---
+pt-BR:
+  messages:
+    validation: Verifique o(s) campo(s) em vermelho!
+    created: "%{model} criado com sucesso!"
+    updated: "%{model} atualizado com sucesso!"
+    deleted: "%{model} apagado com sucesso!"
+    completed_review: Você revisou todos os flashcards disponíveis hoje!
+    no_revision_today: Nenhum flashcard disponível para revisão hoje!

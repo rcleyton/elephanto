@@ -5,7 +5,7 @@ class DecksController < ApplicationController
     @decks = Deck.all
   end
 
-  def show;
+  def show
     @flashcards = @deck.flashcards
   end
 
@@ -18,27 +18,27 @@ class DecksController < ApplicationController
   def create
     @deck = Deck.new(deck_params)
     if @deck.save
-      flash[:success] = "Deck was successfully created." 
+      flash[:success] = t("messages.created", model: Deck.model_name.human)
       redirect_to deck_path(@deck)
     else
-      flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
-      render :new, status: :unprocessable_entity 
+      flash.now[:error] = t("messages.validation")
+      render :new, status: :unprocessable_entity
     end
   end
 
   def update
     if @deck.update(deck_params)
-      flash[:notice] = "Deck was successfully updated."
+      flash[:notice] =t("messages.updated", model: Deck.model_name.human)
       redirect_to deck_path(@deck)
     else
-      flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
+      flash.now[:error] = t("messages.validation")
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     if @deck.destroy!
-      flash[:success] = "Deck was successfully destroyed."
+      flash[:success] = t("messages.deleted", model: Deck.model_name.human)
       redirect_to decks_path, status: :see_other
     end
   end

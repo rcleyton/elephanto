@@ -14,10 +14,10 @@ class FlashcardsController < ApplicationController
   def create
     @flashcard = @deck.flashcards.build(flashcard_params)
     if @flashcard.save
-      flash[:success] = "Flashcard was successfully created."
+      flash[:success] = t("messages.created", model: Flashcard.model_name.human)
       redirect_to new_deck_flashcard_path(@deck)
     else
-      flash.now[:error] = "Verifique o(s) campo(s) em vermelho!"
+      flash.now[:error] = t("messages.validation")
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,7 +37,8 @@ class FlashcardsController < ApplicationController
     if next_flashcard
       redirect_to deck_flashcard_path(@deck, next_flashcard)
     else
-      redirect_to deck_path(@deck), notice: "Você revisou todos os flashcards disponíveis hoje!"
+      flash[:notice] = t("messages.completed_review")
+      redirect_to deck_path(@deck)
     end
   end
 
@@ -47,7 +48,8 @@ class FlashcardsController < ApplicationController
     if due_flashcard
       redirect_to deck_flashcard_path(@deck, due_flashcard)
     else
-      redirect_to deck_path(@deck), notice: "Nenhum flashcard disponível para revisão hoje"
+      flash[:notice] = t("messages.no_revision_today")
+      redirect_to deck_path(@deck)
     end
   end
 
