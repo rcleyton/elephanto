@@ -1,0 +1,31 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      deck: 
+        one: Deck 
+        other: Decks
+      flashcard:
+        one: Flashcard
+        other: Flashcards
+    attributes:
+      deck:
+        name: Nome
+        description: Descrição
+        created_at: Criado em
+        updated_at: Atualizado em
+      flashcard:
+        front: Frente
+        back: Verso
+        difficulty: Dificuldade
+        last_reviewed_at: Última revisão em
+        created_at: Criado em
+        updated_at: Atualizado em
+  placeholders:
+    deck:
+      deck_name: Digite o nome do deck
+      deck_description: Digite a descrição do deck
+    flashcard:
+      front_flashcard: O que é exibido na frente do flashcard 
+      back_flashcard: O que é exibido no verso do flashcard 
+
