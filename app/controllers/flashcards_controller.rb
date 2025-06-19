@@ -23,23 +23,38 @@ class FlashcardsController < ApplicationController
   end
 
   def review
-    @flashcard.update(last_reviewed_at: Time.current, difficulty: params[:difficulty])
+    unless Flashcard.difficulties.key?(params[:difficulty])
+      redirect_to deck_flashcard_path(@deck, @flashcard), alert: "Dificuldade inválida"
+      return
+    end
 
-    flashcards     = @deck.flashcards.order(:created_at)
-    current_index  = flashcards.index(@flashcard)
-    next_flashcard = flashcards[current_index + 1]
+    @flashcard.difficulty = params[:difficulty]
+    @flashcard.review!
+
+    due_flashcards = @deck.flashcards.due.order(:next_review)
+    next_flashcard = due_flashcards.where.not(id: @flashcard.id).first
 
     if next_flashcard
       redirect_to deck_flashcard_path(@deck, next_flashcard)
     else
-      redirect_to deck_path(@deck), notice: "Você revisou todos os flashcards!"
+      redirect_to deck_path(@deck), notice: "Você revisou todos os flashcards disponíveis hoje!"
+    end
+  end
+
+  def start_review
+    due_flashcard = @deck.flashcards.due.order(:next_review).first
+
+    if due_flashcard
+      redirect_to deck_flashcard_path(@deck, due_flashcard)
+    else
+      redirect_to deck_path(@deck), notice: "Nenhum flashcard disponível para revisão hoje"
     end
   end
 
   private
 
   def set_deck
-    @deck = Deck.find(params[:deck_id])
+    @deck = Deck.find(params[:deck_id] || params[:id])
   end
 
   def set_flashcard

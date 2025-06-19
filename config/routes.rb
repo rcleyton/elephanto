@@ -8,6 +8,10 @@ Rails.application.routes.draw do
         post :review
       end
     end
+
+    member do
+      get :review, to: "flashcards#start_review"
+    end
   end
 
   get "up" => "rails/health#show", as: :rails_health_check

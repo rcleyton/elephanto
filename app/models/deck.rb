@@ -1,3 +1,6 @@
+# typed: false
+# frozen_string_literal: true
+
 class Deck < ApplicationRecord
     has_many :flashcards, dependent: :destroy
     validates :name, presence: true

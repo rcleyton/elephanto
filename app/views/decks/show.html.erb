@@ -12,11 +12,10 @@
         <%= @deck.description %>
       </p>
     </div>
-    <button
-      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal"
-    >
+    
+    <%= link_to review_deck_path(@deck), class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal" do %>
       <span class="truncate"><%= t('buttons.general.start_studying') %></span>
-    </button>
+    <% end %>
   </div>
   <div class="flex justify-stretch">
     <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
