@@ -15,16 +15,16 @@
     <button
       class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-medium leading-normal"
     >
-      <span class="truncate">Start Studying</span>
+      <span class="truncate"><%= t('buttons.general.start_studying') %></span>
     </button>
   </div>
   <div class="flex justify-stretch">
     <div class="flex flex-1 gap-3 flex-wrap px-4 py-3 justify-start">
       <%= link_to edit_deck_path(@deck), class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f1f2f4] text-[#121416] text-sm font-bold leading-normal tracking-[0.015em]" do %>
-        <span class="truncate">Edit Deck</span>
+        <span class="truncate"><%= t('buttons.submit.edit_deck') %></span>
       <% end %>
       <%= button_to @deck, method: :delete, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f1f2f4] text-[#121416] text-sm font-bold leading-normal tracking-[0.015em]" do %>
-        <span class="truncate">Delete Deck</span>
+        <span class="truncate"><%= t('buttons.submit.delete_deck') %></span>
       <% end %>
     </div>
   </div>
@@ -50,7 +50,7 @@
 
   <div class="flex px-4 py-3 justify-start">
     <%= link_to new_deck_flashcard_path(@deck), class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#1978e5] text-white text-sm font-bold leading-normal tracking-[0.015em]" do %>
-      <span class="truncate">Add Flashcard</span>
+      <span class="truncate"><%= t('buttons.submit.new_flashcard') %></span>
     <% end %>
   </div>
 
