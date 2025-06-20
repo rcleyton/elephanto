@@ -1,4 +1,4 @@
-<% content_for :title, "Showing deck" %>
+<% content_for :title, "#{t('actions.showing')} #{Deck.model_name.human.downcase}" %>
 
 <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
   <turbo-frame id="flash">
@@ -28,7 +28,7 @@
     </div>
   </div>
 
-  <h3 class="text-[#121416] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4">Deck Overview</h3>
+  <h3 class="text-[#121416] text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-2 pt-4"><%= t("general.deck_overview") %></h3>
 
   <div class="p-4 grid grid-cols-[20%_1fr] gap-x-6">
     <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
@@ -36,12 +36,12 @@
       <p class="text-[#121416] text-sm font-normal leading-normal"><%= @flashcards.count %></p>
     </div>
     <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
-      <p class="text-[#6a7581] text-sm font-normal leading-normal">Created</p>
-      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @deck.created_at %></p>
+      <p class="text-[#6a7581] text-sm font-normal leading-normal"><%= t("general.created") %></p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= l @deck.created_at, format: :long %></p>
     </div>
     <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
-      <p class="text-[#6a7581] text-sm font-normal leading-normal">Last Studied</p>
-      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @deck.created_at %></p>
+      <p class="text-[#6a7581] text-sm font-normal leading-normal"><%= t("general.last_studied") %></p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= l @deck.created_at, format: :short %></p>
     </div>
   </div>
 
@@ -59,7 +59,7 @@
         <thead>
           <tr class="bg-white">
             <th class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
-              Question
+              <%= t("general.question") %>
             </th>
             <th
               class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 px-4 py-3 text-left text-[#111418] w-60 text-[#637488] text-sm font-medium leading-normal"
@@ -73,7 +73,7 @@
                 <%= flashcard.front %>
               </td>
               <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
-                Edit | Delete
+                <%= t("actions.edit") %> | <%= t("actions.delete") %>
               </td>
             </tr>
           <% end %>

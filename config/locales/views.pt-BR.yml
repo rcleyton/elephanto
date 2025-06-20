@@ -7,3 +7,13 @@ pt-BR:
     deleted: "%{model} apagado com sucesso!"
     completed_review: Você revisou todos os flashcards disponíveis hoje!
     no_revision_today: Nenhum flashcard disponível para revisão hoje!
+  actions:
+    new: Novo
+    edit: Editar
+    showing: Exibindo
+    delete: Apagar
+  general:
+    deck_overview: Visão geral do deck
+    created: Criado em
+    last_studied: Última revisão em
+    question: Questão
