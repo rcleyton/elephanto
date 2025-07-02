@@ -25,7 +25,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_difference("Flashcard.count") do
         post deck_flashcards_url(@deck), params: { flashcard: { back: @flashcard.back, difficulty: @flashcard.difficulty, front: @flashcard.front, last_reviewed_at: @flashcard.last_reviewed_at } }
       end
-      
+
       must_redirect_to new_deck_flashcard_url(@deck)
     end
 
@@ -52,7 +52,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  context 'review flashcards' do
+  context "review flashcards" do
     it "should review flashcard and redirect to next one" do
       post review_deck_flashcard_path(@deck, @flashcard), params: { difficulty: "easy" }
 

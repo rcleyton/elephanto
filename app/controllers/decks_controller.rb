@@ -28,7 +28,7 @@ class DecksController < ApplicationController
 
   def update
     if @deck.update(deck_params)
-      flash[:notice] =t("messages.updated", model: Deck.model_name.human)
+      flash[:notice] = t("messages.updated", model: Deck.model_name.human)
       redirect_to deck_path(@deck)
     else
       flash.now[:error] = t("messages.validation")
