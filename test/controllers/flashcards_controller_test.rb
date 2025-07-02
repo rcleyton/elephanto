@@ -64,6 +64,18 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     end
 
     it "should redirect to deck when no next flashcard" do
+      @flashcard.update!(
+        next_review: 1.day.from_now,
+        last_reviewed_at: Time.current,
+        difficulty: "easy"
+      )
+
+      @flashcard2.update!(
+        next_review: Time.current,
+        last_reviewed_at: nil,
+        difficulty: nil
+      )
+
       post review_deck_flashcard_path(@deck, @flashcard2), params: { difficulty: "medium" }
 
       @flashcard2.reload
@@ -72,7 +84,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
       assert_redirected_to deck_path(@deck)
       follow_redirect!
-      assert_match "Você revisou todos os flashcards!", response.body
+      assert_match I18n.t("messages.completed_review"), response.body
     end
   end
 end
