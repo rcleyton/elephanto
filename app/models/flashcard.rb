@@ -13,21 +13,22 @@ class Flashcard < ApplicationRecord
 
   before_create :initialize_spaced_repetition
 
-  scope :due, -> { where("next_review <= ?", Date.today) }
+  scope :due, -> { where("next_review <= ?", Time.current) }
 
   def review!
-    self.efactor ||= 2.5
+    self.efactor    ||= 2.5
     self.repetition ||= 0
-    self.interval ||= 1
+    self.interval   ||= 1
 
     q = quality_score
 
     if q < 3
-      self.repetition = 0
-      self.interval = 1
+      self.repetition  = 0
+      self.interval    = 0
+      self.next_review = Time.current + 1.minute
     else
       self.repetition += 1
-      self.interval = if repetition == 1
+      self.interval   = if repetition == 1
                         case q
                         when 3 then 1
                         when 4 then 3
@@ -38,12 +39,13 @@ class Flashcard < ApplicationRecord
       else
         (interval * efactor).round
       end
+
+      self.next_review = Date.today + interval.days
     end
 
     self.efactor += (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02))
     self.efactor = 1.3 if efactor < 1.3
 
-    self.next_review = Date.today + interval.days
     self.last_reviewed_at = Time.current
 
     save!
@@ -62,9 +64,9 @@ class Flashcard < ApplicationRecord
   end
 
   def initialize_spaced_repetition
-    self.efactor ||= 2.5
-    self.repetition ||= 0
-    self.interval ||= 1
+    self.efactor     ||= 2.5
+    self.repetition  ||= 0
+    self.interval    ||= 1
     self.next_review ||= Date.today
   end
 end

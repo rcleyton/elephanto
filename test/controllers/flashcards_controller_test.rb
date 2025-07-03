@@ -54,6 +54,9 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
   context "review flashcards" do
     it "should review flashcard and redirect to next one" do
+      get review_deck_path(@deck)
+      assert_response :redirect
+
       post review_deck_flashcard_path(@deck, @flashcard), params: { difficulty: "easy" }
 
       @flashcard.reload
@@ -63,17 +66,18 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to deck_flashcard_path(@deck, @flashcard2)
     end
 
+
     it "should redirect to deck when no next flashcard" do
       @flashcard.update!(
-        next_review: 1.day.from_now,
+        next_review:      1.day.from_now,
         last_reviewed_at: Time.current,
-        difficulty: "easy"
+        difficulty:       "easy"
       )
 
       @flashcard2.update!(
-        next_review: Time.current,
+        next_review:      Time.current,
         last_reviewed_at: nil,
-        difficulty: nil
+        difficulty:       nil
       )
 
       post review_deck_flashcard_path(@deck, @flashcard2), params: { difficulty: "medium" }

@@ -31,22 +31,30 @@ class FlashcardsController < ApplicationController
     @flashcard.difficulty = params[:difficulty]
     @flashcard.review!
 
-    due_flashcards = @deck.flashcards.due.order(:next_review)
-    next_flashcard = due_flashcards.where.not(id: @flashcard.id).first
+    queue = session[:review_queue] || []
+    queue.delete(@flashcard.id)
 
-    if next_flashcard
-      redirect_to deck_flashcard_path(@deck, next_flashcard)
+    if @flashcard.difficulty == "again"
+      queue << @flashcard.id
+    end
+
+    session[:review_queue] = queue
+
+    if queue.any?
+      redirect_to deck_flashcard_path(@deck, queue.first)
     else
+      session.delete(:review_queue)
       flash[:notice] = t("messages.completed_review")
       redirect_to deck_path(@deck)
     end
   end
 
   def start_review
-    due_flashcard = @deck.flashcards.due.order(:next_review).first
+    flashcards = @deck.flashcards.due.order(:next_review).pluck(:id)
 
-    if due_flashcard
-      redirect_to deck_flashcard_path(@deck, due_flashcard)
+    if flashcards.any?
+      session[:review_queue] = flashcards
+      redirect_to deck_flashcard_path(@deck, flashcards.first)
     else
       flash[:notice] = t("messages.no_revision_today")
       redirect_to deck_path(@deck)
