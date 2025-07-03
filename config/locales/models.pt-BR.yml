@@ -8,6 +8,9 @@ pt-BR:
       flashcard:
         one: Flashcard
         other: Flashcards
+      user:
+        one: Usuário
+        other: Usuários
     attributes:
       deck:
         name: Nome
@@ -21,6 +24,10 @@ pt-BR:
         last_reviewed_at: Última revisão em
         created_at: Criado em
         updated_at: Atualizado em
+      user:
+        email_address: Email 
+        password: Senha
+        password_confirmation: Confirmar senha
   placeholders:
     deck:
       deck_name: Digite o nome do deck
@@ -28,4 +35,8 @@ pt-BR:
     flashcard:
       front_flashcard: O que é exibido na frente do flashcard 
       back_flashcard: O que é exibido no verso do flashcard 
+    user: 
+      email_address: Digite seu email 
+      password: Digite uma senha
+      password_confirmation: Confirme sua senha
 

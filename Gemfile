@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "bcrypt", "~> 3.1"
 gem "bootsnap", require: false
 gem "importmap-rails"
 gem "jbuilder"
@@ -8,7 +9,7 @@ gem "pg", "~> 1.1"
 gem "propshaft"
 gem "puma", ">= 5.0"
 gem "rails", "~> 8.0.2"
-gem 'simple_form'
+gem "simple_form"
 gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"

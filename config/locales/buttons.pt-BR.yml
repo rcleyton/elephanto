@@ -10,6 +10,7 @@ pt-BR:
       edit_flashcard: Editar flashcard
       update_flashcard: Atualizar flashcard
       delete_flashcard: Apagar flashcard
+      create_account: Registrar
     general:
       start_studying: Começar revisão
       cancel: Cancelar

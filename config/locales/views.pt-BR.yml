@@ -7,6 +7,7 @@ pt-BR:
     deleted: "%{model} apagado com sucesso!"
     completed_review: Você revisou todos os flashcards disponíveis hoje!
     no_revision_today: Nenhum flashcard disponível para revisão hoje!
+    create_account: Conta criada com sucesso!
   actions:
     new: Novo
     edit: Editar
@@ -18,3 +19,4 @@ pt-BR:
     last_studied: Última revisão em
     question: Questão
     are_you_sure: Você tem certeza?
+    create_account: Criar conta

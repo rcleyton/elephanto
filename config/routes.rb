@@ -2,6 +2,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get  "/sign_up", to: "users#new"
+  post "/sign_up", to: "users#create"
+
+  resource :session
+
+  resources :passwords, param: :token
+
   resources :decks do
     resources :flashcards, only: %i[ new create show ] do
       member do
