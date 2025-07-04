@@ -12,6 +12,11 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     )
   end
 
+  it "should use sign_in layout" do
+    get new_session_path
+    assert_template layout: "layouts/signin"
+  end
+
   context "login" do
     it "should get new session page" do
       get new_session_url
