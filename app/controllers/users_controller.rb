@@ -3,6 +3,7 @@
 
 class UsersController < ApplicationController
   allow_unauthenticated_access only: [ :new, :create ]
+  layout "signup"
 
   def new
     @user = User.new
