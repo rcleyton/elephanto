@@ -8,6 +8,10 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     @deck       = decks(:english)
     @flashcard  = @deck.flashcards.create(front: "Question",  back: "Answer", difficulty: "easy")
     @flashcard2 = @deck.flashcards.create(front: "Question2", back: "Answer2")
+    @user       = User.create(email_address: "test@example.com", password: "password", password_confirmation: "password")
+
+    post session_url, params: {  email_address: @user.email_address, password: "password" }
+    assert_response :redirect
   end
 
   it "should get new" do
