@@ -6,9 +6,9 @@ require "test_helper"
 class SessionsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = User.create!(
-      email_address: "test@example.com",
-      password: "password",
-      password_confirmation: "password"
+      email_address: "test2@example.com",
+      password: "p@ssword1",
+      password_confirmation: "p@ssword1"
     )
   end
 
@@ -27,7 +27,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
       assert_difference "Session.count", 1 do
         post session_url, params: {
           email_address: @user.email_address,
-          password: "password"
+          password: "p@ssword1"
         }
       end
 
@@ -52,7 +52,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     it "should destroy session on logout" do
       post session_url, params: {
         email_address: @user.email_address,
-        password: "password"
+        password: "p@ssword1"
       }
 
       session_id = Session.last.id

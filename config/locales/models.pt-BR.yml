@@ -39,4 +39,8 @@ pt-BR:
       email_address: Digite seu email 
       password: Digite uma senha
       password_confirmation: Confirme sua senha
+  errors:
+    messages:
+      password_contains_whitespace: não pode conter espaços
+      password_not_complex: deve conter letras, números e caracteres especiais
 
