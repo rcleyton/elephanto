@@ -8,9 +8,9 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     @deck       = decks(:english)
     @flashcard  = @deck.flashcards.create(front: "Question",  back: "Answer", difficulty: "easy")
     @flashcard2 = @deck.flashcards.create(front: "Question2", back: "Answer2")
-    @user       = User.create(email_address: "test@example.com", password: "password", password_confirmation: "password")
+    @user       = User.create(email_address: "test2@example.com", password: "p@ssword1", password_confirmation: "p@ssword1")
 
-    post session_url, params: {  email_address: @user.email_address, password: "password" }
+    post session_url, params: {  email_address: @user.email_address, password: "p@ssword1" }
     assert_response :redirect
   end
 

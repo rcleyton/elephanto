@@ -6,6 +6,9 @@ require "test_helper"
 class DecksControllerTest < ActionDispatch::IntegrationTest
   setup do
     @deck = decks(:english)
+    @user       = User.create(email_address: "test2@example.com", password: "p@ssword1", password_confirmation: "p@ssword1")
+
+    post session_url, params: {  email_address: @user.email_address, password: "p@ssword1" }
   end
 
   it "should get index" do

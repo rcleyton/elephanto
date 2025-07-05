@@ -3,15 +3,27 @@ require "application_system_test_case"
 class DecksTest < ApplicationSystemTestCase
   setup do
     @deck = decks(:english)
+    @user = users(:one)
+  end
+
+  def login
+    visit new_session_url
+
+    fill_in :email_address, with: @user.email_address
+    fill_in :password,      with: "p@ssword1"
+
+    click_on I18n.t("buttons.general.enter")
   end
 
   it "visiting the index" do
-    visit decks_url
+    login
+
     assert_selector "p", text: "Decks"
   end
 
   it "should create deck" do
-    visit decks_url
+    login
+
     click_on I18n.t("buttons.submit.new_deck")
 
     fill_in  I18n.t("placeholders.deck.deck_description"), with: @deck.description
@@ -24,7 +36,10 @@ class DecksTest < ApplicationSystemTestCase
   end
 
   it "should update Deck" do
-    visit deck_url(@deck)
+    login
+
+    find("#deck_#{@deck.id}").click
+
     click_on I18n.t("buttons.submit.edit_deck"), match: :first
 
     fill_in  I18n.t("placeholders.deck.deck_description"), with: @deck.description
@@ -36,6 +51,10 @@ class DecksTest < ApplicationSystemTestCase
   end
 
   it "should destroy Deck" do
+    login
+
+    find("#deck_#{@deck.id}").click
+
     visit deck_url(@deck)
     accept_confirm { click_on I18n.t("buttons.submit.delete_deck"), match: :first }
 
