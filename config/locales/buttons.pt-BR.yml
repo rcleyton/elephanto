@@ -11,6 +11,7 @@ pt-BR:
       update_flashcard: Atualizar flashcard
       delete_flashcard: Apagar flashcard
       create_account: Registrar
+      email_reset_instructions: Enviar instruções por email
     general:
       start_studying: Começar revisão
       cancel: Cancelar

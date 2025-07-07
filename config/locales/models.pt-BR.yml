@@ -41,7 +41,7 @@ pt-BR:
       back_flashcard: O que é exibido no verso do flashcard 
     user: 
       email_address: Digite seu email 
-      password: Digite uma senha
+      password: Digite sua senha
       password_confirmation: Confirme sua senha
   errors:
     messages:

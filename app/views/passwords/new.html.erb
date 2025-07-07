@@ -1,17 +1,25 @@
-<div class="mx-auto md:w-96 w-full px-4">
-  <% if alert = flash[:alert] %>
-    <p class="py-2 px-3 bg-red-50 mb-5 text-red-500 font-medium rounded-lg inline-block" id="alert"><%= alert %></p>
-  <% end %>
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-gray-200">
+  <div class="mx-auto w-full max-w-md px-4 sm:px-6 py-8 bg-white rounded-xl shadow-xl border border-gray-200">
+    <% if alert = flash[:alert] %>
+      <p class="py-2 px-3 bg-red-50 mb-6 text-red-600 font-medium rounded-lg text-center" id="alert" style="font-family: 'Inter', sans-serif;"><%= alert %></p>
+    <% end %>
 
-  <h1 class="font-bold text-4xl">Forgot your password?</h1>
+    <h1 class="text-3xl font-semibold text-gray-900 text-center mb-8" style="font-family: 'Inter', sans-serif;"><%= t('buttons.general.forgot_password') %></h1>
 
-  <%= form_with url: passwords_path, class: "contents" do |form| %>
-    <div class="my-5">
-      <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address], class: "block shadow-sm rounded-md border border-gray-400 focus:outline-solid focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-    </div>
+    <%= form_with url: passwords_path, html: { class: "space-y-6" } do |form| %>
+      <div class="relative">
+        <%= form.label :email_address, "Email", class: "block text-sm font-medium text-gray-700" %>
+        <div class="absolute inset-y-0 left-0 top-6 flex items-center pl-3">
+          <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <use xlink:href="#icon-email"/>
+          </svg>
+        </div>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "email", placeholder: t('placeholders.user.email_address'), value: params[:email_address], class: "mt-1 block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-900" %>
+      </div>
 
-    <div class="inline">
-      <%= form.submit "Email reset instructions", class: "w-full sm:w-auto text-center rounded-lg px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white inline-block font-medium cursor-pointer" %>
-    </div>
-  <% end %>
+      <div class="flex justify-center">
+        <%= form.submit t('buttons.submit.email_reset_instructions'), class: "w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 ease-in-out", style: "font-family: 'Inter', sans-serif;" %>
+      </div>
+    <% end %>
+  </div>
 </div>

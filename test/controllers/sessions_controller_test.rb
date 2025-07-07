@@ -17,6 +17,11 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_template layout: "layouts/signin"
   end
 
+  it "should use forgot password layout" do
+    get new_password_path
+    assert_template layout: "layouts/recovery_password"
+  end
+
   context "login" do
     it "should get new session page" do
       get new_session_url
