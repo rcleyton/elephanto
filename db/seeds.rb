@@ -90,3 +90,11 @@ Flashcard.create([
   { front: "Force",          back: "A push or pull on an object",                           difficulty: "easy", deck: science_deck },
   { front: "Cell",           back: "The basic unit of life",                                difficulty: "medium", deck: science_deck }
 ])
+
+# Users
+# Creating 5 users to study
+User.create(email_address: 'user1@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user2@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user3@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user4@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user5@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
