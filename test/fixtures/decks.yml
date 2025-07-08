@@ -3,7 +3,9 @@
 english:
   name: Curso de Inglês
   description: Cards para aumentar vocabulário em inglês
+  user: one
 
 chemical:
   name: Química
   description: Cards para decorar o elementos da tabela periódica
+  user: two

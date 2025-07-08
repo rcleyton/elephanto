@@ -8,7 +8,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     @deck       = decks(:english)
     @flashcard  = @deck.flashcards.create(front: "Question",  back: "Answer", difficulty: "easy")
     @flashcard2 = @deck.flashcards.create(front: "Question2", back: "Answer2")
-    @user       = User.create(email_address: "test2@example.com", password: "p@ssword1", password_confirmation: "p@ssword1")
+    @user       = users(:one)
 
     post session_url, params: {  email_address: @user.email_address, password: "p@ssword1" }
     assert_response :redirect
@@ -69,7 +69,6 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
       assert_redirected_to deck_flashcard_path(@deck, @flashcard2)
     end
-
 
     it "should redirect to deck when no next flashcard" do
       @flashcard.update!(

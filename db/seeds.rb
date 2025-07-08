@@ -8,12 +8,20 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# Users
+# Creating 5 users to study
+User.create(email_address: 'user1@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user2@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user3@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user4@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user5@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+
 # Creating 5 decks with different themes
-Deck.create(name: "English Vocabulary",   description: "Basic English words and their meanings")
-Deck.create(name: "Math Formulas",        description: "Common mathematical formulas and their applications")
-Deck.create(name: "History Dates",        description: "Important historical events and dates")
-Deck.create(name: "Programming Concepts", description: "Fundamental programming concepts and definitions")
-Deck.create(name: "Science Terms",        description: "Key scientific terms and their explanations")
+Deck.create(name: "English Vocabulary",   description: "Basic English words and their meanings",              user_id: 1)
+Deck.create(name: "Math Formulas",        description: "Common mathematical formulas and their applications", user_id: 2)
+Deck.create(name: "History Dates",        description: "Important historical events and dates",               user_id: 3)
+Deck.create(name: "Programming Concepts", description: "Fundamental programming concepts and definitions",    user_id: 1)
+Deck.create(name: "Science Terms",        description: "Key scientific terms and their explanations",         user_id: 2)
 
 # Creating 10 flashcards for each deck
 # English Vocabulary Flashcards
@@ -90,11 +98,3 @@ Flashcard.create([
   { front: "Force",          back: "A push or pull on an object",                           difficulty: "easy", deck: science_deck },
   { front: "Cell",           back: "The basic unit of life",                                difficulty: "medium", deck: science_deck }
 ])
-
-# Users
-# Creating 5 users to study
-User.create(email_address: 'user1@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
-User.create(email_address: 'user2@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
-User.create(email_address: 'user3@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
-User.create(email_address: 'user4@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
-User.create(email_address: 'user5@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')

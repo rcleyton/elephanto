@@ -5,7 +5,7 @@ class DecksController < ApplicationController
   before_action :set_deck, only: %i[ show edit update destroy ]
 
   def index
-    @decks = Deck.all
+    @decks = current_user.decks
   end
 
   def show
@@ -19,12 +19,13 @@ class DecksController < ApplicationController
   def edit; end
 
   def create
-    @deck = Deck.new(deck_params)
+    @deck = current_user.decks.build(deck_params)
     if @deck.save
       flash[:success] = t("messages.created", model: Deck.model_name.human)
       redirect_to deck_path(@deck)
     else
       flash.now[:error] = t("messages.validation")
+      p @deck.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
@@ -48,7 +49,7 @@ class DecksController < ApplicationController
 
   private
     def set_deck
-      @deck = Deck.find(params[:id])
+      @deck = current_user.decks.find(params[:id])
     end
 
     def deck_params

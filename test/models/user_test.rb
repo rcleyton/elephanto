@@ -13,7 +13,7 @@ class UserTest < ActiveSupport::TestCase
     end
 
     it "must be unique" do
-      new_user = User.create(email_address: "test@example.com", password: "Password@1", password_confirmation: "Password@1")
+      new_user = User.create(email_address: "user1@elephanto.com", password: "Password@1", password_confirmation: "Password@1")
       assert_not new_user.valid?
       assert_includes new_user.errors[:email_address], I18n.t("errors.messages.taken")
     end

@@ -1,3 +1,6 @@
 one:
-  email_address: 'test@example.com'
+  email_address: 'user1@elephanto.com'
+  password_digest: <%= BCrypt::Password.create('p@ssword1') %>
+two:
+  email_address: 'user2@elephanto.com'
   password_digest: <%= BCrypt::Password.create('p@ssword1') %>

@@ -5,8 +5,9 @@ require "test_helper"
 
 class DecksControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @deck = decks(:english)
-    @user       = User.create(email_address: "test2@example.com", password: "p@ssword1", password_confirmation: "p@ssword1")
+    @deck         = decks(:english)
+    @user         = users(:one)
+    @another_user = users(:two)
 
     post session_url, params: {  email_address: @user.email_address, password: "p@ssword1" }
   end
@@ -22,8 +23,11 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
   end
 
   it "should create deck" do
+    new_deck_name        = "Programming Concepts"
+    new_deck_description = "Fundamental programming concepts and definitions"
+
     assert_difference("Deck.count") do
-      post decks_url, params: { deck: { description: @deck.description, name: @deck.name } }
+      post decks_url, params: { deck: { description: new_deck_description, name: new_deck_name, user_id: @user } }
     end
 
     assert_redirected_to deck_url(Deck.last)
@@ -32,6 +36,16 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
   it "should show deck" do
     get deck_url(@deck)
     assert_response :success
+  end
+
+  it "user cannot access another deck" do
+    other_user = users(:two)
+    other_deck = other_user.decks.create!(name: "Private", description: "Access denied")
+
+    get deck_url(other_deck)
+
+    assert_redirected_to decks_url
+    assert_equal I18n.t("messages.render_not_found"), flash[:alert]
   end
 
   it "should get edit" do

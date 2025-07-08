@@ -8,6 +8,7 @@ pt-BR:
     completed_review: Você revisou todos os flashcards disponíveis hoje!
     no_revision_today: Nenhum flashcard disponível para revisão hoje!
     create_account: Conta criada com sucesso!
+    render_not_found: Recurso não encontrado ou não autorizado.
   actions:
     new: Novo
     edit: Editar
