@@ -1,0 +1,37 @@
+<%= simple_form_for @profile, class: "contents" do |form| %>
+	<div class="px-4 py-3">
+		<%= form.input :first_name, input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full",
+																											{"border-none focus:outline-blue-600": profile.errors[:first_name].none?,
+																											"border-red-400 focus:outline-red-600": profile.errors[:first_name].any?}] 
+																						}, placeholder: t('placeholders.profile.first_name') %>
+	</div>
+
+	<div class="px-4 py-3">
+		<%= form.input :last_name, input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full",
+																									{"border-none focus:outline-blue-600": profile.errors[:last_name].none?,
+																									"border-red-400 focus:outline-red-600": profile.errors[:last_name].any?}] 
+																						}, placeholder: t('placeholders.profile.last_name') %>
+	</div>
+
+	<div class="px-4 py-3">
+		<%= form.input :username, input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full",
+																											{"border-none focus:outline-blue-600": profile.errors[:username].none?,
+																											"border-red-400 focus:outline-red-600": profile.errors[:username].any?}] 
+																					}, placeholder: t('placeholders.profile.username') %>
+	</div>
+
+	<div class="px-4 py-3">
+		<%= form.input :bio, as: "text", input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full", 
+																													{"border-none focus:outline-blue-600": profile.errors[:bio].none?, 
+																															"border-red-400 focus:outline-red-600": profile.errors[:bio].any?}],
+																															"rows": 5
+																									}, placeholder: t('placeholders.profile.bio') %>
+	</div>
+
+  <div class="flex px-4 py-3 space-x-3">
+    <%= form.submit class: "cursor-pointer overflow-hidden rounded-full h-10 px-4 bg-[#1978e5] text-white text-sm font-bold leading-normal tracking-[0.015em]" %>
+  </div>
+<% end %>
+
+
+          

@@ -12,6 +12,9 @@ pt-BR:
         one: Usuário
         other: Usuários
       session: Seção
+      profile:
+        one: Perfil
+        other: Perfis
     attributes:
       deck:
         name: Nome
@@ -32,6 +35,11 @@ pt-BR:
       session:
         email_address: Email 
         password: Senha
+      profile:
+        first_name: Nome
+        last_name: Sobrenome
+        username: Username
+        bio: Bio
   placeholders:
     deck:
       deck_name: Digite o nome do deck
@@ -43,6 +51,11 @@ pt-BR:
       email_address: Digite seu email 
       password: Digite sua senha
       password_confirmation: Confirme sua senha
+    profile:
+      first_name: Digite o seu nome
+      last_name: Digite o seu sobrenome
+      username: Degite um nome de usuário
+      bio: Fale um pouco sobre você
   errors:
     messages:
       password_contains_whitespace: não pode conter espaços

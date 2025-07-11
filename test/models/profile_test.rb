@@ -16,22 +16,22 @@ class ProfileTest < ActiveSupport::TestCase
 
     it "first_name cannot be blank" do
       @profile.first_name = ""
-      assert !@profile.valid?
+      assert_not @profile.valid?
     end
 
     it "last_name cannot be blank" do
       @profile.last_name = ""
-      assert !@profile.valid?
+      assert_not @profile.valid?
     end
 
     it "username cannot be blank" do
       @profile.username = ""
-      assert !@profile.valid?
+      assert_not @profile.valid?
     end
 
     it "bio cannot be blank" do
       @profile.bio = ""
-      assert !@profile.valid?
+      assert_not @profile.valid?
     end
 
     it "should require user" do

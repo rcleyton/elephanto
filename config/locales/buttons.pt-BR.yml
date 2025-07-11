@@ -12,6 +12,7 @@ pt-BR:
       delete_flashcard: Apagar flashcard
       create_account: Registrar
       email_reset_instructions: Enviar instruções por email
+      edit_profile: Editar perfil
     general:
       start_studying: Começar revisão
       cancel: Cancelar
@@ -23,3 +24,4 @@ pt-BR:
       hard: Difícil
       enter: Entrar
       forgot_password: Esqueceu sua senha?
+      logout: Sair

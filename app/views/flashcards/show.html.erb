@@ -1,4 +1,4 @@
-<% content_for :title, "Showing flashcard" %>
+<% content_for :title, "#{t('actions.showing')} #{Flashcard.model_name.human.downcase}" %>
 
 <div class="layout-content-container max-w-[960px] flex-1">
   <%= render @flashcard %>

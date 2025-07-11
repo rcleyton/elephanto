@@ -25,7 +25,6 @@ class DecksController < ApplicationController
       redirect_to deck_path(@deck)
     else
       flash.now[:error] = t("messages.validation")
-      p @deck.errors.full_messages
       render :new, status: :unprocessable_entity
     end
   end
