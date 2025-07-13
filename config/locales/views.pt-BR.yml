@@ -7,7 +7,7 @@ pt-BR:
     deleted: "%{model} apagado com sucesso!"
     completed_review: Você revisou todos os flashcards disponíveis hoje!
     no_revision_today: Nenhum flashcard disponível para revisão hoje!
-    create_account: Conta criada com sucesso!
+    create_account: Conta criada com sucesso. Por favor preencha seu perfil de usuário!
     render_not_found: Recurso não encontrado ou não autorizado.
     already_exists: Você já tem um perfil. Edite-o aqui.
   actions:
