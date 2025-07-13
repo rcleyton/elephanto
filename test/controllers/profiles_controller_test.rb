@@ -25,12 +25,24 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
       assert_equal I18n.t("messages.created", model: Profile.model_name.human), flash[:notice]
     end
 
+    it "already exists" do
+      @user = users(:one)
+      profile = @user.profile
+      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+
+      assert profile.present?
+      get new_profile_url
+
+      assert_redirected_to edit_profile_url(profile)
+      assert_equal I18n.t("messages.already_exists", model: Profile.model_name.human), flash[:notice]
+    end
+
     it "show" do
       @user = users(:one)
       get profile_url(@user.profile)
       assert_response :success
 
-      assert_select "h1", text: "Show Profile"
+      assert_select "p", text: I18n.t("general.my_profile")
     end
 
     it "edit" do

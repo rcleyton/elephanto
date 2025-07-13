@@ -6,7 +6,11 @@ class ProfilesController < ApplicationController
   def show; end
 
   def new
-    @profile = current_user.build_profile
+    if current_user.profile.present?
+      redirect_to edit_profile_path(current_user.profile), notice: t("messages.already_exists")
+    else
+      @profile = current_user.build_profile
+    end
   end
 
   def create

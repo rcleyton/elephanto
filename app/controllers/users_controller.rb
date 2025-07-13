@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
     if @user.save
       start_new_session_for(@user)
-      redirect_to decks_path, notice: t("messages.create_account")
+      redirect_to new_profile_path, notice: t("messages.create_account")
     else
       flash.now[:alert] = "Erro ao criar conta"
       render :new, status: :unprocessable_entity

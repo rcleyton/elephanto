@@ -36,9 +36,9 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
         }
       end
 
-      assert_redirected_to decks_url
+      assert_redirected_to new_profile_url
       follow_redirect!
-      assert_match "Decks", response.body
+      assert_match "#{I18n.t('actions.new')} #{Profile.model_name.human.downcase}", response.body
     end
 
     it "should not create session with invalid credentials" do
