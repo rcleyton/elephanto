@@ -39,6 +39,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     it "show" do
       @user = users(:one)
+      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+
       get profile_url(@user.profile)
       assert_response :success
 
@@ -47,6 +49,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     it "edit" do
       @user = users(:one)
+      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+
       get edit_profile_url(@user.profile)
       assert_response :success
 
@@ -55,6 +59,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     it "update" do
       @user = users(:one)
+      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+
       profile = @user.profile
 
       updated_attributes = {
@@ -74,6 +80,26 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
       assert_equal "da Silva", profile.last_name
       assert_equal "silvaclu", profile.username
       assert_equal "This is an updated bio.", profile.bio
+    end
+
+    it "should not access another user's profile" do
+      other_user = User.create!(
+        email_address: "other@example.com",
+        password: "p@ssword1",
+        password_confirmation: "p@ssword1"
+      )
+
+      other_profile = Profile.create!(
+        user: other_user,
+        first_name: "Invasor",
+        last_name: "Invisible",
+        username: "ghost",
+        bio: "Hacker"
+      )
+
+      get edit_profile_url(other_profile)
+      assert_redirected_to decks_path
+      assert_equal I18n.t("messages.render_not_found"), flash[:alert]
     end
   end
 end

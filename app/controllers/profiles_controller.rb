@@ -43,6 +43,7 @@ class ProfilesController < ApplicationController
   end
 
   def set_profile
-    @profile = Profile.find(params[:id])
+    @profile = current_user.profile
+    raise ActiveRecord::RecordNotFound unless @profile && @profile.id.to_s == params[:id]
   end
 end
