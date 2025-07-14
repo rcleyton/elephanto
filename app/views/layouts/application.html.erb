@@ -26,34 +26,58 @@
   <body>
     <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
       <div class="layout-container flex h-full grow flex-col">
-        <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f1f2f4] px-10 py-3">
-          <div class="flex items-center gap-4 text-[#121416]">
-            <div>
-              <%= image_tag "logo.svg", width: "44" %>
-            </div>
-            <h2 class="text-green-800 text-lg font-bold leading-tight tracking-[-0.015em]">Elephanto</h2>
-          </div>
-          <div class="flex flex-1 justify-end gap-8">
-            <div class="flex items-center gap-9">
-              <%= link_to "Decks", decks_path, class: "text-[#121416] text-sm font-medium leading-normal" %>
-            </div>
-            <button
-              class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f1f2f4] text-[#121416] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5"
-            >
-              <div class="text-[#121416]" data-icon="Bell" data-size="20px" data-weight="regular">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
-                  <path
-                    d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"
-                  ></path>
-                </svg>
+        <div data-controller="header">
+          <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f1f2f4] px-4 md:px-10 py-3">
+            <div class="flex items-center gap-4 text-[#121416]">
+              <div>
+                <%= image_tag "logo.svg", width: "44" %>
               </div>
-            </button>
-            <div
-              class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsx4FBPK8ma5YAt-2VMR22_GVk6vepwoF-iT_D8cFDIGebQJoEg0T_jA5FiD1kv9tRvUSHWtOVqTQYJY5-uQWTJSzwJKSw5smdbkaEcT5teNyreGJN0ShfcYKqnn5nd_Smo_ER4jVl4qnyj_kSV6XdRViArGJkFbuiWRXtgxCrV7AM1ff8gK5G7QTdlgSfkALPEeKYj6lBWWOM1QLO8caJPYkOVwQSj98pia8EpS8p4KmbuinyS4HF8I7YjRaPRpDESw8tsFqtjwvw");'
-            ></div>
+              <h2 class="text-green-800 text-lg font-bold leading-tight tracking-[-0.015em]">Elephanto</h2>
+            </div>
+
+            <div class="md:hidden">
+              <button data-action="header#toggleMobileMenu" class="text-[#121416] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div data-header-target="mainNavContent" class="hidden md:flex flex-1 justify-end gap-8">
+              <div class="flex items-center gap-9">
+                <%= link_to "Decks", decks_path, class: "text-[#121416] text-sm font-medium leading-normal" %>
+              </div>
+              <button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 bg-[#f1f2f4] text-[#121416] gap-2 text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2.5">
+                <div class="text-[#121416]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="currentColor" viewBox="0 0 256 256">
+                    <path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"></path>
+                  </svg>
+                </div>
+              </button>
+
+              <div class="relative">
+                <div data-action="click->header#toggleProfileDropdown"
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAsx4FBPK8ma5YAt-2VMR22_GVk6vepwoF-iT_D8cFDIGebQJoEg0T_jA5FiD1kv9tRvUSHWtOVqTQYJY5-uQWTJSzwJKSw5smdbkaEcT5teNyreGJN0ShfcYKqnn5nd_Smo_ER4jVl4qnyj_kSV6XdRViArGJkFbuiWRXtgxCrV7AM1ff8gK5G7QTdlgSfkALPEeKYj6lBWWOM1QLO8caJPYkOVwQSj98pia8EpS8p4KmbuinyS4HF8I7YjRaPRpDESw8tsFqtjwvw");'>
+                </div>
+
+                <div data-header-target="profileDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10 hidden">
+                  <%= link_to 'Meu perfil', profile_path(current_user), class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"%>
+                  <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <div data-header-target="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200 shadow-md pb-4">
+            <div class="flex flex-col items-center gap-4 py-4">
+              <%= link_to "Decks", decks_path, class: "text-[#121416] text-sm font-medium leading-normal py-2" %>
+              <%= link_to 'Meu perfil', profile_path(current_user), class: "text-[#121416] text-sm font-medium leading-normal py-2"%>
+              <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "text-[#121416] text-sm font-medium leading-normal py-2" %>
+            </div>
           </div>
-        </header>
+        </div>
+
         <div class="px-4 flex flex-1 justify-center py-5">
           <%= yield %>
         </div>
