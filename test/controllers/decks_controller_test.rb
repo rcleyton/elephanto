@@ -7,7 +7,6 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
   setup do
     @deck         = decks(:english)
     @user         = users(:one)
-    @another_user = users(:two)
 
     post session_url, params: {  email_address: @user.email_address, password: "p@ssword1" }
   end
@@ -64,5 +63,19 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to decks_url
+  end
+
+  it "must have a profile" do
+    @another_user        = users(:two)
+    new_deck_name        = "Programming Concepts"
+    new_deck_description = "Fundamental programming concepts and definitions"
+
+    post session_url, params: {  email_address: @another_user.email_address, password: "p@ssword1" }
+
+    post decks_url, params: { deck: { description: new_deck_description, name: new_deck_name } }
+
+    assert_equal @another_user.profile.present?, false
+    assert_redirected_to new_profile_url
+    assert_equal I18n.t("messages.missing_profile"), flash[:alert]
   end
 end

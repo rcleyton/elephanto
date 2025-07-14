@@ -10,6 +10,7 @@ pt-BR:
     create_account: Conta criada com sucesso. Por favor preencha seu perfil de usuário!
     render_not_found: Recurso não encontrado ou não autorizado.
     already_exists: Você já tem um perfil. Edite-o aqui.
+    missing_profile: "Você precisa completar seu perfil antes de criar um deck."
   actions:
     new: Novo
     edit: Editar
