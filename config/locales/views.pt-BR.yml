@@ -32,3 +32,6 @@ pt-BR:
     settings: Configurações
     change_password: Alterar senha
     update_password: Atualize sua senha por segurança.
+    drag_and_drop: Arraste sua imagem aqui ou clique para selecionar
+    invalid_format: Formato inválido. Use JPG, PNG ou WEBP.
+    invalid_size: Imagem muito grande. Limite de 2MB.

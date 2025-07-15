@@ -1,4 +1,17 @@
 <%= simple_form_for @profile, class: "contents" do |form| %>
+	<div class="px-4 py3">
+		<div data-controller="dropzone" data-dropzone-target="dropArea">
+			<div
+				data-dropzone-target="dropArea"
+				class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer"
+			>
+				<p class="text-gray-600"><%= t('general.drag_and_drop') %></p>
+				<%= form.file_field :avatar, class: "hidden", data: { dropzone_target: "input" } %>
+				<img data-dropzone-target="preview" class="hidden mx-auto mt-4 max-h-32 rounded-full" />
+			</div>
+		</div>
+	</div>
+
 	<div class="px-4 py-3">
 		<%= form.input :first_name, input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full",
 																											{"border-none focus:outline-blue-600": profile.errors[:first_name].none?,

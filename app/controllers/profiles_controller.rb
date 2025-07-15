@@ -28,8 +28,8 @@ class ProfilesController < ApplicationController
 
   def update
     if @profile.update(profile_params)
-      flash[:notice] = t("messages.updated", model: Profile.model_name.human)
       redirect_to profile_url(@profile)
+      flash[:notice] = t("messages.updated", model: Profile.model_name.human)
     else
       flash.now[:error] = t("messages.validation")
       render :edit, status: :unprocessable_entity
@@ -39,7 +39,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:first_name, :last_name, :username, :bio)
+    params.require(:profile).permit(:first_name, :last_name, :username, :bio, :avatar)
   end
 
   def set_profile

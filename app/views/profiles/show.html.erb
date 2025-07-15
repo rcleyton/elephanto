@@ -1,6 +1,10 @@
 <% content_for :title, "#{t('actions.showing')} #{Profile.model_name.human.downcase}" %>
 
 <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+	<turbo-frame id="flash">
+    <%= render "shared/flash" %>
+  </turbo-frame>
+
 	<div class="flex flex-wrap justify-between gap-3 p-4">
 		<div class="flex min-w-72 flex-col gap-3">
 			<p class="text-[#111418] tracking-light text-[32px] font-bold leading-tight"><%= t('general.my_profile')%></p>
@@ -10,10 +14,14 @@
 	<div class="flex p-4 @container">
 		<div class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
 			<div class="flex gap-4">
-				<div
-					class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
-					style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5iopFRs_mHHWb4daesZUh8OuRnFXVriq1450xzu9mbsVbYMvgOqjIisPBoaeHPmdOPJP4Fs1kQCG2CBTQsud0xiC4cEypngypkEqKOl6k51Ogb2IHYo5NUx4W6OZX4arcWP8vIbONAeisKXcNfT5RK6XbDi1yLhflRfT9uKWNadyjYGq50n-41YJWihk98flwiWA6EuH8fmC5BOW2LN-kRgOT2SOsOYtm3lAlsSVd2X4L-EYqsBkQE8taA3rK_1izkv7kELNKwgdr");'
-				></div>
+				<% if @profile.avatar.attached? %>
+				  <img src="<%= url_for(@profile.avatar) %>" class="mx-auto mt-4 max-h-32 rounded-full" />
+				<% else %>
+					<div
+						class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32"
+						style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB5iopFRs_mHHWb4daesZUh8OuRnFXVriq1450xzu9mbsVbYMvgOqjIisPBoaeHPmdOPJP4Fs1kQCG2CBTQsud0xiC4cEypngypkEqKOl6k51Ogb2IHYo5NUx4W6OZX4arcWP8vIbONAeisKXcNfT5RK6XbDi1yLhflRfT9uKWNadyjYGq50n-41YJWihk98flwiWA6EuH8fmC5BOW2LN-kRgOT2SOsOYtm3lAlsSVd2X4L-EYqsBkQE8taA3rK_1izkv7kELNKwgdr");'
+					></div>
+				<% end %>
 				<div class="flex flex-col justify-center">
 					<p class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em]"><%= @profile.first_name%> <%= @profile.last_name%></p>
 					<p class="text-[#637488] text-base font-normal leading-normal"><%= current_user.email_address %></p>
