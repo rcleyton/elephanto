@@ -51,6 +51,8 @@ pt-BR:
       email_address: Digite seu email 
       password: Digite sua senha
       password_confirmation: Confirme sua senha
+      new_password: Digite uma nova senha
+      repeat_new_password: Confirme a nova senha
     profile:
       first_name: Digite o seu nome
       last_name: Digite o seu sobrenome

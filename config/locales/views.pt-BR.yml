@@ -13,6 +13,14 @@ pt-BR:
     missing_profile: Você precisa completar seu perfil antes de criar um deck.
     incorrect_credentials: Email ou senha incorretos
     try_again_later: Tente novamente mais tarde
+    reset_instructions: Enviamos as instruções para redefinir sua senha (caso o e-mail esteja cadastrado).
+    password_been_reset: A senha foi redefinida.
+    password_not_match: As senhas não coincidem.
+    password_link_invalid: O link de redefinição de senha é inválido ou expirou.
+    reset_your_password: Redefina sua senha
+    you_can_reset_password: Você pode redefinir sua senha nos próximos 15 minutos
+    this_password_reset_page: nesta página de redefinição de senha
+    update_your_password: Atualizar senha
   actions:
     new: Novo
     edit: Editar
