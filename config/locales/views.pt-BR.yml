@@ -15,7 +15,7 @@ pt-BR:
     try_again_later: Tente novamente mais tarde
     reset_instructions: Enviamos as instruções para redefinir sua senha (caso o e-mail esteja cadastrado).
     password_been_reset: A senha foi redefinida.
-    password_not_match: As senhas não coincidem.
+    password_not_match: Senhas não são iguais ou não atendem o padrão de no mínimo 8 dígitos contendo letras, números e caracteres especiais.
     password_link_invalid: O link de redefinição de senha é inválido ou expirou.
     reset_your_password: Redefina sua senha
     you_can_reset_password: Você pode redefinir sua senha nos próximos 15 minutos
