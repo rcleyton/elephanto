@@ -8,7 +8,7 @@
   <div class="flex flex-wrap justify-between gap-3 p-4">
     <p class="text-[#121416] tracking-light text-[32px] font-bold leading-tight min-w-72"><%= Deck.model_name.human.pluralize %></p>
 
-    <%= link_to new_deck_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-8 px-4 bg-[#f1f2f4] text-[#121416] text-sm font-semibold leading-normal" do %>
+    <%= link_to new_deck_path, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-8 px-4 bg-[#4CAF50] text-white text-sm font-semibold leading-normal" do %>
       <span class="truncate"><%= t('buttons.submit.new_deck') %></span>
     <% end %>
   </div>
