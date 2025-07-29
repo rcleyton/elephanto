@@ -65,7 +65,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
 
       delete session_url
 
-      assert_redirected_to new_session_url
+      assert_redirected_to root_url
       refute Session.exists?(session_id)
     end
   end
