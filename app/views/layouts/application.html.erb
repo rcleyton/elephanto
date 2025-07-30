@@ -18,6 +18,8 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
+
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -29,10 +31,9 @@
         <div data-controller="header">
           <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f1f2f4] px-4 md:px-10 py-3">
             <div class="flex items-center gap-4 text-[#121416]">
-              <div>
-                <%= image_tag "logo.svg", width: "44" %>
-              </div>
-              <h2 class="text-green-800 text-lg font-bold leading-tight tracking-[-0.015em]">Elephanto</h2>
+              <%= link_to decks_path, class: 'text-[#60c2a6] text-lg font-extrabold leading-tight tracking-[-0.015em]', style: 'font-family: "Playwrite HU", cursive;' do %>
+                Elephanto
+              <% end %>
             </div>
 
             <div class="md:hidden">

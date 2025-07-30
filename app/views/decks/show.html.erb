@@ -33,7 +33,7 @@
   <div class="p-4 grid grid-cols-[20%_1fr] gap-x-6">
     <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
       <p class="text-[#6a7581] text-sm font-normal leading-normal">Flashcards</p>
-      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @flashcards.count %></p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @deck.flashcards.count %></p>
     </div>
     <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
       <p class="text-[#6a7581] text-sm font-normal leading-normal"><%= t("general.created") %></p>
@@ -54,32 +54,8 @@
   </div>
 
   <div class="px-4 py-3 @container">
-    <div class="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white">
-      <table class="flex-1">
-        <thead>
-          <tr class="bg-white">
-            <th class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
-              <%= t("general.question") %>
-            </th>
-            <th
-              class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 px-4 py-3 text-left text-[#111418] w-60 text-[#637488] text-sm font-medium leading-normal"
-            ></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @deck.flashcards.each do |flashcard| %>
-            <tr class="border-t border-t-[#dce0e5]">
-              <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-                <%= flashcard.front %>
-              </td>
-              <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
-                <%= t("actions.edit") %> | <%= t("actions.delete") %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+    <%= render partial: "flashcards", locals: { flashcards: @flashcards } %>
+
     <style>
       @container(max-width:120px){.table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120{display: none;}}
       @container(max-width:240px){.table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240{display: none;}}

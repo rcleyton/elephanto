@@ -10,7 +10,7 @@ class DecksController < ApplicationController
   end
 
   def show
-    @flashcards = @deck.flashcards
+    @flashcards = @deck.flashcards.page(params[:page]).per(10)
   end
 
   def new

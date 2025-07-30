@@ -45,3 +45,9 @@ pt-BR:
     drag_and_drop: Arraste sua imagem aqui ou clique para selecionar
     invalid_format: Formato inválido. Use JPG, PNG ou WEBP.
     invalid_size: Imagem muito grande. Limite de 2MB.
+  pagination:
+    first: "&laquo; Primeiro"
+    last: "Último &raquo;"
+    previous: "&lsaquo; Anterior"
+    next: "Próximo &rsaquo;"
+    truncate: "&hellip;"

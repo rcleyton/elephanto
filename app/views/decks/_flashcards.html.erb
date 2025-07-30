@@ -1,0 +1,29 @@
+<turbo-frame id="flashcards">
+  <div class="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white">
+    <table class="flex-1">
+      <thead>
+        <tr class="bg-white">
+          <th class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
+            <%= t("general.question") %>
+          </th>
+          <th
+            class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 px-4 py-3 text-left text-[#111418] w-60 text-[#637488] text-sm font-medium leading-normal"
+          ></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @flashcards.each do |flashcard| %>
+          <tr class="border-t border-t-[#dce0e5]">
+            <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
+              <%= flashcard.front %>
+            </td>
+            <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
+              <%= t("actions.edit") %> | <%= t("actions.delete") %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <%= paginate @flashcards %>
+</turbo-frame>
