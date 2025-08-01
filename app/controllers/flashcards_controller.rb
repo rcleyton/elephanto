@@ -45,6 +45,7 @@ class FlashcardsController < ApplicationController
     else
       session.delete(:review_queue)
       flash[:notice] = t("messages.completed_review")
+      @deck.update(last_reviewed_at: Time.current)
       redirect_to deck_path(@deck)
     end
   end

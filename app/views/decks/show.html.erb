@@ -37,11 +37,11 @@
     </div>
     <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
       <p class="text-[#6a7581] text-sm font-normal leading-normal"><%= t("general.created") %></p>
-      <p class="text-[#121416] text-sm font-normal leading-normal"><%= l @deck.created_at, format: :long %></p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= l @deck.created_at, format: :only_date %></p>
     </div>
     <div class="col-span-2 grid grid-cols-subgrid border-t border-t-[#dde0e3] py-5">
       <p class="text-[#6a7581] text-sm font-normal leading-normal"><%= t("general.last_studied") %></p>
-      <p class="text-[#121416] text-sm font-normal leading-normal"><%= l @deck.created_at, format: :short %></p>
+      <p class="text-[#121416] text-sm font-normal leading-normal"><%= @deck.last_reviewed_at.nil? ? 'Nunca revisado' : (l @deck.last_reviewed_at, format: :long) %></p>
     </div>
   </div>
 

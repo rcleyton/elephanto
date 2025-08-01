@@ -93,5 +93,14 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       follow_redirect!
       assert_match I18n.t("messages.completed_review"), response.body
     end
+
+    it "update last_reviewed_at after review" do
+      post review_deck_flashcard_path(@deck, @flashcard),  params: { difficulty: "easy" }
+      post review_deck_flashcard_path(@deck, @flashcard2), params: { difficulty: "easy" }
+
+      @deck.reload
+      assert_not_nil @deck.last_reviewed_at
+      assert_in_delta Time.current, @deck.last_reviewed_at, 1.second
+    end
   end
 end
