@@ -14,14 +14,31 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  it "should get new" do
-    get new_deck_flashcard_url(@deck)
-    must_respond_with :success
-  end
+  context 'flashcard' do
+    it "should get new" do
+      get new_deck_flashcard_url(@deck)
+      must_respond_with :success
+    end
 
-  it "should show flashcard" do
-    get deck_flashcard_url(@deck, Flashcard.last)
-    must_respond_with :success
+    it "should show flashcard" do
+      get deck_flashcard_url(@deck, Flashcard.last)
+      must_respond_with :success
+    end
+
+    it 'edit' do
+      get edit_deck_flashcard_url(@deck, @flashcard)
+      assert_response :success
+    end
+
+    it 'update' do
+      patch deck_flashcard_url(@deck, @flashcard), params: { flashcard: { back: 'Another question', front: 'Another answer' }}
+
+      @flashcard.reload
+
+      assert_equal "Another question", @flashcard.back
+      assert_equal "Another answer",   @flashcard.front
+      assert_redirected_to deck_flashcard_url(@deck, @flashcard)
+    end
   end
 
   context "create" do

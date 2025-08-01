@@ -3,7 +3,7 @@
 
 class FlashcardsController < ApplicationController
   before_action :set_deck
-  before_action :set_flashcard, only: %i[show review]
+  before_action :set_flashcard, only: %i[show edit update review]
 
   def show; end
 
@@ -19,6 +19,18 @@ class FlashcardsController < ApplicationController
     else
       flash.now[:error] = t("messages.validation")
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit; end
+    
+  def update
+    if @flashcard.update(flashcard_params)
+      flash[:notice] = t("messages.updated", model: Flashcard.model_name.human)
+      redirect_to deck_flashcard_path(@deck, @flashcard)
+    else
+      flash.now[:error] = t("messages.validation")
+      render :edit, status: :unprocessable_entity
     end
   end
 
