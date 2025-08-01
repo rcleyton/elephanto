@@ -26,8 +26,8 @@ class FlashcardsController < ApplicationController
     
   def update
     if @flashcard.update(flashcard_params)
+      redirect_to deck_path(@deck)
       flash[:notice] = t("messages.updated", model: Flashcard.model_name.human)
-      redirect_to deck_flashcard_path(@deck, @flashcard)
     else
       flash.now[:error] = t("messages.validation")
       render :edit, status: :unprocessable_entity

@@ -1,0 +1,15 @@
+<% content_for :title, "#{t('actions.edit')} #{Flashcard.model_name.human.downcase}" %>
+
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+  <div class="flex flex-wrap justify-between gap-3 p-4">
+    <p class="text-[#121416] tracking-light text-[32px] font-bold leading-tight min-w-72">
+      <%= "#{t('actions.edit')} #{Flashcard.model_name.human.downcase}"  %>
+    </p>
+  </div>
+
+  <turbo-frame id="flash">
+    <%= render "shared/flash" %>
+  </turbo-frame>
+
+  <%= render "form", flashcard: @flashcard %>
+</div>

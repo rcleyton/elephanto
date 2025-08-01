@@ -37,7 +37,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
       assert_equal "Another question", @flashcard.back
       assert_equal "Another answer",   @flashcard.front
-      assert_redirected_to deck_flashcard_url(@deck, @flashcard)
+      assert_redirected_to deck_url(@deck)
     end
   end
 
