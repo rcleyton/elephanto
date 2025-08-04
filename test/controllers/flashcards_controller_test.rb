@@ -39,6 +39,14 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_equal "Another answer",   @flashcard.front
       assert_redirected_to deck_url(@deck)
     end
+
+    it 'delete' do
+      assert_difference("Flashcard.count", -1) do
+        delete deck_flashcard_url(@deck, @flashcard)
+      end
+
+      assert_redirected_to deck_url(@deck)
+    end
   end
 
   context "create" do

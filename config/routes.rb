@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :profiles, only: %i[ new create show edit update ]
 
   resources :decks do
-    resources :flashcards, only: %i[ show new create edit update ] do
+    resources :flashcards, only: %i[ show new create edit update destroy] do
       member do
         post :review
       end

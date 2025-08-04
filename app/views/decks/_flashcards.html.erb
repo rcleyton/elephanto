@@ -1,29 +1,33 @@
-<turbo-frame id="flashcards">
-  <div class="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white">
-    <table class="flex-1">
-      <thead>
-        <tr class="bg-white">
-          <th class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-medium leading-normal">
-            <%= t("general.question") %>
-          </th>
-          <th
-            class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 px-4 py-3 text-left text-[#111418] w-60 text-[#637488] text-sm font-medium leading-normal"
-          ></th>
+<div class="flex overflow-hidden rounded-xl border border-[#dce0e5] bg-white">
+  <table class="flex-1">
+    <thead>
+      <tr class="bg-white">
+        <th class="table-column-120 px-4 py-3 text-left text-[#111418] w-[400px] text-sm font-bold leading-normal">
+          <%= t("general.question") %>
+        </th>
+        <th
+          class="table-column-240 px-4 py-3 text-left text-[#111418] w-60 text-[#637488] text-sm font-medium leading-normal"
+        ></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% flashcards.each do |flashcard| %>
+        <tr class="border-t border-t-[#dce0e5]">
+          <td class="table-column-120 p-4 w-[400px] text-[#111418] text-sm font-normal leading-normal">
+            <%= flashcard.front.truncate(30) %>
+          </td>
+          <td class="table-column-240 flex justify-end space-x-2 p-4 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
+            <%= link_to edit_deck_flashcard_path(deck, flashcard), class: 'p-2 rounded-sm bg-[#007bff] cursor-pointer' do %>
+              <%= image_tag 'edit.svg', size: "24" %>
+            <% end %>
+            <%= button_to deck_flashcard_path(deck, flashcard), method: :delete, class: 'p-2 rounded-sm bg-[#dc3545] cursor-pointer' do %>
+              <%= image_tag 'trash.svg', width: '24' %>
+            <% end %>
+          </td>
         </tr>
-      </thead>
-      <tbody>
-        <% flashcards.each do |flashcard| %>
-          <tr class="border-t border-t-[#dce0e5]">
-            <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-120 h-[72px] px-4 py-2 w-[400px] text-[#111418] text-sm font-normal leading-normal">
-              <%= flashcard.front %>
-            </td>
-            <td class="table-d18abba4-203f-4b96-ad66-edbd4246ca40-column-240 h-[72px] px-4 py-2 w-60 text-[#637488] text-sm font-bold leading-normal tracking-[0.015em]">
-              <%= link_to t("actions.edit"), edit_deck_flashcard_path(deck, flashcard), data: { turbo: false } %> | <%= t("actions.delete") %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-  <%= paginate flashcards %>
-</turbo-frame>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= paginate flashcards %>
+

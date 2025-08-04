@@ -3,7 +3,7 @@
 
 class FlashcardsController < ApplicationController
   before_action :set_deck
-  before_action :set_flashcard, only: %i[show edit update review]
+  before_action :set_flashcard, only: %i[show edit update destroy review]
 
   def show; end
 
@@ -31,6 +31,13 @@ class FlashcardsController < ApplicationController
     else
       flash.now[:error] = t("messages.validation")
       render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @flashcard.destroy!
+      flash[:success] = t("messages.deleted", model: Flashcard.model_name.human)
+      redirect_to deck_path(@deck)
     end
   end
 
