@@ -6,8 +6,9 @@ require "test_helper"
 class ProfilesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:two)
+    @user.confirm!
 
-    post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+    post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
   end
 
   it "shoud get new" do
@@ -28,7 +29,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
     it "already exists" do
       @user = users(:one)
       profile = @user.profile
-      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+      post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
 
       assert profile.present?
       get new_profile_url
@@ -39,7 +40,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     it "show" do
       @user = users(:one)
-      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+      post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
 
       get profile_url(@user.profile)
       assert_response :success
@@ -49,7 +50,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     it "edit" do
       @user = users(:one)
-      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+      post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
 
       get edit_profile_url(@user.profile)
       assert_response :success
@@ -59,7 +60,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
 
     it "update" do
       @user = users(:one)
-      post session_url, params: { email_address: @user.email_address, password: "p@ssword1" }
+      post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
 
       profile = @user.profile
 

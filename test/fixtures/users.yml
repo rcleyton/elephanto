@@ -1,6 +1,10 @@
 one:
   email_address: 'user1@elephanto.com'
-  password_digest: <%= BCrypt::Password.create('p@ssword1') %>
+  password_digest: <%= BCrypt::Password.create('P@ssword1') %>
+  verified: true
+  confirmation_token: <%= SecureRandom.urlsafe_base64 %>
+  confirmation_sent_at: <%= Time.current - 10.minutes %>
+  confirmed_at: <%= Time.current - 5.minutes %>
 two:
   email_address: 'user2@elephanto.com'
-  password_digest: <%= BCrypt::Password.create('p@ssword1') %>
+  password_digest: <%= BCrypt::Password.create('P@ssword1') %>

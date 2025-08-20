@@ -8,7 +8,7 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
     @deck         = decks(:english)
     @user         = users(:one)
 
-    post session_url, params: {  email_address: @user.email_address, password: "p@ssword1" }
+    post session_url, params: {  email_address: @user.email_address, password: "P@ssword1" }
   end
 
   it "should get index" do
@@ -70,7 +70,9 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
     new_deck_name        = "Programming Concepts"
     new_deck_description = "Fundamental programming concepts and definitions"
 
-    post session_url, params: {  email_address: @another_user.email_address, password: "p@ssword1" }
+    @another_user.confirm!
+
+    post session_url, params: {  email_address: @another_user.email_address, password: "P@ssword1" }
 
     post decks_url, params: { deck: { description: new_deck_description, name: new_deck_name } }
 

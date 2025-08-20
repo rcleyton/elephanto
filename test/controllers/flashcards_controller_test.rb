@@ -10,11 +10,11 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     @flashcard2 = @deck.flashcards.create(front: "Question2", back: "Answer2")
     @user       = users(:one)
 
-    post session_url, params: {  email_address: @user.email_address, password: "p@ssword1" }
+    post session_url, params: {  email_address: @user.email_address, password: "P@ssword1" }
     assert_response :redirect
   end
 
-  context 'flashcard' do
+  context "flashcard" do
     it "should get new" do
       get new_deck_flashcard_url(@deck)
       must_respond_with :success
@@ -25,13 +25,13 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       must_respond_with :success
     end
 
-    it 'edit' do
+    it "edit" do
       get edit_deck_flashcard_url(@deck, @flashcard)
       assert_response :success
     end
 
-    it 'update' do
-      patch deck_flashcard_url(@deck, @flashcard), params: { flashcard: { back: 'Another question', front: 'Another answer' }}
+    it "update" do
+      patch deck_flashcard_url(@deck, @flashcard), params: { flashcard: { back: "Another question", front: "Another answer" }}
 
       @flashcard.reload
 
@@ -40,7 +40,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to deck_url(@deck)
     end
 
-    it 'delete' do
+    it "delete" do
       assert_difference("Flashcard.count", -1) do
         delete deck_flashcard_url(@deck, @flashcard)
       end

@@ -3,7 +3,7 @@
 
 Rails.application.routes.draw do
   root to: "landing#index"
-  
+
   get  "/sign_up", to: "users#new"
   post "/sign_up", to: "users#create"
 
@@ -22,6 +22,8 @@ Rails.application.routes.draw do
       get :review, to: "flashcards#start_review"
     end
   end
+
+  resource :confirmation, only: [ :show ]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end

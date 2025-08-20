@@ -13,8 +13,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      start_new_session_for(@user)
-      redirect_to new_profile_path, notice: t("messages.create_account")
+      UserMailer.confirmation(@user).deliver_now
+      flash[:success] = t("messages.create_account")
+      redirect_to root_path
     else
       flash.now[:alert] = "Erro ao criar conta"
       render :new, status: :unprocessable_entity

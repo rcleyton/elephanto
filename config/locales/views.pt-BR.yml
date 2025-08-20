@@ -7,7 +7,7 @@ pt-BR:
     deleted: "%{model} apagado com sucesso!"
     completed_review: Você revisou todos os flashcards disponíveis hoje!
     no_revision_today: Nenhum flashcard disponível para revisão hoje!
-    create_account: Conta criada com sucesso. Por favor preencha seu perfil de usuário!
+    create_account: Cadastro realizado! Verifique seu e-mail para confirmar a conta.
     render_not_found: Recurso não encontrado ou não autorizado.
     already_exists: Você já tem um perfil. Edite-o aqui.
     missing_profile: Você precisa completar seu perfil antes de criar um deck.
@@ -21,6 +21,11 @@ pt-BR:
     you_can_reset_password: Você pode redefinir sua senha nos próximos 15 minutos
     this_password_reset_page: nesta página de redefinição de senha
     update_your_password: Atualizar senha
+    confirm_email: "Confirme o seu e-mail antes de entrar."
+    success_login: "Login efetuado com sucesso!"
+    success_logout: "Logout realizado com sucesso!"
+    confirmed_email: "E-mail confirmado com sucesso!"
+    invalid_link: "Link de confirmação inválido ou expirado!"
   actions:
     new: Novo
     edit: Editar
