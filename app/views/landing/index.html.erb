@@ -20,6 +20,14 @@
       <turbo-frame id="flash"> 
         <%= render "shared/flash" %>
       </turbo-frame>
+      
+      <% if params[:resend_user_id] && (user = User.find_by(id: params[:resend_user_id])) %>
+        <%= form_with url: confirmation_path, method: :post, data: { turbo: true } do %>
+          <%= hidden_field_tag :email_address, user.email_address %>
+          <%= submit_tag "Reenviar e-mail de confirmação", class: "text-center rounded-md m-4 px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
+        <% end %>
+      <% end %>
+
 
         <div class="@container">
           <div class="@[480px]:p-4">

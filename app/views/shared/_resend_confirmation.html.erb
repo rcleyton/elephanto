@@ -1,0 +1,7 @@
+<% if @user %>
+  <%= form_with url: confirmation_path, method: :post, data: { turbo: true } do %>
+    <%= hidden_field_tag :email_address, @user.email_address %>
+    <%= submit_tag "Reenviar e-mail", class: "underline text-blue-600" %>
+  <% end %>
+<% end %>
+

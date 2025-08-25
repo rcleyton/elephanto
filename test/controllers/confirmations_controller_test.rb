@@ -15,7 +15,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
   context "confirm" do
     it "with valid token" do
-      get confirmation_url(token: @token)
+      get confirmation_url(token: @token, email: @user.email_address)
 
       assert_redirected_to new_session_url
       follow_redirect!
@@ -25,16 +25,84 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       assert @user.confirmed?
     end
 
-    it "not with invalid token" do
-      @user.update!(confirmation_sent_at: 3.days.ago)
+    it "already confirmed" do
+      @user.update(verified: true, confirmation_token: nil, confirmed_at: Time.current)
+      @user.reload
 
-      get confirmation_url(token: @token)
-      assert_redirected_to root_path
+      get confirmation_url(token: @token, email: @user.email_address)
+
+      assert_redirected_to new_session_url
       follow_redirect!
 
-      assert_match I18n.t("messages.invalid_link"), response.body
+      assert_match I18n.t("messages.already_confirmed"), response.body
+      assert @user.confirmed?
+    end
+
+    it "redirects when email does not exist" do
+      post confirmation_url, params: { email_address: "notfound@elephanto.com.br" }
+
+      assert_redirected_to root_url
+      assert_equal I18n.t("messages.user_not_found_or_confirmed"), flash[:notice]
+    end
+
+    it "does not confirm with wrong email" do
+      get confirmation_url(token: @token, email: "wrong@elephanto.com.br")
+
+      assert_redirected_to root_url
+      assert_equal I18n.t("messages.user_not_found"), flash[:alert]
+      refute @user.reload.confirmed?
+    end
+  end
+
+  context "resend" do
+    it "not with invalid token" do
+      @user.update(confirmation_sent_at: 3.days.ago)
+
+      get confirmation_url(token: @token, email: @user.email_address)
+      assert_redirected_to root_path(resend_user_id: @user.id)
+      follow_redirect!
+
+      expected_message = I18n.t("messages.invalid_link")
+      assert_equal expected_message, flash[:alert]
       @user.reload
       refute @user.confirmed?
+    end
+
+    it "email to new confirmation" do
+      @user.confirmation_sent_at = 3.days.ago
+      @user.save!(validate: false)
+
+      assert_emails 1 do
+        post confirmation_url, params: { email_address: @user.email_address }
+      end
+
+      assert_equal I18n.t("messages.new_email_to_confirmation"), flash[:success]
+
+      @user.reload
+      refute_nil @user.confirmation_token
+      assert @user.confirmation_sent_at > 1.minute.ago
+    end
+
+    it "email to confirm user with new token" do
+      post confirmation_url, params: { email_address: @user.email_address }
+      @user.reload
+
+      get confirmation_url(token: @user.confirmation_token, email: @user.email_address)
+
+      assert_redirected_to new_session_url
+      assert_equal I18n.t("messages.confirmed_email"), flash[:success]
+      assert @user.reload.confirmed?
+    end
+
+    it "does not resend if user already confirmed" do
+      @user.update!(verified: true, confirmed_at: Time.current)
+
+      assert_no_emails do
+        post confirmation_url, params: { email_address: @user.email_address }
+      end
+
+      assert_redirected_to root_url
+      assert_equal I18n.t("messages.user_not_found_or_confirmed"), flash[:notice]
     end
   end
 end

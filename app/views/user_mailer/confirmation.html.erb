@@ -1,8 +1,9 @@
-<h1>Confirmação de conta</h1>
-
 <p>Olá <%= @user.email_address %>,</p>
 
-<p>Obrigado por se cadastrar! Clique no link abaixo para confirmar sua conta:</p>
+<p>Para confirmar sua conta, clique no link abaixo:</p>
 
-<p><%= link_to "Confirmar minha conta", confirmation_url(token: @token) %></p>
+<p><%= link_to "Confirmar minha conta", @confirmation_url %></p>
+
+<p>Se você não solicitou este cadastro, ignore este e-mail.</p>
+
 
