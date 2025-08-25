@@ -1,4 +1,53 @@
-<p>
-  <%= t('messages.you_can_reset_password') %>
-  <%= link_to t('messages.this_password_reset_page'), edit_password_url(@user.password_reset_token) %>.
-</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Redefinição de Senha</title>
+  </head>
+  <body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#f9fafb; color:#111827;">
+    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+      <tr>
+        <td align="center" style="padding: 30px;">
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; background:#ffffff; border-radius: 12px; box-shadow:0 4px 8px rgba(0,0,0,0.05); overflow: hidden;">
+ 
+            <tr>
+              <td align="center" style="background:#8E51FF; padding: 20px;">
+                <h1 style="margin:0; color:#ffffff; font-size: 24px;">Elephanto</h1>
+                <p style="margin:0; color:#dbeafe; font-size:14px;">Seu aprendizado com repetição espaçada</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding: 30px; text-align:left;">
+                <h2 style="color:#111827; font-size:20px; margin-bottom:15px;">Olá <%= @user.email_address %>,</h2>
+                <p style="margin-bottom:20px; font-size:15px; line-height:1.6; color:#374151;">
+                  Recebemos um pedido para redefinir a sua senha.  
+                  Para continuar, clique no botão abaixo:
+                </p>
+                
+                <p style="text-align:center; margin:30px 0;">
+                  <a href="<%= edit_password_url(@user.password_reset_token) %>"
+                     style="background:#60C2A6; color:#ffffff; padding:14px 28px; font-size:16px; text-decoration:none; border-radius:8px; display:inline-block;">
+                    Redefinir Senha
+                  </a>
+                </p>
+
+                <p style="font-size:13px; color:#6b7280; line-height:1.5; margin-top:20px;">  
+                  Se você não solicitou a redefinição, pode ignorar este email com segurança e sua senha permanecerá a mesma.
+                </p>
+              </td>
+            </tr>
+
+            <tr>
+              <td align="center" style="background:#f3f4f6; padding: 15px; font-size:12px; color:#6b7280;">
+                © <%= Time.current.year %> Elephanto — Feito para quem acredita no poder da repetição espaçada 🐘
+              </td>
+            </tr>
+
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
