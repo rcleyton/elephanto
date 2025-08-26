@@ -34,5 +34,17 @@
 
   <body>
     <%= yield %>
+
+    <div data-controller="cookie-consent"
+        data-cookie-consent-target="banner"
+        class="hidden fixed inset-x-0 bottom-0 bg-gray-900 text-white px-6 py-4 flex items-center justify-between z-50">
+      <span class="text-sm">
+        Usamos cookies essenciais para garantir o bom funcionamento do sistema. Ao continuar, você concorda com isso.
+      </span>
+      <button data-action="cookie-consent#accept"
+              class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium">
+        Aceitar
+      </button>
+    </div>
   </body>
 </html>
