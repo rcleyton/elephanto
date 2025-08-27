@@ -87,7 +87,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
       other_user = User.create!(
         email_address: "other@example.com",
         password: "p@ssword1",
-        password_confirmation: "p@ssword1"
+        password_confirmation: "p@ssword1",
+        terms_of_service: true
       )
 
       other_profile = Profile.create!(

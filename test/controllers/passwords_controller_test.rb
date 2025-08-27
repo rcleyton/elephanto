@@ -13,7 +13,12 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
   
 
   it "sends reset instructions" do
-    user = User.create!(email_address: "test@example.com", password: "p@ssword1", password_confirmation: 'p@ssword1')
+    user = User.create!(
+      email_address: "test@example.com", 
+      password: "p@ssword1", 
+      password_confirmation: 'p@ssword1',
+      terms_of_service: true  
+    )
     post passwords_path, params: { email_address: user.email_address }
 
     assert_redirected_to new_session_path

@@ -1,225 +1,164 @@
-<div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden" style='font-family: Lexend, "Noto Sans", sans-serif;'>
-  <div class="layout-container flex h-full grow flex-col">
-    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-10 py-3">
-      <div class="flex items-center gap-4 text-[#111418]">
-        <h2 class="text-[#60c2a6] text-lg font-extrabold leading-tight tracking-[-0.015em]" style='font-family: "Playwrite HU", cursive;'>Elephanto</h2>
-      </div>
-      <div class="flex flex-1 justify-end gap-8">
-        <div class="flex items-center gap-9">
-          <a class="text-[#111418] text-sm font-medium leading-normal" href="#features">Recursos</a>
-        </div>
-        <%= link_to sign_up_url, class: 'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#60c2a6] text-white text-sm font-bold leading-normal tracking-[0.015em]' do %>
-          <span class="truncate">Iniciar</span>
-        <% end %>
-      </div>
-    </header>
-
-    <div class="flex flex-1 justify-center py-0 md:py-5 bg-gradient-to-br from-blue-100 via-purple-100 to-gray-200">
-      <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-       
-      <turbo-frame id="flash"> 
-        <%= render "shared/flash" %>
-      </turbo-frame>
-      
-      <% if params[:resend_user_id] && (user = User.find_by(id: params[:resend_user_id])) %>
-        <%= form_with url: confirmation_path, method: :post, data: { turbo: true } do %>
-          <%= hidden_field_tag :email_address, user.email_address %>
-          <%= submit_tag "Reenviar e-mail de confirmação", class: "text-center rounded-md m-4 px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
-        <% end %>
+<div class="flex flex-1 justify-center py-0 md:py-5 bg-gradient-to-br from-blue-100 via-purple-100 to-gray-200">
+  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+    
+    <turbo-frame id="flash"> 
+      <%= render "shared/flash" %>
+    </turbo-frame>
+    
+    <% if params[:resend_user_id] && (user = User.find_by(id: params[:resend_user_id])) %>
+      <%= form_with url: confirmation_path, method: :post, data: { turbo: true } do %>
+        <%= hidden_field_tag :email_address, user.email_address %>
+        <%= submit_tag "Reenviar e-mail de confirmação", class: "text-center rounded-md m-4 px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
       <% end %>
+    <% end %>
 
 
-        <div class="@container">
-          <div class="@[480px]:p-4">
-            <div
-              class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
-              style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBTr0tN8iVq7xzfsyEMC1cv-DgNaYoksGfaHJjSP5T4uj959yxB7Dq2MELI9nkJj88X34FYwbqwpWdueGGgtT6Gf9EgRpCcK95j1quor5fxUUeKE50tMvjB6_19QX22lBJOiFllo_Xk8SXGNnmHo_cRIglwAuGKL-tpxWQAbGL_x2XEAAKOwE10re00Cy5z2_oAjd8MVXQFZp9PO4LHA16bcPrF8gh2MWNTHL-XKPmfJgr0ogiQS7YWKFj-DFozqHWK5lYa774P4zmP");'
-            >
-              <div class="flex flex-col gap-2 text-center">
-                <h1
-                  class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
-                >
-                  Elephanto: Aprenda mais, esqueça menos
-                </h1>
-                <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                  A metodologia de aprendizagem espaçada que acelera sua retenção e libera seu tempo.
-                </h2>
-              </div>
-                <%= link_to sign_up_url, class: 'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-violet-500 text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]' do %>
-                  <span class="truncate">Iniciar aprendizado</span>
-                <% end %>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-10 px-4 py-10 @container">
-          <div class="flex flex-col gap-4">
+    <div class="@container">
+      <div class="@[480px]:p-4">
+        <div
+          class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
+          style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBTr0tN8iVq7xzfsyEMC1cv-DgNaYoksGfaHJjSP5T4uj959yxB7Dq2MELI9nkJj88X34FYwbqwpWdueGGgtT6Gf9EgRpCcK95j1quor5fxUUeKE50tMvjB6_19QX22lBJOiFllo_Xk8SXGNnmHo_cRIglwAuGKL-tpxWQAbGL_x2XEAAKOwE10re00Cy5z2_oAjd8MVXQFZp9PO4LHA16bcPrF8gh2MWNTHL-XKPmfJgr0ogiQS7YWKFj-DFozqHWK5lYa774P4zmP");'
+        >
+          <div class="flex flex-col gap-2 text-center">
             <h1
-              class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
+              class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
             >
-              Por que o Elephanto funciona?
+              Elephanto: Aprenda mais, esqueça menos
             </h1>
-            <p class="text-[#111418] text-base font-normal leading-normal max-w-[720px]">
-              Nossa plataforma foi projetada para tornar o aprendizado mais eficiente e agradável. Veja como ajudamos você a ter sucesso:
+            <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+              A metodologia de aprendizagem espaçada que acelera sua retenção e libera seu tempo.
+            </h2>
+          </div>
+            <%= link_to sign_up_url, class: 'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-violet-500 text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]' do %>
+              <span class="truncate">Iniciar aprendizado</span>
+            <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-10 px-4 py-10 @container">
+      <div class="flex flex-col gap-4">
+        <h1
+          class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
+        >
+          Por que o Elephanto funciona?
+        </h1>
+        <p class="text-[#111418] text-base font-normal leading-normal max-w-[720px]">
+          Nossa plataforma foi projetada para tornar o aprendizado mais eficiente e agradável. Veja como ajudamos você a ter sucesso:
+        </p>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
+        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
+          <div class="text-[#111418]" data-icon="BookOpen" data-size="24px" data-weight="regular">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" stroke="#60c2a6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round"></path> </g></svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-[#111418] text-base font-bold leading-tight">Reforce o que aprendeu no momento certo</h2>
+            <p class="text-[#637488] text-sm font-normal leading-normal">
+              O Elephanto identifica os momentos ideais para revisar o conteúdo, maximizando retenção sem esforço excessivo.
             </p>
           </div>
-          <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
-            <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-              <div class="text-[#111418]" data-icon="BookOpen" data-size="24px" data-weight="regular">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" stroke="#60c2a6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round"></path> </g></svg>
-              </div>
-              <div class="flex flex-col gap-1">
-                <h2 class="text-[#111418] text-base font-bold leading-tight">Reforce o que aprendeu no momento certo</h2>
-                <p class="text-[#637488] text-sm font-normal leading-normal">
-                 O Elephanto identifica os momentos ideais para revisar o conteúdo, maximizando retenção sem esforço excessivo.
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-              <div class="text-[#60c2a6]" data-icon="Cards" data-size="24px" data-weight="regular">
-                <svg fill="#60c2a6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20,3a1,1,0,0,0,0-2H4A1,1,0,0,0,4,3H5.049c.146,1.836.743,5.75,3.194,8-2.585,2.511-3.111,7.734-3.216,10H4a1,1,0,0,0,0,2H20a1,1,0,0,0,0-2H18.973c-.105-2.264-.631-7.487-3.216-10,2.451-2.252,3.048-6.166,3.194-8Zm-6.42,7.126a1,1,0,0,0,.035,1.767c2.437,1.228,3.2,6.311,3.355,9.107H7.03c.151-2.8.918-7.879,3.355-9.107a1,1,0,0,0,.035-1.767C7.881,8.717,7.227,4.844,7.058,3h9.884C16.773,4.844,16.119,8.717,13.58,10.126ZM12,13s3,2.4,3,3.6V20H9V16.6C9,15.4,12,13,12,13Z"></path></g></svg>
-              </div>
-              <div class="flex flex-col gap-1">
-                <h2 class="text-[#111418] text-base font-bold leading-tight">Economize horas de revisão desnecessária</h2>
-                <p class="text-[#637488] text-sm font-normal leading-normal">Chega de revisões aleatórias! Com ciclos personalizados, você estuda o que precisa, quando precisa.</p>
-              </div>
-            </div>
-            <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-              <div class="text-[#111418]" data-icon="Users" data-size="24px" data-weight="regular">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 14.6C3 14.0399 3 13.7599 3.10899 13.546C3.20487 13.3578 3.35785 13.2049 3.54601 13.109C3.75992 13 4.03995 13 4.6 13H5.4C5.96005 13 6.24008 13 6.45399 13.109C6.64215 13.2049 6.79513 13.3578 6.89101 13.546C7 13.7599 7 14.0399 7 14.6V19.4C7 19.9601 7 20.2401 6.89101 20.454C6.79513 20.6422 6.64215 20.7951 6.45399 20.891C6.24008 21 5.96005 21 5.4 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V14.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 4.6C10 4.03995 10 3.75992 10.109 3.54601C10.2049 3.35785 10.3578 3.20487 10.546 3.10899C10.7599 3 11.0399 3 11.6 3H12.4C12.9601 3 13.2401 3 13.454 3.10899C13.6422 3.20487 13.7951 3.35785 13.891 3.54601C14 3.75992 14 4.03995 14 4.6V19.4C14 19.9601 14 20.2401 13.891 20.454C13.7951 20.6422 13.6422 20.7951 13.454 20.891C13.2401 21 12.9601 21 12.4 21H11.6C11.0399 21 10.7599 21 10.546 20.891C10.3578 20.7951 10.2049 20.6422 10.109 20.454C10 20.2401 10 19.9601 10 19.4V4.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 10.6C17 10.0399 17 9.75992 17.109 9.54601C17.2049 9.35785 17.3578 9.20487 17.546 9.10899C17.7599 9 18.0399 9 18.6 9H19.4C19.9601 9 20.2401 9 20.454 9.10899C20.6422 9.20487 20.7951 9.35785 20.891 9.54601C21 9.75992 21 10.0399 21 10.6V19.4C21 19.9601 21 20.2401 20.891 20.454C20.7951 20.6422 20.6422 20.7951 20.454 20.891C20.2401 21 19.9601 21 19.4 21H18.6C18.0399 21 17.7599 21 17.546 20.891C17.3578 20.7951 17.2049 20.6422 17.109 20.454C17 20.2401 17 19.9601 17 19.4V10.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-              </div>
-              <div class="flex flex-col gap-1">
-                <h2 class="text-[#111418] text-base font-bold leading-tight">Progresso real, dia após dia</h2>
-                <p class="text-[#637488] text-sm font-normal leading-normal">
-                  Visualize seu avanço com clareza. Cada revisão feita é um passo consciente rumo ao domínio do conteúdo.
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-              <div class="text-[#111418]" data-icon="ChartLine" data-size="24px" data-weight="regular">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-              </div>
-              <div class="flex flex-col gap-1">
-                <h2 class="text-[#111418] text-base font-bold leading-tight"> Aprendizado que se adapta ao seu ritmo</h2>
-                <p class="text-[#637488] text-sm font-normal leading-normal">
-                  Seja você um estudante acelerado ou mais reflexivo, o Elephanto molda seu caminho conforme seu estilo de aprendizagem.
-                </p>
-              </div>
-            </div>
+        </div>
+        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
+          <div class="text-[#60c2a6]" data-icon="Cards" data-size="24px" data-weight="regular">
+            <svg fill="#60c2a6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20,3a1,1,0,0,0,0-2H4A1,1,0,0,0,4,3H5.049c.146,1.836.743,5.75,3.194,8-2.585,2.511-3.111,7.734-3.216,10H4a1,1,0,0,0,0,2H20a1,1,0,0,0,0-2H18.973c-.105-2.264-.631-7.487-3.216-10,2.451-2.252,3.048-6.166,3.194-8Zm-6.42,7.126a1,1,0,0,0,.035,1.767c2.437,1.228,3.2,6.311,3.355,9.107H7.03c.151-2.8.918-7.879,3.355-9.107a1,1,0,0,0,.035-1.767C7.881,8.717,7.227,4.844,7.058,3h9.884C16.773,4.844,16.119,8.717,13.58,10.126ZM12,13s3,2.4,3,3.6V20H9V16.6C9,15.4,12,13,12,13Z"></path></g></svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-[#111418] text-base font-bold leading-tight">Economize horas de revisão desnecessária</h2>
+            <p class="text-[#637488] text-sm font-normal leading-normal">Chega de revisões aleatórias! Com ciclos personalizados, você estuda o que precisa, quando precisa.</p>
           </div>
         </div>
-
-        <div class="flex flex-col gap-10 px-4 py-10 @container">
-          <div class="flex flex-col gap-4" id="features">
-            <h1
-              class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
-            >
-              Recursos que potencializam seu aprendizado
-            </h1>
-            <p class="text-[#111418] text-base font-normal leading-normal max-w-[720px]">
-              Descubra como o Elephanto funciona com uma interface intuitiva e uma jornada de aprendizagem personalizada.
+        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
+          <div class="text-[#111418]" data-icon="Users" data-size="24px" data-weight="regular">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 14.6C3 14.0399 3 13.7599 3.10899 13.546C3.20487 13.3578 3.35785 13.2049 3.54601 13.109C3.75992 13 4.03995 13 4.6 13H5.4C5.96005 13 6.24008 13 6.45399 13.109C6.64215 13.2049 6.79513 13.3578 6.89101 13.546C7 13.7599 7 14.0399 7 14.6V19.4C7 19.9601 7 20.2401 6.89101 20.454C6.79513 20.6422 6.64215 20.7951 6.45399 20.891C6.24008 21 5.96005 21 5.4 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V14.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 4.6C10 4.03995 10 3.75992 10.109 3.54601C10.2049 3.35785 10.3578 3.20487 10.546 3.10899C10.7599 3 11.0399 3 11.6 3H12.4C12.9601 3 13.2401 3 13.454 3.10899C13.6422 3.20487 13.7951 3.35785 13.891 3.54601C14 3.75992 14 4.03995 14 4.6V19.4C14 19.9601 14 20.2401 13.891 20.454C13.7951 20.6422 13.6422 20.7951 13.454 20.891C13.2401 21 12.9601 21 12.4 21H11.6C11.0399 21 10.7599 21 10.546 20.891C10.3578 20.7951 10.2049 20.6422 10.109 20.454C10 20.2401 10 19.9601 10 19.4V4.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 10.6C17 10.0399 17 9.75992 17.109 9.54601C17.2049 9.35785 17.3578 9.20487 17.546 9.10899C17.7599 9 18.0399 9 18.6 9H19.4C19.9601 9 20.2401 9 20.454 9.10899C20.6422 9.20487 20.7951 9.35785 20.891 9.54601C21 9.75992 21 10.0399 21 10.6V19.4C21 19.9601 21 20.2401 20.891 20.454C20.7951 20.6422 20.6422 20.7951 20.454 20.891C20.2401 21 19.9601 21 19.4 21H18.6C18.0399 21 17.7599 21 17.546 20.891C17.3578 20.7951 17.2049 20.6422 17.109 20.454C17 20.2401 17 19.9601 17 19.4V10.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-[#111418] text-base font-bold leading-tight">Progresso real, dia após dia</h2>
+            <p class="text-[#637488] text-sm font-normal leading-normal">
+              Visualize seu avanço com clareza. Cada revisão feita é um passo consciente rumo ao domínio do conteúdo.
             </p>
           </div>
-          <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
-            <div class="flex flex-col gap-3 pb-3">
-              <div
-                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZ_MnI71yEIps2WH--LmR6aYWZmjE2iaBCLIex4Yf0iAcf8d0mMYCHJePIiwQbT-oily1vBhSLiySfFYDXzk_HZj4qTG22YpcajhrZzePVz5g6-7YDLqiW4zK2VPs4eEDrK3TToBst209p4cyP6ufN166SlmXrUP8dc7JyXdmEBUgYQzSL3sTlP4Z1KhkES5x1XnoWBz9lhvtl7qIl4LlhA8Fg9a-h8sOKY17TEShQifwgUdUln5n6MF2WOngHNcWtbZ1aNzqOm_vt");'
-              ></div>
-              <div>
-                <p class="text-[#111418] text-base font-medium leading-normal">Sistema de Flashcards inteligentes</p>
-                <p class="text-[#637488] text-sm font-normal leading-normal">
-                  Nosso algoritmo inteligente de flashcards prioriza palavras e frases que você considera desafiadoras, maximizando sua eficiência de aprendizagem.
-                </p>
-              </div>
-            </div>
-            <div class="flex flex-col gap-3 pb-3">
-              <div
-                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPHuMabXkOti499BlZjfusAHn_iWoIdULPfvcFgyFo4iNscWtK_wAuyjad_0QxUHKPfn-K7CJLhMqWEUO2O-S2rmB0gt2nUeVIdyq7jeNcSRxOr84MMmqEYKey1U4dD5t-Cf44oMSJKEU5bSVRW-a59MgUPltIA_-y-FUsqeessZkSrEnsXkznYAM-PFl8SQnOP5wxfIXKtVh_j3SEkmAHZULMkjIStl--rbkba2UMcVYMCOLaAF1Ova5TKHRuWpoCMie0hXhuu8Vu");'
-              ></div>
-              <div>
-                <p class="text-[#111418] text-base font-medium leading-normal">Aprendizagem otimizada para dispositivos móveis</p>
-                <p class="text-[#637488] text-sm font-normal leading-normal">Aprenda em qualquer lugar com nosso design totalmente responsivo, acessível em qualquer dispositivo, a qualquer hora e em qualquer lugar.</p>
-              </div>
-            </div>
-            <div class="flex flex-col gap-3 pb-3">
-              <div
-                class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxiqiDj6R-lbZba2iv_EnxZ_e4QjedfGFyT2uBfB8XFmZyhomQSr25GOML19wVdQnBEAurYQkk-bO6BAx6-kht-88RmmbfEtreS_9xWFDCyNmuOkB8TCev3cgvZh-2XMwCGqO1sKlIdXnPgOx2LH7cxPOnV80Ba8RwbRfur3VXwVNoE09p8K1IhRhMxTtL8eaIc4AnNrwlF0Ork3jlioFvCPLyjJpJ4Ikk_iONOZWavRP4y6R5lyZL1dnJjt7Da3MFplku--OwSxDs");'
-              ></div>
-              <div>
-                <p class="text-[#111418] text-base font-medium leading-normal">Metodologia comprovada</p>
-                <p class="text-[#637488] text-sm font-normal leading-normal">
-                  Nossa abordagem é baseada em técnica de estudo que visa otimizar a memorização através da revisão de informações em intervalos crescentes de tempo.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-
-        <div class="@container">
-          <div class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:py-20">
-            <div class="flex flex-col gap-2">
-              <h1
-                class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
-              >
-                Pronto para embarcar na sua jornada de aprendizado?
-              </h1>
-            </div>
-            <div class="flex flex-1 justify-start">
-              <div class="flex justify-center">
-                <%= link_to sign_up_url, class: 'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#60c2a6] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] grow' do %>
-                  <span class="truncate">Comece hoje mesmo</span>
-                <% end %>
-              </div>
-            </div>
+        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
+          <div class="text-[#111418]" data-icon="ChartLine" data-size="24px" data-weight="regular">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          </div>
+          <div class="flex flex-col gap-1">
+            <h2 class="text-[#111418] text-base font-bold leading-tight"> Aprendizado que se adapta ao seu ritmo</h2>
+            <p class="text-[#637488] text-sm font-normal leading-normal">
+              Seja você um estudante acelerado ou mais reflexivo, o Elephanto molda seu caminho conforme seu estilo de aprendizagem.
+            </p>
           </div>
         </div>
       </div>
     </div>
 
-    <footer class="flex justify-center">
-      <div class="flex max-w-[960px] flex-1 flex-col">
-        <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
-          <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-            <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Sobre nós</a>
-            <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Contato</a>
-            <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Política de privacidade</a>
-            <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Termos de serviço</a>
-          </div>
-          <div class="flex flex-wrap justify-center gap-4">
-            <a href="#">
-              <div class="text-[#60c2a6]" data-icon="TwitterLogo" data-size="24px" data-weight="regular">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                  <path
-                    d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"
-                  ></path>
-                </svg>
-              </div>
-            </a>
-            <a href="#">
-              <div class="text-[#60c2a6]" data-icon="FacebookLogo" data-size="24px" data-weight="regular">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                  <path
-                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"
-                  ></path>
-                </svg>
-              </div>
-            </a>
-            <a href="#">
-              <div class="text-[#60c2a6]" data-icon="InstagramLogo" data-size="24px" data-weight="regular">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                  <path
-                    d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"
-                  ></path>
-                </svg>
-              </div>
-            </a>
-          </div>
-          <p class="text-[#637488] text-base font-normal leading-normal">© <%= Date.today.year %> Elephanto. Todos os direitos reservados</p>
-        </footer>
+    <div class="flex flex-col gap-10 px-4 py-10 @container">
+      <div class="flex flex-col gap-4" id="features">
+        <h1
+          class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
+        >
+          Recursos que potencializam seu aprendizado
+        </h1>
+        <p class="text-[#111418] text-base font-normal leading-normal max-w-[720px]">
+          Descubra como o Elephanto funciona com uma interface intuitiva e uma jornada de aprendizagem personalizada.
+        </p>
       </div>
-    </footer>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
+        <div class="flex flex-col gap-3 pb-3">
+          <div
+            class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZ_MnI71yEIps2WH--LmR6aYWZmjE2iaBCLIex4Yf0iAcf8d0mMYCHJePIiwQbT-oily1vBhSLiySfFYDXzk_HZj4qTG22YpcajhrZzePVz5g6-7YDLqiW4zK2VPs4eEDrK3TToBst209p4cyP6ufN166SlmXrUP8dc7JyXdmEBUgYQzSL3sTlP4Z1KhkES5x1XnoWBz9lhvtl7qIl4LlhA8Fg9a-h8sOKY17TEShQifwgUdUln5n6MF2WOngHNcWtbZ1aNzqOm_vt");'
+          ></div>
+          <div>
+            <p class="text-[#111418] text-base font-medium leading-normal">Sistema de Flashcards inteligentes</p>
+            <p class="text-[#637488] text-sm font-normal leading-normal">
+              Nosso algoritmo inteligente de flashcards prioriza palavras e frases que você considera desafiadoras, maximizando sua eficiência de aprendizagem.
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 pb-3">
+          <div
+            class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPHuMabXkOti499BlZjfusAHn_iWoIdULPfvcFgyFo4iNscWtK_wAuyjad_0QxUHKPfn-K7CJLhMqWEUO2O-S2rmB0gt2nUeVIdyq7jeNcSRxOr84MMmqEYKey1U4dD5t-Cf44oMSJKEU5bSVRW-a59MgUPltIA_-y-FUsqeessZkSrEnsXkznYAM-PFl8SQnOP5wxfIXKtVh_j3SEkmAHZULMkjIStl--rbkba2UMcVYMCOLaAF1Ova5TKHRuWpoCMie0hXhuu8Vu");'
+          ></div>
+          <div>
+            <p class="text-[#111418] text-base font-medium leading-normal">Aprendizagem otimizada para dispositivos móveis</p>
+            <p class="text-[#637488] text-sm font-normal leading-normal">Aprenda em qualquer lugar com nosso design totalmente responsivo, acessível em qualquer dispositivo, a qualquer hora e em qualquer lugar.</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3 pb-3">
+          <div
+            class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
+            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxiqiDj6R-lbZba2iv_EnxZ_e4QjedfGFyT2uBfB8XFmZyhomQSr25GOML19wVdQnBEAurYQkk-bO6BAx6-kht-88RmmbfEtreS_9xWFDCyNmuOkB8TCev3cgvZh-2XMwCGqO1sKlIdXnPgOx2LH7cxPOnV80Ba8RwbRfur3VXwVNoE09p8K1IhRhMxTtL8eaIc4AnNrwlF0Ork3jlioFvCPLyjJpJ4Ikk_iONOZWavRP4y6R5lyZL1dnJjt7Da3MFplku--OwSxDs");'
+          ></div>
+          <div>
+            <p class="text-[#111418] text-base font-medium leading-normal">Metodologia comprovada</p>
+            <p class="text-[#637488] text-sm font-normal leading-normal">
+              Nossa abordagem é baseada em técnica de estudo que visa otimizar a memorização através da revisão de informações em intervalos crescentes de tempo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="@container">
+      <div class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:py-20">
+        <div class="flex flex-col gap-2">
+          <h1
+            class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
+          >
+            Pronto para embarcar na sua jornada de aprendizado?
+          </h1>
+        </div>
+        <div class="flex flex-1 justify-start">
+          <div class="flex justify-center">
+            <%= link_to sign_up_url, class: 'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#60c2a6] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] grow' do %>
+              <span class="truncate">Comece hoje mesmo</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

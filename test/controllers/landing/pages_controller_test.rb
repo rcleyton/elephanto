@@ -1,0 +1,23 @@
+# typed: false
+# frozen_string_literal: true
+
+require "test_helper"
+
+class Landing::PagesControllerTest < ActionDispatch::IntegrationTest
+  context "Pages" do
+    it "terms" do
+      get terms_url
+
+      assert_template layout: "layouts/landing"
+      assert_response :success
+    end
+  
+    it "privacy" do
+      get privacy_url
+
+      assert_template layout: "layouts/landing"
+      assert_response :success
+    end
+  end
+end
+

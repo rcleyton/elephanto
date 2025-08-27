@@ -32,6 +32,7 @@ pt-BR:
         email_address: Email 
         password: Senha
         password_confirmation: Confirmar senha
+        terms_of_service: Termos de uso
       session:
         email_address: Email 
         password: Senha

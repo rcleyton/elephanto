@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
+gem "actionview-encoded_mail_to"
 gem "bcrypt", "~> 3.1"
 gem "bootsnap", require: false
 gem "importmap-rails"

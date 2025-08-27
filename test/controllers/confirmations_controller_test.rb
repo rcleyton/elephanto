@@ -8,7 +8,8 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     @user = User.create!(
       email_address: "user@elephanto.com.br",
       password: "P@ssword1",
-      password_confirmation: "P@ssword1"
+      password_confirmation: "P@ssword1",
+      terms_of_service: true
     )
     @token = @user.confirmation_token
   end

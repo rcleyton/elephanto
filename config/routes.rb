@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get  "/sign_up", to: "users#new"
   post "/sign_up", to: "users#create"
 
+  get "terms",   to: "landing/pages#terms"
+  get "privacy", to: "landing/pages#privacy"
+
   resource  :session
   resources :passwords, param: :token
   resources :profiles, only: %i[ new create show edit update ]
