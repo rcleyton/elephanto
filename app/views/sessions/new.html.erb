@@ -1,38 +1,39 @@
-<div class="min-h-screen flex items-center px-4 sm:px-6 justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-gray-200">
-  <div class="mx-auto w-full max-w-md px-4 sm:px-6 py-8 bg-white rounded-xl shadow-xl border border-gray-200">
-    <turbo-frame id="flash">
-      <%= render "shared/flash" %>
-    </turbo-frame>
-
-    <h1 class="text-3xl font-semibold text-gray-900 text-center mb-8" style="font-family: 'Inter', sans-serif;"><%= t('general.signin') %></h1>
-
-    <%= form_with url: session_url, class: "space-y-6" do |form| %>
-      <div class="relative">
-        <%= form.label 'Email', class: "block text-sm font-medium text-gray-700" %>
-        <div class="absolute inset-y-0 left-0 top-6 flex items-center pl-3">
-          <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <use xlink:href="#icon-email"/>
-          </svg>
+<div class="min-h-screen flex">
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-primary items-center justify-center p-8 bg-emerald-400">
+    <div class="text-center text-white">
+        <h1 class="text-4xl font-bold mb-4">Bem vindo de volta ao Elephanto</h1>
+        <p class="text-xl opacity-90">
+          Aprenda com inteligência usando repetição espaçada
+        </p>
+    </div>
+  </div>
+  <div class="flex-1 flex items-center justify-center p-8 bg-gray-100">
+    <div class="rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full max-w-md">
+      <div class="flex flex-col space-y-1.5 p-6 text-center">
+        <div>
+          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t('general.signin') %></h3>
+          <p class="text-sm text-gray-500 mt-2">Entre e aprenda um pouco mais ainda hoje</p>
         </div>
-        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t('placeholders.user.email_address'), value: params[:email_address], class: "mt-1 block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-900" %>
       </div>
-
-      <div class="relative">
-        <%= form.label 'Senha', class: "block text-sm font-medium text-gray-700" %>
-        <div class="absolute inset-y-0 left-0 top-6 flex items-center pl-3">
-          <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <use xlink:href="#icon-lock"/>
-          </svg>
-        </div>
-        <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: t('placeholders.user.password'), maxlength: 72, class: "mt-1 block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-900" %>
+      <div class="p-6 pt-0">
+        <%= form_with url: session_url, class: "space-y-4" do |form| %>
+          <div class="space-y-2">
+            <%= form.label 'Email', class: "text-sm font-medium leading-none" %>
+            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t('placeholders.user.email_address'), value: params[:email_address], class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+          </div>
+          <div class="space-y-2">
+            <%= form.label 'Senha', class: "text-sm font-medium leading-none" %>
+            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: t('placeholders.user.password'), maxlength: 72, class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+          </div>
+          <%= form.submit t('buttons.general.enter'), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-emerald-600 text-white hover:bg-emerald-700 shadow-md hover:shadow-lg transition duration-300 ease-in-out h-10 px-4 py-2 w-full" %>
+          
+          <div class="text-center flex flex-col">
+            <%= link_to t('buttons.general.forgot_password'), new_password_path, class: "text-sm text-blue-600 hover:underline" %>
+            <%= link_to 'Ainda não tenho conta?', sign_up_path, class: "text-sm text-blue-600 hover:underline" %>
+          </div>
+        <% end %>
       </div>
-
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <%= form.submit t('buttons.general.enter'), class: "w-full sm:w-auto px-6 py-3 bg-violet-600 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 ease-in-out", style: "font-family: 'Inter', sans-serif;" %>
-        <%= link_to t('buttons.general.forgot_password'), new_password_path, class: "text-sm text-blue-600 hover:text-blue-700 font-medium underline hover:no-underline transition duration-200 ease-in-out", style: "font-family: 'Inter', sans-serif;" %>
-      </div>
-
-      <%= link_to 'Ainda não tenho conta?', sign_up_path, class: 'block text-center text-violet-700 hover:text-violet-900' %>
-    <% end %>
+    </div>
   </div>
 </div>
+
