@@ -1,63 +1,45 @@
-<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-100 to-gray-200">
-  <div class="mx-auto w-full max-w-md px-4 sm:px-6 py-8 bg-white rounded-xl shadow-xl border border-gray-200">
-    <h1 class="text-3xl font-semibold text-gray-900 text-center mb-8" style="font-family: 'Inter', sans-serif;"><%= t('general.create_account') %></h1>
-
-    <%= simple_form_for @user, url: sign_up_path, html: { class: "space-y-6" }, local: true do |form| %>
-      <div class="relative">
-        <%= form.input :email_address, 
-                       label_html: { class: "block text-sm font-medium text-gray-700" },
-                       input_html: { 
-                         class: "mt-1 block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-900",
-                         autocomplete: "email",
-                         placeholder: t('placeholders.user.email_address')
-                       } %>
-        <div class="absolute inset-y-0 left-0 top-6 flex items-center pl-3">
-          <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <use xlink:href="#icon-email"/>
-          </svg>
+<div class="min-h-screen flex">
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-primary items-center justify-center p-8 bg-[#6E52EA]">
+    <div class="text-center text-white">
+      <h1 class="text-4xl font-bold mb-4">Bem vindo ao Elephanto</h1>
+      <p class="text-xl opacity-90">
+        Aprenda com inteligência usando repetição espaçada
+      </p>
+    </div>
+  </div>
+  
+  <div class="flex-1 flex items-center justify-center p-8 bg-gray-100">
+    <div class="rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full max-w-md">
+      <div class="flex flex-col space-y-1.5 p-6 text-center">
+        <div>
+          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t('general.create_account') %></h3>
+          <p class="text-sm text-gray-500 mt-2">Crie sua conta para começar a aprender</p>
         </div>
       </div>
-
-      <div class="relative">
-        <%= form.input :password, 
-                       label_html: { class: "block text-sm font-medium text-gray-700" },
-                       input_html: { 
-                         class: "mt-1 block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-900",
-                         autocomplete: "new-password",
-                         placeholder: t('placeholders.user.password')
-                       } %>
-        <div class="absolute inset-y-0 left-0 top-6 flex items-center pl-3">
-          <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <use xlink:href="#icon-lock"/>
-          </svg>
+      <div class="p-6 pt-0">
+        <%= form_with(model: @user, url: sign_up_path, class: "space-y-4") do |f| %>
+          <div class="space-y-2">
+            <%= f.label :email_address, class: "text-sm font-medium leading-none" %>
+            <%= f.email_field :email_address, placeholder: t('placeholders.user.email_address'), required: true, class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+          </div>
+          <div class="space-y-2">
+            <%= f.label :password, class: "text-sm font-medium leading-none" %>
+            <%= f.password_field :password, placeholder: t('placeholders.user.password'), class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+          </div>
+          <div class="space-y-2">
+            <%= f.label :password_confirmation, class: "text-sm font-medium leading-none" %>
+            <%= f.password_field :password_confirmation, placeholder: t('placeholders.user.password_confirmation'), class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+          </div>
+          <div class="space-x-4 flex items-center">
+            <%= f.check_box :terms_of_service, class: "h-4 w-4 focus:ring-blue-500 border-gray-300 rounded" %>
+            Eu li e aceito os <%= link_to "Termos de Uso", terms_path, target: "_blank", class: "text-blue-600 font-medium hover:underline ml-1" %>
+          </div>
+          <%= f.submit t('buttons.submit.create_account'), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg transition duration-300 ease-in-out h-10 px-4 py-2 w-full" %>
+        <% end %>
+        <div class="mt-4 text-center">
+          <%= link_to 'Já tem uma conta? Entre aqui', new_session_path, class: "text-blue-600 hover:underline" %>
         </div>
       </div>
-
-      <div class="relative">
-        <%= form.input :password_confirmation, 
-                       label_html: { class: "block text-sm font-medium text-gray-700" },
-                       input_html: { 
-                         class: "mt-1 block w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 ease-in-out text-gray-900",
-                         autocomplete: "new-password",
-                         placeholder: t('placeholders.user.password_confirmation')
-                       } %>
-        <div class="absolute inset-y-0 left-0 top-6 flex items-center pl-3">
-          <svg class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <use xlink:href="#icon-lock"/>
-          </svg>
-        </div>
-      </div>
-
-      <div>
-        <%= form.input :terms_of_service, as: :boolean, label: false,
-          input_html: { class: "h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" } %>
-          Eu li e aceito os <%= link_to "Termos de Uso", terms_path, target: "_blank", class: "text-blue-600 font-medium hover:underline ml-1" %>
-      </div>
-
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <%= form.submit t('buttons.submit.create_account'), class: "w-full sm:w-auto px-6 py-3 bg-violet-600 text-white font-semibold rounded-full shadow-md hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 ease-in-out", style: "font-family: 'Inter', sans-serif;" %>
-        <%= link_to 'Já possuo uma conta', new_session_path, class: 'text-sm text-blue-600 hover:text-blue-700 font-medium underline hover:no-underline transition duration-200 ease-in-out', style: "font-family: 'Inter', sans-serif;" %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
