@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       flash[:success] = t("messages.create_account")
       redirect_to root_path
     else
-      flash.now[:alert] = "Erro ao criar conta"
+      flash.now[:error] = @user.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
     end
   end
