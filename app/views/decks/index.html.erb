@@ -5,66 +5,81 @@
 </turbo-frame>
 
 <div class="min-h-screen bg-gray-100">
-  <header class="border-b border-gray-200 border-opacity-50 bg-gray-50/80 backdrop-blur-lg" data-controller="header">
+  <header class="fixed top-0 right-0 left-0 md:static border-b border-gray-200 bg-gray-50/80 backdrop-blur-lg" data-controller="header">
     <div class="container mx-auto px-6 py-6">
-      <div class="flex items-center justify-between">
-        <div>
-          <h1 class="text-3xl font-bold bg-[#644FE8] bg-clip-text text-transparent">
-            Meus <%= Deck.model_name.human.pluralize %>
-          </h1>
-          <p class="text-[#676F7E] text-muted-foreground mt-2">
-            Gerencie seus decks de flashcards e continue seu aprendizado
-          </p>
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-start justify-between">
+          <div>
+            <h1 class="text-3xl font-bold bg-[#644FE8] bg-clip-text text-transparent">
+              Meus <%= Deck.model_name.human.pluralize %>
+            </h1>
+            <p class="text-[#676F7E] text-muted-foreground mt-2">
+              Gerencie seus decks de flashcards e continue seu aprendizado
+            </p>
+          </div>
+          <div class="md:hidden">
+            <button data-action="header#toggleMobileMenu" class="text-gray-900 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Abrir menu">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-settings w-6 h-6">
+                <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
         </div>
 
-        <div class="flex items-center gap-4">
-          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition duration-300 ease-in-out font-semibold h-10 px-4 py-2 gap-2" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus w-4 h-4">
+        <div class="flex items-center gap-4 md:gap-8">
+          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition duration-300 ease-in-out font-semibold h-10 px-4 py-2 gap-2 w-full md:w-auto" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-plus w-4 h-4">
               <path d="M5 12h14"/>
               <path d="M12 5v14"/>
             </svg>
             <%= t('buttons.submit.new_deck') %>
           <% end %>
 
-          <div class="md:hidden">
-            <button data-action="header#toggleMobileMenu" class="text-[#121416] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-              </svg>
-            </button>
-          </div>
-
-          <div data-header-target="mainNavContent" class="hidden md:flex flex-1 justify-end gap-8">
+          <div class="hidden md:flex flex-1 justify-end">
             <div class="relative">
-              <div data-action="click->header#toggleProfileDropdown" class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 cursor-pointer">
+              <div data-action="click->header#toggleProfileDropdown" class="rounded-full size-10 cursor-pointer overflow-hidden">
                 <% profile = current_user.profile %>
                 <% if profile&.avatar&.attached? %>
-                  <img src="<%= url_for(current_user.profile.avatar) %>" class="rounded-full"  />
+                  <img src="<%= url_for(current_user.profile.avatar) %>" class="rounded-full w-full h-full object-cover" alt="Avatar do usuário" />
                 <% else %>
-                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z" fill="#000000"></path> </g></svg>
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z" fill="#000000"/>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z" fill="#000000"/>
+                  </svg>
                 <% end %>
               </div>
 
               <div data-header-target="profileDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10 hidden">
-                <%= link_to 'Meu perfil', path_to_profile, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b-1 border-gray-200" %>
+                <%= link_to 'Meu perfil', path_to_profile, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200" %>
                 <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
 
-    <div data-header-target="mobileMenu" class="hidden md:hidden bg-white border-b border-gray-200 shadow-md pb-4">
-      <div class="flex flex-col items-center gap-4 py-4">
-        <%= link_to 'Meu perfil', profile_path(current_user), class: "text-gray-700 text-sm font-medium leading-normal py-2"%>
-        <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "text-gray-700 text-sm font-medium leading-normal py-2" %>
-      </div>
+    <div data-header-target="overlay"
+     data-action="click->header#closeMobileMenu"
+     class="h-screen fixed inset-0 bg-black/50 hidden z-40 md:hidden"></div>
+
+    <div data-header-target="mobileMenu"
+      class="h-screen fixed inset-y-0 right-0 w-64 bg-white shadow-lg border-l rounded-l-lg border-gray-200 transform translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden">
+      <ul class="mt-8">
+        <li class="flex space-x-4 p-2 items-end">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <%= link_to 'Meu perfil', path_to_profile, class: "text-gray-700 text-sm font-medium" %>
+        </li>
+        <li class="flex space-x-4 p-2 items-end">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+          <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "text-gray-700 text-sm font-medium" %>
+        </li>
+      </ul>
     </div>
   </header>
 
-  <main id="decks" class="container mx-auto px-6 py-8">
+  <main id="decks" class="container md:mx-auto px-6 py-8">
     <% if @decks.any? %>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <% @decks.each do |deck| %>
@@ -76,3 +91,31 @@
     <% end %>
   </main>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+    const main = document.querySelector('main');
+
+    const adjustMainMargin = () => {
+      // Obtenha o estilo computado do header
+      const headerStyle = window.getComputedStyle(header);
+      const headerPosition = headerStyle.getPropertyValue('position');
+
+      if (headerPosition === 'fixed') {
+        // Se o header for fixo, ajuste a margem
+        const headerHeight = header.offsetHeight;
+        main.style.marginTop = `${headerHeight}px`;
+      } else {
+        // Se o header não for fixo, defina a margem como 0
+        main.style.marginTop = '0';
+      }
+    };
+
+    // Execute a função ao carregar a página
+    adjustMainMargin();
+
+    // Execute a função quando a janela for redimensionada
+    window.addEventListener('resize', adjustMainMargin);
+  });
+</script>

@@ -1,11 +1,9 @@
-// app/javascript/controllers/header_controller.js
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["mobileMenu", "mainNavContent", "profileDropdownMenu"]
+  static targets = ["mobileMenu", "overlay", "profileDropdownMenu"]
 
   connect() {
-    // Adiciona um listener global para fechar o dropdown ao clicar fora
     this.boundClickOutside = this.clickOutside.bind(this)
     document.addEventListener("click", this.boundClickOutside)
   }
@@ -15,19 +13,34 @@ export default class extends Controller {
   }
 
   toggleMobileMenu() {
-    this.mobileMenuTarget.classList.toggle("hidden");
+    const isOpen = !this.mobileMenuTarget.classList.contains("translate-x-full")
+
+    if (isOpen) {
+      this.closeMobileMenu()
+    } else {
+      this.openMobileMenu()
+    }
+  }
+
+  openMobileMenu() {
+    this.mobileMenuTarget.classList.remove("translate-x-full")
+    this.overlayTarget.classList.remove("hidden")
+  }
+
+  closeMobileMenu() {
+    this.mobileMenuTarget.classList.add("translate-x-full")
+    this.overlayTarget.classList.add("hidden")
   }
 
   toggleProfileDropdown(event) {
-    event.stopPropagation(); // Impede o fechamento imediato
-    this.profileDropdownMenuTarget.classList.toggle("hidden");
+    event.stopPropagation()
+    this.profileDropdownMenuTarget.classList.toggle("hidden")
   }
 
   clickOutside(event) {
     if (this.hasProfileDropdownMenuTarget && !this.profileDropdownMenuTarget.contains(event.target)) {
-      // Se o clique não foi dentro do dropdown e não foi no botão que o abriu
       if (event.target.closest('[data-action="click->header#toggleProfileDropdown"]') === null) {
-        this.profileDropdownMenuTarget.classList.add("hidden");
+        this.profileDropdownMenuTarget.classList.add("hidden")
       }
     }
   }
