@@ -1,22 +1,48 @@
-<div id="<%= dom_id flashcard %>" data-controller="reveal" class="h-full flex flex-col justify-between">
-  <div>
-    <h2 class="text-[#111418] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5"><%= flashcard.front %></h2>
-    
-    <div class="flex px-4 py-3 justify-center">
-      <button data-action="reveal#show" type="button" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#1978e5] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-        <%= t('buttons.general.show_answer') %>
-      </button>
-    </div>
-  </div>
+<div id="<%= dom_id flashcard %>" data-controller="reveal" class="max-w-2xl mx-auto">
+  <div class="rounded-lg border bg-white border-gray-200 text-card-foreground min-h-[400px]">
+    <div class="p-8 flex flex-col justify-center items-center text-center min-h-[400px]">
+      <div class="w-full">
+        <div class="mb-8">
+          <h3 class="text-sm font-medium text-[#676F7E] mb-2">Pergunta</h3>
+          <p class="text-2xl font-bold mb-8 text-[#21242C]"><%= flashcard.front %></p>
 
-  <div data-reveal-target="item" class="hidden h-full flex flex-col justify-between">
-    <p class="text-[#111418] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5"><%= flashcard.back %></p>
+          <button
+            data-action="reveal#show"
+            data-hide-button-target="button"
+            type="button" 
+            class="button-hide inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition-smooth font-semibold h-11 rounded-md px-8 w-full">
+            <%= t('buttons.general.show_answer') %>
+          </button>
+        </div>
 
-    <div class="my-3 flex justify-center space-x-3">
-      <%= button_to t('buttons.general.again'),  review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "again" },  method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-red-600 hover:bg-red-500 font-medium text-white cursor-pointer" %>
-      <%= button_to t('buttons.general.easy'),   review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "easy" },   method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
-      <%= button_to t('buttons.general.medium'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" }, method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
-      <%= button_to t('buttons.general.hard'),   review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "hard" },   method: :post, class: "text-center rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
+        <div data-reveal-target="item" class="mb-8 hidden">
+          <h3 class="text-sm font-medium text-[#676F7E] mb-2">Resposta</h3>
+          <p class="text-xl font-semibold mb-8 text-[#594DE6]"><%= flashcard.back %></p>
+          <div class="space-y-4">
+            <div class="text-[#676F7E] text-sm mb-4">Como foi sua resposta?</div>
+            <div class="grid grid-cols-2 gap-3">
+              <%= button_to t('buttons.general.again'),  review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "again" },  method: :post, class: "cursor-pointer w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-red-500 text-white hover:bg-red-500/90 h-10 px-4 py-2" %>
+              <%= button_to t('buttons.general.hard'),   review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "hard" },   method: :post, class: "cursor-pointer w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-gray-300 bg-[#F9FAFB] hover:bg-[#8C5AF2] hover:text-white h-10 px-4 py-2" %>
+              <%= button_to t('buttons.general.medium'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" }, method: :post, class: "cursor-pointer w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#EDEFF3] text-[#363D49] hover:bg-secondary/80 h-10 px-4 py-2" %>
+              <%= button_to t('buttons.general.easy'),   review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "easy" },   method: :post, class: "cursor-pointer w-full tinline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#8C5AF2]/90 shadow-md hover:shadow-lg transition-smooth font-semibold h-10 px-4 py-2" %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<script>
+  function initHideButton() {
+    const btn = document.querySelector('.button-hide');
+    if (!btn) return;
+
+    btn.addEventListener('click', () => {
+      btn.style.display = 'none';
+    }, { once: true });
+  }
+
+  document.addEventListener('DOMContentLoaded', initHideButton);
+  document.addEventListener('turbo:load', initHideButton); 
+</script>
