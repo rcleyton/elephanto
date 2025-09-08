@@ -10,8 +10,18 @@
           <% end %>
           <div>
             <h1 class="text-3xl font-bold bg-[#644FE8] bg-clip-text text-transparent">Revisão: <%= @deck.name %></h1>
-            <p class="text-[#676F7E] mt-2">Flashcard 1 de 3</p>
+
+            <% total_flashcards = (session[:review_queue] || []).size + (@deck.flashcards.due.count - (session[:review_queue] || []).size) %>
+            <% flashcards_remaining = (session[:review_queue] || []).size %>
+            <% flashcards_completed = total_flashcards - flashcards_remaining %>
+            <% percent_completed = ((flashcards_completed.to_f / total_flashcards) * 100).round %>
+            <p class="text-[#676F7E] mt-2">
+              Flashcard <%= flashcards_completed + 1 %> de <%= total_flashcards %> 
+            </p>
           </div>
+        </div>
+        <div>
+          <p class="text-[#676F7E]"><%= percent_completed %>%</p>
         </div>
       </div>
     </div>
