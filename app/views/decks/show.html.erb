@@ -1,9 +1,10 @@
 <% content_for :title, "#{t('actions.showing')} #{Deck.model_name.human.downcase}" %>
 
+<turbo-frame id="flash">
+  <%= render "shared/flash" %>
+</turbo-frame>
+
 <div class="min-h-screen bg-gray-100">
-  <turbo-frame id="flash">
-    <%= render "shared/flash" %>
-  </turbo-frame>
   <header class="border-b border-gray-200 border-opacity-50 bg-gray-50/80 backdrop-blur-lg" data-controller="header">
     <div class="container mx-auto px-6 py-6">
       <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row justify-start md:items-center md:justify-between">

@@ -43,8 +43,8 @@ pt-BR:
         bio: Bio
   placeholders:
     deck:
-      deck_name: Digite o nome do deck
-      deck_description: Digite a descrição do deck
+      deck_name: "Ex: Inglês Básico, História do Brasil..."
+      deck_description: Descreva o conteúdo do seu deck...
     flashcard:
       front_flashcard: O que é exibido na frente do flashcard 
       back_flashcard: O que é exibido no verso do flashcard 
