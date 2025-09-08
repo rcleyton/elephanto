@@ -1,15 +1,35 @@
 <% content_for :title, "#{t('actions.new')} #{Flashcard.model_name.human.downcase}" %>
 
-<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-  <div class="flex flex-wrap justify-between gap-3 p-4">
-    <p class="text-[#121416] tracking-light text-[32px] font-bold leading-tight min-w-72">
-      <%= "#{t('actions.new')} #{Flashcard.model_name.human.downcase}"  %>
-    </p>
-  </div>
+<turbo-frame id="flash">
+  <%= render "shared/flash" %>
+</turbo-frame>
 
-  <turbo-frame id="flash">
-    <%= render "shared/flash" %>
-  </turbo-frame>
-  
-  <%= render "form", flashcard: @flashcard %>
+<div class="min-h-screen bg-gray-100">
+  <header class="border-b border-gray-200 border-opacity-50 bg-gray-50/80 backdrop-blur-lg" data-controller="header">
+    <div class="container mx-auto px-6 py-6">
+      <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row justify-start md:items-center md:justify-between">
+        <div class="flex items-center gap-4">
+          <%= link_to decks_path, class: "inline-flex items-center justify-center rounded-md ring-offset-white transition duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0  hover:bg-[#8C5AF2] hover:text-white h-10 w-10" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left h-4 w-4"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          <% end %>
+          <div>
+            <h1 class="text-3xl font-bold bg-[#644FE8] bg-clip-text text-transparent"><%= "#{t('actions.new')} #{Deck.model_name.human.downcase}" %></h1>
+            <p class="text-[#676F7E] mt-2">Crie um novo flashcard para estudar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container mx-auto px-6 py-6">
+    <div class="max-w-2xl mx-auto">
+      <div class="rounded-lg border border-gray-200 bg-white">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight text-[#21242C]">Novo flashcard</h3>
+        </div>
+        <div class="p-6 pt-0">
+          <%= render "form", flashcard: @flashcard %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
