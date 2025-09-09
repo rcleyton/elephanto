@@ -15,4 +15,19 @@ module ApplicationHelper
     profile = current_user.profile
     profile&.id.present? ? profile_path(profile) : new_profile_path
   end
+
+  def flashcard_progress(deck)
+    queue = session[:review_queue] || []
+    total = session[:review_total] || queue.size
+    completed = total - queue.size
+    current = completed + 1
+    percent = total.positive? ? ((completed.to_f / total) * 100).round : 0
+
+    {
+      current: current,
+      completed: completed,
+      total: total,
+      percent: percent
+    }
+  end
 end

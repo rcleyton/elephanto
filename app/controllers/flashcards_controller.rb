@@ -74,6 +74,7 @@ class FlashcardsController < ApplicationController
 
     if flashcards.any?
       session[:review_queue] = flashcards
+      session[:review_total] = flashcards.size
       redirect_to deck_flashcard_path(@deck, flashcards.first)
     else
       flash[:notice] = t("messages.no_revision_today")
