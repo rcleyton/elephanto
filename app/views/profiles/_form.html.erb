@@ -1,50 +1,42 @@
-<%= simple_form_for @profile, class: "contents" do |form| %>
-	<div class="px-4 py3">
-		<div data-controller="dropzone" data-dropzone-target="dropArea">
-			<div
-				data-dropzone-target="dropArea"
-				class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer"
-			>
-				<p class="text-gray-600"><%= t('general.drag_and_drop') %></p>
-				<%= form.file_field :avatar, class: "hidden", data: { dropzone_target: "input" } %>
-				<img data-dropzone-target="preview" class="hidden mx-auto mt-4 max-h-32 rounded-full" />
+<div class="flex flex-col space-y-1.5 p-6">
+	<h3 class="text-2xl font-semibold leading-none tracking-tight">Informações do perfil</h3>
+	<p class="text-sm text-[#676F7E]">Gerencia suas informações pessoais e preferências</p>
+	<%= form_with model: @profile, class: "space-y-6" do |form| %>
+		<div class="mt-4">
+			<div data-controller="dropzone" data-dropzone-target="dropArea">
+				<div
+					data-dropzone-target="dropArea"
+					class="border-2 border-dashed border-[#DCDFE5] bg-[#F9FAFB]  rounded-lg p-6 text-center cursor-pointer"
+				>
+					<p class="text-gray-600"><%= t('general.drag_and_drop') %></p>
+					<%= form.file_field :avatar, class: "hidden", data: { dropzone_target: "input" } %>
+					<img data-dropzone-target="preview" class="hidden mx-auto mt-4 max-h-32 rounded-full" />
+				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="px-4 py-3">
-		<%= form.input :first_name, input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full",
-																											{"border-none focus:outline-blue-600": profile.errors[:first_name].none?,
-																											"border-red-400 focus:outline-red-600": profile.errors[:first_name].any?}] 
-																						}, placeholder: t('placeholders.profile.first_name') %>
-	</div>
-
-	<div class="px-4 py-3">
-		<%= form.input :last_name, input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full",
-																									{"border-none focus:outline-blue-600": profile.errors[:last_name].none?,
-																									"border-red-400 focus:outline-red-600": profile.errors[:last_name].any?}] 
-																						}, placeholder: t('placeholders.profile.last_name') %>
-	</div>
-
-	<div class="px-4 py-3">
-		<%= form.input :username, input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full",
-																											{"border-none focus:outline-blue-600": profile.errors[:username].none?,
-																											"border-red-400 focus:outline-red-600": profile.errors[:username].any?}] 
-																					}, placeholder: t('placeholders.profile.username') %>
-	</div>
-
-	<div class="px-4 py-3">
-		<%= form.input :bio, as: "text", input_html: { class: ["bg-[#f0f2f4] shadow-sm rounded-xl border px-3 py-2 mt-2 w-full", 
-																													{"border-none focus:outline-blue-600": profile.errors[:bio].none?, 
-																															"border-red-400 focus:outline-red-600": profile.errors[:bio].any?}],
-																															"rows": 5
-																									}, placeholder: t('placeholders.profile.bio') %>
-	</div>
-
-  <div class="flex px-4 py-3 space-x-3">
-    <%= form.submit class: "cursor-pointer overflow-hidden rounded-full h-10 px-4 bg-[#1978e5] text-white text-sm font-bold leading-normal tracking-[0.015em]" %>
-  </div>
-<% end %>
+		<div class="grid grid-cols-2 gap-4">
+			<div>
+				<%= form.label :first_name, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
+				<%= form.text_field :first_name, placeholder: t("placeholders.profile.first_name"), class: ["flex h-10 w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": profile.errors[:first_name].any? }] %>
+			</div>
+			<div>
+				<%= form.label :last_name, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
+				<%= form.text_field :last_name, placeholder: t("placeholders.profile.last_name"), class: ["flex h-10 w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": profile.errors[:last_name].any? }] %>
+			</div>
+		</div>
+		<div>
+			<%= form.label :username, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
+			<%= form.text_field :username, placeholder: t("placeholders.profile.username"), class: ["flex h-10 w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": profile.errors[:username].any? }] %>
+		</div>
+		<div>
+			<%= form.label :bio, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
+			<%= form.textarea :bio, placeholder: t("placeholders.profile.bio"), class: ["flex min-h-[80px] w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-sm ring-offset-background placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50", { "border-red-400 focus:outline-red-600": profile.errors[:bio].any? }] %>
+		</div>
+		<div class="flex justify-end">
+			<%= form.submit class: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#594CE6] text-white hover:bg-[#594CE6]/90 shadow-lg hover:shadow-glow transition-smooth h-10 px-4 py-2 cursor-pointer" %>
+		</div>
+	<% end %>
+</div>
 
 
           

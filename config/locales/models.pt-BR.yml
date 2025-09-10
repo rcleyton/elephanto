@@ -55,10 +55,10 @@ pt-BR:
       new_password: Digite uma nova senha
       repeat_new_password: Confirme a nova senha
     profile:
-      first_name: Digite o seu nome
-      last_name: Digite o seu sobrenome
-      username: Degite um nome de usuário
-      bio: Fale um pouco sobre você
+      first_name: Seu nome
+      last_name: Seu sobrenome
+      username: seu_usuario
+      bio: "Conte um pouco sobre você..."
   errors:
     messages:
       password_contains_whitespace: não pode conter espaços

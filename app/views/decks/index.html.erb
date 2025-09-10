@@ -98,24 +98,19 @@
     const main = document.querySelector('main');
 
     const adjustMainMargin = () => {
-      // Obtenha o estilo computado do header
       const headerStyle = window.getComputedStyle(header);
       const headerPosition = headerStyle.getPropertyValue('position');
 
       if (headerPosition === 'fixed') {
-        // Se o header for fixo, ajuste a margem
         const headerHeight = header.offsetHeight;
         main.style.marginTop = `${headerHeight}px`;
       } else {
-        // Se o header não for fixo, defina a margem como 0
         main.style.marginTop = '0';
       }
     };
 
-    // Execute a função ao carregar a página
     adjustMainMargin();
 
-    // Execute a função quando a janela for redimensionada
     window.addEventListener('resize', adjustMainMargin);
   });
 </script>
