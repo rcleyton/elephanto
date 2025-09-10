@@ -1,66 +1,71 @@
 <% content_for :title, "#{t('actions.showing')} #{Profile.model_name.human.downcase}" %>
 
-<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-	<turbo-frame id="flash">
-    <%= render "shared/flash" %>
-  </turbo-frame>
+<turbo-frame id="flash">
+  <%= render "shared/flash" %>
+</turbo-frame>
 
-	<div class="flex flex-wrap justify-between gap-3 p-4">
-		<div class="flex min-w-72 flex-col gap-3">
-			<p class="text-[#111418] tracking-light text-[32px] font-bold leading-tight"><%= t('general.my_profile')%></p>
-			<p class="text-[#637488] text-sm font-normal leading-normal"><%= t('general.menage_account')%></p>
-		</div>
-	</div>
-	<div class="flex p-4 @container">
-		<div class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:justify-between @[520px]:items-center">
-			<div class="flex gap-4">
-				<% if @profile.avatar.attached? %>
-				  <img src="<%= url_for(@profile.avatar) %>" class="mx-auto mt-4 max-h-32 rounded-full" />
-				<% else %>
-					<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32">
-						<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z" fill="#000000"></path> </g></svg>
-					</div>
+<div class="min-h-screen bg-gray-100">
+  <header class="border-b border-gray-200 border-opacity-50 bg-gray-50/80 backdrop-blur-lg" data-controller="header">
+    <div class="container mx-auto px-6 py-6">
+      <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row justify-start md:items-center md:justify-between">
+        <div class="flex items-center gap-4">
+          <%= link_to decks_path, class: "inline-flex items-center justify-center rounded-md ring-offset-white transition duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0  hover:bg-[#8C5AF2] hover:text-white h-10 w-10" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left h-4 w-4"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          <% end %>
+          <div>
+            <h1 class="text-3xl font-bold bg-[#644FE8] bg-clip-text text-transparent"><%= t('general.my_profile')%></h1>
+            <p class="text-[#676F7E] mt-2"><%= t('general.menage_account')%></p>
+          </div>
+        </div>
+				<%= link_to edit_profile_path(@profile), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition duration-300 ease-in-out font-semibold h-10 px-4 py-2 gap-2 w-full md:w-auto" do %>
+					<%= t('buttons.submit.edit_profile') %>
 				<% end %>
-				<div class="flex flex-col justify-center">
-					<p class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em]"><%= @profile.first_name%> <%= @profile.last_name%></p>
-					<p class="text-[#637488] text-base font-normal leading-normal"><%= current_user.email_address %></p>
+      </div>
+    </div>
+  </header>
+
+	<div class="container max-w-2xl mx-auto p-6">
+		<div class="rounded-lg border border-[#DCDFE5] bg-white text-[#21242C]">
+			<div class="flex flex-col space-y-1.5 p-6 text-center pb-2">
+				<div class="flex flex-col items-center space-y-4">
+					<% if @profile.avatar.attached? %>
+						<img src="<%= url_for(@profile.avatar) %>" class="mx-auto mt-4 max-h-32 rounded-full" />
+					<% else %>
+						<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-32 w-32">
+							<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z" fill="#000000"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z" fill="#000000"></path> </g></svg>
+						</div>
+					<% end %>
+					<div class="space-y-1">
+						<h3 class="font-semibold tracking-tight text-2xl"><%= @profile.first_name%> <%= @profile.last_name%></h3>
+						<p class="text-[#676F7E] text-base">@<%= @profile.username %></p>
+					</div>
 				</div>
 			</div>
-			<%= link_to edit_profile_path(@profile), class: "flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em] w-full max-w-[480px] @[480px]:w-auto" do %>
-				<span class="truncate"><%= t('buttons.submit.edit_profile') %></span>
-			<% end %>
-		</div>
-	</div>
-	<h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"><%= t('general.statistics') %></h2>
-	<div class="flex flex-wrap gap-3 px-4 py-3">
-		<div class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#dce0e5] p-3 items-start">
-			<p class="text-[#111418] tracking-light text-2xl font-bold leading-tight"><%= current_user.decks.size %></p>
-			<div class="flex items-center gap-2"><p class="text-[#637488] text-sm font-normal leading-normal"><%= t('general.decks_created') %></p></div>
-		</div>
-		<div class="flex min-w-[111px] flex-1 basis-[fit-content] flex-col gap-2 rounded-lg border border-[#dce0e5] p-3 items-start">
-			<p class="text-[#111418] tracking-light text-2xl font-bold leading-tight">
-				<%= flashcards_studied(current_user) %>
-			</p>
-			<div class="flex items-center gap-2"><p class="text-[#637488] text-sm font-normal leading-normal"><%= t('general.flashcard_studied')%></p></div>
-		</div>
-	</div>
-	<h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"><%= t('general.settings') %></h2>
-	<div class="flex items-center gap-4 bg-white px-4 min-h-[72px] py-2 justify-between">
-		<div class="flex flex-col justify-center">
-			<p class="text-[#111418] text-base font-medium leading-normal line-clamp-1"><%= t('general.change_password') %></p>
-			<p class="text-[#637488] text-sm font-normal leading-normal line-clamp-2"><%= t('general.update_password') %></p>
-		</div>
-		<div class="shrink-0">
-			<div class="text-[#111418] flex size-7 items-center justify-center" data-icon="CaretRight" data-size="24px" data-weight="regular">
-				<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-					<path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"></path>
-				</svg>
+			<div class="p-6 pt-0 space-y-6">
+				<div class="text-center">
+					<p class="text-[#676F7E] leading-relaxed"><%= @profile.bio %></p>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div class="flex items-center gap-3 p-3 rounded-lg bg-[#676F7E]/10">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-icon lucide-user text-[#676F7E] w-5 h-5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+						<div>
+							<p class="text-sm text-[#676F7E]">Nome completo</p>
+							<p class="font-medium"><%= @profile.first_name%> <%= @profile.last_name%></p>
+						</div>
+					</div>
+					<div class="flex items-center gap-3 p-3 rounded-lg bg-[#676F7E]/10">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-icon lucide-calendar text-[#676F7E] w-5 h-5"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+						<div>
+							<p class="text-sm text-[#676F7E]">Menbro desde</p>
+							<p class="font-medium"><%= l @profile.created_at, format: :only_date %></p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="flex px-4 py-3 justify-start">
-		<%= link_to session_path, data: { turbo_method: :delete, turbo_confirm: t('general.are_you_sure') }, class: "flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#f0f2f4] text-[#111418] text-sm font-bold leading-normal tracking-[0.015em]" do %>
-			<span class="truncate"><%= t('buttons.general.logout')%></span>
-		<% end %>
-	</div>
-</div>
+
+
+
+
+		
