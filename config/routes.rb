@@ -20,6 +20,8 @@ Rails.application.routes.draw do
         post :review
       end
     end
+    
+    get :reviewed_completed, to: "flashcards#reviewed_completed"
 
     member do
       get :review, to: "flashcards#start_review"

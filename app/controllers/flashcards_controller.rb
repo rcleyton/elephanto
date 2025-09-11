@@ -63,9 +63,8 @@ class FlashcardsController < ApplicationController
       redirect_to deck_flashcard_path(@deck, queue.first)
     else
       session.delete(:review_queue)
-      flash[:notice] = t("messages.completed_review")
       @deck.update(last_reviewed_at: Time.current)
-      redirect_to deck_path(@deck)
+      redirect_to deck_reviewed_completed_path(@deck)
     end
   end
 
@@ -81,6 +80,8 @@ class FlashcardsController < ApplicationController
       redirect_to deck_path(@deck)
     end
   end
+
+  def reviewed_completed; end
 
   private
 
