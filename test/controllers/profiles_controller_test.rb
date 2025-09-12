@@ -45,7 +45,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
       get profile_url(@user.profile)
       assert_response :success
 
-      assert_select "p", text: I18n.t("general.my_profile")
+      assert_select "h1", text: I18n.t("general.my_profile")
     end
 
     it "edit" do
@@ -55,7 +55,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
       get edit_profile_url(@user.profile)
       assert_response :success
 
-      assert_select "p", text: "#{I18n.t('actions.edit')} #{Profile.model_name.human.downcase}"
+      assert_select "h1", text: "#{I18n.t('actions.edit')} #{Profile.model_name.human.downcase}"
     end
 
     it "update" do
