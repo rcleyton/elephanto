@@ -25,3 +25,9 @@ module ActiveSupport
     end
   end
 end
+
+class ActionDispatch::IntegrationTest
+  setup do
+    host! "app.lvh.me"
+  end
+end

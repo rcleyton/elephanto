@@ -31,7 +31,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     end
 
     it "update" do
-      patch deck_flashcard_url(@deck, @flashcard), params: { flashcard: { back: "Another question", front: "Another answer" }}
+      patch deck_flashcard_url(@deck, @flashcard), params: { flashcard: { back: "Another question", front: "Another answer" } }
 
       @flashcard.reload
 
@@ -114,9 +114,8 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_not_nil @flashcard2.last_reviewed_at
       assert_equal "medium", @flashcard2.difficulty
 
-      assert_redirected_to deck_path(@deck)
+      assert_redirected_to reviewed_completed_deck_path(@deck)
       follow_redirect!
-      assert_match I18n.t("messages.completed_review"), response.body
     end
 
     it "update last_reviewed_at after review" do

@@ -23,7 +23,7 @@ class FlashcardsController < ApplicationController
   end
 
   def edit; end
-    
+
   def update
     if @flashcard.update(flashcard_params)
       redirect_to deck_path(@deck)
@@ -64,7 +64,7 @@ class FlashcardsController < ApplicationController
     else
       session.delete(:review_queue)
       @deck.update(last_reviewed_at: Time.current)
-      redirect_to deck_reviewed_completed_path(@deck)
+      redirect_to reviewed_completed_deck_path(@deck)
     end
   end
 

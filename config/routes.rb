@@ -2,37 +2,42 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root to: "landing#index"
+  constraints(lambda { |req| req.subdomain.blank? }) do
+    root to: "landing#index"
 
-  get  "/sign_up", to: "users#new"
-  post "/sign_up", to: "users#create"
-
-  get "terms",    to: "landing/pages#terms"
-  get "privacy",  to: "landing/pages#privacy"
-
-  resource  :session
-  resources :passwords, param: :token
-  resources :profiles, only: %i[ new create show edit update ]
-  
-  resource :settings, only: [:show] do
-    patch :update_password
+    controller "landing/pages" do
+      get "terms"
+      get "privacy"
+    end
   end
 
-  resources :decks do
-    resources :flashcards, only: %i[ show new create edit update destroy] do
+  constraints(lambda { |req| req.subdomain == "app" || req.host == "app.localhost" }) do
+    get  "/sign_up", to: "users#new"
+    post "/sign_up", to: "users#create"
+
+    resource  :session
+    resources :passwords, param: :token
+    resources :profiles, only: %i[new create show edit update]
+
+    resource :settings, only: [:show] do
+      patch :update_password
+    end
+
+    resources :decks do
+      resources :flashcards, only: %i[show new create edit update destroy] do
+        member do
+          post :review
+        end
+      end
+
       member do
-        post :review
+        get :review,             to: "flashcards#start_review"
+        get :reviewed_completed, to: "flashcards#reviewed_completed"
       end
     end
-    
-    get :reviewed_completed, to: "flashcards#reviewed_completed"
 
-    member do
-      get :review, to: "flashcards#start_review"
-    end
+    resource :confirmation, only: %i[show create]
   end
-
-  resource :confirmation, only: %i[ show create ]
 
   get "up" => "rails/health#show", as: :rails_health_check
 end
