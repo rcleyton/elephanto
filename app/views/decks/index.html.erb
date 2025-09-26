@@ -51,8 +51,9 @@
               </div>
 
               <div data-header-target="profileDropdownMenu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10 hidden">
-                <%= link_to 'Meu perfil', path_to_profile, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200" %>
-                <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <%= link_to "Meu perfil", path_to_profile, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %>
+                <%= link_to "Configurações", settings_path, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200" %>
+                <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" %> 
               </div>
             </div>
           </div>

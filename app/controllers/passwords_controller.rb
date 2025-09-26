@@ -1,3 +1,6 @@
+# typed: false
+# frozen_string_literal: true
+
 class PasswordsController < ApplicationController
   allow_unauthenticated_access
   before_action :set_user_by_token, only: %i[ edit update ]
@@ -26,10 +29,10 @@ class PasswordsController < ApplicationController
   def update
     case params
     when params[:password]
-        flash.now[:alert] = "Senha n\u00E3o pode ficar em branco"
+        flash.now[:alert] = "Senha não pode ficar em branco"
         render :new, status: :unprocessable_entity
     when params[:password_confirmation]
-        flash.now[:alert] = "Confirmar senha n\u00E3o pode ficar em branco"
+        flash.now[:alert] = "Confirmar senha não pode ficar em branco"
         render :new, status: :unprocessable_entity
     end
 
@@ -41,9 +44,10 @@ class PasswordsController < ApplicationController
   end
 
   private
-    def set_user_by_token
-      @user = User.find_by_password_reset_token!(params[:token])
-    rescue ActiveSupport::MessageVerifier::InvalidSignature
-      redirect_to new_password_path, alert: ("messages.password_link_invalid")
-    end
+
+  def set_user_by_token
+    @user = User.find_by_password_reset_token!(params[:token])
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    redirect_to new_password_path, alert: ("messages.password_link_invalid")
+  end
 end

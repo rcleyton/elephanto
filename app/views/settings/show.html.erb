@@ -1,0 +1,39 @@
+<% content_for :title, "Configurações" %>
+
+<turbo-frame id="flash">
+  <%= render "shared/flash" %>
+</turbo-frame>
+
+<div class="min-h-screen bg-gray-100">
+  <header class="border-b border-gray-200 border-opacity-50 bg-gray-50/80 backdrop-blur-lg" data-controller="header">
+    <div class="container mx-auto px-6 py-6">
+      <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row justify-start md:items-center md:justify-between">
+        <div class="flex items-center gap-4">
+          <%= link_to decks_path, class: "inline-flex items-center justify-center rounded-md ring-offset-white transition duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0  hover:bg-[#8C5AF2] hover:text-white h-10 w-10" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left h-4 w-4"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+          <% end %>
+          <div>
+            <h1 class="text-3xl font-bold bg-[#644FE8] bg-clip-text text-transparent">Configurações</h1>
+            <p class="text-[#676F7E] mt-2">Gerencie suas preferências e configurações da conta</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="container mx-auto px-6 py-8 max-w-4xl">
+    <div class="grid gap-6">
+      <div class="rounded-lg border border-[#DCDFE5] bg-white text-[#21242C]">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-icon lucide-shield h-5 w-5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+            Alterar senha
+          </h3>
+          <p class="text-sm text-[#676F7E]">Mantenha sua conta segura alterando sua senha regularmente</p>
+        </div>
+        <div class="p-6 pt-0">
+          <%= render "settings/password_form", user: current_user %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
