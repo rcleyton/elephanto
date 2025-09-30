@@ -8,7 +8,7 @@ set :deploy_to, "/var/www/elephanto"
 
 # RVM
 set :rvm_type, :user
-set :rvm_ruby_version, "3.3.4"
+set :rvm_ruby_version, "3.3.4@elephanto"
 
 # Linked files (que ficam em shared/)
 append :linked_files, "config/database.yml", ".env", "config/master.key"
