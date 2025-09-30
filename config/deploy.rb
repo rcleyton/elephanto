@@ -1,4 +1,4 @@
-lock "~> 3.18.0"
+lock "~> 3.19.2"
 
 set :application, "elephanto"
 set :repo_url, "git@github.com:rcleyton/elephanto.git"
