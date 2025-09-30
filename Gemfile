@@ -27,8 +27,12 @@ group :development, :test do
 end
 
 group :development do
-  gem "web-console"
+  gem "capistrano-passenger", require: false
+  gem "capistrano-rails", require: false
+  gem "capistrano-rvm", require: false
+  gem "capistrano", require: false
   gem "letter_opener"
+  gem "web-console"
 end
 
 group :test do
@@ -43,8 +47,10 @@ group :test do
   gem "simplecov", require: false
 end
 
+gem "dotenv-rails", groups: [ :staging, :production ]
+
 gem "tailwindcss-ruby", "~> 4.1"
 
 gem "tailwindcss-rails", "~> 4.2"
 
-gem "byebug", "~> 12.0", :groups => [:development, :test]
+gem "byebug", "~> 12.0", groups: [ :development, :test ]
