@@ -19,6 +19,7 @@ gem "stimulus-rails"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "stringio", "3.1.1"
 
 group :development, :test do
   gem "brakeman", require: false
