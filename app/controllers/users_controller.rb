@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      UserMailer.confirmation(@user).deliver_now
+      ConfirmationEmailJob.perform_later(@user.id)
       flash[:success] = t("messages.create_account")
       redirect_to root_path
     else
