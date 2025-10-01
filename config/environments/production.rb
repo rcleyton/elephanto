@@ -33,6 +33,16 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: "getelephanto.com" }
 
+  config.action_mailer.smtp_settings = {
+    address:              "smtp-relay.brevo.com",
+    port:                 587,
+    domain:               "getelephanto.com",
+    user_name:            ENV["SMTP_USERNAME"],
+    password:             ENV["SMTP_PASSWORD"],
+    authentication:       "plain",
+    enable_starttls_auto: true
+  }
+
   config.i18n.fallbacks = true
 
   config.active_record.dump_schema_after_migration = false

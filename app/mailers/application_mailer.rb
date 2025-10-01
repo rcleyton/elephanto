@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@elephanto.com"
+  default from: "noreply@getelephanto.com"
   layout "mailer"
 end
