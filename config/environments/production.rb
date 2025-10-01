@@ -30,8 +30,13 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = { database: { writing: :queue } }
-
+  
   config.action_mailer.default_url_options = { host: "getelephanto.com" }
+  
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
+  config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
     address:              "smtp-relay.brevo.com",
@@ -40,7 +45,9 @@ Rails.application.configure do
     user_name:            ENV["SMTP_USERNAME"],
     password:             ENV["SMTP_PASSWORD"],
     authentication:       "plain",
-    enable_starttls_auto: true
+    enable_starttls_auto: true,
+    open_timeout:         20,
+    read_timeout:         20
   }
 
   config.i18n.fallbacks = true

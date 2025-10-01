@@ -5,7 +5,7 @@ class ConfirmationEmailJobTest < ActiveJob::TestCase
   include ActionMailer::TestHelper
 
   test "envia email de confirmação" do
-    user = users(:one) # ou FactoryBot.create(:user)
+    user = users(:one)
 
     assert_enqueued_with(job: ConfirmationEmailJob, args: [user.id]) do
       ConfirmationEmailJob.perform_later(user.id)

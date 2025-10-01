@@ -30,7 +30,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address:              "smtp-relay.brevo.com",
     port:                 587,
-    domain:               "getelephanto.com",
+    domain:               "localhost",
     user_name:            ENV["SMTP_USERNAME"],
     password:             ENV["SMTP_PASSWORD"],
     authentication:       "plain",
