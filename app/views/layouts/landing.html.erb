@@ -61,7 +61,7 @@
             <footer class="flex flex-col gap-6 px-5 py-10 text-center @container">
               <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
                 <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Sobre nós</a>
-                <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Contato</a>
+                <%= mail_to "suporte@getelephanto.com", "Contato", encode: 'hex',  class: "text-[#637488] text-base font-normal leading-normal min-w-40" %>
                 <%= link_to privacy_url(host: Rails.env.development? ? 'localhost' : 'getelephanto.com'), class: "text-[#637488] text-base font-normal leading-normal min-w-40" do %>
                   Política de Privacidade
                 <% end %>
