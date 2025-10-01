@@ -10,5 +10,3 @@ Rails.application.config.after_initialize do
   ActionMailer::Base.default_url_options = host_config
   Rails.application.config.action_controller.default_url_options = host_config
 end
-
-

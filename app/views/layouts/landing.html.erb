@@ -60,10 +60,10 @@
               <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
                 <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Sobre nós</a>
                 <a class="text-[#637488] text-base font-normal leading-normal min-w-40" href="#">Contato</a>
-                <%= link_to privacy_url, class: "text-[#637488] text-base font-normal leading-normal min-w-40" do %>
+                <%= link_to privacy_url(host: Rails.env.development? ? 'localhost' : 'getelephanto.com'), class: "text-[#637488] text-base font-normal leading-normal min-w-40" do %>
                   Política de Privacidade
                 <% end %>
-                <%= link_to terms_url, class: "text-[#637488] text-base font-normal leading-normal min-w-40" do %>
+                <%= link_to terms_url(host: Rails.env.development? ? 'localhost' : 'getelephanto.com'), class: "text-[#637488] text-base font-normal leading-normal min-w-40" do %>
                   Termos de Uso
                 <% end %>
               </div>

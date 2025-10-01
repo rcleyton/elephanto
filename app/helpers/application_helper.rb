@@ -31,3 +31,4 @@ module ApplicationHelper
     }
   end
 end
+
