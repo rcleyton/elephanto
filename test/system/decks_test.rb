@@ -10,10 +10,10 @@ class DecksTest < ApplicationSystemTestCase
   end
 
   def login
-    visit new_session_url
+    new_session_path
 
     fill_in :email_address, with: @user.email_address
-    fill_in :password,      with: "p@ssword1"
+    fill_in :password,      with: "P@ssword1"
 
     click_on I18n.t("buttons.general.enter")
   end
@@ -21,7 +21,7 @@ class DecksTest < ApplicationSystemTestCase
   it "visiting the index" do
     login
 
-    assert_selector "p", text: "Decks"
+    assert_selector "h1", text: "Meus decks"
   end
 
   it "should create deck" do

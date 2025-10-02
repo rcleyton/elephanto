@@ -5,6 +5,7 @@ one:
   confirmation_token: <%= SecureRandom.urlsafe_base64 %>
   confirmation_sent_at: <%= Time.current - 10.minutes %>
   confirmed_at: <%= Time.current - 5.minutes %>
+  terms_of_service: true
 two:
   email_address: 'user2@elephanto.com'
   password_digest: <%= BCrypt::Password.create('P@ssword1') %>
