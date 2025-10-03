@@ -21,6 +21,8 @@
     --color-secondary: hsl(220 20% 94%);
     --color-secondary-foreground: hsl(220 15% 25%);
 
+    --color-third: hsl(163, 45%, 57%);
+
     --color-muted: hsl(220 15% 92%);
     --color-muted-foreground: hsl(220 10% 45%);
 
@@ -113,5 +115,19 @@
 
     body {
         @apply bg-background text-foreground;
+    }
+}
+
+@layer utilities {
+    .bg-gradient-hero {
+        background-image: var(--gradient-hero);
+    }
+
+    .bg-gradient-primary {
+        background-image: var(--gradient-primary);
+    }
+
+    .bg-gradient-card {
+        background-image: var(--gradient-card);
     }
 }

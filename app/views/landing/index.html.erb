@@ -1,164 +1,257 @@
-<div class="flex flex-1 justify-center py-0 md:py-5 bg-gradient-to-br from-blue-100 via-purple-100 to-gray-200">
-  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-    
-    <turbo-frame id="flash"> 
-      <%= render "shared/flash" %>
-    </turbo-frame>
-    
-    <% if params[:resend_user_id] && (user = User.find_by(id: params[:resend_user_id])) %>
-      <%= form_with url: confirmation_path, method: :post, data: { turbo: true } do %>
-        <%= hidden_field_tag :email_address, user.email_address %>
-        <%= submit_tag "Reenviar e-mail de confirmação", class: "text-center rounded-md m-4 px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
-      <% end %>
+<turbo-frame id="flash">
+  <%= render "shared/flash" %>
+</turbo-frame>
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
+  <% if params[:resend_user_id] && (user = User.find_by(id: params[:resend_user_id])) %>
+    <%= form_with url: confirmation_path, method: :post, data: { turbo: true } do %>
+      <%= hidden_field_tag :email_address, user.email_address %>
+      <%= submit_tag "Reenviar e-mail de confirmação", class: "text-center rounded-md m-4 px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 font-medium text-white cursor-pointer" %>
     <% end %>
-
-
-    <div class="@container">
-      <div class="@[480px]:p-4">
-        <div
-          class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-xl items-center justify-center p-4"
-          style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBTr0tN8iVq7xzfsyEMC1cv-DgNaYoksGfaHJjSP5T4uj959yxB7Dq2MELI9nkJj88X34FYwbqwpWdueGGgtT6Gf9EgRpCcK95j1quor5fxUUeKE50tMvjB6_19QX22lBJOiFllo_Xk8SXGNnmHo_cRIglwAuGKL-tpxWQAbGL_x2XEAAKOwE10re00Cy5z2_oAjd8MVXQFZp9PO4LHA16bcPrF8gh2MWNTHL-XKPmfJgr0ogiQS7YWKFj-DFozqHWK5lYa774P4zmP");'
-        >
-          <div class="flex flex-col gap-2 text-center">
-            <h1
-              class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]"
-            >
-              Elephanto: Aprenda mais, esqueça menos
-            </h1>
-            <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-              A metodologia de aprendizagem espaçada que acelera sua retenção e libera seu tempo.
-            </h2>
-          </div>
-            <%= link_to sign_up_url, class: 'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-violet-500 text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em]' do %>
-              <span class="truncate">Iniciar aprendizado</span>
-            <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex flex-col gap-10 px-4 py-10 @container">
-      <div class="flex flex-col gap-4">
-        <h1
-          class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
-        >
-          Por que o Elephanto funciona?
-        </h1>
-        <p class="text-[#111418] text-base font-normal leading-normal max-w-[720px]">
-          Nossa plataforma foi projetada para tornar o aprendizado mais eficiente e agradável. Veja como ajudamos você a ter sucesso:
-        </p>
-      </div>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3 p-0">
-        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-          <div class="text-[#111418]" data-icon="BookOpen" data-size="24px" data-weight="regular">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" stroke="#60c2a6"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round"></path> </g></svg>
-          </div>
-          <div class="flex flex-col gap-1">
-            <h2 class="text-[#111418] text-base font-bold leading-tight">Reforce o que aprendeu no momento certo</h2>
-            <p class="text-[#637488] text-sm font-normal leading-normal">
-              O Elephanto identifica os momentos ideais para revisar o conteúdo, maximizando retenção sem esforço excessivo.
-            </p>
-          </div>
-        </div>
-        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-          <div class="text-[#60c2a6]" data-icon="Cards" data-size="24px" data-weight="regular">
-            <svg fill="#60c2a6" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M20,3a1,1,0,0,0,0-2H4A1,1,0,0,0,4,3H5.049c.146,1.836.743,5.75,3.194,8-2.585,2.511-3.111,7.734-3.216,10H4a1,1,0,0,0,0,2H20a1,1,0,0,0,0-2H18.973c-.105-2.264-.631-7.487-3.216-10,2.451-2.252,3.048-6.166,3.194-8Zm-6.42,7.126a1,1,0,0,0,.035,1.767c2.437,1.228,3.2,6.311,3.355,9.107H7.03c.151-2.8.918-7.879,3.355-9.107a1,1,0,0,0,.035-1.767C7.881,8.717,7.227,4.844,7.058,3h9.884C16.773,4.844,16.119,8.717,13.58,10.126ZM12,13s3,2.4,3,3.6V20H9V16.6C9,15.4,12,13,12,13Z"></path></g></svg>
-          </div>
-          <div class="flex flex-col gap-1">
-            <h2 class="text-[#111418] text-base font-bold leading-tight">Economize horas de revisão desnecessária</h2>
-            <p class="text-[#637488] text-sm font-normal leading-normal">Chega de revisões aleatórias! Com ciclos personalizados, você estuda o que precisa, quando precisa.</p>
-          </div>
-        </div>
-        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-          <div class="text-[#111418]" data-icon="Users" data-size="24px" data-weight="regular">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 14.6C3 14.0399 3 13.7599 3.10899 13.546C3.20487 13.3578 3.35785 13.2049 3.54601 13.109C3.75992 13 4.03995 13 4.6 13H5.4C5.96005 13 6.24008 13 6.45399 13.109C6.64215 13.2049 6.79513 13.3578 6.89101 13.546C7 13.7599 7 14.0399 7 14.6V19.4C7 19.9601 7 20.2401 6.89101 20.454C6.79513 20.6422 6.64215 20.7951 6.45399 20.891C6.24008 21 5.96005 21 5.4 21H4.6C4.03995 21 3.75992 21 3.54601 20.891C3.35785 20.7951 3.20487 20.6422 3.10899 20.454C3 20.2401 3 19.9601 3 19.4V14.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M10 4.6C10 4.03995 10 3.75992 10.109 3.54601C10.2049 3.35785 10.3578 3.20487 10.546 3.10899C10.7599 3 11.0399 3 11.6 3H12.4C12.9601 3 13.2401 3 13.454 3.10899C13.6422 3.20487 13.7951 3.35785 13.891 3.54601C14 3.75992 14 4.03995 14 4.6V19.4C14 19.9601 14 20.2401 13.891 20.454C13.7951 20.6422 13.6422 20.7951 13.454 20.891C13.2401 21 12.9601 21 12.4 21H11.6C11.0399 21 10.7599 21 10.546 20.891C10.3578 20.7951 10.2049 20.6422 10.109 20.454C10 20.2401 10 19.9601 10 19.4V4.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17 10.6C17 10.0399 17 9.75992 17.109 9.54601C17.2049 9.35785 17.3578 9.20487 17.546 9.10899C17.7599 9 18.0399 9 18.6 9H19.4C19.9601 9 20.2401 9 20.454 9.10899C20.6422 9.20487 20.7951 9.35785 20.891 9.54601C21 9.75992 21 10.0399 21 10.6V19.4C21 19.9601 21 20.2401 20.891 20.454C20.7951 20.6422 20.6422 20.7951 20.454 20.891C20.2401 21 19.9601 21 19.4 21H18.6C18.0399 21 17.7599 21 17.546 20.891C17.3578 20.7951 17.2049 20.6422 17.109 20.454C17 20.2401 17 19.9601 17 19.4V10.6Z" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-          </div>
-          <div class="flex flex-col gap-1">
-            <h2 class="text-[#111418] text-base font-bold leading-tight">Progresso real, dia após dia</h2>
-            <p class="text-[#637488] text-sm font-normal leading-normal">
-              Visualize seu avanço com clareza. Cada revisão feita é um passo consciente rumo ao domínio do conteúdo.
-            </p>
-          </div>
-        </div>
-        <div class="flex flex-1 gap-3 rounded-lg border border-[#dce0e5] bg-white p-4 flex-col">
-          <div class="text-[#111418]" data-icon="ChartLine" data-size="24px" data-weight="regular">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#60c2a6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-          </div>
-          <div class="flex flex-col gap-1">
-            <h2 class="text-[#111418] text-base font-bold leading-tight"> Aprendizado que se adapta ao seu ritmo</h2>
-            <p class="text-[#637488] text-sm font-normal leading-normal">
-              Seja você um estudante acelerado ou mais reflexivo, o Elephanto molda seu caminho conforme seu estilo de aprendizagem.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex flex-col gap-10 px-4 py-10 @container">
-      <div class="flex flex-col gap-4" id="features">
-        <h1
-          class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
-        >
-          Recursos que potencializam seu aprendizado
-        </h1>
-        <p class="text-[#111418] text-base font-normal leading-normal max-w-[720px]">
-          Descubra como o Elephanto funciona com uma interface intuitiva e uma jornada de aprendizagem personalizada.
-        </p>
-      </div>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-3">
-        <div class="flex flex-col gap-3 pb-3">
-          <div
-            class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCZ_MnI71yEIps2WH--LmR6aYWZmjE2iaBCLIex4Yf0iAcf8d0mMYCHJePIiwQbT-oily1vBhSLiySfFYDXzk_HZj4qTG22YpcajhrZzePVz5g6-7YDLqiW4zK2VPs4eEDrK3TToBst209p4cyP6ufN166SlmXrUP8dc7JyXdmEBUgYQzSL3sTlP4Z1KhkES5x1XnoWBz9lhvtl7qIl4LlhA8Fg9a-h8sOKY17TEShQifwgUdUln5n6MF2WOngHNcWtbZ1aNzqOm_vt");'
-          ></div>
-          <div>
-            <p class="text-[#111418] text-base font-medium leading-normal">Sistema de Flashcards inteligentes</p>
-            <p class="text-[#637488] text-sm font-normal leading-normal">
-              Nosso algoritmo inteligente de flashcards prioriza palavras e frases que você considera desafiadoras, maximizando sua eficiência de aprendizagem.
-            </p>
-          </div>
-        </div>
-        <div class="flex flex-col gap-3 pb-3">
-          <div
-            class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPHuMabXkOti499BlZjfusAHn_iWoIdULPfvcFgyFo4iNscWtK_wAuyjad_0QxUHKPfn-K7CJLhMqWEUO2O-S2rmB0gt2nUeVIdyq7jeNcSRxOr84MMmqEYKey1U4dD5t-Cf44oMSJKEU5bSVRW-a59MgUPltIA_-y-FUsqeessZkSrEnsXkznYAM-PFl8SQnOP5wxfIXKtVh_j3SEkmAHZULMkjIStl--rbkba2UMcVYMCOLaAF1Ova5TKHRuWpoCMie0hXhuu8Vu");'
-          ></div>
-          <div>
-            <p class="text-[#111418] text-base font-medium leading-normal">Aprendizagem otimizada para dispositivos móveis</p>
-            <p class="text-[#637488] text-sm font-normal leading-normal">Aprenda em qualquer lugar com nosso design totalmente responsivo, acessível em qualquer dispositivo, a qualquer hora e em qualquer lugar.</p>
-          </div>
-        </div>
-        <div class="flex flex-col gap-3 pb-3">
-          <div
-            class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-xl"
-            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCxiqiDj6R-lbZba2iv_EnxZ_e4QjedfGFyT2uBfB8XFmZyhomQSr25GOML19wVdQnBEAurYQkk-bO6BAx6-kht-88RmmbfEtreS_9xWFDCyNmuOkB8TCev3cgvZh-2XMwCGqO1sKlIdXnPgOx2LH7cxPOnV80Ba8RwbRfur3VXwVNoE09p8K1IhRhMxTtL8eaIc4AnNrwlF0Ork3jlioFvCPLyjJpJ4Ikk_iONOZWavRP4y6R5lyZL1dnJjt7Da3MFplku--OwSxDs");'
-          ></div>
-          <div>
-            <p class="text-[#111418] text-base font-medium leading-normal">Metodologia comprovada</p>
-            <p class="text-[#637488] text-sm font-normal leading-normal">
-              Nossa abordagem é baseada em técnica de estudo que visa otimizar a memorização através da revisão de informações em intervalos crescentes de tempo.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="@container">
-      <div class="flex flex-col justify-end gap-6 px-4 py-10 @[480px]:gap-8 @[480px]:py-20">
-        <div class="flex flex-col gap-2">
-          <h1
-            class="text-[#111418] tracking-light text-[32px] font-bold leading-tight @[480px]:text-4xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em] max-w-[720px]"
-          >
-            Pronto para embarcar na sua jornada de aprendizado?
+  <% end %>
+  <div class="container mx-auto px-6 py-20 relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-8">
+        <div class="space-y-4">
+          <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight">
+            Memorize
+            <span class="block bg-gradient-to-r from-accent to-third bg-clip-text text-transparent">Qualquer coisa</span>
+            <span class="block text-white">Para sempre</span>
           </h1>
+          <p class="text-xl text-white/80 max-w-lg leading-relaxed">
+            Domine qualquer assunto com o Elephanto, sistema inteligente de repetição espaçada.
+            Crie decks e flashcards, e deixe nosso algoritmo otimizar seu cronograma de aprendizado.
+          </p>
         </div>
-        <div class="flex flex-1 justify-start">
-          <div class="flex justify-center">
-            <%= link_to sign_up_url, class: 'flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#60c2a6] text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] grow' do %>
-              <span class="truncate">Comece hoje mesmo</span>
-            <% end %>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <%= link_to sign_up_path, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border hover:text-accent-foreground h-11 rounded-md text-lg px-8 bg-white/10 text-white border-white/30 hover:bg-white/20" do %>
+            Começar a aprender agora
+          <% end %>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="relative">
+          <%= image_tag "hero-flashcards.png", alt: "Imagem hero", class: "w-full h-auto rounded-2xl shadow-glow" %>
+        </div>
+        <div class="rounded-lg text-card-foreground shadow-sm absolute -left-6 top-20 p-4 bg-card/90 backdrop-blur-sm shadow-card-soft border-0">
+          <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain w-8 h-8 text-primary">
+              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+            </svg>
+            <div>
+              <div class="font-semibold text-sm">Algoritmo inteligente</div>
+              <div class="text-xs text-muted-foreground">Avisos de revisão</div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg text-card-foreground shadow-sm absolute -right-6 top-40 p-4 bg-card/90 backdrop-blur-sm shadow-card-soft border-0">
+          <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat w-8 h-8 text-accent">
+              <path d="m17 2 4 4-4 4"></path><path d="M3 11v-1a4 4 0 0 1 4-4h14"></path><path d="m7 22-4-4 4-4"></path><path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
+            </svg>
+            <div>
+              <div class="font-semibold text-sm">Revisão espaçada</div>
+              <div class="text-xs text-muted-foreground">Comprovado cientificamente</div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-lg text-card-foreground shadow-sm absolute -left-4 bottom-20 p-4 bg-card/90 backdrop-blur-sm shadow-card-soft border-0">
+          <div class="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up w-8 h-8 text-primary" >
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+              <polyline points="16 7 22 7 22 13"></polyline>
+            </svg>
+            <div>
+              <div class="font-semibold text-sm">Acompanhe o progresso</div>
+              <div class="text-xs text-muted-foreground">Análise detalhada</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+<section class="py-20 bg-background" id="index_resources">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold mb-6">Recursos poderosos para
+        <span class="block bg-gradient-primary bg-clip-text text-transparent pb-2">uma aprendizagem eficaz</span>
+      </h2>
+      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+        O Elephanto combina ciência de aprendizagem comprovada com tecnologia moderna para ajudar você a memorizar qualquer coisa, de forma mais rápida e eficaz.
+      </p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="rounded-lg text-card-foreground shadow-sm group hover:shadow-card transition-smooth border-0 bg-gradient-card">
+        <div class="flex flex-col p-6 space-y-4">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3 group-hover:scale-110 transition-smooth">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain w-6 h-6 text-white">
+              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold tracking-tight text-xl">Algoritmo inteligente</h3>
+        </div>
+        <div class="p-6 pt-0">
+          <p class="text-muted-foreground text-base leading-relaxed">
+            Nosso algoritmo se adapta aos seus padrões de aprendizagem, otimizando os intervalos de revisão para máxima retenção.
+          </p>
+        </div>
+      </div>
+      <div class="rounded-lg text-card-foreground shadow-sm group hover:shadow-card transition-smooth border-0 bg-gradient-card">
+        <div class="flex flex-col p-6 space-y-4">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3 group-hover:scale-110 transition-smooth">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-6 h-6 text-white"><circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <h3 class="font-semibold tracking-tight text-xl">Intervalo de tempo</h3>
+        </div>
+        <div class="p-6 pt-0">
+          <p class="text-muted-foreground text-base leading-relaxed">
+            O Elephanto identifica os momentos ideais para revisar o conteúdo, maximizando retenção sem esforço excessivo.
+          </p>
+        </div>
+      </div>
+      <div class="rounded-lg text-card-foreground shadow-sm group hover:shadow-card transition-smooth border-0 bg-gradient-card">
+        <div class="flex flex-col p-6 space-y-4">
+          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3 group-hover:scale-110 transition-smooth">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-6 h-6 text-white">
+              <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+            </svg>
+          </div>
+          <h3 class="font-semibold tracking-tight text-xl">Criação rápida</h3>
+        </div>
+        <div class="p-6 pt-0">
+          <p class="text-muted-foreground text-base leading-relaxed">
+            Crie flashcards em segundos com nossa interface intuitiva e recursos de importação em massa.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="py-20 bg-muted/30" id="index_how_work">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+        Como o <span class="bg-gradient-primary bg-clip-text text-transparent">Elephanto</span> funciona
+      </h2>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Nossa abordagem com base científica torna o aprendizado mais eficiente e agradável.</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="relative">
+        <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-accent/30 z-0"></div>
+        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+          <div class="p-6 text-center flex flex-col h-full">
+            <div class="mb-6">
+              <div class="text-6xl font-bold text-primary opacity-20 mb-4">01</div>
+              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-8 h-8 text-white">
+                  <path d="M5 12h14"></path><path d="M12 5v14"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Crie seu deck</h3>
+            <p class="text-muted-foreground leading-relaxed">Comece criando um novo deck e adicionando flashcards.</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-accent/30 z-0"></div>
+        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+          <div class="p-6 text-center flex flex-col h-full">
+            <div class="mb-6">
+              <div class="text-6xl font-bold text-primary opacity-20 mb-4">02</div>
+              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers w-8 h-8 text-white">
+                  <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path>
+                  <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Estude seus cards</h3>
+            <p class="text-muted-foreground leading-relaxed">Comece a estudar seus flashcards. Avalie o quão bem você se lembra de cada cartão para ajudar nosso algoritmo a aprender.</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-accent/30 z-0"></div>
+        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+          <div class="p-6 text-center flex flex-col h-full">
+            <div class="mb-6">
+              <div class="text-6xl font-bold text-primary opacity-20 mb-4">03</div>
+              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat w-8 h-8 text-white">
+                  <path d="m17 2 4 4-4 4"></path>
+                  <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
+                  <path d="m7 22-4-4 4-4"></path>
+                  <path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Repetição inteligente</h3>
+            <p class="text-muted-foreground leading-relaxed">Nosso algoritmo agenda a próxima repetição com base no seu desempenho, mostrando cartas difíceis com mais frequência.</p>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+          <div class="p-6 text-center flex flex-col h-full">
+            <div class="mb-6">
+              <div class="text-6xl font-bold text-primary opacity-20 mb-4">04</div>
+              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy w-8 h-8 text-white">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                  <path d="M4 22h16"></path>
+                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 class="text-xl font-semibold mb-3">Acompanhe o progresso</h3>
+            <p class="text-muted-foreground leading-relaxed">Observe suas taxas de retenção melhorarem à medida que você domina cada cartão por meio de repetição espaçada.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-16">
+      <%= link_to sign_up_url, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-11 rounded-md text-lg px-8" do %>
+        Iniciar jornada de aprendizado
+      <% end %>
+    </div>
+  </div>
+</section>
+<section class="py-20 bg-gradient-hero relative overflow-hidden">
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="rounded-lg border text-card-foreground shadow-sm max-w-4xl mx-auto bg-white/10 backdrop-blur-lg border-white/20 shadow-glow">
+      <div class="p-12 text-center">
+        <div class="mb-8">
+          <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+            Pronto para transformar
+            <span class="block">sua aprendizagem?</span>
+          </h2>
+          <p class="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            Junte-se a milhares de alunos que já melhoraram sua memória e retenção com o Elephanto.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <%= link_to sign_up_url, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:shadow-glow transition-smooth font-semibold h-11 rounded-md text-lg px-8 bg-white text-primary hover:bg-white/90" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-5 h-5">
+              <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+            </svg>
+            Começar agora
+          <% end %>
+          <%= link_to new_session_url, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border hover:text-accent-foreground h-11 rounded-md text-lg px-8 bg-transparent text-white border-white/30 hover:bg-white/10" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-5 h-5">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+            Já estou por aqui
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
