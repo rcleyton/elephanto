@@ -1,16 +1,16 @@
-<div id="<%= dom_id deck %>" class="rounded-lg border border-gray-200 bg-white shadow-sm group hover:shadow-md transition-shadow duration-300 cursor-pointer">
+<div id="<%= dom_id deck %>" class="rounded-lg border bg-card text-card-foreground shadow-sm group hover:shadow-elegant transition-all duration-300 cursor-pointer">
   <div class="flex flex-col space-y-1.5 p-6">
     <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center justify-between">
-      <span class="text-gray-900 group-hover:text-blue-600 transition-colors">
+      <span class="group-hover:text-primary transition-colors">
         <%= deck.name %>
       </span>  
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open w-5 h-5 text-[#676F7E]"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5 text-muted-foreground"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
     </h3>
-    <p class="text-sm text-gray-500 line-clamp-2"><%= deck.description %></p>
+    <p class="text-sm text-muted-foreground line-clamp-2"><%= deck.description %></p>
   </div>
 
   <div class="p-6 pt-0">
-    <div class="flex items-center justify-between text-sm text-gray-500">
+    <div class="flex items-center justify-between text-sm text-muted-foreground">
       <div class="flex items-center gap-1">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open w-4 h-4"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
@@ -27,10 +27,10 @@
       </div>
     </div>
     <div class="mt-4 flex gap-2">
-      <%= link_to deck, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition duration-300 ease-in-out h-9 rounded-md px-3 flex-1" do %>
+      <%= link_to deck, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant hover:shadow-glow transition-smooth h-9 rounded-md px-3 flex-1" do %>
         Estudar
       <% end %>
-      <%= link_to edit_deck_path(deck), class: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-gray-300 bg-white hover:bg-gray-100 hover:text-gray-900 h-9 rounded-md px-3 flex-1" do %>
+      <%= link_to edit_deck_path(deck), class: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex-1" do %>
         Editar
       <% end %>
     </div>
