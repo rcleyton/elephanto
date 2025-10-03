@@ -10,7 +10,7 @@
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div class="flex items-start justify-between">
           <div>
-            <h1 class="text-3xl font-bold bg-[#644FE8] bg-clip-text text-transparent">
+            <h1 class="text-3xl font-bold bg-primary bg-clip-text text-transparent">
               Meus <%= Deck.model_name.human.pluralize %>
             </h1>
             <p class="text-[#676F7E] text-muted-foreground mt-2">
@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex items-center gap-4 md:gap-8">
-          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition duration-300 ease-in-out font-semibold h-10 px-4 py-2 gap-2 w-full md:w-auto" do %>
+          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2 w-full" do %>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-plus w-4 h-4">
               <path d="M5 12h14"/>
               <path d="M12 5v14"/>
