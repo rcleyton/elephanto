@@ -44,10 +44,12 @@
               </div>
             <% end %>
           </div>
-          <div class="hidden md:flex items-center gap-8">
-            <a href="#index_resources" class="text-foreground/80 hover:text-foreground transition-smooth">Recursos</a>
-            <a href="#index_how_work" class="text-foreground/80 hover:text-foreground transition-smooth">Como funciona</a>
-          </div>
+          <% if controller.controller_name == "landing" %>
+            <div class="hidden md:flex items-center gap-8">
+              <a href="#index_resources" class="text-foreground/80 hover:text-foreground transition-smooth">Recursos</a>
+              <a href="#index_how_work" class="text-foreground/80 hover:text-foreground transition-smooth">Como funciona</a>
+            </div>
+          <% end %>
           <div class="hidden md:flex items-center gap-4">
             <%= link_to new_session_url, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-foreground hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2" do %>
               Entrar
