@@ -80,7 +80,7 @@
     </div>
   </header>
 
-  <main id="decks" class="container md:mx-auto px-6 py-8">
+  <main id="decks" data-controller="automatic-margin-top" class="container md:mx-auto px-6 py-8">
     <% if @decks.any? %>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <% @decks.each do |deck| %>
@@ -92,26 +92,3 @@
     <% end %>
   </main>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    const main = document.querySelector('main');
-
-    const adjustMainMargin = () => {
-      const headerStyle = window.getComputedStyle(header);
-      const headerPosition = headerStyle.getPropertyValue('position');
-
-      if (headerPosition === 'fixed') {
-        const headerHeight = header.offsetHeight;
-        main.style.marginTop = `${headerHeight}px`;
-      } else {
-        main.style.marginTop = '0';
-      }
-    };
-
-    adjustMainMargin();
-
-    window.addEventListener('resize', adjustMainMargin);
-  });
-</script>
