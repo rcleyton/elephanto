@@ -2,12 +2,15 @@
   <turbo-frame id="flash">
     <%= render "shared/flash" %>
   </turbo-frame>
-  <div class="hidden lg:flex lg:w-1/2 bg-gradient-primary items-center justify-center p-8 bg-emerald-400">
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-third items-center justify-center p-8 bg-emerald-400">
     <div class="text-center text-white">
-        <h1 class="text-4xl font-bold mb-4">Bem vindo de volta ao Elephanto</h1>
-        <p class="text-xl opacity-90">
-          Atualize sua senha e volte a aprender usando repetição espaçada
-        </p>
+      <h1 class="text-4xl font-bold mb-4">Bem vindo de volta ao Elephanto</h1>
+      <p class="text-xl opacity-90">
+        Atualize sua senha e volte a aprender usando repetição espaçada
+      </p>
+      <div class="mt-8">
+        <%= image_tag "logo_ligth.svg", class: "w-48 h-48 mx-auto filter brightness-0 invert" %>
+      </div>
     </div>
   </div>
   <div class="flex-1 flex items-center justify-center p-8 bg-gray-100">
