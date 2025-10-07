@@ -58,7 +58,26 @@
         <h2 class="text-2xl font-semibold">Flashcards</h2>
         <span class="text-gray-500"><%= @deck.flashcards.count %> cards</span>
       </div>
-      <%= render partial: "flashcards", locals: { flashcards: @flashcards, deck: @deck } %>
+      <% if @deck.flashcards.any? %>
+        <%= render partial: "flashcards", locals: { flashcards: @flashcards, deck: @deck } %>
+      <% else %>
+        <div class="rounded-lg border bg-card text-card-foreground">
+          <div class="p-8 text-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-12 h-12 text-muted-foreground mx-auto mb-4">
+              <path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
+            </svg>
+            <h3 class="text-lg font-semibold mb-2">Nenhum flashcard encontrado</h3>
+            <p class="text-muted-foreground mb-6">Adicione flashcards para começar a estudar</p>
+            <%= link_to new_deck_flashcard_path(@deck), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2" do %>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+              </svg>
+              Adicionar primeiro flashcard
+            <% end %>
+          </div>
+        </div>
+      <% end %> 
     </div>
   </main>
 </div>
