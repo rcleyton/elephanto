@@ -1,3 +1,5 @@
+<% content_for :title, "Elephanto | Iniciar sessão" %>
+
 <div class="min-h-screen flex overflow-hidden">
   <turbo-frame id="flash"> 
     <%= render "shared/flash" %>
@@ -36,6 +38,7 @@
           <div class="text-center flex flex-col">
             <%= link_to t('buttons.general.forgot_password'), new_password_path, class: "text-sm text-blue-600 hover:underline" %>
             <%= link_to 'Ainda não tenho conta?', sign_up_path, class: "text-sm text-blue-600 hover:underline" %>
+            <%= link_to "Reenviar e-mail de confirmação", new_confirmation_path, class: "text-sm text-blue-600 hover:underline" %>
           </div>
         <% end %>
       </div>

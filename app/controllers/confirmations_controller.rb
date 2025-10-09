@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class ConfirmationsController < ApplicationController
-  allow_unauthenticated_access only: [ :show, :create ]
+  allow_unauthenticated_access only: [ :show, :new, :create ]
 
   def show
     @user = User.find_by(email_address: params[:email])
@@ -20,8 +20,11 @@ class ConfirmationsController < ApplicationController
       flash[:success] = t("messages.confirmed_email")
       redirect_to new_session_path
     else
-      redirect_to root_path(resend_user_id: @user.id), alert: t("messages.invalid_link")
+      redirect_to new_session_path, alert: t("messages.invalid_link")
     end
+  end
+
+  def new
   end
 
   def create
@@ -33,8 +36,9 @@ class ConfirmationsController < ApplicationController
       UserMailer.confirmation(@user).deliver_now
 
       flash[:success] = t("messages.new_email_to_confirmation")
+      redirect_to new_session_path
     else
-      redirect_to root_path, notice: t("messages.user_not_found_or_confirmed")
+      redirect_to new_session_path, notice: t("messages.user_not_found_or_confirmed")
     end
   end
 end

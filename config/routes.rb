@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resource :confirmation, only: %i[show create]
+    resource :confirmation, only: %i[show new create]
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
