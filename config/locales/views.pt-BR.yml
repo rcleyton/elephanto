@@ -21,11 +21,11 @@ pt-BR:
     you_can_reset_password: Você pode redefinir sua senha nos próximos 15 minutos
     this_password_reset_page: nesta página de redefinição de senha
     update_your_password: Atualizar senha
-    confirm_email: "Sua conta ainda não foi verificada. Clique em 'Reenviar e-mail de verificação de conta' para receber um novo link."
+    confirm_email: "Sua conta ainda não foi verificada. Clique em 'Reenviar e-mail de confirmação' para receber um novo link."
     success_login: Login efetuado com sucesso!
     success_logout: Logout realizado com sucesso!
     confirmed_email: E-mail confirmado com sucesso!
-    invalid_link: "Link de confirmação inválido ou expirado! Clique em 'Reenviar e-mail de verificação de conta' para receber um novo link."
+    invalid_link: "Link de confirmação inválido ou expirado! Clique em 'Reenviar e-mail de confirmação' para receber um novo link."
     new_email_to_confirmation: Um novo e-mail de confirmação foi enviado.
     user_confirmed: Usuário já confirmado.
     already_confirmed: E-mail já confirmado.
