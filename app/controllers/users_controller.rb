@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     if @user.save
       ConfirmationEmailJob.perform_later(@user.id)
       flash[:success] = t("messages.create_account")
-      redirect_to root_path
+      redirect_to new_session_path
     else
       flash.now[:error] = @user.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity

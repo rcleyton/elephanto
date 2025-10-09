@@ -42,7 +42,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     it "redirects when email does not exist" do
       post confirmation_url, params: { email_address: "notfound@elephanto.com.br" }
 
-      assert_redirected_to root_url
+      assert_redirected_to new_session_path
       assert_equal I18n.t("messages.user_not_found_or_confirmed"), flash[:notice]
     end
 
@@ -56,11 +56,16 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   context "resend" do
+    it 'new confirmation' do
+      get new_confirmation_path
+      assert :success
+    end
+
     it "not with invalid token" do
       @user.update(confirmation_sent_at: 3.days.ago)
 
-      get confirmation_url(token: @token, email: @user.email_address)
-      assert_redirected_to root_path(resend_user_id: @user.id)
+      get confirmation_path(token: @token, email: @user.email_address)
+      assert_redirected_to new_session_path
       follow_redirect!
 
       expected_message = I18n.t("messages.invalid_link")
@@ -102,7 +107,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
         post confirmation_url, params: { email_address: @user.email_address }
       end
 
-      assert_redirected_to root_url
+      assert_redirected_to new_session_path
       assert_equal I18n.t("messages.user_not_found_or_confirmed"), flash[:notice]
     end
   end
