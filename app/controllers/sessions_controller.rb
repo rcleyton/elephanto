@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     @user = User.authenticate_by(params.permit(:email_address, :password))
 
     if @user
-      if @user.verified? == false || !@user.confirmed?
+      if !@user.verified? || !@user.confirmed?
         redirect_to new_session_path, alert: t("messages.confirm_email")
         return
       end
