@@ -74,21 +74,6 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       refute @user.confirmed?
     end
 
-    it "email to new confirmation" do
-      @user.confirmation_sent_at = 3.days.ago
-      @user.save!(validate: false)
-
-      assert_emails 1 do
-        post confirmation_url, params: { email_address: @user.email_address }
-      end
-
-      assert_equal I18n.t("messages.new_email_to_confirmation"), flash[:success]
-
-      @user.reload
-      refute_nil @user.confirmation_token
-      assert @user.confirmation_sent_at > 1.minute.ago
-    end
-
     it "email to confirm user with new token" do
       post confirmation_url, params: { email_address: @user.email_address }
       @user.reload
@@ -110,5 +95,27 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
       assert_redirected_to new_session_path
       assert_equal I18n.t("messages.user_not_found_or_confirmed"), flash[:notice]
     end
+
+    it "should enqueue confirmation email if last sent more than 5 minutes ago" do
+      @user.update!(confirmation_sent_at: 10.minutes.ago)
+
+      assert_enqueued_with(job: ConfirmationEmailJob, args: [@user.id]) do
+        post confirmation_path, params: { email_address: @user.email_address }
+      end
+
+      assert_redirected_to new_session_path
+      assert_equal I18n.t("messages.new_email_to_confirmation"), flash[:success]
+    end
+
+    it "should not enqueue email if last sent less than 5 minutes ago" do
+      @user.update!(confirmation_sent_at: 2.minutes.ago)
+
+      assert_no_enqueued_jobs do
+        post confirmation_path, params: { email_address: @user.email_address }
+      end
+
+      assert_redirected_to new_confirmation_path
+      assert_equal I18n.t("messages.confirmation_email_recently_sent"), flash[:alert]
+    end  
   end
 end

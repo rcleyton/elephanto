@@ -16,7 +16,7 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
-  before_create :generation_confirmation_token
+  before_create :generate_confirmation_token
 
   def confirmed?
     verified && confirmed_at.present?
@@ -26,7 +26,7 @@ class User < ApplicationRecord
     update_columns(confirmed_at: Time.current, confirmation_token: nil, verified: true)
   end
 
-  def generation_confirmation_token
+  def generate_confirmation_token
     self.confirmation_token   = SecureRandom.urlsafe_base64
     self.confirmation_sent_at = Time.current
   end
