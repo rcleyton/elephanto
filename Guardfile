@@ -1,3 +1,5 @@
+ENV["DISABLE_SPRING"] = "1"
+
 guard :minitest do
   watch(%r{^app/(.+)\.rb$})                               { |m| "test/#{m[1]}_test.rb" }
   watch(%r{^app/controllers/application_controller\.rb$}) { 'test/controllers' }

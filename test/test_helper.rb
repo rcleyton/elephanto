@@ -1,3 +1,5 @@
+require_relative "simplecov_helper"
+
 ENV["RAILS_ENV"] ||= "test"
 
 require_relative "../config/environment"
@@ -5,12 +7,6 @@ require "rails/test_help"
 require "minitest/rails"
 require "minitest/reporters"
 require "simplecov"
-
-SimpleCov.start "rails" do
-  add_filter "app/channels"
-  add_filter "app/jobs"
-  add_filter "app/mailers"
-end
 
 Minitest::Reporters.use! Minitest::Reporters::ProgressReporter.new
 
@@ -31,3 +27,5 @@ class ActionDispatch::IntegrationTest
     host! "app.lvh.me"
   end
 end
+
+Minitest.after_run { SimpleCov.result.format! }
