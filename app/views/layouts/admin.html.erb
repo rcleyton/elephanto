@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Elephanto | Dashboard" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <%= favicon_link_tag 'favicon.ico', type: 'image/png' %>
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap" rel="stylesheet">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <style>
+      .transition-fast { transition: all 0.2s ease-in-out; }
+    </style>
+  </head>
+
+  <body class="bg-gray-50 text-gray-800">
+
+    <div class="flex min-h-screen">
+
+      <!-- SIDEBAR -->
+      <aside id="sidebar" class="w-64 bg-white border-r border-gray-200 p-4 flex flex-col transition-fast">
+        <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center gap-2">
+            <div class="bg-indigo-600 text-white w-8 h-8 flex items-center justify-center rounded-md font-bold">E</div>
+            <span class="text-lg font-semibold sidebar-label">Elephanto</span>
+          </div>
+          <button id="toggleSidebar" class="p-2 rounded-md hover:bg-gray-100 transition-fast hidden md:block">
+            <svg id="toggleIcon" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-600 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+        </div>
+
+        <nav class="flex-1">
+          <ul class="space-y-2">
+            <li>
+              <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard h-4 w-4">
+                  <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                  <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                  <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                  <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                </svg>
+                <span class="text-sm font-medium sidebar-label">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users h-4 w-4">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span class="text-sm font-medium sidebar-label">Usuários</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-4 w-4">
+                  <path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
+                </svg>
+                <span class="text-sm font-medium sidebar-label">Decks</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text h-4 w-4">
+                  <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                  <path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path>
+                  <path d="M16 13H8"></path><path d="M16 17H8"></path>
+                </svg>
+                <span class="text-sm font-medium sidebar-label">Flashcards</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- CONTEÚDO PRINCIPAL -->
+      <div class="flex-1 flex flex-col">
+        <!-- HEADER -->
+        <header class="bg-white border-b border-gray-200 p-4 flex flex-wrap items-center justify-between gap-3">
+          <h1 class="text-2xl font-bold ml-4">Dashboard administrativo</h1>
+        </header>
+
+        <!-- MAIN -->
+        <main class="p-6 text-gray-600">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+      const sidebar = document.getElementById('sidebar');
+      const toggleSidebar = document.getElementById('toggleSidebar');
+      const toggleIcon = document.getElementById('toggleIcon');
+      const labels = document.querySelectorAll('.sidebar-label');
+
+      // inicia colapsado em mobile, expandido em desktop
+      let collapsed = window.innerWidth < 768;
+
+      function applySidebarState() {
+        if (collapsed) {
+          sidebar.classList.add('w-20');
+          sidebar.classList.remove('w-64');
+          labels.forEach(l => l.classList.add('hidden'));
+          toggleIcon.classList.add('rotate-180');
+        } else {
+          sidebar.classList.add('w-64');
+          sidebar.classList.remove('w-20');
+          labels.forEach(l => l.classList.remove('hidden'));
+          toggleIcon.classList.remove('rotate-180');
+        }
+      }
+
+      applySidebarState();
+
+      toggleSidebar.addEventListener('click', () => {
+        collapsed = !collapsed;
+        applySidebarState();
+      });
+
+      window.addEventListener('resize', () => {
+        const shouldCollapse = window.innerWidth < 768;
+        if (shouldCollapse !== collapsed) {
+          collapsed = shouldCollapse;
+          applySidebarState();
+        }
+      });
+    </script>
+  </body>
+</html>
