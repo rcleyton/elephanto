@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   constraints(lambda { |req| req.subdomain == "app" || req.host == "app.localhost" }) do
+    get  "admin",    to: "admin#index"
     get  "/sign_up", to: "users#new"
     post "/sign_up", to: "users#create"
 
