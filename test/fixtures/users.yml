@@ -6,6 +6,7 @@ one:
   confirmation_sent_at: <%= Time.current - 10.minutes %>
   confirmed_at: <%= Time.current - 5.minutes %>
   terms_of_service: true
+  admin: true
 two:
   email_address: 'user2@elephanto.com'
   password_digest: <%= BCrypt::Password.create('P@ssword1') %>
