@@ -45,12 +45,10 @@
                 </div>
               <% end %>
             </div>
-            <% if controller.controller_name == "landing" %>
-              <div class="hidden md:flex items-center gap-8">
-                <a href="#index_resources" class="text-foreground/80 hover:text-foreground transition-smooth">Recursos</a>
-                <a href="#index_how_work" class="text-foreground/80 hover:text-foreground transition-smooth">Como funciona</a>
-              </div>
-            <% end %>
+            <div class="hidden md:flex items-center gap-8">
+              <%= link_to "Recursos", root_path(anchor: "resources"), class: "text-foreground/80 hover:text-foreground transition-smooth" %>
+              <%= link_to "Como funciona", root_path(anchor: "how_work"), class: "text-foreground/80 hover:text-foreground transition-smooth" %>
+            </div>
             <div class="hidden md:flex items-center gap-4">
               <%= link_to new_session_url, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 text-foreground hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2" do %>
                 Entrar
@@ -67,12 +65,8 @@
           
           <div class="hidden py-4 border-t border-border/50" data-dropdown-target="menu">
             <div class="flex flex-col gap-4">
-              <a href="#index_resources" data-action="dropdown#close" class="text-foreground/80 hover:text-foreground transition-smooth py-2">
-                Recursos
-              </a>
-              <a href="#index_how_work" data-action="dropdown#close" class="text-foreground/80 hover:text-foreground transition-smooth py-2">
-                Como funciona
-              </a>
+              <%= link_to "Recursos", root_path(anchor: "resources"), data: { action: "dropdown#close"}, class: "text-foreground/80 hover:text-foreground transition-smooth py-2" %>
+              <%= link_to "Como funciona", root_path(anchor: "how_work"), data: { action: "dropdown#close" }, class: "text-foreground/80 hover:text-foreground transition-smooth py-2" %>
               <div class="flex flex-col gap-2 pt-4">
                 <%= link_to new_session_url, data: { action: "dropdown#close" }, class: "inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 justify-start" do %>
                   Entrar
@@ -104,8 +98,8 @@
           <div class="space-y-4">
             <h3 class="font-semibold">Produto</h3>
             <div class="space-y-2">
-              <a href="#index_resources" class="block text-muted-foreground hover:text-foreground transition-smooth">Recursos</a>
-              <a href="#index_how_work" class="block text-muted-foreground hover:text-foreground transition-smooth">Como funciona</a>
+              <a href="#resources" class="block text-muted-foreground hover:text-foreground transition-smooth">Recursos</a>
+              <a href="#how_work" class="block text-muted-foreground hover:text-foreground transition-smooth">Como funciona</a>
             </div>
           </div>
           <div class="space-y-4">
