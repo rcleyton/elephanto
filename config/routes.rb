@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   end
 
   constraints(lambda { |req| req.subdomain == "app" || req.host == "app.localhost" }) do
-    root to: redirect("/session/new"), as: :app_root
-
+    root to: "home#redirect", as: :app_root
+    
     get  "admin",    to: "admin#index"
     get  "/sign_up", to: "users#new"
     post "/sign_up", to: "users#create"
