@@ -7,6 +7,10 @@ Rails.application.configure do
 
   config.consider_all_requests_local = false
 
+  config.action_dispatch.show_exceptions = true
+  
+  config.exceptions_app = self.routes
+
   config.action_controller.perform_caching = true
 
   config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
