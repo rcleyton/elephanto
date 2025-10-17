@@ -5,8 +5,9 @@ Rails.application.configure do
 
   config.eager_load = false
 
-  config.consider_all_requests_local = true
-
+  config.consider_all_requests_local = false
+  config.exceptions_app = self.routes
+  
   config.server_timing = true
 
   if Rails.root.join("tmp/caching-dev.txt").exist?
