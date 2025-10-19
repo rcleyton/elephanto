@@ -49,7 +49,7 @@
         <nav class="flex-1">
           <ul class="space-y-2">
             <li>
-              <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
+              <%= link_to admin_path, class: "flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard h-4 w-4">
                   <rect width="7" height="9" x="3" y="3" rx="1"></rect>
                   <rect width="7" height="5" x="14" y="3" rx="1"></rect>
@@ -57,7 +57,7 @@
                   <rect width="7" height="5" x="3" y="16" rx="1"></rect>
                 </svg>
                 <span class="text-sm font-medium sidebar-label">Dashboard</span>
-              </a>
+              <% end %>
             </li>
             <li>
               <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
@@ -71,12 +71,12 @@
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
+              <%= link_to decks_path,  class: "flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast" do %>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-4 w-4">
                   <path d="M12 7v14"></path><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
                 </svg>
                 <span class="text-sm font-medium sidebar-label">Decks</span>
-              </a>
+                <% end %>
             </li>
             <li>
               <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-md hover:bg-gray-100 transition-fast">
