@@ -5,8 +5,8 @@ Rails.application.configure do
 
   config.eager_load = false
 
-  config.consider_all_requests_local = true
-
+  config.consider_all_requests_local = false
+  
   config.server_timing = true
 
   if Rails.root.join("tmp/caching-dev.txt").exist?
@@ -54,4 +54,7 @@ Rails.application.configure do
   config.action_view.annotate_rendered_view_with_filenames = true
 
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.hosts << /.*\.localhost/
+  config.action_dispatch.tld_length = 0
 end

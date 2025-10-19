@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   end
 
   constraints(lambda { |req| req.subdomain == "app" || req.host == "app.localhost" }) do
+    root to: "home#redirect", as: :app_root
+    
     get  "admin",    to: "admin#index"
     get  "/sign_up", to: "users#new"
     post "/sign_up", to: "users#create"
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
 
     resource :settings, only: [:show] do
       patch :update_password
+      patch :learning_speed
     end
 
     resources :decks do
@@ -41,4 +44,7 @@ Rails.application.routes.draw do
   end
 
   get "up" => "rails/health#show", as: :rails_health_check
+
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
 end

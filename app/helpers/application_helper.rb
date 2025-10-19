@@ -30,5 +30,13 @@ module ApplicationHelper
       percent: percent
     }
   end
+
+  def app_root_url
+    if Rails.env.production?
+      "https://app.getelephanto.com"
+    else
+      "http://app.localhost:4000"
+    end
+  end
 end
 

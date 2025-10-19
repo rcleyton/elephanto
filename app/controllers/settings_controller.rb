@@ -13,7 +13,7 @@ class SettingsController < ApplicationController
 
         render turbo_stream: [
           turbo_stream.update("flash", partial: "shared/flash"),
-          turbo_stream.replace("settings_form", partial: "settings/password_form", locals: { user: current_user })
+          turbo_stream.replace("password_settings_form", partial: "settings/password_form", locals: { user: current_user })
         ]
       else
         flash.now[:alert] = "Erro ao alterar senha: " + current_user.errors.full_messages.join(", ")
@@ -25,9 +25,31 @@ class SettingsController < ApplicationController
     end
   end
 
+  def learning_speed
+    @profile = current_user.profile
+
+    if @profile.update(learning_speed_params)
+      flash.now[:notice] = "Configuração de velocidade alterada com sucesso!"
+      render turbo_stream: [
+        turbo_stream.update("flash", partial: "shared/flash"),
+        turbo_stream.replace("learning_speed_form", partial: "settings/learning_speed", locals: { user: current_user })
+      ]
+    else
+      flash.now[:alert] = "Erro ao alterar configuração."
+      render turbo_stream: [
+        turbo_stream.update("flash", partial: "shared/flash"),
+        turbo_stream.replace("learning_speed_form", partial: "settings/learning_speed", locals: { user: current_user })
+      ], status: :unprocessable_entity
+    end
+  end
+
   private
 
   def password_params
     params.permit(:password, :password_confirmation)
+  end
+
+  def learning_speed_params
+    params.require(:profile).permit(:learning_speed)
   end
 end
