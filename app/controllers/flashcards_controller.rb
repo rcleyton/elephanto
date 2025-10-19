@@ -48,7 +48,7 @@ class FlashcardsController < ApplicationController
     end
 
     @flashcard.difficulty = params[:difficulty]
-    @flashcard.review!
+    @flashcard.review!(current_user)
 
     queue = session[:review_queue] || []
     queue.delete(@flashcard.id)

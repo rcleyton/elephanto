@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     resource :settings, only: [:show] do
       patch :update_password
+      patch :learning_speed
     end
 
     resources :decks do

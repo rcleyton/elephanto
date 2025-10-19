@@ -22,16 +22,34 @@
   </header>
   <div class="container mx-auto px-6 py-8 max-w-4xl">
     <div class="grid gap-6">
-      <div class="rounded-lg border border-[#DCDFE5] bg-white text-[#21242C]">
+      <!-- change password -->
+      <div class="rounded-lg border border-[#DCDFE5] bg-white text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6">
           <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-icon lucide-shield h-5 w-5"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
             Alterar senha
           </h3>
-          <p class="text-sm text-[#676F7E]">Mantenha sua conta segura alterando sua senha regularmente</p>
+          <p class="text-sm text-muted-foreground">Mantenha sua conta segura alterando sua senha regularmente</p>
         </div>
         <div class="p-6 pt-0">
           <%= render "settings/password_form", user: current_user %>
+        </div>
+      </div>
+
+      <!-- learning spee -->
+      <div class="rounded-lg border border-[#DCDFE5] bg-white text-card-foreground">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-5 w-5">
+              <path d="M12 7v14"></path>
+              <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
+            </svg>            
+            Configurações de estudo
+          </h3>
+          <p class="text-sm text-muted-foreground">Personalize sua experiência de aprendizagem</p>
+        </div>
+        <div class="p-6 pt-0">
+          <%= render "settings/learning_speed", user: current_user %>
         </div>
       </div>
     </div>

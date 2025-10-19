@@ -41,6 +41,7 @@ pt-BR:
         last_name: Sobrenome
         username: Username
         bio: Bio
+        learning_speed: Velocidade de aprendizagem
   placeholders:
     deck:
       deck_name: "Ex: Inglês Básico, História do Brasil..."
