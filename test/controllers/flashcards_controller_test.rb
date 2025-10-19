@@ -127,4 +127,39 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_in_delta Time.current, @deck.last_reviewed_at, 1.second
     end
   end
+
+  context "Learning speed" do
+    it "normal keeps default interval" do
+      @user.profile.update(learning_speed: 1.0)
+      @user.reload
+
+      @flashcard.difficulty = "easy"
+      @flashcard.review!(@user)
+
+      assert_equal Date.today + @flashcard.interval.days, @flashcard.next_review.to_date
+    end
+      
+    it "faster learning speed shortens next review interval" do
+      @user.profile.update(learning_speed: 0.8)
+      @user.reload
+
+      @flashcard.difficulty = "easy"
+      @flashcard.review!(@user)
+
+      expected = ( @flashcard.interval * 0.8 ).round
+      assert_equal Date.today + expected.days, @flashcard.next_review.to_date
+    end
+
+
+    it "slower learning speed increases next review interval" do
+      @user.profile.update(learning_speed: 1.5)
+      @user.reload
+
+      @flashcard.difficulty = "easy"
+      @flashcard.review!(@user)
+
+      expected = ( @flashcard.interval * 1.5 ).round
+      assert_equal Date.today + expected.days, @flashcard.next_review.to_date
+    end
+  end
 end
