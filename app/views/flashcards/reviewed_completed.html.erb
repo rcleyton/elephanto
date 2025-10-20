@@ -7,7 +7,7 @@
       <h2 class="text-2xl font-bold mb-4">Revisão concluída!</h2>
       <% progress = flashcard_progress(@deck) %>
       <p class="text-[#676F7E] mb-6">Você revisou <%= progress[:total] %> flashcards do Deck: <%= @deck.name %></p>
-      <%= link_to "Voltar para o deck", deck_path(@deck), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition duration-300 font-semibold h-10 px-4 py-2 w-full gap-2" %>
+      <%= link_to "Voltar para o deck", deck_path(@deck), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition duration-300 font-semibold h-10 px-4 py-2 w-full gap-2" %>
     </div>
   </div>
 </div>

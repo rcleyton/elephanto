@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_18_211844) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_19_161846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -79,6 +79,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_211844) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "review_sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "deck_id", null: false
+    t.integer "total_count", default: 0, null: false
+    t.integer "reviewed_count", default: 0, null: false
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["deck_id"], name: "index_review_sessions_on_deck_id"
+    t.index ["user_id"], name: "index_review_sessions_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "ip_address"
@@ -108,5 +121,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_18_211844) do
   add_foreign_key "decks", "users"
   add_foreign_key "flashcards", "decks"
   add_foreign_key "profiles", "users"
+  add_foreign_key "review_sessions", "decks"
+  add_foreign_key "review_sessions", "users"
   add_foreign_key "sessions", "users"
 end

@@ -131,3 +131,7 @@
         background-image: var(--gradient-card);
     }
 }
+
+.icon-arrow-left:hover img {
+  filter: brightness(0) invert(1);
+}

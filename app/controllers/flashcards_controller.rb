@@ -57,6 +57,11 @@ class FlashcardsController < ApplicationController
       queue << @flashcard.id
     end
 
+    if session[:review_session_id]
+      review_session = ReviewSession.find_by(id: session[:review_session_id])
+      ReviewSessionService.new(current_user, @deck).increment(review_session) if review_session
+    end
+
     session[:review_queue] = queue
 
     if queue.any?
@@ -68,18 +73,23 @@ class FlashcardsController < ApplicationController
     end
   end
 
-  def start_review
+def start_review
+  service = ReviewSessionService.new(current_user, @deck)
+  review_session = service.start
+
+  if review_session
     flashcards = @deck.flashcards.due.order(:next_review).pluck(:id)
 
-    if flashcards.any?
-      session[:review_queue] = flashcards
-      session[:review_total] = flashcards.size
-      redirect_to deck_flashcard_path(@deck, flashcards.first)
-    else
-      flash[:notice] = t("messages.no_revision_today")
-      redirect_to deck_path(@deck)
-    end
+    session[:review_queue]       = flashcards
+    session[:review_total]       = review_session.total_count
+    session[:review_session_id]  = review_session.id
+
+    redirect_to deck_flashcard_path(@deck, flashcards.first)
+  else
+    flash[:notice] = t("messages.no_revision_today")
+    redirect_to deck_path(@deck)
   end
+end
 
   def reviewed_completed; end
 
