@@ -41,6 +41,24 @@ class FlashcardsController < ApplicationController
     end
   end
 
+  def start_review
+    service = ReviewSessionService.new(current_user, @deck)
+    review_session = service.start
+
+    if review_session
+      flashcards = @deck.flashcards.due.order(:next_review).pluck(:id)
+
+      session[:review_queue]       = flashcards
+      session[:review_total]       = review_session.total_count
+      session[:review_session_id]  = review_session.id
+
+      redirect_to deck_flashcard_path(@deck, flashcards.first)
+    else
+      flash[:notice] = t("messages.no_revision_today")
+      redirect_to deck_path(@deck)
+    end
+  end
+
   def review
     unless Flashcard.difficulties.key?(params[:difficulty])
       redirect_to deck_flashcard_path(@deck, @flashcard), alert: "Dificuldade inválida"
@@ -50,6 +68,7 @@ class FlashcardsController < ApplicationController
     @flashcard.difficulty = params[:difficulty]
     @flashcard.review!(current_user)
 
+    # load list of flashcards [12, 15, 19] and delete flashcard who is on review
     queue = session[:review_queue] || []
     queue.delete(@flashcard.id)
 
@@ -72,24 +91,6 @@ class FlashcardsController < ApplicationController
       redirect_to reviewed_completed_deck_path(@deck)
     end
   end
-
-def start_review
-  service = ReviewSessionService.new(current_user, @deck)
-  review_session = service.start
-
-  if review_session
-    flashcards = @deck.flashcards.due.order(:next_review).pluck(:id)
-
-    session[:review_queue]       = flashcards
-    session[:review_total]       = review_session.total_count
-    session[:review_session_id]  = review_session.id
-
-    redirect_to deck_flashcard_path(@deck, flashcards.first)
-  else
-    flash[:notice] = t("messages.no_revision_today")
-    redirect_to deck_path(@deck)
-  end
-end
 
   def reviewed_completed; end
 
