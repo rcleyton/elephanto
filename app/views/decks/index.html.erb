@@ -28,7 +28,7 @@
         </div>
 
         <div class="flex items-center gap-4 md:gap-8">
-          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2 w-full" do %>
+          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2 w-full" do %>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-plus w-4 h-4">
               <path d="M5 12h14"/>
               <path d="M12 5v14"/>
@@ -56,29 +56,29 @@
                     <p class="text-xs leading-none text-muted-foreground"><%= current_user.email_address %></p>
                   </div>
                 </div>
-                <div class="relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer">
+                <%= link_to path_to_profile, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user mr-2 h-4 w-4">
                     <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                     <circle cx="12" cy="7" r="4"></circle>
                   </svg>
-                  <%= link_to "Meu perfil", path_to_profile %>
-                </div>
-                <div class="relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer">
+                  Meu perfil
+                <% end %>
+                <%= link_to settings_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings mr-2 h-4 w-4">
                     <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
                     <circle cx="12" cy="12" r="3"></circle>
                   </svg>
-                  <%= link_to "Configurações", settings_path %>
-                </div>
+                  Configurações
+                <% end %>
                 <div class="border-t-1 border-gray-200">
-                  <div class="relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 cursor-pointer">
+                  <%= link_to session_path, data: { turbo_method: :delete }, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out mr-2 h-4 w-4">
                       <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                       <polyline points="16 17 21 12 16 7"></polyline>
                       <line x1="21" x2="9" y1="12" y2="12"></line>
                     </svg>
-                    <%= link_to "Sair", session_path, data: { turbo_method: :delete } %> 
-                  </div>
+                    Sair 
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -106,6 +106,15 @@
         </li>
         <li class="flex items-center space-x-4 p-3 text-muted-foreground hover:text-white hover:bg-accent rounded-md transition-colors duration-200">
           <div class="p-2 bg-gray-100 rounded-full text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings">
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <%= link_to 'Configurações', settings_path, class: "text-sm font-semibold" %>
+        </li>
+        <li class="flex items-center space-x-4 p-3 text-muted-foreground hover:text-white hover:bg-accent rounded-md transition-colors duration-200">
+          <div class="p-2 bg-gray-100 rounded-full text-gray-600">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
           </div>
           <%= link_to "Sair", session_path, data: { turbo_method: :delete }, class: "text-sm font-semibold" %>
@@ -129,7 +138,7 @@
           </svg>
           <h3 class="text-lg font-semibold mb-2">Nenhum deck criado ainda</h3>
           <p class="text-muted-foreground mb-6">Crie um deck para adicionar flascards</p>
-          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2" do %>
+          <%= link_to new_deck_path, class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2" do %>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
               <path d="M5 12h14"></path>
               <path d="M12 5v14"></path>
