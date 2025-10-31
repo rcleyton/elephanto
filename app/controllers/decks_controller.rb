@@ -6,7 +6,7 @@ class DecksController < ApplicationController
   before_action :set_deck, only: %i[ show edit update destroy ]
 
   def index
-    @decks = current_user.decks
+    @decks = current_user.decks.order(:created_at)
   end
 
   def show
