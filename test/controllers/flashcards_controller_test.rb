@@ -16,7 +16,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
   context "flashcard" do
     it "should get new" do
-      get new_deck_flashcard_url(@deck)
+      get new_deck_flashcard_path(@deck)
       must_respond_with :success
     end
 
@@ -26,47 +26,51 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     end
 
     it "edit" do
-      get edit_deck_flashcard_url(@deck, @flashcard)
+      get edit_deck_flashcard_path(@deck, @flashcard)
       assert_response :success
     end
 
     it "update" do
-      patch deck_flashcard_url(@deck, @flashcard), params: { flashcard: { back: "Another question", front: "Another answer" } }
+      patch deck_flashcard_path(@deck, @flashcard), params: { flashcard: { back: "Another question", 
+                                                                          front: "Another answer" } }
 
       @flashcard.reload
 
       assert_equal "Another question", @flashcard.back
       assert_equal "Another answer",   @flashcard.front
-      assert_redirected_to deck_url(@deck)
+      assert_redirected_to deck_path(@deck)
     end
 
     it "delete" do
       assert_difference("Flashcard.count", -1) do
-        delete deck_flashcard_url(@deck, @flashcard)
+        delete deck_flashcard_path(@deck, @flashcard)
       end
 
-      assert_redirected_to deck_url(@deck)
+      assert_redirected_to deck_path(@deck)
     end
   end
 
   context "create" do
     it "should create flashcard" do
       assert_difference("Flashcard.count") do
-        post deck_flashcards_url(@deck), params: { flashcard: { back: @flashcard.back, difficulty: @flashcard.difficulty, front: @flashcard.front, last_reviewed_at: @flashcard.last_reviewed_at } }
+        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back, 
+                                                                difficulty: @flashcard.difficulty, 
+                                                                front: @flashcard.front, 
+                                                                last_reviewed_at: @flashcard.last_reviewed_at } }
       end
 
-      must_redirect_to new_deck_flashcard_url(@deck)
+      must_redirect_to new_deck_flashcard_path(@deck)
     end
 
     it "front cannot be empty" do
-      post deck_flashcards_url(@deck), params: { flashcard: { back: @flashcard.back, front: "" } }
+      post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back, front: "" } }
 
       assert_response :unprocessable_entity
       assert_template :new
     end
 
     it "back cannot be empty" do
-      post deck_flashcards_url(@deck), params: { flashcard: { back: "", front: @flashcard.front } }
+      post deck_flashcards_path(@deck), params: { flashcard: { back: "", front: @flashcard.front } }
 
       assert_response :unprocessable_entity
       assert_template :new
@@ -74,10 +78,12 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
     it "difficult can be blank" do
       assert_difference("Flashcard.count") do
-        post deck_flashcards_url(@deck), params: { flashcard: { back: @flashcard.back, front: @flashcard.front, difficulty: "" } }
+        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back, 
+                                                                front: @flashcard.front, 
+                                                                difficulty: "" } }
       end
 
-      must_redirect_to new_deck_flashcard_url(@deck)
+      must_redirect_to new_deck_flashcard_path(@deck)
     end
   end
 
@@ -125,6 +131,17 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       @deck.reload
       assert_not_nil @deck.last_reviewed_at
       assert_in_delta Time.current, @deck.last_reviewed_at, 1.second
+    end
+
+    it 'check period to before review' do
+      flashcard = @flashcard
+      flashcard.update(next_review: Time.current + 172800)
+      flashcard.reload
+      
+      get deck_flashcard_path(@deck, flashcard)
+
+      assert_redirected_to deck_path(@deck)
+      follow_redirect!
     end
   end
 

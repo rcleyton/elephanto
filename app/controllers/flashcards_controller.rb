@@ -4,6 +4,7 @@
 class FlashcardsController < ApplicationController
   before_action :set_deck
   before_action :set_flashcard, only: %i[show edit update destroy review]
+  before_action :check_review_period, only: [:show]
 
   def show; end
 
@@ -106,5 +107,11 @@ class FlashcardsController < ApplicationController
 
   def flashcard_params
     params.require(:flashcard).permit(:front, :back, :difficulty, :last_reviewed_at)
+  end
+
+  def check_review_period
+    unless @flashcard.next_review <= Time.current
+      redirect_to deck_path(@deck), alert: "Flashcard fora do período de revisão"
+    end
   end
 end
