@@ -7,6 +7,7 @@ gem "importmap-rails"
 gem "jbuilder"
 gem "kamal", require: false
 gem "kaminari"
+gem "newrelic_rpm"
 gem "pg", "~> 1.1"
 gem "propshaft"
 gem "puma", ">= 5.0"
