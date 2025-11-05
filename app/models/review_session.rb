@@ -6,8 +6,12 @@ class ReviewSession < ApplicationRecord
     return 0 if total_count.zero?
     ((reviewed_count.to_f / total_count) * 100).round
   end
-
+ 
   def complete?
     reviewed_count >= total_count
+  end
+
+  def completed_at?
+    completed_at.present?
   end
 end

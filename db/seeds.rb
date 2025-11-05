@@ -10,7 +10,7 @@
 
 # Users
 # Creating 5 users to study
-User.create(email_address: 'user1@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+User.create(email_address: 'user1@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1', terms_of_service: true, verified: true, confirmed_at: 1.day.ago)
 User.create(email_address: 'user2@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
 User.create(email_address: 'user3@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
 User.create(email_address: 'user4@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')

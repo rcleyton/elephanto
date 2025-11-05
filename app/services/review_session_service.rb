@@ -21,7 +21,7 @@ class ReviewSessionService
 
     session
   end
-
+  
   def increment(session)
     session.increment!(:reviewed_count)
     if session.complete?
