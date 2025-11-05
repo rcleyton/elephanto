@@ -61,34 +61,15 @@ class FlashcardsController < ApplicationController
   end
 
   def review
-    unless Flashcard.difficulties.key?(params[:difficulty])
-      redirect_to deck_flashcard_path(@deck, @flashcard), alert: "Dificuldade inválida"
-      return
-    end
+    queue                  = session[:review_queue] || []
+    service                = ReviewSessionService.new(current_user, @deck)
+    updated_queue          = service.process_review(@flashcard, params[:difficulty], queue, session)
+    session[:review_queue] = updated_queue
 
-    @flashcard.difficulty = params[:difficulty]
-    @flashcard.review!(current_user)
-
-    # load list of flashcards [12, 15, 19] and delete flashcard who is on review
-    queue = session[:review_queue] || []
-    queue.delete(@flashcard.id)
-
-    if @flashcard.difficulty == "again"
-      queue << @flashcard.id
-    end
-
-    if session[:review_session_id]
-      review_session = ReviewSession.find_by(id: session[:review_session_id])
-      ReviewSessionService.new(current_user, @deck).increment(review_session) if review_session
-    end
-
-    session[:review_queue] = queue
-
-    if queue.any?
+    if updated_queue.any?
       redirect_to deck_flashcard_path(@deck, queue.first)
     else
       session.delete(:review_queue)
-      @deck.update(last_reviewed_at: Time.current)
       redirect_to reviewed_completed_deck_path(@deck)
     end
   end
