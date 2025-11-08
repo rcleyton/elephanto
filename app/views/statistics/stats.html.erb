@@ -22,30 +22,31 @@
   </header>
   <main class="container md:mx-auto px-6 py-8">
     <div class="grid gap-6 md:grid-cols-4 mb-6">
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="rounded-lg border bg-card text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6 pb-2">
           <p class="text-sm text-muted-foreground">Total de decks</p>
           <h3 class="font-semibold tracking-tight text-3xl"><%= @total_decks %></h3>
         </div>
       </div>
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="rounded-lg border bg-card text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6 pb-2">
           <p class="text-sm text-muted-foreground">Total de flashcards</p>
           <h3 class="font-semibold tracking-tight text-3xl"><%= current_user.flashcards.count %></h3>
         </div>
       </div>
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="rounded-lg border bg-card text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6 pb-2">
           <p class="text-sm text-muted-foreground">Total de revisões</p>
           <h3 class="font-semibold tracking-tight text-3xl"><%= @total_review_sessions %></h3>
         </div>
       </div>
-      <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
+      <div class="rounded-lg border bg-card text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6 pb-2">
           <p class="text-sm text-muted-foreground">Tempo total de estudo</p>
           <h3 class="font-semibold tracking-tight text-3xl"><%= seconds_to_str(@total_study_time) %></h3>
         </div>
       </div>
     </div>
+    <%= render "overview_stats", review_sessions: @review_sessions, flashcards: @flashcards %> 
   </main>
 </div>
