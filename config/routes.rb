@@ -27,6 +27,8 @@ Rails.application.routes.draw do
       patch :learning_speed
     end
 
+    get "/statistics", to: "statistics#stats"   
+
     resources :decks do
       resources :flashcards, only: %i[show new create edit update destroy] do
         member do
