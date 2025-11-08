@@ -2,7 +2,9 @@ source "https://rubygems.org"
 
 gem "actionview-encoded_mail_to"
 gem "bcrypt", "~> 3.1"
+gem "chartkick"
 gem "bootsnap", require: false
+gem "groupdate"
 gem "importmap-rails"
 gem "jbuilder"
 gem "kamal", require: false

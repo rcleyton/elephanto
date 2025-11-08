@@ -49,7 +49,10 @@ class ReviewSessionService
 
   def complete_session(review_session)
     @deck.update!(last_reviewed_at: Time.current)
-    review_session&.update!(completed_at: Time.current)
+    review_session&.update!(
+      completed_at: Time.current,
+      duration_seconds: (Time.current - review_session.created_at).to_i
+    )
   end
   
   def increment(session)
