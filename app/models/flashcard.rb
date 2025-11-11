@@ -13,7 +13,7 @@ class Flashcard < ApplicationRecord
 
   before_create :initialize_spaced_repetition
 
-  scope :due, -> { where("next_review <= ?", Time.current) }
+  scope :due, -> { where("next_review <= ?", Date.current) }
 
   def review!(user)
     profile = user.profile 
@@ -44,7 +44,7 @@ class Flashcard < ApplicationRecord
       end
       
       adjust_interval      = (interval * speed).round
-      self.next_review     = Date.today + adjust_interval.days
+      self.next_review     = Date.current + adjust_interval.days
     end
 
     self.efactor += (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02))
