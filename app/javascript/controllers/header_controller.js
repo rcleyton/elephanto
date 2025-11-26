@@ -6,10 +6,29 @@ export default class extends Controller {
   connect() {
     this.boundClickOutside = this.clickOutside.bind(this)
     document.addEventListener("click", this.boundClickOutside)
+    
+    this.element.addEventListener("click", this.closeOnNavigation.bind(this))
+    
+    document.addEventListener("turbo:before-visit", this.closeAllMenus.bind(this))
   }
 
   disconnect() {
     document.removeEventListener("click", this.boundClickOutside)
+    this.element.removeEventListener("click", this.closeOnNavigation.bind(this))
+    document.removeEventListener("turbo:before-visit", this.closeAllMenus.bind(this))
+  }
+
+  closeOnNavigation(event) {
+    if (event.target.tagName === 'A' || event.target.closest('a')) {
+      this.closeAllMenus()
+    }
+  }
+
+  closeAllMenus() {
+    this.closeMobileMenu()
+    if (this.hasProfileDropdownMenuTarget) {
+      this.profileDropdownMenuTarget.classList.add("hidden")
+    }
   }
 
   toggleMobileMenu() {
