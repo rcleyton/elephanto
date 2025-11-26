@@ -17,7 +17,7 @@
       <p class="text-sm text-muted-foreground">Frequência revisões diárias</p>
     </div>
     <div class="p-6 pt-0">
-      <%= line_chart @review_sessions.group_by_day(:started_at).count, height: "250px", suffix: " flashcards" %>
+      <%= line_chart @review_sessions.group_by_day(:started_at).count, height: "250px", suffix: " Revisões" %>
     </div>
   </div>
 </div>
