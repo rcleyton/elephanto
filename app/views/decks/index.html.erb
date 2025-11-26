@@ -77,6 +77,17 @@
                   </svg>
                   Configurações
                 <% end %>
+                <% if current_user.admin? %>
+                  <%= link_to admin_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-dashboard mr-2 h-4 w-4">
+                      <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                      <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                      <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                      <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                    </svg>
+                    Dashboard
+                  <% end %>
+                <% end %>
                 <div class="border-t-1 border-gray-200">
                   <%= link_to session_path, data: { turbo_method: :delete }, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out mr-2 h-4 w-4">
