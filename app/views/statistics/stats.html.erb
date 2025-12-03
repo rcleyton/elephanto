@@ -5,22 +5,15 @@
 </turbo-frame>
 
 <div class="min-h-screen bg-background">
-  <header class="border-b border-border/50 bg-background/80 backdrop-blur-lg" data-controller="header">
-    <div class="container mx-auto px-6 py-6">
-      <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row justify-start md:items-center md:justify-between">
-        <div class="flex items-center gap-4">
-          <%= link_to decks_path, class: "inline-flex items-center justify-center rounded-md ring-offset-white transition duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0  hover:bg-[#8C5AF2] hover:text-white h-10 w-10" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left h-4 w-4"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-          <% end %>
-          <div>
-            <h1 class="text-3xl font-bold bg-primary bg-clip-text text-transparent">Estatísticas de aprendizado</h1>
-            <p class="text-muted-foreground mt-2">Acompanhe sua evolução nas revisões</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-  <main class="container md:mx-auto px-6 py-8">
+  <%= page_header(
+    show_back_button: true,
+    back_path: decks_path,
+    title: "Estatísticas de aprendizado",
+    subtitle: "Acompanhe sua evolução nas revisões",
+    show_profile_menu: false
+  ) %>
+
+  <main data-controller="automatic-margin-top" class="container md:mx-auto px-6 py-8">
     <div class="grid gap-6 md:grid-cols-4 mb-6">
       <div class="rounded-lg border bg-card text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6 pb-2">

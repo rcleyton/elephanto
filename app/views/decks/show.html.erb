@@ -5,32 +5,29 @@
 </turbo-frame>
 
 <div class="min-h-screen bg-background">
-  <header class="fixed top-0 right-0 left-0 md:static border-b border-gray-200 bg-gray-50/80 backdrop-blur-lg" data-controller="header">
-    <div class="container mx-auto px-6 py-6">
-      <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row justify-start md:items-center md:justify-between">
-        <div class="flex items-center gap-4">
-          <%= link_to decks_path, class: "inline-flex items-center justify-center rounded-md ring-offset-white transition duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0  hover:bg-[#8C5AF2] hover:text-white h-10 w-10" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left-icon lucide-arrow-left h-4 w-4"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-          <% end %>
-          <div>
-            <h1 class="text-3xl font-bold bg-primary bg-clip-text text-transparent"><%= @deck.name %></h1>
-            <p class="text-[#676F7E] text-muted-foreground mt-2"><%= @deck.description %></p>
-          </div>
-        </div>
-        <div class="flex gap-2">
-          <%= link_to new_deck_flashcard_path(@deck), class: "w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus h-4 w-4"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
-            <%= t('buttons.submit.new_flashcard') %>
-          <% end %>
+  <% right_buttons = capture do %>
+    <div class="flex gap-2 w-full">
+      <%= link_to new_deck_flashcard_path(@deck), class: "w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus h-4 w-4"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+        <%= t('buttons.submit.new_flashcard') %>
+      <% end %>
 
-          <%= link_to review_deck_path(@deck), class: "w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play h-4 w-4"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
-            <%= t('buttons.general.start_studying') %>
-          <% end %>
-        </div>
-      </div>
+      <%= link_to review_deck_path(@deck), class: "w-full inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 gap-2" do %>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play h-4 w-4"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
+        <%= t('buttons.general.start_studying') %>
+      <% end %>
     </div>
-  </header>
+  <% end %>
+
+  <%= page_header(
+    show_back_button: true,
+    back_path: decks_path,
+    title: "#{@deck.name}",
+    subtitle: "#{@deck.description}",
+    show_profile_menu: false,
+    right_buttons: right_buttons
+  ) %>
+
   <main data-controller="automatic-margin-top" class="container mx-auto px-6 py-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
