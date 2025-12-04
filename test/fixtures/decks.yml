@@ -9,3 +9,8 @@ chemical:
   name: Química
   description: Cards para decorar o elementos da tabela periódica
   user: two
+
+development:
+  name: Programming Concepts
+  description: Fundamental programming concepts and definitions
+  user: one

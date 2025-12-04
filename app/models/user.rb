@@ -5,10 +5,10 @@ class User < ApplicationRecord
   has_secure_password
 
   has_many :sessions, dependent: :destroy
-  has_many :decks
+  has_many :decks,    dependent: :destroy
   has_many :flashcards, through: :decks
   
-  has_one :profile
+  has_one :profile, dependent: :destroy
 
   validates :email_address,         presence: true, uniqueness: true, email: true
   validates :password,              presence: true, length: { minimum: 8 }, password: true

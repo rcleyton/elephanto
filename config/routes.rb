@@ -23,8 +23,9 @@ Rails.application.routes.draw do
     resources :profiles, only: %i[new create show edit update]
 
     resource :settings, only: [:show] do
-      patch :update_password
-      patch :learning_speed
+      patch   :update_password
+      patch   :learning_speed
+      delete  :delete_account
     end
 
     get "/statistics", to: "statistics#stats"   

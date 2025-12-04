@@ -43,6 +43,22 @@ class SettingsController < ApplicationController
     end
   end
 
+  def delete_account
+    if current_user.profile.username == params[:username]
+      if current_user.authenticate(params[:current_password]) 
+        current_user.destroy
+        flash[:success] = "Conta excluída com sucesso!"
+        redirect_to root_path
+      else
+        flash.now[:alert] = "Senha incorreta."
+        render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: :unprocessable_entity
+      end
+    else
+      flash.now[:alert] = "Nome de usuário incorreto."
+      render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: :unprocessable_entity
+    end
+  end
+
   private
 
   def password_params
