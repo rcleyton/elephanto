@@ -2,6 +2,10 @@
 # frozen_string_literal: true
 
 class SettingsController < ApplicationController
+  include ProfileRequired
+
+  before_action :required_profile, only: [:show]
+
   def show
     @profile = current_user.profile
   end

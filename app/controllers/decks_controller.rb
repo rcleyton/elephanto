@@ -2,7 +2,9 @@
 # frozen_string_literal: true
 
 class DecksController < ApplicationController
-  before_action :require_profile, only: [ :new, :create ]
+  include ProfileRequired
+
+  before_action :required_profile, only: [ :new, :create ]
   before_action :set_deck, only: %i[ show edit update destroy ]
 
   def index
@@ -48,18 +50,12 @@ class DecksController < ApplicationController
   end
 
   private
-    def set_deck
-      @deck = current_user.decks.find(params[:id])
-    end
+  
+  def set_deck
+    @deck = current_user.decks.find(params[:id])
+  end
 
-    def deck_params
-      params.expect(deck: [ :name, :description ])
-    end
-
-    def require_profile
-      unless current_user.profile.present?
-        flash[:alert] = t("messages.missing_profile")
-        redirect_to new_profile_path
-      end
-    end
+  def deck_params
+    params.expect(deck: [ :name, :description ])
+  end
 end

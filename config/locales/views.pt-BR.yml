@@ -10,7 +10,7 @@ pt-BR:
     create_account: Cadastro realizado! Verifique seu e-mail para confirmar a conta.
     render_not_found: Recurso não encontrado ou não autorizado.
     already_exists: Você já tem um perfil. Edite-o aqui.
-    missing_profile: Você precisa completar seu perfil antes de criar um deck.
+    missing_profile: Você precisa completar seu perfil.
     incorrect_credentials: E-mail ou senha incorretos
     try_again_later: Tente novamente mais tarde
     reset_instructions: Enviamos as instruções para redefinir sua senha (caso o e-mail esteja cadastrado).
