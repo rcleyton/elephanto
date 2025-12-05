@@ -10,23 +10,36 @@ export default class extends Controller {
   ]
 
   connect() {
-    this.toggleChangePasswordButton() // garante estado inicial
+    this.toggleChangePasswordButton()
     this.toggleDeleteAccountButton()
   }
 
   toggleChangePasswordButton() {
-    const filled = this.currentPasswordTarget.value.trim() !== "" &&
-                   this.passwordTarget.value.trim() !== "" &&
-                   this.passwordConfirmationTarget.value.trim() !== ""
+    if (!(this.hasCurrentPasswordTarget &&
+          this.hasPasswordTarget &&
+          this.hasPasswordConfirmationTarget)) {
+      return
+    }
+
+    const filled =
+      this.currentPasswordTarget.value.trim() !== "" &&
+      this.passwordTarget.value.trim() !== "" &&
+      this.passwordConfirmationTarget.value.trim() !== ""
 
     this.submitTarget.disabled = !filled
   }
 
   toggleDeleteAccountButton() {
-    const filled = this.usernameTarget.value.trim() !== "" &&
-                   this.currentPasswordTarget.value.trim() !== ""
+    if (!(this.hasUsernameTarget && this.hasCurrentPasswordTarget)) {
+      return
+    }
+
+    const filled =
+      this.usernameTarget.value.trim() !== "" &&
+      this.currentPasswordTarget.value.trim() !== ""
 
     this.submitTarget.disabled = !filled
   }
 }
+
 
