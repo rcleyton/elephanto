@@ -26,8 +26,8 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  context "Delete" do
-    it "account" do
+  context "Delete account" do
+    it "with success" do
       assert_difference("User.count", -1) do
         delete delete_account_settings_path(@user), params: {
           username: @user.profile.username,
@@ -62,6 +62,33 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
 
       assert_response :unprocessable_entity
       assert_equal "Senha incorreta.", flash[:alert]
+    end
+  end
+
+  context "Delete deck" do
+    it "with success" do
+      deck = @user.decks.first
+
+      assert_difference("Deck.count", -1) do
+        delete remove_deck_settings_path(deck), params: { 
+          deck_id: deck.id
+        } 
+      end
+
+      assert_equal "Deck apagado!", flash[:success]
+    end
+
+    it "must prevent deletion if deck belongs to other user" do
+      other_deck        = decks(:chemical)
+      deck_count_before = Deck.count
+
+      delete remove_deck_settings_path(other_deck), params: {  
+        deck_id: other_deck.id
+      }
+
+      assert_equal "Deck inválido", flash[:alert] 
+      assert_response :not_found
+      assert_equal deck_count_before, Deck.count 
     end
   end
 end

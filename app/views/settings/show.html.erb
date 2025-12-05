@@ -46,6 +46,23 @@
         </div>
       </div>
 
+      <!-- remove deck -->
+      <div class="rounded-lg border border-[#DCDFE5] bg-white text-card-foreground">
+        <div class="flex flex-col space-y-1.5 p-6">
+          <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eraser-icon lucide-eraser h-5 w-5">
+              <path d="M21 21H8a2 2 0 0 1-1.42-.587l-3.994-3.999a2 2 0 0 1 0-2.828l10-10a2 2 0 0 1 2.829 0l5.999 6a2 2 0 0 1 0 2.828L12.834 21"/>
+              <path d="m5.082 11.09 8.828 8.828"/>
+            </svg>            
+            Apagar deck
+          </h3>
+          <p class="text-sm text-muted-foreground">Selecione um deck para excluir</p>
+        </div>
+        <div class="p-6 pt-0">
+          <%= render "settings/remove_deck", user: current_user %>
+        </div>
+      </div>
+
       <!-- delete account -->
       <div class="rounded-lg border border-[#DCDFE5] bg-white text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6">

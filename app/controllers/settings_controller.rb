@@ -63,6 +63,32 @@ class SettingsController < ApplicationController
     end
   end
 
+  def remove_deck
+    deck = current_user.decks.find(params[:deck_id])
+
+    if deck.destroy
+      flash.now[:success] = "Deck apagado!"
+
+      render turbo_stream: [
+        turbo_stream.update("flash", partial: "shared/flash"),
+        turbo_stream.replace(
+          "remove_deck_form",
+          partial: "settings/remove_deck",
+          locals: { user: current_user }
+        )
+      ]
+    else
+      flash.now[:alert] = "Erro ao excluir deck"
+
+      render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"),
+            status: :unprocessable_entity
+    end
+  rescue ActiveRecord::RecordNotFound
+    flash.now[:alert] = "Deck inválido"
+    render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"),
+           status: :not_found
+  end
+
   private
 
   def password_params

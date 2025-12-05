@@ -26,6 +26,10 @@ Rails.application.routes.draw do
       patch   :update_password
       patch   :learning_speed
       delete  :delete_account
+      
+      collection do 
+        delete  :remove_deck
+      end
     end
 
     get "/statistics", to: "statistics#stats"   
