@@ -12,10 +12,46 @@
 # Creating 5 users to study
 User.create(email_address: 'user1@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1', 
             terms_of_service: true, verified: true, confirmed_at: 1.day.ago, admin: true)
-User.create(email_address: 'user2@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
-User.create(email_address: 'user3@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
-User.create(email_address: 'user4@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
-User.create(email_address: 'user5@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1')
+
+User.create(email_address: 'user2@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1',
+            terms_of_service: true, verified: true, confirmed_at: 1.day.ago, admin: true)
+
+User.create(email_address: 'user3@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1',
+            terms_of_service: true, verified: false, admin: false)
+
+User.create(email_address: 'user4@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1',
+            terms_of_service: true, verified: false, admin: false)
+
+User.create(email_address: 'user5@elephanto.com', password: 'p@ssword1', password_confirmation: 'p@ssword1',
+            terms_of_service: true, verified: false, admin: false)
+
+# Creatinf profiles
+user1 = Profile.create(first_name: "Mariana", last_name: "Silva", username: "mari.silva.art", 
+                       bio: "Artista visual e ilustradora digital. Amante da natureza e do café. Compartilhando meu processo criativo e descobertas.", user_id: 1) 
+
+user2 = Profile.create(first_name: "Rafael", last_name: "Costa", username: "rafatech.dev", 
+                       bio: "Desenvolvedor full-stack, entusiasta de código aberto e fotografia urbana. Sempre aprendendo e construindo coisas novas.", user_id: 2) 
+
+
+user3 = Profile.create(first_name: "Beatriz", last_name: "Santos", username: "bia.sustainable.life", 
+                       bio: "Educadora ambiental e defensora do consumo consciente. Aqui para compartilhar dicas de sustentabilidade no dia a dia.", user_id: 3) 
+
+user4 = Profile.create(first_name: "Tiago", last_name: "Oliveira", username: "thiago.travelnotes", 
+                       bio: "Nômade digital e contador de histórias. Já visitei 37 países e ainda contando. Fotos e reflexões das estradas pelo mundo.", user_id: 4) 
+
+images = %w(maria.jpg rafael.jpg beatriz.jpg tiago.jpg)
+
+images.each_with_index do |image, index|
+  image_path = Rails.root.join('db', 'seed_images', image)
+
+  if File.exist?(image_path)
+    profile = Profile.find(index + 1)
+    profile.avatar.attach(io: File.open(image_path), filename: image, content_type: 'image/jpeg')
+    puts "Attached avatar to #{profile.username}"
+  else 
+    puts "Warning: Default avatar image not found"
+  end
+end
 
 # Creating 5 decks with different themes
 Deck.create(name: "English Vocabulary",   description: "Basic English words and their meanings",              user_id: 1)
