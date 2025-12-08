@@ -1,47 +1,53 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["mobileMenu", "overlay", "profileDropdownMenu"]
+  static targets = ["profileDropdownMenu"]
 
   connect() {
     this.boundClickOutside = this.clickOutside.bind(this)
     document.addEventListener("click", this.boundClickOutside)
+
+    document.addEventListener("turbo:before-cache", () => {
+      if (this.hasProfileDropdownMenuTarget) {
+        this.profileDropdownMenuTarget.classList.add("hidden")
+      }
+    })
   }
 
   disconnect() {
     document.removeEventListener("click", this.boundClickOutside)
   }
 
-  toggleMobileMenu() {
-    const isOpen = !this.mobileMenuTarget.classList.contains("translate-x-full")
+  toggleProfileDropdown(event) {
+    event.stopPropagation();
 
-    if (isOpen) {
-      this.closeMobileMenu()
+    const menu = this.profileDropdownMenuTarget;
+
+    if (menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden", "pointer-events-none", "animate-dropdownOut");
+      menu.classList.add("animate-dropdownIn");
     } else {
-      this.openMobileMenu()
+      menu.classList.remove("animate-dropdownIn");
+      menu.classList.add("animate-dropdownOut");
+
+      setTimeout(() => {
+        menu.classList.add("hidden", "pointer-events-none");
+      }, 150);
     }
   }
 
-  openMobileMenu() {
-    this.mobileMenuTarget.classList.remove("translate-x-full")
-    this.overlayTarget.classList.remove("hidden")
-  }
-
-  closeMobileMenu() {
-    this.mobileMenuTarget.classList.add("translate-x-full")
-    this.overlayTarget.classList.add("hidden")
-  }
-
-  toggleProfileDropdown(event) {
-    event.stopPropagation()
-    this.profileDropdownMenuTarget.classList.toggle("hidden")
-  }
-
   clickOutside(event) {
-    if (this.hasProfileDropdownMenuTarget && !this.profileDropdownMenuTarget.contains(event.target)) {
-      if (event.target.closest('[data-action="click->header#toggleProfileDropdown"]') === null) {
-        this.profileDropdownMenuTarget.classList.add("hidden")
-      }
+    if (!this.hasProfileDropdownMenuTarget) return
+
+    const menu = this.profileDropdownMenuTarget
+
+    const clickInsideMenu = menu.contains(event.target)
+
+    const clickedToggleButton =
+      event.target.closest('[data-action="header#toggleProfileDropdown"]')
+
+    if (!clickInsideMenu && !clickedToggleButton) {
+      menu.classList.add("hidden")
     }
   }
 }

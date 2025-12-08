@@ -135,3 +135,46 @@
 .icon-arrow-left:hover img {
   filter: brightness(0) invert(1);
 }
+
+@layer utilities {
+  @keyframes dropdownIn {
+    0%   { opacity: 0; transform: translateY(-6px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes dropdownOut {
+    0%   { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-6px); }
+  }
+
+  @keyframes fadeIn {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    0%   { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  .animate-dropdownIn {
+    animation: dropdownIn 150ms ease-out forwards;
+  }
+
+  .animate-dropdownOut {
+    animation: dropdownOut 150ms ease-in forwards;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 300ms ease-out forwards;
+  }
+
+  .animate-fadeOut {
+    animation: fadeOut 300ms ease-in forwards;
+  }
+
+  .overlay-fade {
+    @apply transition-opacity duration-300;
+  }
+}
+
