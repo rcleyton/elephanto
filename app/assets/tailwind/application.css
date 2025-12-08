@@ -109,37 +109,31 @@
 }
 
 @layer base {
-    * {
-        @apply border-border;
-    }
+  * {
+    @apply border-border;
+  }
 
-    body {
-        @apply bg-background text-foreground;
-    }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
 
 @layer utilities {
-    .bg-gradient-hero {
-        background-image: var(--gradient-hero);
-    }
+  .bg-gradient-hero {
+      background-image: var(--gradient-hero);
+  }
 
-    .bg-gradient-primary {
-        background-image: var(--gradient-primary);
-    }
+  .bg-gradient-primary {
+      background-image: var(--gradient-primary);
+  }
 
-    .bg-gradient-card {
-        background-image: var(--gradient-card);
-    }
-}
+  .bg-gradient-card {
+      background-image: var(--gradient-card);
+  }
 
-.icon-arrow-left:hover img {
-  filter: brightness(0) invert(1);
-}
-
-@layer utilities {
   @keyframes dropdownIn {
-    0%   { opacity: 0; transform: translateY(-6px); }
-    100% { opacity: 1; transform: translateY(0); }
+  0%   { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 1; transform: translateY(0); }
   }
 
   @keyframes dropdownOut {
@@ -176,5 +170,30 @@
   .overlay-fade {
     @apply transition-opacity duration-300;
   }
+
+  .icon-arrow-left:hover img {
+    filter: brightness(0) invert(1);
+  }
 }
 
+@layer components {
+  .ui-label {
+    @apply text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mb-8
+  }
+
+  .ui-input { 
+    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm
+  }
+
+  .ui-textarea {
+    @apply flex w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 min-h-[100px]
+  }
+    
+  .ui-error {
+    @apply text-sm text-red-600 mt-1;
+  }
+
+  .ui-input-error {
+    @apply border-red-400 focus-visible:ring-red-600;
+  }
+}

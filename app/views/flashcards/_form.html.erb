@@ -1,12 +1,26 @@
 <%= form_with model: [ @deck, @flashcard ], class: "space-y-6" do |form| %>
-  <div class="space-y-2">
-    <%= form.label :front, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-    <%= form.text_field :front, placeholder: t("placeholders.flashcard.front_flashcard"), class: ["flex h-10 w-full rounded-md border border-gray-300 bg-[#F9FAFB] px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": flashcard.errors[:front].any? }] %>
+  <div>
+    <%= form.label :front, class: "ui-label" %>
+
+    <%= form.text_field :front,
+          placeholder: t("placeholders.flashcard.front_flashcard"),
+          class: "ui-input #{error_class(flashcard, :front)}" %>
+
+    <% if flashcard.errors[:front].any? %>
+      <p class="ui-error"><%= Flashcard.human_attribute_name(:front) %> <%= flashcard.errors[:front].first %></p>
+    <% end %>
   </div>
 
-  <div class="space-y-2">
-    <%= form.label :back, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-    <%= form.text_area :back, placeholder: t("placeholders.flashcard.back_flashcard"), class: ["flex min-h-[80px] w-full rounded-md border border-gray-300 bg-[#F9FAFB] px-3 py-2 mt-2 text-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50", { "border-red-400 focus:outline-red-600": flashcard.errors[:back].any? }] %>
+  <div>
+    <%= form.label :back, class: "ui-label" %>
+
+    <%= form.text_area :back,
+          placeholder: t("placeholders.flashcard.back_flashcard"),
+          class: "ui-textarea #{error_class(flashcard, :back)}" %>
+
+    <% if flashcard.errors[:back].any? %>
+      <p class="ui-error"><%= Flashcard.human_attribute_name(:back) %> <%= flashcard.errors[:back].first %></p>
+    <% end %>
   </div>
 
   <div class="flex gap-4 pt-4">

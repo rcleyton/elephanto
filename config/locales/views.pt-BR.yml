@@ -32,6 +32,7 @@ pt-BR:
     user_not_found: Usuário não encontrado.
     user_not_found_or_confirmed: Usuário não encontrado ou já confirmado.
     confirmation_email_recently_sent: Você já solicitou um e-mail de verificação recentemente. Tente novamente em alguns minutos.
+    fill_all_fields: Preencha todos os campos!
   actions:
     new: Novo
     edit: Editar

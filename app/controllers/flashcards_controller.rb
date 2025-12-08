@@ -18,7 +18,7 @@ class FlashcardsController < ApplicationController
       flash[:success] = t("messages.created", model: Flashcard.model_name.human)
       redirect_to new_deck_flashcard_path(@deck)
     else
-      flash.now[:error] = @flashcard.errors.full_messages.to_sentence
+      flash.now[:error] = t("messages.fill_all_fields")
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,7 +30,7 @@ class FlashcardsController < ApplicationController
       redirect_to deck_path(@deck)
       flash[:notice] = t("messages.updated", model: Flashcard.model_name.human)
     else
-      flash.now[:error] = @flashcard.errors.full_messages.to_sentence
+      flash.now[:error] = t("messages.fill_all_fields")
       render :edit, status: :unprocessable_entity
     end
   end

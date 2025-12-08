@@ -47,5 +47,13 @@ module ApplicationHelper
   def page_header(options={})
     HeaderPresenter.new(self, options).render
   end
+
+  def input_error?(model, field)
+    model.errors[field].any?
+  end
+
+  def error_class(model, field)
+    input_error?(model, field) ? "ui-input-error" : ""
+  end
 end
 
