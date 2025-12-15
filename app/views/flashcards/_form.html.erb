@@ -1,31 +1,30 @@
 <%= form_with model: [ @deck, @flashcard ], class: "space-y-6" do |form| %>
-  <div>
-    <%= form.label :front, class: "ui-label" %>
+<div>
+  <%= form.label :front, class: "ui-label" %>
 
-    <%= form.text_field :front,
-          placeholder: t("placeholders.flashcard.front_flashcard"),
-          class: "ui-input #{error_class(flashcard, :front)}" %>
+  <%= form.text_field :front,
+            placeholder: t("placeholders.flashcard.front_flashcard"),
+            class: "ui-input #{error_class(flashcard, :front)} mt-2" %>
 
-    <% if flashcard.errors[:front].any? %>
-      <p class="ui-error"><%= Flashcard.human_attribute_name(:front) %> <%= flashcard.errors[:front].first %></p>
-    <% end %>
-  </div>
+  <% if flashcard.errors[:front].any? %>
+  <p class="ui-error"><%= Flashcard.human_attribute_name(:front) %> <%= flashcard.errors[:front].first %></p>
+  <% end %>
+</div>
 
-  <div>
-    <%= form.label :back, class: "ui-label" %>
+<div>
+  <%= form.label :back, class: "ui-label" %>
 
-    <%= form.text_area :back,
-          placeholder: t("placeholders.flashcard.back_flashcard"),
-          class: "ui-textarea #{error_class(flashcard, :back)}" %>
+  <%= form.text_area :back,
+            placeholder: t("placeholders.flashcard.back_flashcard"),
+            class: "ui-textarea #{error_class(flashcard, :back)} mt-2" %>
 
-    <% if flashcard.errors[:back].any? %>
-      <p class="ui-error"><%= Flashcard.human_attribute_name(:back) %> <%= flashcard.errors[:back].first %></p>
-    <% end %>
-  </div>
+  <% if flashcard.errors[:back].any? %>
+  <p class="ui-error"><%= Flashcard.human_attribute_name(:back) %> <%= flashcard.errors[:back].first %></p>
+  <% end %>
+</div>
 
-  <div class="flex gap-4 pt-4">
-    <%= link_to t('buttons.general.back_to_deck'), deck_path(@deck), class: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium text-[#21242C] ring-offset-white transition duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-50 border border-gray-300 bg-[#F9FAFB] hover:bg-[#8C5AF2] hover:text-white h-10 px-4 py-2 flex-1" %>
-    <%= form.submit class: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold ring-offset-white transition duration-300 ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-50 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg h-10 px-4 py-2 flex-1" %>
-  </div>
+<div class="flex gap-4 pt-4">
+  <%= link_to t('buttons.general.back_to_deck'), deck_path(@deck), class: "btn btn-default-size btn-outline flex-1" %>
+  <%= form.submit class: "btn btn-default-size btn-cta flex-1" %>
+</div>
 <% end %>
-

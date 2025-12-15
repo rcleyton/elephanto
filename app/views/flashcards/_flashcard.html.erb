@@ -6,11 +6,7 @@
           <h3 class="text-sm font-medium text-[#676F7E] mb-2">Pergunta</h3>
           <p class="text-2xl font-bold mb-8 text-[#21242C]"><%= flashcard.front %></p>
 
-          <button
-            data-action="reveal#show"
-            data-hide-button-target="button"
-            type="button" 
-            class="button-hide inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#8C5AF2] text-white hover:bg-[#644FE8] shadow-md hover:shadow-lg transition-smooth font-semibold h-11 rounded-md px-8 w-full">
+          <button data-action="reveal#show" data-hide-button-target="button" type="button" class="btn btn-default-size btn-cta w-full">
             <%= t('buttons.general.show_answer') %>
           </button>
         </div>
@@ -21,13 +17,10 @@
           <div class="space-y-4">
             <div class="text-[#676F7E] text-sm mb-4">Como foi sua resposta?</div>
             <div class="grid grid-cols-2 gap-3">
-              <%= button_to t('buttons.general.again'),  review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "again" }, method: :post, class: "cursor-pointer w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-red-500 text-white hover:bg-red-500/90 h-10 px-4 py-2" %>
-              
-              <%= button_to t('buttons.general.hard'),   review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "hard" }, method: :post, class: "cursor-pointer w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 border border-gray-300 bg-[#F9FAFB] hover:bg-[#8C5AF2] hover:text-white h-10 px-4 py-2" %>
-              
-              <%= button_to t('buttons.general.medium'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" }, method: :post, class: "cursor-pointer w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#EDEFF3] text-[#363D49] hover:bg-secondary/80 h-10 px-4 py-2" %>
-              
-              <%= button_to t('buttons.general.easy'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "easy" }, method: :post, class: "cursor-pointer w-full tinline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-[#8C5AF2] text-white hover:bg-[#8C5AF2]/90 shadow-md hover:shadow-lg transition-smooth font-semibold h-10 px-4 py-2" %>
+              <%= button_to t('buttons.general.again'),  review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "again" }, method: :post, class: "btn btn-default-size btn-destructive w-full" %>
+              <%= button_to t('buttons.general.hard'),   review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "hard" }, method: :post, class: "btn btn-default-size btn-outline w-full" %>
+              <%= button_to t('buttons.general.medium'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" }, method: :post, class: "btn btn-default-size btn-secondary w-full" %>
+              <%= button_to t('buttons.general.easy'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "easy" }, method: :post, class: "btn btn-default-size btn-cta w-full" %>
             </div>
           </div>
         </div>
@@ -43,9 +36,11 @@
 
     btn.addEventListener('click', () => {
       btn.style.display = 'none';
-    }, { once: true });
+    }, {
+      once: true
+    });
   }
 
   document.addEventListener('DOMContentLoaded', initHideButton);
-  document.addEventListener('turbo:load', initHideButton); 
+  document.addEventListener('turbo:load', initHideButton);
 </script>
