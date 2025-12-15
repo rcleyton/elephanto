@@ -2,9 +2,9 @@
   <turbo-frame id="flash">
     <%= render "shared/flash" %>
   </turbo-frame>
-  <div class="hidden lg:flex lg:w-1/2 bg-gradient-third items-center justify-center p-8 bg-emerald-400">
+  <div class="hidden lg:flex lg:w-1/2 bg-gradient-third items-center justify-center p-8 bg-gradient-primary">
     <div class="text-center text-white">
-      <h1 class="text-4xl font-bold mb-4">Bem vindo de volta ao Elephanto</h1>
+      <h1 class="text-4xl font-bold mb-4">Bem-vindo(a) de volta ao Elephanto</h1>
       <p class="text-xl opacity-90">
         Recupere sua senha e volte a aprender usando repetição espaçada
       </p>
@@ -23,16 +23,16 @@
       </div>
       <div class="p-6 pt-0">
         <%= form_with url: passwords_path, class: "space-y-6" do |form| %>
-          <div class="space-y-2">
-            <%= form.label :email_address, "Email", class: "ui-label" %>
-            <%= form.email_field :email_address, 
+        <div class="space-y-2">
+          <%= form.label :email_address, "Email", class: "ui-label" %>
+          <%= form.email_field :email_address, 
               required: true, 
               autofocus: true, autocomplete: "email", 
               placeholder: t('placeholders.user.email_address'), 
               value: params[:email_address], 
               class: "ui-input mt-2" %>
-          </div>
-          <%= form.submit t('buttons.submit.email_reset_instructions'), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-emerald-600 text-white hover:bg-emerald-700 shadow-md hover:shadow-lg transition duration-300 ease-in-out h-10 px-4 py-2 w-full" %>
+        </div>
+        <%= form.submit t('buttons.submit.email_reset_instructions'), class: "btn btn-default-variant btn-default-size w-full" %>
         <% end %>
       </div>
     </div>
