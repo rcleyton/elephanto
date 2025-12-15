@@ -3,8 +3,10 @@
     <h3 class="text-2xl font-semibold leading-none tracking-tight flex items-center justify-between">
       <span class="group-hover:text-primary transition-colors">
         <%= deck.name %>
-      </span>  
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5 text-muted-foreground"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+      </span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-5 h-5 text-muted-foreground">
+        <path d="M12 7v14" />
+        <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
     </h3>
     <p class="text-sm text-muted-foreground line-clamp-2"><%= deck.description %></p>
   </div>
@@ -13,27 +15,30 @@
     <div class="flex items-center justify-between text-sm text-muted-foreground">
       <div class="flex items-center gap-1">
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open w-4 h-4"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-icon lucide-book-open w-4 h-4">
+            <path d="M12 7v14" />
+            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
         </div>
         <div>
           <p class="text-sm leading-normal line-clamp-2"><%= deck.flashcards.count %> cards</p>
         </div>
       </div>
       <div class="flex items-center gap-1">
-        <div>          
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock w-4 h-4"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock-icon lucide-clock w-4 h-4">
+            <path d="M12 6v6l4 2" />
+            <circle cx="12" cy="12" r="10" /></svg>
         </div>
         <div><%= l deck.created_at, format: :only_date %></div>
       </div>
     </div>
     <div class="mt-4 flex gap-2">
-      <%= link_to deck, class: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant hover:shadow-glow transition-smooth h-9 rounded-md px-3 flex-1" do %>
-        Estudar
+      <%= link_to deck, class: "btn btn-default-size btn-cta flex-1" do %>
+      Estudar
       <% end %>
-      <%= link_to edit_deck_path(deck), class: "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 flex-1" do %>
-        Editar
+      <%= link_to edit_deck_path(deck), class: "btn btn-default-size btn-outline flex-1" do %>
+      Editar
       <% end %>
     </div>
   </div>
 </div>
-
