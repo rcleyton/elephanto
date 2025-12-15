@@ -1,22 +1,26 @@
 <%= form_with model: @deck, class: "space-y-6" do |form| %>
-<div>
-  <%= form.label :name, class: "ui-label" %>
-  <%= form.text_field :name, placeholder: t("placeholders.deck.deck_name"), class: "ui-input #{error_class(deck, :name)}" %>
-  <% if deck.errors[:name].any? %>
-  <p class="ui-error"><%= Deck.human_attribute_name(:name) %> <%= deck.errors[:name].first %></p>
-  <% end %>
-</div>
+  <div>
+    <%= form.label :name, class: "ui-label" %>
+    <%= form.text_field :name, 
+      placeholder: t("placeholders.deck.deck_name"), 
+      class: "ui-input #{error_class(deck, :name)} mt-2" %>
+    <% if deck.errors[:name].any? %>
+      <p class="ui-error"><%= Deck.human_attribute_name(:name) %> <%= deck.errors[:name].first %></p>
+    <% end %>
+  </div>
 
-<div>
-  <%= form.label :description, class: "ui-label" %>
-  <%= form.text_area :description, placeholder: t("placeholders.deck.deck_description"), class: "ui-textarea #{error_class(deck, :description)}" %>
-  <% if deck.errors[:description].any? %>
-  <p class="ui-error"><%= Deck.human_attribute_name(:description) %> <%= deck.errors[:description].first %></p>
-  <% end %>
-</div>
+  <div>
+    <%= form.label :description, class: "ui-label" %>
+    <%= form.text_area :description, 
+      placeholder: t("placeholders.deck.deck_description"), 
+      class: "ui-textarea #{error_class(deck, :description)} mt-2" %>
+    <% if deck.errors[:description].any? %>
+      <p class="ui-error"><%= Deck.human_attribute_name(:description) %> <%= deck.errors[:description].first %></p>
+    <% end %>
+  </div>
 
-<div class="flex gap-4 pt-4">
-  <%= link_to t('buttons.general.cancel'), decks_path, class: "btn flex-1 btn-outline" %>
-  <%= form.submit class: "btn btn-default-size btn-cta flex-1" %>
-</div>
+  <div class="flex gap-4 pt-4">
+    <%= link_to t('buttons.general.cancel'), decks_path, class: "btn flex-1 btn-outline" %>
+    <%= form.submit class: "btn btn-default-size btn-cta flex-1" %>
+  </div>
 <% end %>
