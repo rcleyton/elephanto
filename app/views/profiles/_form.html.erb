@@ -1,12 +1,12 @@
 <div class="flex flex-col space-y-1.5 p-6">
 	<h3 class="text-2xl font-semibold leading-none tracking-tight">Informações do perfil</h3>
-	<p class="text-sm text-[#676F7E]">Gerencia suas informações pessoais e preferências</p>
+	<p class="text-sm text-muted-foreground">Gerencia suas informações pessoais e preferências</p>
 	<%= form_with model: @profile, class: "space-y-6" do |form| %>
 		<div class="mt-4">
 			<div data-controller="dropzone" data-dropzone-target="dropArea">
 				<div
 					data-dropzone-target="dropArea"
-					class="border-2 border-dashed border-[#DCDFE5] bg-[#F9FAFB]  rounded-lg p-6 text-center cursor-pointer"
+					class="border-2 border-dashed bg-color bg-background rounded-lg p-6 text-center cursor-pointer"
 				>
 					<p class="text-gray-600"><%= t('general.drag_and_drop') %></p>
 					<%= form.file_field :avatar, class: "hidden", data: { dropzone_target: "input" } %>
@@ -16,27 +16,36 @@
 		</div>
 		<div class="grid grid-cols-2 gap-4">
 			<div>
-				<%= form.label :first_name, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-				<%= form.text_field :first_name, placeholder: t("placeholders.profile.first_name"), class: ["flex h-10 w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": profile.errors[:first_name].any? }] %>
+				<%= form.label :first_name, class: "ui-label" %>
+				<%= form.text_field :first_name, placeholder: t("placeholders.profile.first_name"), class: "ui-input #{error_class(profile, :first_name)}" %>
+				<% if profile.errors[:first_name].any? %>
+      		<p class="ui-error"><%= Profile.human_attribute_name(:first_name) %> <%= profile.errors[:first_name].first %></p>
+    		<% end %>
 			</div>
 			<div>
-				<%= form.label :last_name, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-				<%= form.text_field :last_name, placeholder: t("placeholders.profile.last_name"), class: ["flex h-10 w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": profile.errors[:last_name].any? }] %>
+				<%= form.label :last_name, class: "ui-label" %>
+				<%= form.text_field :last_name, placeholder: t("placeholders.profile.last_name"), class: "ui-input #{error_class(profile, :last_name)}" %>
+				<% if profile.errors[:last_name].any? %>
+      		<p class="ui-error"><%= Profile.human_attribute_name(:last_name) %> <%= profile.errors[:last_name].first %></p>
+    		<% end %>
 			</div>
 		</div>
 		<div>
-			<%= form.label :username, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-			<%= form.text_field :username, placeholder: t("placeholders.profile.username"), class: ["flex h-10 w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": profile.errors[:username].any? }] %>
+			<%= form.label :username, class: "ui-label" %>
+			<%= form.text_field :username, placeholder: t("placeholders.profile.username"), class: "ui-input #{error_class(profile, :username)}" %>
+			<% if profile.errors[:username].any? %>
+      	<p class="ui-error"><%= Profile.human_attribute_name(:username) %> <%= profile.errors[:username].first %></p>
+    	<% end %>
 		</div>
 		<div>
-			<%= form.label :bio, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-			<%= form.textarea :bio, placeholder: t("placeholders.profile.bio"), class: ["flex min-h-[80px] w-full rounded-md border border-[#DCDFE5] bg-[#F9FAFB] px-3 py-2 text-sm ring-offset-background placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50", { "border-red-400 focus:outline-red-600": profile.errors[:bio].any? }] %>
+			<%= form.label :bio, class: "ui-label" %>
+			<%= form.textarea :bio, placeholder: t("placeholders.profile.bio"), class: "ui-textarea #{error_class(profile, :bio)}" %>
+			<% if profile.errors[:bio].any? %>
+      	<p class="ui-error"><%= Profile.human_attribute_name(:bio) %> <%= profile.errors[:bio].first %></p>
+    	<% end %>
 		</div>
 		<div class="flex justify-end">
 			<%= form.submit class: "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-[#594CE6] text-white hover:bg-[#594CE6]/90 shadow-lg hover:shadow-glow transition-smooth h-10 px-4 py-2 cursor-pointer" %>
 		</div>
 	<% end %>
 </div>
-
-
-          

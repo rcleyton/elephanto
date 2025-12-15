@@ -27,6 +27,7 @@ gem "stringio", "3.1.1"
 group :development, :test do
   gem "brakeman", require: false
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "htmlbeautifier"
   gem "rubocop-rails-omakase", require: false
 end
 

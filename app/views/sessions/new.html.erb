@@ -1,9 +1,10 @@
 <% content_for :title, "Elephanto | Iniciar sessão" %>
 
+<turbo-frame id="flash"> 
+  <%= render "shared/flash" %>
+</turbo-frame>
+
 <div class="min-h-screen flex overflow-hidden">
-  <turbo-frame id="flash"> 
-    <%= render "shared/flash" %>
-  </turbo-frame>
   <div class="hidden lg:flex lg:w-1/2 bg-gradient-third items-center justify-center p-8 bg-emerald-400">
     <div class="text-center text-white">
         <h1 class="text-4xl font-bold mb-4">Bem vindo de volta ao Elephanto</h1>
@@ -26,12 +27,21 @@
       <div class="p-6 pt-0">
         <%= form_with url: session_url, class: "space-y-4" do |form| %>
           <div class="space-y-2">
-            <%= form.label 'Email', class: "text-sm font-medium leading-none" %>
-            <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: t('placeholders.user.email_address'), value: params[:email_address], class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+            <%= form.label 'Email', class: "ui-label" %>
+            <%= form.email_field :email_address, 
+              required: true, 
+              autofocus: true, 
+              autocomplete: "username", 
+              placeholder: t('placeholders.user.email_address'), 
+              value: params[:email_address], 
+              class: "ui-input mt-2" %>
           </div>
           <div class="space-y-2">
-            <%= form.label 'Senha', class: "text-sm font-medium leading-none" %>
-            <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: t('placeholders.user.password'), maxlength: 72, class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+            <%= form.label 'Senha', class: "ui-label" %>
+            <%= form.password_field :password, required: true, 
+              autocomplete: "current-password", 
+              placeholder: t('placeholders.user.password'), maxlength: 72, 
+              class: "ui-input mt-2" %>
           </div>
           <%= form.submit t('buttons.general.enter'), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-emerald-600 text-white hover:bg-emerald-700 shadow-md hover:shadow-lg transition duration-300 ease-in-out h-10 px-4 py-2 w-full" %>
           

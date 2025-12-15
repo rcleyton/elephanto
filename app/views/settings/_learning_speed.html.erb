@@ -1,13 +1,13 @@
 <%= turbo_frame_tag "learning_speed_form" do %>
   <%= form_with model: @profile, url: learning_speed_settings_path, method: :patch, data: { turbo_frame: "settings_form" } do |form| %>
     <div>
-      <%= form.label :learning_speed, class: "text-sm font-medium leading-none" %>
+      <%= form.label :learning_speed, class: "ui-label" %>
       <%= form.select :learning_speed, options_for_select([
         ["Mais rápido (0.8x)", 0.8],
         ["Normal (1.0x)", 1.0],
         ["Mais lento (1.2x)", 1.2],
         ["Bem mais lento (1.5x)", 1.5]
-      ], @profile.learning_speed), {}, class: "flex h-10 w-full md:w-48 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 appearance-none" %>
+      ], @profile.learning_speed), {}, class: "ui-input appearance-none md:w-48" %>
       <p class="text-sm text-muted-foreground mt-1">Controla a frequência de repetição dos flashcards</p>
     </div>
     <%= form.submit "Atualizar velocidade", class: "inline-flex mt-2.5 items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90 shadow-elegant hover:shadow-glow transition-smooth h-10 px-4 py-2 w-full md:w-auto" %>

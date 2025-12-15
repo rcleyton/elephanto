@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       flash[:success] = t("messages.create_account")
       redirect_to new_session_path
     else
-      flash.now[:error] = @user.errors.full_messages.to_sentence
+      flash.now[:error] = "Verifique os campos em vermelho"
       render :new, status: :unprocessable_entity
     end
   end

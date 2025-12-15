@@ -25,20 +25,41 @@
       <div class="p-6 pt-0">
         <%= form_with(model: @user, url: sign_up_path, class: "space-y-4") do |f| %>
           <div class="space-y-2">
-            <%= f.label :email_address, class: "text-sm font-medium leading-none" %>
-            <%= f.email_field :email_address, placeholder: t('placeholders.user.email_address'), required: true, class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+            <%= f.label :email_address, class: "ui-label" %>
+            <%= f.email_field :email_address, 
+              placeholder: t('placeholders.user.email_address'), 
+              required: true, 
+              class: "ui-input mt-2 #{error_class(@user, :email_address)}" %>
+            <% if @user.errors[:email_address].any? %>
+              <p class="ui-error"><%= @user.errors[:email_address].first %></p>
+            <% end %>
           </div>
           <div class="space-y-2">
-            <%= f.label :password, class: "text-sm font-medium leading-none" %>
-            <%= f.password_field :password, placeholder: t('placeholders.user.password'), class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+            <%= f.label :password, class: "ui-label" %>
+            <%= f.password_field :password, 
+              placeholder: t('placeholders.user.password'), 
+              class: "ui-input mt-2 #{error_class(@user, :password)}" %>
+            <% if @user.errors[:password].any? %>
+              <p class="ui-error"><%= @user.errors[:password].first %></p>
+            <% end %>
           </div>
           <div class="space-y-2">
-            <%= f.label :password_confirmation, class: "text-sm font-medium leading-none" %>
-            <%= f.password_field :password_confirmation, placeholder: t('placeholders.user.password_confirmation'), class: "flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm" %>
+            <%= f.label :password_confirmation, class: "ui-label" %>
+            <%= f.password_field :password_confirmation, 
+              placeholder: t('placeholders.user.password_confirmation'), 
+              class: "ui-input mt-2 #{error_class(@user, :password_confirmation)}" %>
+            <% if @user.errors[:password_confirmation].any? %>
+              <p class="ui-error"><%= @user.errors[:password_confirmation].to_sentence %></p>
+            <% end %>
           </div>
-          <div class="space-x-4 flex items-center">
-            <%= f.check_box :terms_of_service, class: "h-4 w-4 focus:ring-blue-500 border-gray-300 rounded" %>
-            Eu li e aceito os <%= link_to "Termos de Uso", terms_url(host: Rails.env.development? ? "localhost" : "getelephanto.com"), target: "_blank", class: "text-blue-600 font-medium hover:underline ml-1" %>
+          <div class="flex flex-col">
+            <div class="space-x-4 flex items-center">
+              <%= f.check_box :terms_of_service, class: "h-4 w-4 focus:ring-blue-500 border-gray-300 rounded" %>
+              Eu li e aceito os <%= link_to "Termos de Uso", terms_url(host: Rails.env.development? ? "localhost" : "getelephanto.com"), target: "_blank", class: "text-blue-600 font-medium hover:underline ml-1" %>
+            </div>
+            <% if @user.errors[:terms_of_service].any? %>
+              <p class="ui-error"><%= User.human_attribute_name(:terms_of_service) %> <%= @user.errors[:terms_of_service].first %></p>
+            <% end %>
           </div>
           <%= f.submit t('buttons.submit.create_account'), class: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-lg transition duration-300 ease-in-out h-10 px-4 py-2 w-full" %>
         <% end %>

@@ -1,12 +1,18 @@
 <%= form_with model: @deck, class: "space-y-6" do |form| %>
-  <div class="space-y-2">
-    <%= form.label :name, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-    <%= form.text_field :name, placeholder: t("placeholders.deck.deck_name"), class: ["flex h-10 w-full rounded-md border border-gray-300 bg-[#F9FAFB] px-3 py-2 mt-2 text-base placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", { "border-red-400 focus:outline-red-600": deck.errors[:name].any? }] %>
+  <div>
+    <%= form.label :name, class: "ui-label" %>
+    <%= form.text_field :name, placeholder: t("placeholders.deck.deck_name"), class: "ui-input #{error_class(deck, :name)}" %>
+    <% if deck.errors[:name].any? %>
+      <p class="ui-error"><%= Deck.human_attribute_name(:name) %> <%= deck.errors[:name].first %></p>
+    <% end %>
   </div>
 
-  <div class="space-y-2">
-    <%= form.label :description, class: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70" %>
-    <%= form.text_area :description, placeholder: t("placeholders.deck.deck_description"), class: ["flex min-h-[80px] w-full rounded-md border border-gray-300 bg-[#F9FAFB] px-3 py-2 mt-2 text-sm placeholder:text-gray-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-50", { "border-red-400 focus:outline-red-600": deck.errors[:description].any? }] %>
+  <div>
+    <%= form.label :description, class: "ui-label" %>
+    <%= form.text_area :description, placeholder: t("placeholders.deck.deck_description"), class: "ui-textarea #{error_class(deck, :description)}" %>
+    <% if deck.errors[:description].any? %>
+      <p class="ui-error"><%= Deck.human_attribute_name(:description) %> <%= deck.errors[:description].first %></p>
+    <% end %>
   </div>
 
   <div class="flex gap-4 pt-4">

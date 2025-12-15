@@ -27,7 +27,7 @@ class DecksController < ApplicationController
       flash[:success] = t("messages.created", model: Deck.model_name.human)
       redirect_to deck_path(@deck)
     else
-      flash.now[:error] = @deck.errors.full_messages.to_sentence
+      flash.now[:error] = t("messages.fill_all_fields")
       render :new, status: :unprocessable_entity
     end
   end
@@ -37,7 +37,7 @@ class DecksController < ApplicationController
       flash[:notice] = t("messages.updated", model: Deck.model_name.human)
       redirect_to deck_path(@deck)
     else
-      flash.now[:error] = @deck.errors.full_messages.to_sentence
+      flash.now[:error] = t("messages.fill_all_fields")
       render :edit, status: :unprocessable_entity
     end
   end
