@@ -4,7 +4,7 @@
 class SettingsController < ApplicationController
   include ProfileRequired
 
-  before_action :required_profile, only: [:show]
+  before_action :required_profile, only: [ :show ]
 
   def show
     @profile = current_user.profile
@@ -49,7 +49,7 @@ class SettingsController < ApplicationController
 
   def delete_account
     if current_user.profile.username == params[:username]
-      if current_user.authenticate(params[:current_password]) 
+      if current_user.authenticate(params[:current_password])
         current_user.destroy
         flash[:success] = "Conta excluída com sucesso!"
         redirect_to root_path

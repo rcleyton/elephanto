@@ -1,4 +1,4 @@
-<% content_for :title, "#{t('actions.showing')} #{Deck.model_name.human.downcase}" %>
+<% content_for :title, "#{t("actions.showing")} #{Deck.model_name.human.downcase}" %>
 
 <turbo-frame id="flash">
   <%= render "shared/flash" %>
@@ -6,20 +6,44 @@
 
 <div class="min-h-screen bg-background">
   <% right_buttons = capture do %>
-  <div class="flex gap-2 w-full">
-    <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta w-full" do %>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus h-4 w-4">
-      <path d="M5 12h14" />
-      <path d="M12 5v14" /></svg>
-    <%= t('buttons.submit.new_flashcard') %>
-    <% end %>
+    <div class="flex gap-2 w-full">
+      <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta w-full" do %>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-plus-icon lucide-plus h-4 w-4"
+        >
+          <path d="M5 12h14"/>
+          <path d="M12 5v14"/></svg>
+        <%= t("buttons.submit.new_flashcard") %>
+      <% end %>
 
-    <%= link_to review_deck_path(@deck), class: "btn btn-default-size btn-cta btn-default-variant w-full" do %>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play-icon lucide-play h-4 w-4">
-      <path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg>
-    <%= t('buttons.general.start_studying') %>
-    <% end %>
-  </div>
+      <%= link_to review_deck_path(@deck), class: "btn btn-default-size btn-cta btn-default-variant w-full" do %>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-play-icon lucide-play h-4 w-4"
+        >
+          <path
+            d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
+          /></svg>
+        <%= t("buttons.general.start_studying") %>
+      <% end %>
+    </div>
   <% end %>
 
   <%= page_header(
@@ -28,16 +52,32 @@
     title: "#{@deck.name}",
     subtitle: "#{@deck.description}",
     show_profile_menu: false,
-    right_buttons: right_buttons
+    right_buttons: right_buttons,
   ) %>
 
-  <main data-controller="automatic-margin-top" class="container mx-auto px-6 py-8">
+  <main
+    data-controller="automatic-margin-top"
+    class="container mx-auto px-6 py-8"
+  >
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
         <div class="p-4 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-8 h-8 text-[#594CE6] mx-auto mb-2">
-            <path d="M12 7v14" />
-            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" /></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-book-open w-8 h-8 text-[#594CE6] mx-auto mb-2"
+          >
+            <path d="M12 7v14"/>
+            <path
+              d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+            /></svg>
           <div class="text-2xl font-bold text-[#21242C]"><%= @deck.flashcards.count %></div>
           <div class="text-sm">Flashcards</div>
         </div>
@@ -51,35 +91,66 @@
       <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
         <div class="p-4 text-center">
           <div class="text-2xl font-bold text-[#594CE6]"><%= t("general.last_studied") %></div>
-          <div class="text-sm"><%= @deck.last_reviewed_at.nil? ? 'Nunca revisado' : (l @deck.last_reviewed_at, format: :long) %></div>
+          <div class="text-sm"><%= if @deck.last_reviewed_at.nil?
+              "Nunca revisado"
+            else
+              (l @deck.last_reviewed_at, format: :long)
+            end %></div>
         </div>
       </div>
     </div>
     <div class="space-y-4">
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-semibold">Flashcards</h2>
-        <span class="text-gray-500"><%= @deck.flashcards.count %> cards</span>
+        <span class="text-gray-500"><%= @deck.flashcards.count %>
+          cards</span>
       </div>
       <% if @deck.flashcards.any? %>
-      <%= render partial: "flashcards", locals: { flashcards: @flashcards, deck: @deck } %>
+        <%= render partial: "flashcards", locals: { flashcards: @flashcards, deck: @deck } %>
       <% else %>
-      <div class="rounded-lg border bg-card text-card-foreground">
-        <div class="p-8 text-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-12 h-12 text-muted-foreground mx-auto mb-4">
-            <path d="M12 7v14"></path>
-            <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
-          </svg>
-          <h3 class="text-lg font-semibold mb-2">Nenhum flashcard encontrado</h3>
-          <p class="text-muted-foreground mb-6">Adicione flashcards para começar a estudar</p>
-          <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
-            <path d="M5 12h14"></path>
-            <path d="M12 5v14"></path>
-          </svg>
-          Adicionar primeiro flashcard
-          <% end %>
+        <div class="rounded-lg border bg-card text-card-foreground">
+          <div class="p-8 text-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="
+                lucide lucide-book-open w-12 h-12 text-muted-foreground mx-auto mb-4
+              "
+            >
+              <path d="M12 7v14"></path>
+              <path
+                d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
+              ></path>
+            </svg>
+            <h3 class="text-lg font-semibold mb-2">Nenhum flashcard encontrado</h3>
+            <p class="text-muted-foreground mb-6">Adicione flashcards para começar a estudar</p>
+            <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta" do %>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-plus w-4 h-4"
+              >
+                <path d="M5 12h14"></path>
+                <path d="M12 5v14"></path>
+              </svg>
+              Adicionar primeiro flashcard
+            <% end %>
+          </div>
         </div>
-      </div>
       <% end %>
     </div>
   </main>

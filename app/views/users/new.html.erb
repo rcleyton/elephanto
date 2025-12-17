@@ -2,69 +2,90 @@
   <turbo-frame id="flash">
     <%= render "shared/flash" %>
   </turbo-frame>
-  <div class="hidden lg:flex lg:w-1/2 bg-gradient-primary items-center justify-center p-8 bg-gradient-primary">
+  <div
+    class="
+      hidden lg:flex lg:w-1/2 bg-gradient-primary items-center justify-center p-8
+      bg-gradient-primary
+    "
+  >
     <div class="text-center text-white">
       <h1 class="text-4xl font-bold mb-4">Bem-vindo(a) ao Elephanto</h1>
       <p class="text-xl opacity-90">
         Aprenda com inteligência usando repetição espaçada
       </p>
       <div class="mt-8">
-        <%= image_tag "logo_ligth.svg", class: "w-48 h-48 mx-auto filter brightness-0 invert" %>
+        <%= image_tag "logo_ligth.svg",
+        class: "w-48 h-48 mx-auto filter brightness-0 invert" %>
       </div>
     </div>
   </div>
 
   <div class="flex-1 flex items-center justify-center p-8 bg-gray-100">
-    <div class="rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full max-w-md">
+    <div
+      class="
+        rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full
+        max-w-md
+      "
+    >
       <div class="flex flex-col space-y-1.5 p-6 text-center">
         <div>
-          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t('general.create_account') %></h3>
+          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t("general.create_account") %></h3>
           <p class="text-sm text-gray-500 mt-2">Crie sua conta para começar a aprender</p>
         </div>
       </div>
       <div class="p-6 pt-0">
         <%= form_with(model: @user, url: sign_up_path, class: "space-y-4") do |f| %>
-        <div class="space-y-2">
-          <%= f.label :email_address, class: "ui-label" %>
-          <%= f.email_field :email_address, 
-              placeholder: t('placeholders.user.email_address'), 
-              required: true, 
-              class: "ui-input mt-2 #{error_class(@user, :email_address)}" %>
-          <% if @user.errors[:email_address].any? %>
-          <p class="ui-error"><%= @user.errors[:email_address].first %></p>
-          <% end %>
-        </div>
-        <div class="space-y-2">
-          <%= f.label :password, class: "ui-label" %>
-          <%= f.password_field :password, 
-              placeholder: t('placeholders.user.password'), 
-              class: "ui-input mt-2 #{error_class(@user, :password)}" %>
-          <% if @user.errors[:password].any? %>
-          <p class="ui-error"><%= @user.errors[:password].first %></p>
-          <% end %>
-        </div>
-        <div class="space-y-2">
-          <%= f.label :password_confirmation, class: "ui-label" %>
-          <%= f.password_field :password_confirmation, 
-              placeholder: t('placeholders.user.password_confirmation'), 
-              class: "ui-input mt-2 #{error_class(@user, :password_confirmation)}" %>
-          <% if @user.errors[:password_confirmation].any? %>
-          <p class="ui-error"><%= @user.errors[:password_confirmation].to_sentence %></p>
-          <% end %>
-        </div>
-        <div class="flex flex-col">
-          <div class="space-x-4 flex items-center">
-            <%= f.check_box :terms_of_service, class: "h-4 w-4 focus:ring-blue-500 border-gray-300 rounded" %>
-            Eu li e aceito os <%= link_to "Termos de Uso", terms_url(host: Rails.env.development? ? "localhost" : "getelephanto.com"), target: "_blank", class: "text-blue-600 font-medium hover:underline ml-1" %>
+          <div class="space-y-2">
+            <%= f.label :email_address, class: "ui-label" %>
+            <%= f.email_field :email_address,
+                          placeholder: t("placeholders.user.email_address"),
+                          required: true,
+                          class: "ui-input mt-2 #{error_class(@user, :email_address)}" %>
+            <% if @user.errors[:email_address].any? %>
+              <p class="ui-error"><%= @user.errors[:email_address].first %></p>
+            <% end %>
           </div>
-          <% if @user.errors[:terms_of_service].any? %>
-          <p class="ui-error"><%= User.human_attribute_name(:terms_of_service) %> <%= @user.errors[:terms_of_service].first %></p>
-          <% end %>
-        </div>
-        <%= f.submit t('buttons.submit.create_account'), class: "btn btn-default-variant btn-default-size w-full" %>
+          <div class="space-y-2">
+            <%= f.label :password, class: "ui-label" %>
+            <%= f.password_field :password,
+                             placeholder: t("placeholders.user.password"),
+                             class: "ui-input mt-2 #{error_class(@user, :password)}" %>
+            <% if @user.errors[:password].any? %>
+              <p class="ui-error"><%= @user.errors[:password].first %></p>
+            <% end %>
+          </div>
+          <div class="space-y-2">
+            <%= f.label :password_confirmation, class: "ui-label" %>
+            <%= f.password_field :password_confirmation,
+                             placeholder: t("placeholders.user.password_confirmation"),
+                             class:
+                               "ui-input mt-2 #{error_class(@user, :password_confirmation)}" %>
+            <% if @user.errors[:password_confirmation].any? %>
+              <p class="ui-error"><%= @user.errors[:password_confirmation].to_sentence %></p>
+            <% end %>
+          </div>
+          <div class="flex flex-col">
+            <div class="space-x-4 flex items-center">
+              <%= f.check_box :terms_of_service,
+                          class: "h-4 w-4 focus:ring-blue-500 border-gray-300 rounded" %>
+              Eu li e aceito os
+              <%= link_to "Termos de Uso",
+              terms_url(host: Rails.env.development? ? "localhost" : "getelephanto.com"),
+              target: "_blank",
+              class: "text-blue-600 font-medium hover:underline ml-1" %>
+            </div>
+            <% if @user.errors[:terms_of_service].any? %>
+              <p class="ui-error"><%= User.human_attribute_name(:terms_of_service) %>
+                <%= @user.errors[:terms_of_service].first %></p>
+            <% end %>
+          </div>
+          <%= f.submit t("buttons.submit.create_account"),
+                   class: "btn btn-default-variant btn-default-size w-full" %>
         <% end %>
         <div class="mt-4 text-center">
-          <%= link_to 'Já tem uma conta? Entre aqui', new_session_path, class: "text-sm text-blue-600 hover:underline" %>
+          <%= link_to "Já tem uma conta? Entre aqui",
+          new_session_path,
+          class: "text-sm text-blue-600 hover:underline" %>
         </div>
       </div>
     </div>

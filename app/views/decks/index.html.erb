@@ -8,35 +8,64 @@
   <%= page_header(
     title: "Meus #{Deck.model_name.human.pluralize}",
     subtitle: "Gerencie seus decks de flashcards e continue seu aprendizado",
-    show_new_deck_button: true
+    show_new_deck_button: true,
   ) %>
 
-  <main id="decks" data-controller="automatic-margin-top" class="container md:mx-auto px-6 py-8">
+  <main
+    id="decks"
+    data-controller="automatic-margin-top"
+    class="container md:mx-auto px-6 py-8"
+  >
     <% if @decks.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <% @decks.each do |deck| %>
-      <%= render deck %>
-      <% end %>
-    </div>
-    <% else %>
-    <div class="rounded-lg border bg-card text-card-foreground">
-      <div class="p-8 text-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-gallery-horizontal-end-icon lucide-gallery-horizontal-end w-12 h-12 text-muted-foreground mx-auto mb-4">
-          <path d="M2 7v10" />
-          <path d="M6 5v14" />
-          <rect width="12" height="18" x="10" y="3" rx="2" />
-        </svg>
-        <h3 class="text-lg font-semibold mb-2">Nenhum deck criado ainda</h3>
-        <p class="text-muted-foreground mb-6">Crie um deck para adicionar flascards</p>
-        <%= link_to new_deck_path, class: "btn btn-default-size btn-default-variant" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4">
-          <path d="M5 12h14"></path>
-          <path d="M12 5v14"></path>
-        </svg>
-        Criar primeiro deck
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% @decks.each do |deck| %>
+          <%= render deck %>
         <% end %>
       </div>
-    </div>
+    <% else %>
+      <div class="rounded-lg border bg-card text-card-foreground">
+        <div class="p-8 text-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="
+              lucide lucide-gallery-horizontal-end-icon lucide-gallery-horizontal-end w-12
+              h-12 text-muted-foreground mx-auto mb-4
+            "
+          >
+            <path d="M2 7v10"/>
+            <path d="M6 5v14"/>
+            <rect width="12" height="18" x="10" y="3" rx="2"/>
+          </svg>
+          <h3 class="text-lg font-semibold mb-2">Nenhum deck criado ainda</h3>
+          <p class="text-muted-foreground mb-6">Crie um deck para adicionar flascards</p>
+          <%= link_to new_deck_path, class: "btn btn-default-size btn-default-variant" do %>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-plus w-4 h-4"
+            >
+              <path d="M5 12h14"></path>
+              <path d="M12 5v14"></path>
+            </svg>
+            Criar primeiro deck
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </main>
 </div>

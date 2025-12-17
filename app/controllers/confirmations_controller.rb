@@ -26,13 +26,13 @@ class ConfirmationsController < ApplicationController
     @user = User.find_by(email_address: params[:email_address])
 
     if @user && !@user.confirmed?
-      return redirect_to new_confirmation_path, alert: t("messages.confirmation_email_recently_sent") if 
+      return redirect_to new_confirmation_path, alert: t("messages.confirmation_email_recently_sent") if
       recently_requested_confirmation?(@user)
 
       @user.generate_confirmation_token
       @user.save(validate: false)
-      
-      ConfirmationEmailJob.perform_later(@user.id) 
+
+      ConfirmationEmailJob.perform_later(@user.id)
 
       flash[:success] = t("messages.new_email_to_confirmation")
       redirect_to new_session_path

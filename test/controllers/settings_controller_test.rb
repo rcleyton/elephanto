@@ -70,9 +70,9 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
       deck = @user.decks.first
 
       assert_difference("Deck.count", -1) do
-        delete remove_deck_settings_path(deck), params: { 
+        delete remove_deck_settings_path(deck), params: {
           deck_id: deck.id
-        } 
+        }
       end
 
       assert_equal "Deck apagado!", flash[:success]
@@ -82,13 +82,13 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
       other_deck        = decks(:chemical)
       deck_count_before = Deck.count
 
-      delete remove_deck_settings_path(other_deck), params: {  
+      delete remove_deck_settings_path(other_deck), params: {
         deck_id: other_deck.id
       }
 
-      assert_equal "Deck inválido", flash[:alert] 
+      assert_equal "Deck inválido", flash[:alert]
       assert_response :not_found
-      assert_equal deck_count_before, Deck.count 
+      assert_equal deck_count_before, Deck.count
     end
   end
 end

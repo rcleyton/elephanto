@@ -1,4 +1,4 @@
-<% content_for :title, "#{t('actions.new')} #{Profile.model_name.human.downcase}" %>
+<% content_for :title, "#{t("actions.new")} #{Profile.model_name.human.downcase}" %>
 
 <turbo-frame id="flash">
   <%= render "shared/flash" %>
@@ -7,13 +7,16 @@
 <div class="min-h-screen bg-background">
   <%= page_header(
     show_back_button: true,
-		back_path: decks_path,
-    title: "#{t('actions.new')} #{Profile.model_name.human.downcase}",
+    back_path: decks_path,
+    title: "#{t("actions.new")} #{Profile.model_name.human.downcase}",
     subtitle: "Preencha seu perfil para gerenciar seus flashcards",
     show_profile_menu: false,
   ) %>
 
-  <main data-controller="automatic-margin-top" class="container max-w-2xl mx-auto p-6">
+  <main
+    data-controller="automatic-margin-top"
+    class="container max-w-2xl mx-auto p-6"
+  >
     <div class="rounded-lg border border-[#DCDFE5] bg-white text-[#21242C]">
       <%= render "form", profile: @profile %>
     </div>

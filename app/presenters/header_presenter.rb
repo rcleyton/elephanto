@@ -2,7 +2,7 @@ class HeaderPresenter
   attr_reader :title, :subtitle, :show_back_button, :show_new_deck_button, :show_profile_menu,
     :back_path, :right_buttons
 
-  def initialize(view_context, options={})
+  def initialize(view_context, options = {})
     @view                 = view_context
     @back_path            = options[:back_path]
     @title                = options[:title]
@@ -18,9 +18,9 @@ class HeaderPresenter
   end
 
   def locals
-    { 
+    {
       back_path: back_path,
-      title: title,  
+      title: title,
       subtitle: subtitle,
       show_back_button: show_back_button,
       show_new_deck_button: show_new_deck_button,

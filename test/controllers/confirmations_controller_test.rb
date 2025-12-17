@@ -56,7 +56,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
   end
 
   context "resend" do
-    it 'new confirmation' do
+    it "new confirmation" do
       get new_confirmation_path
       assert :success
     end
@@ -99,7 +99,7 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
     it "should enqueue confirmation email if last sent more than 5 minutes ago" do
       @user.update!(confirmation_sent_at: 10.minutes.ago)
 
-      assert_enqueued_with(job: ConfirmationEmailJob, args: [@user.id]) do
+      assert_enqueued_with(job: ConfirmationEmailJob, args: [ @user.id ]) do
         post confirmation_path, params: { email_address: @user.email_address }
       end
 
@@ -116,6 +116,6 @@ class ConfirmationsControllerTest < ActionDispatch::IntegrationTest
 
       assert_redirected_to new_confirmation_path
       assert_equal I18n.t("messages.confirmation_email_recently_sent"), flash[:alert]
-    end  
+    end
   end
 end

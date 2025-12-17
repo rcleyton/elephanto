@@ -22,4 +22,3 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, ActionMailer::Base.deliveries.size
   end
 end
-

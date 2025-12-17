@@ -50,7 +50,7 @@ class DecksController < ApplicationController
   end
 
   private
-  
+
   def set_deck
     @deck = current_user.decks.find(params[:id])
   end

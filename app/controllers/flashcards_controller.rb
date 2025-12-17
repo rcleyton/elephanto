@@ -4,7 +4,7 @@
 class FlashcardsController < ApplicationController
   before_action :set_deck
   before_action :set_flashcard, only: %i[show edit update destroy review]
-  before_action :check_review_period, only: [:show]
+  before_action :check_review_period, only: [ :show ]
 
   def show; end
 

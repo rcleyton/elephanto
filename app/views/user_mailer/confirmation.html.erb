@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <title>Confirmação de Conta</title>
   </head>
-  <body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#f9fafb; color:#111827;">
-    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+  <body
+    style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#f9fafb; color:#111827;"
+  >
+    <table
+      role="presentation"
+      cellspacing="0"
+      cellpadding="0"
+      border="0"
+      width="100%"
+    >
       <tr>
         <td align="center" style="padding: 30px;">
-          <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; background:#ffffff; border-radius: 12px; box-shadow:0 4px 8px rgba(0,0,0,0.05); overflow: hidden;">
-            
+          <table
+            role="presentation"
+            cellspacing="0"
+            cellpadding="0"
+            border="0"
+            width="100%"
+            style="max-width: 600px; background:#ffffff; border-radius: 12px; box-shadow:0 4px 8px rgba(0,0,0,0.05); overflow: hidden;"
+          >
+
             <tr>
               <td align="center" style="background:#8E51FF; padding: 20px;">
                 <h1 style="margin:0; color:#ffffff; font-size: 24px;">Elephanto</h1>
@@ -19,29 +34,40 @@
 
             <tr>
               <td style="padding: 30px; text-align:left;">
-                <h2 style="color:#111827; font-size:20px; margin-bottom:15px;">Olá <%= @user.email_address %>,</h2>
+                <h2 style="color:#111827; font-size:20px; margin-bottom:15px;">Olá
+                  <%= @user.email_address %>,</h2>
                 <p style="margin-bottom:20px; font-size:15px; line-height:1.6; color:#374151;">
-                  Seja bem-vindo ao <strong>Elephanto</strong>! 🎉  
-                  Para ativar sua conta e começar a estudar com o método de repetição espaçada, clique no botão abaixo:
+                  Seja bem-vindo ao
+                  <strong>Elephanto</strong>! 🎉 Para ativar sua conta e começar a estudar com o método de
+                  repetição espaçada, clique no botão abaixo:
                 </p>
-                
+
                 <p style="text-align:center; margin:30px 0;">
-                <a href="<%= confirmation_url(token: @user.confirmation_token, email: @user.email_address) %>"
-                  style="background:#60C2A6; color:#ffffff; padding:14px 28px; font-size:16px; text-decoration:none; border-radius:8px; display:inline-block;">
+                  <a
+                    href="<%= confirmation_url(token: @user.confirmation_token, email: @user.email_address) %>"
+                    style="background:#60C2A6; color:#ffffff; padding:14px 28px; font-size:16px; text-decoration:none; border-radius:8px; display:inline-block;"
+                  >
                     Confirmar Conta
                   </a>
                 </p>
 
                 <p style="font-size:13px; color:#6b7280; line-height:1.5; margin-top:20px;">
-                  Este link é válido por <strong>24 horas</strong>.  
-                  Se você não criou uma conta no Elephanto, pode ignorar este email com segurança.
+                  Este link é válido por
+                  <strong>24 horas</strong>. Se você não criou uma conta no Elephanto, pode ignorar este
+                  email com segurança.
                 </p>
               </td>
             </tr>
 
             <tr>
-              <td align="center" style="background:#f3f4f6; padding: 15px; font-size:12px; color:#6b7280;">
-                © <%= Time.current.year %> Elephanto — Feito para quem acredita no poder da repetição espaçada 🐘
+              <td
+                align="center"
+                style="background:#f3f4f6; padding: 15px; font-size:12px; color:#6b7280;"
+              >
+                ©
+                <%= Time.current.year %>
+                Elephanto — Feito para quem acredita no poder da repetição
+                espaçada 🐘
               </td>
             </tr>
 
@@ -51,4 +77,3 @@
     </table>
   </body>
 </html>
-

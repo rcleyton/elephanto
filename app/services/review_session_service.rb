@@ -23,14 +23,14 @@ class ReviewSessionService
   end
 
   def process_review(flashcard, difficulty, review_queue, session)
-    raise ArgumentError, "Dificuldade inválida" unless Flashcard.difficulties.key?(difficulty) 
+    raise ArgumentError, "Dificuldade inválida" unless Flashcard.difficulties.key?(difficulty)
 
     flashcard.update!(difficulty: difficulty)
     flashcard.review!(@user)
 
     review_queue.delete(flashcard.id)
     review_queue << flashcard.id if difficulty == "again"
-    
+
     review_session_id = session[:review_session_id]
 
     if review_session_id
@@ -54,9 +54,8 @@ class ReviewSessionService
       duration_seconds: (Time.current - review_session.created_at).to_i
     )
   end
-  
+
   def increment(session)
     session.increment!(:reviewed_count)
   end
 end
-

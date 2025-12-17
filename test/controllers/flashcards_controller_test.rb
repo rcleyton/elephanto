@@ -31,7 +31,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     end
 
     it "update" do
-      patch deck_flashcard_path(@deck, @flashcard), params: { flashcard: { back: "Another question", 
+      patch deck_flashcard_path(@deck, @flashcard), params: { flashcard: { back: "Another question",
                                                                           front: "Another answer" } }
 
       @flashcard.reload
@@ -53,9 +53,9 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
   context "create" do
     it "should create flashcard" do
       assert_difference("Flashcard.count") do
-        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back, 
-                                                                difficulty: @flashcard.difficulty, 
-                                                                front: @flashcard.front, 
+        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back,
+                                                                difficulty: @flashcard.difficulty,
+                                                                front: @flashcard.front,
                                                                 last_reviewed_at: @flashcard.last_reviewed_at } }
       end
 
@@ -78,8 +78,8 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
     it "difficult can be blank" do
       assert_difference("Flashcard.count") do
-        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back, 
-                                                                front: @flashcard.front, 
+        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back,
+                                                                front: @flashcard.front,
                                                                 difficulty: "" } }
       end
 
@@ -133,11 +133,11 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_in_delta Time.current, @deck.last_reviewed_at, 1.second
     end
 
-    it 'check period to before review' do
+    it "check period to before review" do
       flashcard = @flashcard
       flashcard.update(next_review: Time.current + 172800)
       flashcard.reload
-      
+
       get deck_flashcard_path(@deck, flashcard)
 
       assert_redirected_to deck_path(@deck)
@@ -155,7 +155,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
 
       assert_equal Date.today + @flashcard.interval.days, @flashcard.next_review.to_date
     end
-      
+
     it "faster learning speed shortens next review interval" do
       @user.profile.update(learning_speed: 0.8)
       @user.reload
@@ -163,7 +163,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       @flashcard.difficulty = "easy"
       @flashcard.review!(@user)
 
-      expected = ( @flashcard.interval * 0.8 ).round
+      expected = (@flashcard.interval * 0.8).round
       assert_equal Date.today + expected.days, @flashcard.next_review.to_date
     end
 
@@ -175,7 +175,7 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       @flashcard.difficulty = "easy"
       @flashcard.review!(@user)
 
-      expected = ( @flashcard.interval * 1.5 ).round
+      expected = (@flashcard.interval * 1.5).round
       assert_equal Date.today + expected.days, @flashcard.next_review.to_date
     end
   end

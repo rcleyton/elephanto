@@ -2,8 +2,9 @@ source "https://rubygems.org"
 
 gem "actionview-encoded_mail_to"
 gem "bcrypt", "~> 3.1"
-gem "chartkick"
 gem "bootsnap", require: false
+gem "chartkick"
+gem "erb-formatter", "~> 0.7.3"
 gem "groupdate"
 gem "importmap-rails"
 gem "jbuilder"
@@ -19,15 +20,17 @@ gem "solid_cable"
 gem "solid_cache"
 gem "solid_queue"
 gem "stimulus-rails"
+gem "stringio", "3.1.1"
+gem "tailwindcss-rails", "~> 4.2"
+gem "tailwindcss-ruby", "~> 4.1"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
-gem "stringio", "3.1.1"
 
 group :development, :test do
   gem "brakeman", require: false
+  gem "byebug", "~> 12.0"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
-  gem "htmlbeautifier"
   gem "rubocop-rails-omakase", require: false
 end
 
@@ -53,9 +56,3 @@ group :test do
 end
 
 gem "dotenv-rails", groups: [ :staging, :production ]
-
-gem "tailwindcss-ruby", "~> 4.1"
-
-gem "tailwindcss-rails", "~> 4.2"
-
-gem "byebug", "~> 12.0", groups: [ :development, :test ]

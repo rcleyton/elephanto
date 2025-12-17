@@ -1,13 +1,30 @@
-<div id="<%= dom_id flashcard %>" data-controller="reveal" class="max-w-2xl mx-auto">
-  <div class="rounded-lg border bg-white border-gray-200 text-card-foreground min-h-[400px]">
-    <div class="p-8 flex flex-col justify-center items-center text-left min-h-[400px]">
+<div
+  id="<%= dom_id flashcard %>"
+  data-controller="reveal"
+  class="max-w-2xl mx-auto"
+>
+  <div
+    class="
+      rounded-lg border bg-white border-gray-200 text-card-foreground min-h-[400px]
+    "
+  >
+    <div
+      class="
+        p-8 flex flex-col justify-center items-center text-left min-h-[400px]
+      "
+    >
       <div class="w-full">
         <div class="mb-8">
           <h3 class="text-sm font-medium text-[#676F7E] mb-2">Pergunta</h3>
           <p class="text-2xl font-bold mb-8 text-[#21242C]"><%= flashcard.front %></p>
 
-          <button data-action="reveal#show" data-hide-button-target="button" type="button" class="btn btn-default-size btn-cta w-full">
-            <%= t('buttons.general.show_answer') %>
+          <button
+            data-action="reveal#show"
+            data-hide-button-target="button"
+            type="button"
+            class="btn btn-default-size btn-cta w-full"
+          >
+            <%= t("buttons.general.show_answer") %>
           </button>
         </div>
 
@@ -17,10 +34,34 @@
           <div class="space-y-4">
             <div class="text-[#676F7E] text-sm mb-4">Como foi sua resposta?</div>
             <div class="grid grid-cols-2 gap-3">
-              <%= button_to t('buttons.general.again'),  review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "again" }, method: :post, class: "btn btn-default-size btn-destructive w-full" %>
-              <%= button_to t('buttons.general.hard'),   review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "hard" }, method: :post, class: "btn btn-default-size btn-outline w-full" %>
-              <%= button_to t('buttons.general.medium'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" }, method: :post, class: "btn btn-default-size btn-secondary w-full" %>
-              <%= button_to t('buttons.general.easy'), review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "easy" }, method: :post, class: "btn btn-default-size btn-cta w-full" %>
+              <%= button_to t("buttons.general.again"),
+              review_deck_flashcard_path(@deck, flashcard),
+              params: {
+                difficulty: "again",
+              },
+              method: :post,
+              class: "btn btn-default-size btn-destructive w-full" %>
+              <%= button_to t("buttons.general.hard"),
+              review_deck_flashcard_path(@deck, flashcard),
+              params: {
+                difficulty: "hard",
+              },
+              method: :post,
+              class: "btn btn-default-size btn-outline w-full" %>
+              <%= button_to t("buttons.general.medium"),
+              review_deck_flashcard_path(@deck, flashcard),
+              params: {
+                difficulty: "medium",
+              },
+              method: :post,
+              class: "btn btn-default-size btn-secondary w-full" %>
+              <%= button_to t("buttons.general.easy"),
+              review_deck_flashcard_path(@deck, flashcard),
+              params: {
+                difficulty: "easy",
+              },
+              method: :post,
+              class: "btn btn-default-size btn-cta w-full" %>
             </div>
           </div>
         </div>

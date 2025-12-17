@@ -12,4 +12,3 @@ module ProfileRequired
     end
   end
 end
-

@@ -24,4 +24,3 @@ class Landing::PagesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 end
-

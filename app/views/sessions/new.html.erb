@@ -5,51 +5,71 @@
 </turbo-frame>
 
 <div class="min-h-screen flex overflow-hidden">
-  <div class="hidden lg:flex lg:w-1/2 bg-gradient-third items-center justify-center p-8 bg-gradient-primary">
+  <div
+    class="
+      hidden lg:flex lg:w-1/2 bg-gradient-third items-center justify-center p-8
+      bg-gradient-primary
+    "
+  >
     <div class="text-center text-white">
       <h1 class="text-4xl font-bold mb-4">Bem-vindo(a) de volta ao Elephanto</h1>
       <p class="text-xl opacity-90">
         Aprenda com inteligência usando repetição espaçada
       </p>
       <div class="mt-8">
-        <%= image_tag "logo_ligth.svg", class: "w-48 h-48 mx-auto filter brightness-0 invert" %>
+        <%= image_tag "logo_ligth.svg",
+        class: "w-48 h-48 mx-auto filter brightness-0 invert" %>
       </div>
     </div>
   </div>
   <div class="flex-1 flex items-center justify-center p-8 bg-gray-100">
-    <div class="rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full max-w-md">
+    <div
+      class="
+        rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full
+        max-w-md
+      "
+    >
       <div class="flex flex-col space-y-1.5 p-6 text-center">
         <div>
-          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t('general.signin') %></h3>
+          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t("general.signin") %></h3>
           <p class="text-sm text-gray-500 mt-2">Entre e aprenda um pouco mais ainda hoje</p>
         </div>
       </div>
       <div class="p-6 pt-0">
         <%= form_with url: session_url, class: "space-y-4" do |form| %>
-        <div class="space-y-2">
-          <%= form.label 'Email', class: "ui-label" %>
-          <%= form.email_field :email_address, 
-              required: true, 
-              autofocus: true, 
-              autocomplete: "username", 
-              placeholder: t('placeholders.user.email_address'), 
-              value: params[:email_address], 
-              class: "ui-input mt-2" %>
-        </div>
-        <div class="space-y-2">
-          <%= form.label 'Senha', class: "ui-label" %>
-          <%= form.password_field :password, required: true, 
-              autocomplete: "current-password", 
-              placeholder: t('placeholders.user.password'), maxlength: 72, 
-              class: "ui-input mt-2" %>
-        </div>
-        <%= form.submit t('buttons.general.enter'), class: "btn btn-default-variant btn-default-size w-full" %>
+          <div class="space-y-2">
+            <%= form.label "Email", class: "ui-label" %>
+            <%= form.email_field :email_address,
+                             required: true,
+                             autofocus: true,
+                             autocomplete: "username",
+                             placeholder: t("placeholders.user.email_address"),
+                             value: params[:email_address],
+                             class: "ui-input mt-2" %>
+          </div>
+          <div class="space-y-2">
+            <%= form.label "Senha", class: "ui-label" %>
+            <%= form.password_field :password,
+                                required: true,
+                                autocomplete: "current-password",
+                                placeholder: t("placeholders.user.password"),
+                                maxlength: 72,
+                                class: "ui-input mt-2" %>
+          </div>
+          <%= form.submit t("buttons.general.enter"),
+                      class: "btn btn-default-variant btn-default-size w-full" %>
 
-        <div class="text-center flex flex-col">
-          <%= link_to t('buttons.general.forgot_password'), new_password_path, class: "text-sm text-blue-600 hover:underline" %>
-          <%= link_to 'Ainda não tenho conta?', sign_up_path, class: "text-sm text-blue-600 hover:underline" %>
-          <%= link_to "Reenviar e-mail de confirmação", new_confirmation_path, class: "text-sm text-blue-600 hover:underline" %>
-        </div>
+          <div class="text-center flex flex-col">
+            <%= link_to t("buttons.general.forgot_password"),
+            new_password_path,
+            class: "text-sm text-blue-600 hover:underline" %>
+            <%= link_to "Ainda não tenho conta?",
+            sign_up_path,
+            class: "text-sm text-blue-600 hover:underline" %>
+            <%= link_to "Reenviar e-mail de confirmação",
+            new_confirmation_path,
+            class: "text-sm text-blue-600 hover:underline" %>
+          </div>
         <% end %>
       </div>
     </div>

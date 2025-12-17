@@ -7,7 +7,7 @@ class ConfirmationEmailJobTest < ActiveJob::TestCase
   test "envia email de confirmação" do
     user = users(:one)
 
-    assert_enqueued_with(job: ConfirmationEmailJob, args: [user.id]) do
+    assert_enqueued_with(job: ConfirmationEmailJob, args: [ user.id ]) do
       ConfirmationEmailJob.perform_later(user.id)
     end
 
@@ -17,7 +17,7 @@ class ConfirmationEmailJobTest < ActiveJob::TestCase
 
     assert_emails 1
     mail = ActionMailer::Base.deliveries.last
-    assert_equal [user.email_address], mail.to
+    assert_equal [ user.email_address ], mail.to
     assert_match /Confirme sua conta/i, mail.subject
   end
 end

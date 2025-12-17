@@ -2,36 +2,68 @@
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-hero">
+<section
+  class="
+    relative min-h-screen flex items-center justify-center overflow-hidden
+    bg-gradient-hero
+  "
+>
   <div class="container mx-auto px-6 py-20 relative z-10">
     <div class="grid lg:grid-cols-2 gap-12 items-center">
       <div class="space-y-8">
         <div class="space-y-4">
           <h1 class="text-5xl lg:text-7xl font-bold text-white leading-tight">
             Memorize
-            <span class="block bg-gradient-to-r from-accent to-third bg-clip-text text-transparent">Qualquer coisa</span>
+            <span
+              class="
+                block bg-gradient-to-r from-accent to-third bg-clip-text text-transparent
+              "
+            >Qualquer coisa</span>
             <span class="block text-white">Para sempre</span>
           </h1>
           <p class="text-xl text-white/80 max-w-lg leading-relaxed">
-            Domine qualquer assunto com o Elephanto, sistema inteligente de repetição espaçada.
-            Crie decks e flashcards, e deixe nosso algoritmo otimizar seu cronograma de aprendizado.
+            Domine qualquer assunto com o Elephanto, sistema inteligente de
+            repetição espaçada. Crie decks e flashcards, e deixe nosso
+            algoritmo otimizar seu cronograma de aprendizado.
           </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-4">
           <%= link_to sign_up_url, class: "btn btn-lg btn-outline text-lg px-8 bg-white/10 text-white border-white/30 hover:bg-white/20" do %>
-          Começar a aprender agora
+            Começar a aprender agora
           <% end %>
         </div>
       </div>
       <div class="relative">
         <div class="relative">
-          <%= image_tag "hero-flashcards.png", alt: "Imagem hero", class: "w-full h-auto rounded-2xl shadow-glow" %>
+          <%= image_tag "hero-flashcards.png",
+          alt: "Imagem hero",
+          class: "w-full h-auto rounded-2xl shadow-glow" %>
         </div>
-        <div class="rounded-lg text-card-foreground shadow-sm absolute -left-6 top-20 p-4 bg-card/90 backdrop-blur-sm shadow-card-soft border-0 hidden md:block">
+        <div
+          class="
+            rounded-lg text-card-foreground shadow-sm absolute -left-6 top-20 p-4 bg-card/90
+            backdrop-blur-sm shadow-card-soft border-0 hidden md:block
+          "
+        >
           <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain w-8 h-8 text-primary">
-              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path>
-              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-brain w-8 h-8 text-primary"
+            >
+              <path
+                d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
+              ></path>
+              <path
+                d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
+              ></path>
               <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
               <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
               <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
@@ -46,9 +78,25 @@
             </div>
           </div>
         </div>
-        <div class="rounded-lg text-card-foreground shadow-sm absolute -right-6 top-40 p-4 bg-card/90 backdrop-blur-sm shadow-card-soft border-0 hidden md:block">
+        <div
+          class="
+            rounded-lg text-card-foreground shadow-sm absolute -right-6 top-40 p-4
+            bg-card/90 backdrop-blur-sm shadow-card-soft border-0 hidden md:block
+          "
+        >
           <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat w-8 h-8 text-accent">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-repeat w-8 h-8 text-accent"
+            >
               <path d="m17 2 4 4-4 4"></path>
               <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
               <path d="m7 22-4-4 4-4"></path>
@@ -60,9 +108,25 @@
             </div>
           </div>
         </div>
-        <div class="rounded-lg text-card-foreground shadow-sm absolute -left-4 bottom-20 p-4 bg-card/90 backdrop-blur-sm shadow-card-soft border-0 hidden md:block">
+        <div
+          class="
+            rounded-lg text-card-foreground shadow-sm absolute -left-4 bottom-20 p-4
+            bg-card/90 backdrop-blur-sm shadow-card-soft border-0 hidden md:block
+          "
+        >
           <div class="flex items-center gap-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trending-up w-8 h-8 text-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-trending-up w-8 h-8 text-primary"
+            >
               <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
               <polyline points="16 7 22 7 22 13"></polyline>
             </svg>
@@ -83,16 +147,43 @@
         <span class="block bg-gradient-primary bg-clip-text text-transparent pb-2">uma aprendizagem eficaz</span>
       </h2>
       <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-        O Elephanto combina ciência de aprendizagem comprovada com tecnologia moderna para ajudar você a memorizar qualquer coisa, de forma mais rápida e eficaz.
+        O Elephanto combina ciência de aprendizagem comprovada com tecnologia
+        moderna para ajudar você a memorizar qualquer coisa, de forma mais
+        rápida e eficaz.
       </p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="rounded-lg text-card-foreground shadow-sm group hover:shadow-card transition-smooth border-0 bg-gradient-card">
+      <div
+        class="
+          rounded-lg text-card-foreground shadow-sm group hover:shadow-card
+          transition-smooth border-0 bg-gradient-card
+        "
+      >
         <div class="flex flex-col p-6 space-y-4">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3 group-hover:scale-110 transition-smooth">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain w-6 h-6 text-white">
-              <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path>
-              <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path>
+          <div
+            class="
+              w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3
+              group-hover:scale-110 transition-smooth
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-brain w-6 h-6 text-white"
+            >
+              <path
+                d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
+              ></path>
+              <path
+                d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
+              ></path>
               <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
               <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
               <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
@@ -106,14 +197,36 @@
         </div>
         <div class="p-6 pt-0">
           <p class="text-muted-foreground text-base leading-relaxed">
-            Nosso algoritmo se adapta aos seus padrões de aprendizagem, otimizando os intervalos de revisão para máxima retenção.
+            Nosso algoritmo se adapta aos seus padrões de aprendizagem,
+            otimizando os intervalos de revisão para máxima retenção.
           </p>
         </div>
       </div>
-      <div class="rounded-lg text-card-foreground shadow-sm group hover:shadow-card transition-smooth border-0 bg-gradient-card">
+      <div
+        class="
+          rounded-lg text-card-foreground shadow-sm group hover:shadow-card
+          transition-smooth border-0 bg-gradient-card
+        "
+      >
         <div class="flex flex-col p-6 space-y-4">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3 group-hover:scale-110 transition-smooth">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-6 h-6 text-white">
+          <div
+            class="
+              w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3
+              group-hover:scale-110 transition-smooth
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-clock w-6 h-6 text-white"
+            >
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
@@ -122,22 +235,47 @@
         </div>
         <div class="p-6 pt-0">
           <p class="text-muted-foreground text-base leading-relaxed">
-            O Elephanto identifica os momentos ideais para revisar o conteúdo, maximizando retenção sem esforço excessivo.
+            O Elephanto identifica os momentos ideais para revisar o conteúdo,
+            maximizando retenção sem esforço excessivo.
           </p>
         </div>
       </div>
-      <div class="rounded-lg text-card-foreground shadow-sm group hover:shadow-card transition-smooth border-0 bg-gradient-card">
+      <div
+        class="
+          rounded-lg text-card-foreground shadow-sm group hover:shadow-card
+          transition-smooth border-0 bg-gradient-card
+        "
+      >
         <div class="flex flex-col p-6 space-y-4">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3 group-hover:scale-110 transition-smooth">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-6 h-6 text-white">
-              <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
+          <div
+            class="
+              w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3
+              group-hover:scale-110 transition-smooth
+            "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-zap w-6 h-6 text-white"
+            >
+              <path
+                d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+              ></path>
             </svg>
           </div>
           <h3 class="font-semibold tracking-tight text-xl">Criação rápida</h3>
         </div>
         <div class="p-6 pt-0">
           <p class="text-muted-foreground text-base leading-relaxed">
-            Crie flashcards em segundos com nossa interface intuitiva e recursos de importação em massa.
+            Crie flashcards em segundos com nossa interface intuitiva e
+            recursos de importação em massa.
           </p>
         </div>
       </div>
@@ -148,19 +286,47 @@
   <div class="container mx-auto px-6">
     <div class="text-center mb-16">
       <h2 class="text-4xl lg:text-5xl font-bold mb-6">
-        Como o <span class="bg-gradient-primary bg-clip-text text-transparent">Elephanto</span> funciona
+        Como o
+        <span class="bg-gradient-primary bg-clip-text text-transparent">Elephanto</span>
+        funciona
       </h2>
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Nossa abordagem com base científica torna o aprendizado mais eficiente e agradável.</p>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Nossa abordagem com base científica torna o aprendizado mais eficiente
+        e agradável.</p>
     </div>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="relative">
-        <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-accent/30 z-0"></div>
-        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+        <div
+          class="
+            hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r
+            from-primary/30 to-accent/30 z-0
+          "
+        ></div>
+        <div
+          class="
+            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
+            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+          "
+        >
           <div class="p-6 text-center flex flex-col h-full">
             <div class="mb-6">
               <div class="text-6xl font-bold text-primary opacity-20 mb-4">01</div>
-              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-8 h-8 text-white">
+              <div
+                class="
+                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-plus w-8 h-8 text-white"
+                >
                   <path d="M5 12h14"></path>
                   <path d="M12 5v14"></path>
                 </svg>
@@ -172,32 +338,85 @@
         </div>
       </div>
       <div class="relative">
-        <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-accent/30 z-0"></div>
-        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+        <div
+          class="
+            hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r
+            from-primary/30 to-accent/30 z-0
+          "
+        ></div>
+        <div
+          class="
+            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
+            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+          "
+        >
           <div class="p-6 text-center flex flex-col h-full">
             <div class="mb-6">
               <div class="text-6xl font-bold text-primary opacity-20 mb-4">02</div>
-              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layers w-8 h-8 text-white">
-                  <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"></path>
+              <div
+                class="
+                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-layers w-8 h-8 text-white"
+                >
+                  <path
+                    d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"
+                  ></path>
                   <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"></path>
                   <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"></path>
                 </svg>
               </div>
             </div>
             <h3 class="text-xl font-semibold mb-3">Estude seus cards</h3>
-            <p class="text-muted-foreground leading-relaxed">Comece a estudar seus flashcards. Avalie o quão bem você se lembra de cada cartão para ajudar nosso algoritmo a aprender.</p>
+            <p class="text-muted-foreground leading-relaxed">Comece a estudar seus flashcards. Avalie o quão bem você se
+              lembra de cada cartão para ajudar nosso algoritmo a aprender.</p>
           </div>
         </div>
       </div>
       <div class="relative">
-        <div class="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r from-primary/30 to-accent/30 z-0"></div>
-        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+        <div
+          class="
+            hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r
+            from-primary/30 to-accent/30 z-0
+          "
+        ></div>
+        <div
+          class="
+            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
+            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+          "
+        >
           <div class="p-6 text-center flex flex-col h-full">
             <div class="mb-6">
               <div class="text-6xl font-bold text-primary opacity-20 mb-4">03</div>
-              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat w-8 h-8 text-white">
+              <div
+                class="
+                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-repeat w-8 h-8 text-white"
+                >
                   <path d="m17 2 4 4-4 4"></path>
                   <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
                   <path d="m7 22-4-4 4-4"></path>
@@ -206,17 +425,38 @@
               </div>
             </div>
             <h3 class="text-xl font-semibold mb-3">Repetição inteligente</h3>
-            <p class="text-muted-foreground leading-relaxed">Nosso algoritmo agenda a próxima repetição com base no seu desempenho, mostrando cartas difíceis com mais frequência.</p>
+            <p class="text-muted-foreground leading-relaxed">Nosso algoritmo agenda a próxima repetição com base no seu
+              desempenho, mostrando cartas difíceis com mais frequência.</p>
           </div>
         </div>
       </div>
       <div class="relative">
-        <div class="rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card transition-smooth border-0 bg-gradient-card h-full flex flex-col">
+        <div
+          class="
+            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
+            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+          "
+        >
           <div class="p-6 text-center flex flex-col h-full">
             <div class="mb-6">
               <div class="text-6xl font-bold text-primary opacity-20 mb-4">04</div>
-              <div class="w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy w-8 h-8 text-white">
+              <div
+                class="
+                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-trophy w-8 h-8 text-white"
+                >
                   <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
                   <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
                   <path d="M4 22h16"></path>
@@ -227,21 +467,27 @@
               </div>
             </div>
             <h3 class="text-xl font-semibold mb-3">Acompanhe o progresso</h3>
-            <p class="text-muted-foreground leading-relaxed">Observe suas taxas de retenção melhorarem à medida que você domina cada cartão por meio de repetição espaçada.</p>
+            <p class="text-muted-foreground leading-relaxed">Observe suas taxas de retenção melhorarem à medida que você
+              domina cada cartão por meio de repetição espaçada.</p>
           </div>
         </div>
       </div>
     </div>
     <div class="text-center mt-16">
       <%= link_to sign_up_url, class: "btn btn-lg btn-cta text-lg px-8" do %>
-      Iniciar jornada de aprendizado
+        Iniciar jornada de aprendizado
       <% end %>
     </div>
   </div>
 </section>
 <section class="py-20 bg-gradient-hero relative overflow-hidden">
   <div class="container mx-auto px-6 relative z-10">
-    <div class="rounded-lg border text-card-foreground shadow-sm max-w-4xl mx-auto bg-white/10 backdrop-blur-lg border-white/20 shadow-glow">
+    <div
+      class="
+        rounded-lg border text-card-foreground shadow-sm max-w-4xl mx-auto bg-white/10
+        backdrop-blur-lg border-white/20 shadow-glow
+      "
+    >
       <div class="p-12 text-center">
         <div class="mb-8">
           <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
@@ -249,22 +495,47 @@
             <span class="block">sua aprendizagem?</span>
           </h2>
           <p class="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-            Junte-se a milhares de alunos que já melhoraram sua memória e retenção com o Elephanto.
+            Junte-se a milhares de alunos que já melhoraram sua memória e
+            retenção com o Elephanto.
           </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
           <%= link_to sign_up_url, class: "btn btn-lg btn-hero text-lg px-8 bg-white text-primary hover:bg-white/90" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-5 h-5">
-            <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path>
-          </svg>
-          Começar agora
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-zap w-5 h-5"
+            >
+              <path
+                d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+              ></path>
+            </svg>
+            Começar agora
           <% end %>
           <%= link_to new_session_url, class: "btn btn-lg btn-outline text-lg px-8 bg-transparent text-white border-white/30 hover:bg-white/10" do %>
-          Já estou por aqui
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-5 h-5">
-            <path d="M5 12h14"></path>
-            <path d="m12 5 7 7-7 7"></path>
-          </svg>
+            Já estou por aqui
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right w-5 h-5"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
           <% end %>
         </div>
       </div>

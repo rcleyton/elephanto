@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :decks,    dependent: :destroy
   has_many :flashcards, through: :decks
-  
+
   has_one :profile, dependent: :destroy
 
   validates :email_address,         presence: true, uniqueness: true, email: true

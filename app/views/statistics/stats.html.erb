@@ -10,10 +10,13 @@
     back_path: decks_path,
     title: "Estatísticas de aprendizado",
     subtitle: "Acompanhe sua evolução nas revisões",
-    show_profile_menu: false
+    show_profile_menu: false,
   ) %>
 
-  <main data-controller="automatic-margin-top" class="container md:mx-auto px-6 py-8">
+  <main
+    data-controller="automatic-margin-top"
+    class="container md:mx-auto px-6 py-8"
+  >
     <div class="grid gap-6 md:grid-cols-4 mb-6">
       <div class="rounded-lg border bg-card text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6 pb-2">
@@ -40,6 +43,8 @@
         </div>
       </div>
     </div>
-    <%= render "overview_stats", review_sessions: @review_sessions, flashcards: @flashcards %> 
+    <%= render "overview_stats",
+    review_sessions: @review_sessions,
+    flashcards: @flashcards %>
   </main>
 </div>

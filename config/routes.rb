@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   constraints(lambda { |req| req.subdomain == "app" || req.host == "app.localhost" }) do
     root to: "home#redirect", as: :app_root
-    
+
     get  "admin",    to: "admin#index"
     get  "/sign_up", to: "users#new"
     post "/sign_up", to: "users#create"
@@ -22,17 +22,17 @@ Rails.application.routes.draw do
     resources :passwords, param: :token
     resources :profiles, only: %i[new create show edit update]
 
-    resource :settings, only: [:show] do
+    resource :settings, only: [ :show ] do
       patch   :update_password
       patch   :learning_speed
       delete  :delete_account
-      
-      collection do 
-        delete  :remove_deck
+
+      collection do
+        delete :remove_deck
       end
     end
 
-    get "/statistics", to: "statistics#stats"   
+    get "/statistics", to: "statistics#stats"
 
     resources :decks do
       resources :flashcards, only: %i[show new create edit update destroy] do

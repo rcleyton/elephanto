@@ -16,8 +16,8 @@ class Flashcard < ApplicationRecord
   scope :due, -> { where("next_review <= ?", Date.current) }
 
   def review!(user)
-    profile = user.profile 
-    speed   = profile&.learning_speed || 1.0 
+    profile = user.profile
+    speed   = profile&.learning_speed || 1.0
 
     self.efactor    ||= 2.5
     self.repetition ||= 0
@@ -42,7 +42,7 @@ class Flashcard < ApplicationRecord
       else
         (interval * efactor).round
       end
-      
+
       adjust_interval      = (interval * speed).round
       self.next_review     = Date.current + adjust_interval.days
     end

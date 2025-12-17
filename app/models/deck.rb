@@ -4,7 +4,7 @@
 class Deck < ApplicationRecord
     has_many :flashcards, dependent: :destroy
     has_many :review_sessions, dependent: :destroy
-    
+
     belongs_to :user
 
     validates :name, presence: true

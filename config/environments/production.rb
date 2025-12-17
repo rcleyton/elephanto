@@ -8,7 +8,7 @@ Rails.application.configure do
   config.consider_all_requests_local = false
 
   config.action_dispatch.show_exceptions = true
-  
+
   config.exceptions_app = self.routes
 
   config.action_controller.perform_caching = true
@@ -34,9 +34,9 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = { database: { writing: :queue } }
-  
+
   config.action_mailer.default_url_options = { host: "getelephanto.com" }
-  
+
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 

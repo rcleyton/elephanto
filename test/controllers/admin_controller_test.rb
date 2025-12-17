@@ -9,23 +9,23 @@ class AdminControllerTest < ActionDispatch::IntegrationTest
   end
 
   context "Admin"  do
-    it 'get success' do
+    it "get success" do
       @user = users(:one)
       post session_url, params: {  email_address: @user.email_address, password: "P@ssword1" }
-      
+
       get admin_path
 
       assert_template layout: "layouts/admin"
       assert :success
     end
 
-    it 'false' do
+    it "false" do
       @not_admin = users(:one)
       @not_admin.update_column(:admin, false)
       @not_admin.reload
 
       post session_url, params: { email_address: @not_admin.email_address, password: "P@ssword1" }
-      
+
       get admin_path
 
       assert_redirected_to decks_path

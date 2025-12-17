@@ -1,65 +1,105 @@
-<header class="fixed top-0 right-0 left-0 md:static border-b border-border/50 bg-background/80 backdrop-blur-lg" data-controller="header mobile-menu">
+<header
+  class="
+    fixed top-0 right-0 left-0 md:static border-b border-border/50 bg-background/80
+    backdrop-blur-lg
+  "
+  data-controller="header mobile-menu"
+>
   <div class="container mx-auto px-6 py-6">
     <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
       <div class="flex items-start justify-between">
         <div class="flex items-center gap-4">
           <% if show_back_button %>
-          <%= link_to back_path, class: "icon-arrow-left inline-flex items-center justify-center ring-offset-backgrond transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:accent-foreground rounded-md h-10 w-10" do %>
-          <%= image_tag "arrow-left.svg", class: "h-4 w-4" %>
-          <% end %>
+            <%= link_to back_path, class: "icon-arrow-left inline-flex items-center justify-center ring-offset-backgrond transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:accent-foreground rounded-md h-10 w-10" do %>
+              <%= image_tag "arrow-left.svg", class: "h-4 w-4" %>
+            <% end %>
           <% end %>
           <div>
-            <h1 class="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            <h1
+              class="
+                text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent
+              "
+            >
               <%= title %>
             </h1>
             <% if subtitle %>
-            <p class="text-muted-foreground mt-2">
-              <%= subtitle %>
-            </p>
+              <p class="text-muted-foreground mt-2">
+                <%= subtitle %>
+              </p>
             <% end %>
           </div>
         </div>
         <% if show_profile_menu %>
-        <div class="md:hidden">
-          <button data-action="mobile-menu#toggleMobileMenu" class="text-gray-900 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Abrir menu">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-settings w-6 h-6">
-              <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
-              <circle cx="12" cy="12" r="3" />
-            </svg>
-          </button>
-        </div>
+          <div class="md:hidden">
+            <button
+              data-action="mobile-menu#toggleMobileMenu"
+              class="
+                text-gray-900 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
+              "
+              aria-label="Abrir menu"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide-settings w-6 h-6"
+              >
+                <path
+                  d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"
+                />
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
+          </div>
         <% end %>
       </div>
       <div class="flex items-center gap-4 md:gap-8">
         <% if show_new_deck_button %>
-        <%= link_to new_deck_path, class: "btn btn-default-size btn-default-variant w-full" do %>
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-plus w-4 h-4">
-          <path d="M5 12h14" />
-          <path d="M12 5v14" />
-        </svg>
-        <%= t('buttons.submit.new_deck') %>
-        <% end %>
+          <%= link_to new_deck_path, class: "btn btn-default-size btn-default-variant w-full" do %>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide-plus w-4 h-4"
+            >
+              <path d="M5 12h14"/>
+              <path d="M12 5v14"/>
+            </svg>
+            <%= t("buttons.submit.new_deck") %>
+          <% end %>
         <% end %>
 
         <% if show_profile_menu %>
-        <%= render 'shared/profile_menu' %>
+          <%= render "shared/profile_menu" %>
         <% end %>
 
         <% if right_buttons %>
-        <%= right_buttons %>
+          <%= right_buttons %>
         <% end %>
       </div>
     </div>
   </div>
   <% if show_profile_menu %>
-  <%= render 'shared/mobile_menu' %>
+    <%= render "shared/mobile_menu" %>
   <% end %>
 
   <% progress = flashcard_progress(@deck) %>
 
   <% if controller_name == "flashcards" && controller.action_name == "show" %>
-  <div class="w-full bg-gray-200 h-2.5 dark:bg-gray-700">
-    <div class="bg-blue-600 h-2.5" style="width: <%= progress[:percent] %>%"></div>
-  </div>
+    <div class="w-full bg-gray-200 h-2.5 dark:bg-gray-700">
+      <div class="bg-blue-600 h-2.5" style="width: <%= progress[:percent] %>%"></div>
+    </div>
   <% end %>
 </header>

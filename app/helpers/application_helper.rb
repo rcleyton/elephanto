@@ -7,7 +7,7 @@ module ApplicationHelper
       notice:  "bg-blue-600 text-white",
       alert:   "bg-yellow-500 text-gray-900",
       error:   "bg-red-500 text-white",
-      success: "bg-green-600 text-white",
+      success: "bg-green-600 text-white"
     }.fetch(type.to_sym)
   end
 
@@ -40,11 +40,11 @@ module ApplicationHelper
   end
 
   def seconds_to_str(seconds)
-    ["#{seconds/3600}h", "#{seconds/60%60}m", "#{seconds%60}s"]
+    [ "#{seconds/3600}h", "#{seconds/60%60}m", "#{seconds%60}s" ]
       .select { |str| str =~ /[1-9]/ }.join(" ")
   end
 
-  def page_header(options={})
+  def page_header(options = {})
     HeaderPresenter.new(self, options).render
   end
 
@@ -56,4 +56,3 @@ module ApplicationHelper
     input_error?(model, field) ? "ui-input-error" : ""
   end
 end
-

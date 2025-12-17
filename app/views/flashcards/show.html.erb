@@ -1,4 +1,5 @@
-<% content_for :title, "#{t('actions.showing')} #{Flashcard.model_name.human.downcase}" %>
+<% content_for :title,
+"#{t("actions.showing")} #{Flashcard.model_name.human.downcase}" %>
 
 <div class="min-h-screen bg-background">
   <% progress = flashcard_progress(@deck) %>
@@ -14,10 +15,13 @@
     title: "Revisão: #{@deck.name}",
     subtitle: "Flashcard #{progress[:current]} de #{progress[:total]}",
     show_profile_menu: false,
-    right_buttons: right_button
-  ) %> 
+    right_buttons: right_button,
+  ) %>
 
-  <main data-controller="automatic-margin-top" class="container mx-auto px-6 py-8">
+  <main
+    data-controller="automatic-margin-top"
+    class="container mx-auto px-6 py-8"
+  >
     <%= render @flashcard %>
   </main>
-<div>
+  <div>

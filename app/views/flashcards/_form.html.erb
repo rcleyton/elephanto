@@ -1,30 +1,34 @@
 <%= form_with model: [ @deck, @flashcard ], class: "space-y-6" do |form| %>
-<div>
-  <%= form.label :front, class: "ui-label" %>
+  <div>
+    <%= form.label :front, class: "ui-label" %>
 
-  <%= form.text_field :front,
-            placeholder: t("placeholders.flashcard.front_flashcard"),
-            class: "ui-input #{error_class(flashcard, :front)} mt-2" %>
+    <%= form.text_field :front,
+                    placeholder: t("placeholders.flashcard.front_flashcard"),
+                    class: "ui-input #{error_class(flashcard, :front)} mt-2" %>
 
-  <% if flashcard.errors[:front].any? %>
-  <p class="ui-error"><%= Flashcard.human_attribute_name(:front) %> <%= flashcard.errors[:front].first %></p>
-  <% end %>
-</div>
+    <% if flashcard.errors[:front].any? %>
+      <p class="ui-error"><%= Flashcard.human_attribute_name(:front) %>
+        <%= flashcard.errors[:front].first %></p>
+    <% end %>
+  </div>
 
-<div>
-  <%= form.label :back, class: "ui-label" %>
+  <div>
+    <%= form.label :back, class: "ui-label" %>
 
-  <%= form.text_area :back,
-            placeholder: t("placeholders.flashcard.back_flashcard"),
-            class: "ui-textarea #{error_class(flashcard, :back)} mt-2" %>
+    <%= form.text_area :back,
+                   placeholder: t("placeholders.flashcard.back_flashcard"),
+                   class: "ui-textarea #{error_class(flashcard, :back)} mt-2" %>
 
-  <% if flashcard.errors[:back].any? %>
-  <p class="ui-error"><%= Flashcard.human_attribute_name(:back) %> <%= flashcard.errors[:back].first %></p>
-  <% end %>
-</div>
+    <% if flashcard.errors[:back].any? %>
+      <p class="ui-error"><%= Flashcard.human_attribute_name(:back) %>
+        <%= flashcard.errors[:back].first %></p>
+    <% end %>
+  </div>
 
-<div class="flex gap-4 pt-4">
-  <%= link_to t('buttons.general.back_to_deck'), deck_path(@deck), class: "btn btn-default-size btn-outline flex-1" %>
-  <%= form.submit class: "btn btn-default-size btn-cta flex-1" %>
-</div>
+  <div class="flex gap-4 pt-4">
+    <%= link_to t("buttons.general.back_to_deck"),
+    deck_path(@deck),
+    class: "btn btn-default-size btn-outline flex-1" %>
+    <%= form.submit class: "btn btn-default-size btn-cta flex-1" %>
+  </div>
 <% end %>

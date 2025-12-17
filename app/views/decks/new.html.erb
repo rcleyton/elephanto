@@ -1,4 +1,4 @@
-<% content_for :title, "#{t('actions.new')} #{Deck.model_name.human.downcase}" %>
+<% content_for :title, "#{t("actions.new")} #{Deck.model_name.human.downcase}" %>
 
 <turbo-frame id="flash">
   <%= render "shared/flash" %>
@@ -8,12 +8,15 @@
   <%= page_header(
     show_back_button: true,
     back_path: decks_path,
-    title: "#{t('actions.new')} #{Deck.model_name.human.downcase}",
+    title: "#{t("actions.new")} #{Deck.model_name.human.downcase}",
     subtitle: "Crie um novo deck para organizar seus flashcards",
-    show_profile_menu: false
+    show_profile_menu: false,
   ) %>
 
-  <main data-controller="automatic-margin-top" class="container mx-auto px-6 py-8">
+  <main
+    data-controller="automatic-margin-top"
+    class="container mx-auto px-6 py-8"
+  >
     <div class="max-w-2xl mx-auto">
       <div class="rounded-lg border bg-card text-card-foreground">
         <div class="flex flex-col space-y-1.5 p-6">
