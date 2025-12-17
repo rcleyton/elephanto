@@ -10,3 +10,4 @@ pin "@stimulus-components/notification", to: "@stimulus-components--notification
 pin "stimulus-use" # @0.52.3
 pin "chartkick", to: "chartkick.js"
 pin "Chart.bundle", to: "Chart.bundle.js"
+pin "@stimulus-components/password-visibility", to: "@stimulus-components--password-visibility.js" # @3.0.0
