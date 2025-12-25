@@ -34,34 +34,24 @@
           <div class="space-y-4">
             <div class="text-[#676F7E] text-sm mb-4">Como foi sua resposta?</div>
             <div class="grid grid-cols-2 gap-3">
-              <%= button_to t("buttons.general.again"),
-              review_deck_flashcard_path(@deck, flashcard),
-              params: {
-                difficulty: "again",
-              },
-              method: :post,
-              class: "btn btn-default-size btn-destructive w-full" %>
-              <%= button_to t("buttons.general.hard"),
-              review_deck_flashcard_path(@deck, flashcard),
-              params: {
-                difficulty: "hard",
-              },
-              method: :post,
-              class: "btn btn-default-size btn-outline w-full" %>
-              <%= button_to t("buttons.general.medium"),
-              review_deck_flashcard_path(@deck, flashcard),
-              params: {
-                difficulty: "medium",
-              },
-              method: :post,
-              class: "btn btn-default-size btn-secondary w-full" %>
-              <%= button_to t("buttons.general.easy"),
-              review_deck_flashcard_path(@deck, flashcard),
-              params: {
-                difficulty: "easy",
-              },
-              method: :post,
-              class: "btn btn-default-size btn-cta w-full" %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard),
+                params: { difficulty: "again" }, method: :post, class: "btn btn-default-size btn-destructive w-full" do %>
+                <%= t("buttons.general.again") %>
+                <%= review_preview(flashcard, :again) %>
+              <% end %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "hard" }, method: :post, class: "btn btn-default-size btn-outline w-full" do %>
+                <%= t("buttons.general.hard") %>
+                <%= review_preview(flashcard, :hard) %>
+              <% end %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" },
+                method: :post, class: "btn btn-default-size btn-secondary w-full" do %>
+                <%= t("buttons.general.medium") %>
+                <%= review_preview(flashcard, :medium) %>
+              <% end %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "easy" }, method: :post, class: "btn btn-default-size btn-cta w-full" do %>
+                <%= t("buttons.general.easy") %>
+                <%= review_preview(flashcard, :easy) %>
+              <% end %>
             </div>
           </div>
         </div>
