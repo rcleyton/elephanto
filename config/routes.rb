@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
     resource :settings, only: [ :show ] do
       patch   :update_password
-      patch   :learning_speed
+      patch   :rigor_factor
       delete  :delete_account
 
       collection do

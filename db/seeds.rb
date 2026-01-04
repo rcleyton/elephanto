@@ -64,16 +64,16 @@ Deck.create(name: "Science Terms",        description: "Key scientific terms and
 # English Vocabulary Flashcards
 english_deck = Deck.find_by(name: "English Vocabulary")
 Flashcard.create([
-  { front: "Big",         back: "Large in size or amount",          difficulty: "easy",   deck: english_deck },
-  { front: "Run",         back: "To move quickly on foot",          difficulty: "easy",   deck: english_deck },
-  { front: "Beautiful",   back: "Pleasing to the senses",           difficulty: "medium", deck: english_deck },
-  { front: "Quick",       back: "Fast or rapid",                    difficulty: "easy",   deck: english_deck },
-  { front: "Happy",       back: "Feeling or showing pleasure",      difficulty: "easy",   deck: english_deck },
-  { front: "Difficult",   back: "Hard to do or understand",         difficulty: "medium", deck: english_deck },
-  { front: "Ancient",     back: "Very old or from a long time ago", difficulty: "medium", deck: english_deck },
-  { front: "Brave",       back: "Showing courage",                  difficulty: "medium", deck: english_deck },
-  { front: "Freedom",     back: "The state of being free",          difficulty: "hard",   deck: english_deck },
-  { front: "Magnificent", back: "Very beautiful or impressive",     difficulty: "hard",   deck: english_deck }
+  { front: "Big",         back: "Large in size or amount",          deck: english_deck },
+  { front: "Run",         back: "To move quickly on foot",          deck: english_deck },
+  { front: "Beautiful",   back: "Pleasing to the senses",           deck: english_deck },
+  { front: "Quick",       back: "Fast or rapid",                    deck: english_deck },
+  { front: "Happy",       back: "Feeling or showing pleasure",      deck: english_deck },
+  { front: "Difficult",   back: "Hard to do or understand",         deck: english_deck },
+  { front: "Ancient",     back: "Very old or from a long time ago", deck: english_deck },
+  { front: "Brave",       back: "Showing courage",                  deck: english_deck },
+  { front: "Freedom",     back: "The state of being free",          deck: english_deck },
+  { front: "Magnificent", back: "Very beautiful or impressive",     deck: english_deck }
 ])
 
 # Math Formulas Flashcards
@@ -109,16 +109,16 @@ Flashcard.create([
 # Programming Concepts Flashcards
 programming_deck = Deck.find_by(name: "Programming Concepts")
 Flashcard.create([
-  { front: "Variable",    back: "A named storage location in memory",                               difficulty: "easy",   deck: programming_deck },
-  { front: "Function",    back: "A block of code that performs a specific task",                    difficulty: "medium", deck: programming_deck },
-  { front: "Loop",        back: "A control structure that repeats a block of code",                 difficulty: "medium", deck: programming_deck },
-  { front: "Array",       back: "A collection of elements stored at contiguous memory locations",   difficulty: "medium", deck: programming_deck },
-  { front: "Class",       back: "A blueprint for creating objects",                                 difficulty: "hard",   deck: programming_deck },
-  { front: "Object",      back: "An instance of a class",                                           difficulty: "medium", deck: programming_deck },
-  { front: "Conditional", back: "A statement that performs different actions based on a condition", difficulty: "medium", deck: programming_deck },
-  { front: "Algorithm",   back: "A set of instructions to solve a problem",                         difficulty: "hard",   deck: programming_deck },
-  { front: "Debugging",   back: "The process of finding and fixing errors in code",                 difficulty: "medium", deck: programming_deck },
-  { front: "Inheritance", back: "A mechanism where a class inherits properties from another class", difficulty: "hard",   deck: programming_deck }
+  { front: "Variable",    back: "A named storage location in memory",                               deck: programming_deck },
+  { front: "Function",    back: "A block of code that performs a specific task",                    deck: programming_deck },
+  { front: "Loop",        back: "A control structure that repeats a block of code",                 deck: programming_deck },
+  { front: "Array",       back: "A collection of elements stored at contiguous memory locations",   deck: programming_deck },
+  { front: "Class",       back: "A blueprint for creating objects",                                 deck: programming_deck },
+  { front: "Object",      back: "An instance of a class",                                           deck: programming_deck },
+  { front: "Conditional", back: "A statement that performs different actions based on a condition", deck: programming_deck },
+  { front: "Algorithm",   back: "A set of instructions to solve a problem",                         deck: programming_deck },
+  { front: "Debugging",   back: "The process of finding and fixing errors in code",                 deck: programming_deck },
+  { front: "Inheritance", back: "A mechanism where a class inherits properties from another class", deck: programming_deck }
 ])
 
 # Science Terms Flashcards

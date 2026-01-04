@@ -145,38 +145,43 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  context "Learning speed" do
-    it "normal keeps default interval" do
-      @user.profile.update(learning_speed: 1.0)
-      @user.reload
-
-      @flashcard.difficulty = "easy"
-      @flashcard.review!(@user)
-
-      assert_equal Date.today + @flashcard.interval.days, @flashcard.next_review.to_date
+  context "Rigor factor" do
+    setup do
+      @flashcard.update!(repetition: 0, last_reviewed_at: nil, stability: 0.1)
     end
 
-    it "faster learning speed shortens next review interval" do
-      @user.profile.update(learning_speed: 0.8)
-      @user.reload
+    it "normal rigor (9.0) sets standar interval" do
+      @flashcard.review!("easy", @user)
 
-      @flashcard.difficulty = "easy"
-      @flashcard.review!(@user)
-
-      expected = (@flashcard.interval * 0.8).round
-      assert_equal Date.today + expected.days, @flashcard.next_review.to_date
+      assert_equal 11, @flashcard.interval
+      assert_equal Date.current + 11.days, @flashcard.next_review.to_date
     end
 
+    it "relaxed rigor (4.0) shortens intervals (accepts more forgetting)" do
+      @user.profile.update!(rigor_factor: 4.0)
 
-    it "slower learning speed increases next review interval" do
-      @user.profile.update(learning_speed: 1.5)
-      @user.reload
+      @flashcard.review!("easy", @user)
 
-      @flashcard.difficulty = "easy"
-      @flashcard.review!(@user)
+      assert_equal 5, @flashcard.interval
+      assert_equal Date.current + 5.days, @flashcard.next_review.to_date
+    end
 
-      expected = (@flashcard.interval * 1.5).round
-      assert_equal Date.today + expected.days, @flashcard.next_review.to_date
+    it "high rigor (19.0) increases frequency by shortening stability-to-interval ratio" do
+      @user.profile.update!(rigor_factor: 19.0)
+    
+      @flashcard.review!("easy", @user)
+
+      assert_equal 23, @flashcard.interval
+      assert_equal Date.current + 23.days, @flashcard.next_review.to_date
+    end
+
+    it "maximum rigor (32.3) provides longest intervals for high retention (97%)" do
+      @user.profile.update!(rigor_factor: 32.3)
+    
+      @flashcard.review!("easy", @user)
+
+      assert_equal 39, @flashcard.interval
+      assert_equal Date.current + 39.days, @flashcard.next_review.to_date
     end
   end
 end

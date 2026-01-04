@@ -1,44 +1,81 @@
 # typed: false
 # frozen_string_literal: true
 
-# app/services/spaced_repetition_service.rb
 class SpacedRepetitionService
-  def self.calculate(difficulty, current_data, learning_speed = 1.0)
-    q = quality_score(difficulty)
-    efactor = current_data[:efactor] || 2.5
-    repetition = current_data[:repetition] || 0
-    interval = current_data[:interval] || 1
+  W = [0.1, 0.2, 0.6, 1.2, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61]
 
-    if q < 3
-      {
-        repetition: 0,
-        interval: 0,
-        efactor: efactor, # Mantém ou reseta conforme regra de negócio
-        next_review: Time.current + 1.minute
-      }
-    else
-      repetition += 1
-      new_interval = case repetition
-                     when 1 then { 3 => 1, 4 => 3, 5 => 4 }[q]
-                     when 2 then 6
-                     else (interval * efactor).round
-                     end
+  def self.calculate(difficulty_input, current_data, rigor_factor = 9.0)
+    grade       = quality_score(difficulty_input)
+    s           = current_data[:stability].to_f
+    d           = current_data[:difficulty_score]
+    last_review = current_data[:last_reviewed_at]
 
-      new_efactor = efactor + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02))
-      new_efactor = [new_efactor, 1.3].max
+    # --- CASO 1: PRIMEIRA REVISÃO (Cartão Novo) ---
+    if last_review.nil? || current_data[:repetition].to_i == 0
+      new_s = W[grade - 1]
+      new_d = 10.1 - W[4] * (grade - 1)
       
-      adjusted_interval = (new_interval * learning_speed).round
+      # Para o "Again" em cartão novo, forçamos revisão no mesmo dia
+      if grade == 1
+        interval = 0
+        next_review = Time.current + 5.minutes
+      else
+        interval = (new_s * rigor_factor).round
+        interval = [interval, (current_data[:interval].to_i + 1)].max # Garante pelo menos 1 dia para Hard/Medium/Easy
+        next_review = Date.current + interval.days
+      end
 
-      {
-        repetition: repetition,
-        interval: new_interval,
-        efactor: new_efactor,
-        next_review: Date.current + adjusted_interval.days
+      return {
+        stability: new_s,
+        difficulty_score: new_d.clamp(1, 10),
+        interval: interval,
+        next_review: next_review
       }
     end
+
+    # --- CASO 2: REVISÕES SUBSEQUENTES ---
+    days_since_last = (Date.current - last_review.to_date).to_i
+    # Se revisou hoje (mesmo dia), tratamos como 0 para não inflar a estabilidade
+    days_since_last = [days_since_last, 0].max
+    
+    retrievability = (1 + days_since_last / (9.0 * s))**-1
+
+    if grade == 1 # Errou (Again)
+      new_s = [s * 0.2, 0.1].max # Reduz estabilidade drasticamente
+      new_d = [d + 1.0, 10.0].min # Aumenta dificuldade
+      interval = 0
+      next_review = Time.current + 5.minutes
+    else
+      # Acertou: Ajusta Dificuldade
+      new_d = d + (grade - 3) * -0.5
+      new_d = new_d.clamp(1, 10)
+      
+      # Ajusta Estabilidade usando a fórmula de reforço do SM-17/FSRS
+      growth_factor = (Math.exp(W[8]) * (11 - new_d) * (s**-W[9]) * (Math.exp((1 - retrievability) * W[10]) - 1))
+      
+      grade_bonus = { 2 => 0.7, 3 => 1.0, 4 => 1.3 }[grade] || 1.0
+      new_s = s * (1 + growth_factor * grade_bonus)
+      
+      interval = (new_s * 9).round
+      interval = [interval, current_data[:interval] + 1].max # Garante que o intervalo sempre cresce se acertar
+      next_review = Date.current + interval.days
+    end
+
+    {
+      stability: new_s.round(4),
+      difficulty_score: new_d.round(4),
+      interval: interval,
+      next_review: next_review
+    }
   end
 
   def self.quality_score(difficulty)
-    { "easy" => 5, "medium" => 4, "hard" => 3, "again" => 1 }[difficulty.to_s] || 3
+    scores = { 
+      "again"  => 1, 
+      "hard"   => 2, 
+      "medium" => 3, 
+      "easy"   => 4 
+    }
+    scores[difficulty.to_s] || 3
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_20_155421) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_01_154649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -60,10 +60,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_20_155421) do
     t.bigint "deck_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "efactor"
     t.integer "interval"
     t.integer "repetition"
     t.date "next_review"
+    t.float "stability", default: 0.1, null: false
+    t.float "difficulty_score", default: 5.0, null: false
     t.index ["deck_id"], name: "index_flashcards_on_deck_id"
   end
 
@@ -75,7 +76,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_20_155421) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "learning_speed", precision: 3, scale: 2, default: "1.0", null: false
+    t.decimal "rigor_factor", precision: 5, scale: 2, default: "9.0", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

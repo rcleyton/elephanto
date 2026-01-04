@@ -9,17 +9,17 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
     post session_url, params: {  email_address: @user.email_address, password: "P@ssword1" }
   end
 
-  context "Update learning speed" do
+  context "Update rigor factor" do
     it "with success" do
-      patch learning_speed_settings_path, params: { profile: { learning_speed: 1.2 } }, as: :turbo_stream
+      patch rigor_factor_settings_path, params: { profile: { rigor_factor: 9.0 } }, as: :turbo_stream
 
       assert_response :success
-      assert_equal 1.2, @user.profile.reload.learning_speed
+      assert_equal 9.0, @user.profile.reload.rigor_factor
       assert_includes response.body, "Configuração de velocidade alterada com sucesso"
     end
 
     it "must be fail" do
-      patch learning_speed_settings_path, params: { profile: { learning_speed: nil } }, as: :turbo_stream
+      patch rigor_factor_settings_path, params: { profile: { rigor_factor: nil } }, as: :turbo_stream
 
       assert_response :unprocessable_entity
       assert_includes response.body, "Erro ao alterar configuração"

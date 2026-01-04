@@ -55,20 +55,4 @@ module ApplicationHelper
   def error_class(model, field)
     input_error?(model, field) ? "ui-input-error" : ""
   end
-
-  def review_preview(flashcard, difficulty)
-    result = flashcard.simulate_review(difficulty, current_user)
-
-    interval = result[:interval]
-
-    if interval.zero?
-      "< 1 min"
-    elsif interval < 1
-      "< 1 dia"
-    elsif interval == 1
-      "1 dia"
-    else
-      "#{interval} dias"
-    end
-  end
 end

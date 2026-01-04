@@ -6,52 +6,49 @@ class Flashcard < ApplicationRecord
 
   enum :difficulty, { easy: 0, medium: 1, hard: 2, again: 3 }
 
-  # Validações
   validates :front, :back, presence: true
   validates :difficulty, inclusion: { in: difficulties.keys }, allow_nil: true
 
-  # Callbacks
   before_create :initialize_spaced_repetition
 
-  # Scopes (Melhorados para legibilidade)
   scope :due, -> { where("next_review <= ?", Time.current) }
   scope :new_cards,      -> { where(repetition: 0) }
   scope :learning_cards, -> { where(repetition: 1..).where("interval < 7") }
   scope :review_cards,   -> { where("interval >= 7") }
 
-  def review!(user)
-    results = simulate_review(difficulty, user)
+  def review!(user_difficulty, user)
+    rigor = user.profile&.rigor_factor || 9.0
+    
+    results = SpacedRepetitionService.calculate(
+      user_difficulty, 
+      { 
+        stability:        stability, 
+        difficulty_score: difficulty_score, 
+        last_reviewed_at: last_reviewed_at,
+        repetition:       repetition,
+        interval:         interval
+      },
+      rigor
+    )
     
     update!(
-      repetition:       results[:repetition],
+      difficulty:       user_difficulty,
+      stability:        results[:stability],
+      difficulty_score: results[:difficulty_score],
       interval:         results[:interval],
-      efactor:          results[:efactor],
       next_review:      results[:next_review],
-      last_reviewed_at: Time.current
+      last_reviewed_at: Time.current,
+      repetition:       user_difficulty.to_s == "again" ? 0 : (repetition + 1)
     )
-  end
-
-  def simulate_review(difficulty_level, user)
-    speed = user.profile&.learning_speed || 1.0
-    
-    SpacedRepetitionService.calculate(
-      difficulty_level,
-      { efactor: efactor, repetition: repetition, interval: interval },
-      speed
-    )
-  end
-
-  def learning_state
-    return :new if repetition.to_i.zero?
-    interval.to_i < 7 ? :learning : :review
   end
 
   private
 
   def initialize_spaced_repetition
-    self.efactor     ||= 2.5
-    self.repetition  ||= 0
-    self.interval    ||= 1
-    self.next_review ||= Time.current
+    self.stability        ||= 0.1
+    self.difficulty_score ||= 5.0
+    self.repetition       ||= 0
+    self.interval         ||= 0
+    self.next_review      ||= Time.current
   end
 end

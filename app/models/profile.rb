@@ -6,9 +6,9 @@ class Profile < ApplicationRecord
 
   has_one_attached :avatar
 
-  validates :first_name, presence: true
-  validates :last_name,  presence: true
-  validates :username,   presence: true, uniqueness: true
-  validates :bio,        presence: true
-  validates :learning_speed, numericality: { greater_than: 0.5, less_then_or_equal: 2.0 }
+  validates :first_name,   presence: true
+  validates :last_name,    presence: true
+  validates :username,     presence: true, uniqueness: true
+  validates :bio,          presence: true
+  validates :rigor_factor, inclusion: { in: [4.0, 9.0, 19.0, 32.3] }
 end

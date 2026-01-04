@@ -25,8 +25,7 @@ class ReviewSessionService
   def process_review(flashcard, difficulty, review_queue, session)
     raise ArgumentError, "Dificuldade inválida" unless Flashcard.difficulties.key?(difficulty)
 
-    flashcard.update!(difficulty: difficulty)
-    flashcard.review!(@user)
+    flashcard.review!(difficulty, @user)
 
     review_queue.delete(flashcard.id)
     review_queue << flashcard.id if difficulty == "again"

@@ -29,20 +29,20 @@ class SettingsController < ApplicationController
     end
   end
 
-  def learning_speed
+  def rigor_factor
     @profile = current_user.profile
 
-    if @profile.update(learning_speed_params)
+    if @profile.update(rigor_factor_params)
       flash.now[:notice] = "Configuração de velocidade alterada com sucesso!"
       render turbo_stream: [
         turbo_stream.update("flash", partial: "shared/flash"),
-        turbo_stream.replace("learning_speed_form", partial: "settings/learning_speed", locals: { user: current_user })
+        turbo_stream.replace("rigor_factor_form", partial: "settings/rigor_factor", locals: { user: current_user })
       ]
     else
       flash.now[:alert] = "Erro ao alterar configuração."
       render turbo_stream: [
         turbo_stream.update("flash", partial: "shared/flash"),
-        turbo_stream.replace("learning_speed_form", partial: "settings/learning_speed", locals: { user: current_user })
+        turbo_stream.replace("rigor_factor_form", partial: "settings/rigor_factor", locals: { user: current_user })
       ], status: :unprocessable_entity
     end
   end
@@ -95,7 +95,7 @@ class SettingsController < ApplicationController
     params.permit(:password, :password_confirmation)
   end
 
-  def learning_speed_params
-    params.require(:profile).permit(:learning_speed)
+  def rigor_factor_params
+    params.require(:profile).permit(:rigor_factor)
   end
 end
