@@ -41,6 +41,7 @@ pt-BR:
         last_name: Sobrenome
         username: Username
         bio: Bio
+        rigor_factor: Fator de rigor
     errors:
       models:
         user:
