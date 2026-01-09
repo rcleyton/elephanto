@@ -167,12 +167,12 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     end
 
     it "high rigor (19.0) increases frequency by shortening stability-to-interval ratio" do
-      @user.profile.update!(rigor_factor: 19.0)
+      @user.profile.update!(rigor_factor: 2.5)
     
       @flashcard.review!("easy", @user)
 
-      assert_equal 23, @flashcard.interval
-      assert_equal Date.current + 23.days, @flashcard.next_review.to_date
+      assert_equal 3, @flashcard.interval
+      assert_equal Date.current + 3.days, @flashcard.next_review.to_date
     end
 
     it "maximum rigor (32.3) provides longest intervals for high retention (97%)" do

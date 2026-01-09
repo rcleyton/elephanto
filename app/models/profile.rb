@@ -10,5 +10,5 @@ class Profile < ApplicationRecord
   validates :last_name,    presence: true
   validates :username,     presence: true, uniqueness: true
   validates :bio,          presence: true
-  validates :rigor_factor, inclusion: { in: [4.0, 9.0, 19.0, 32.3] }
+  validates :rigor_factor, inclusion: { in: [2.5, 4.0, 9.0, 32.3] }
 end

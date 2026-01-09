@@ -3,21 +3,21 @@
     <div>
       <%= form.label :rigor_factor, class: "ui-label" %>
       <%= form.select :rigor_factor,
-                  options_for_select(
-                    [
-                      ["Relaxado (Retenção 80%)", 4.0],
-                      ["Normal (Retenção 90%)", 9.0],
-                      ["Rigoroso (Retenção 95%)", 19.0],
-                      ["Máximo (Retenção 97%)", 32.3],
-                    ],
-                    @profile.rigor_factor,
-                  ),
-                  {},
-                  class: "ui-input appearance-none md:w-48 mt-2",
-                  data: {
-                    "rigor-factor-target": "select",
-                    action: "change->rigor-factor#updateDescription",
-                  } %>
+            options_for_select(
+              [
+                ["Relaxado (Retenção 80%)", 32.3],  
+                ["Normal (Retenção 90%)", 9.0],    
+                ["Rigoroso (Retenção 95%)", 4.0],
+                ["Máximo (Retenção 97%)", 2.5],
+              ],
+              @profile.rigor_factor,
+            ),
+            {},
+            class: "ui-input appearance-none md:w-48 mt-2",
+            data: {
+              "rigor-factor-target": "select",
+              action: "change->rigor-factor#updateDescription",
+            } %>
       <p class="text-sm text-muted-foreground mt-1">Controla a frequência de repetição dos flashcards</p>
       <div
         data-rigor-factor-target="description"

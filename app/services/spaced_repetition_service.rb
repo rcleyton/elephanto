@@ -5,10 +5,11 @@ class SpacedRepetitionService
   W = [0.1, 0.2, 0.6, 1.2, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61]
 
   def self.calculate(difficulty_input, current_data, rigor_factor = 9.0)
-    grade       = quality_score(difficulty_input)
-    s           = current_data[:stability].to_f
-    d           = current_data[:difficulty_score]
-    last_review = current_data[:last_reviewed_at]
+    rigor_factor = rigor_factor.to_f
+    grade        = quality_score(difficulty_input)
+    s            = current_data[:stability].to_f
+    d            = current_data[:difficulty_score]
+    last_review  = current_data[:last_reviewed_at]
 
     # --- CASO 1: PRIMEIRA REVISÃO (Cartão Novo) ---
     if last_review.nil? || current_data[:repetition].to_i == 0
@@ -37,8 +38,7 @@ class SpacedRepetitionService
     days_since_last = (Date.current - last_review.to_date).to_i
     # Se revisou hoje (mesmo dia), tratamos como 0 para não inflar a estabilidade
     days_since_last = [days_since_last, 0].max
-    
-    retrievability = (1 + days_since_last / (9.0 * s))**-1
+    retrievability  = (1 + days_since_last / (rigor_factor * s))**-1
 
     if grade == 1 # Errou (Again)
       new_s = [s * 0.2, 0.1].max # Reduz estabilidade drasticamente
@@ -56,7 +56,7 @@ class SpacedRepetitionService
       grade_bonus = { 2 => 0.7, 3 => 1.0, 4 => 1.3 }[grade] || 1.0
       new_s = s * (1 + growth_factor * grade_bonus)
       
-      interval = (new_s * 9).round
+      interval = (new_s * rigor_factor).round
       interval = [interval, current_data[:interval] + 1].max # Garante que o intervalo sempre cresce se acertar
       next_review = Date.current + interval.days
     end
