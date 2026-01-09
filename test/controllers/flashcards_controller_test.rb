@@ -183,5 +183,49 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
       assert_equal 39, @flashcard.interval
       assert_equal Date.current + 39.days, @flashcard.next_review.to_date
     end
+    
+    it "sets correct initial intervals for all difficulty levels (Normal Rigor)" do
+      @user.profile.update!(rigor_factor: 9.0)
+      
+      test_cases = {
+        "again"  => 0,  
+        "hard"   => 2,  
+        "medium" => 5,  
+        "easy"   => 11  
+      }
+
+      test_cases.each do |difficulty, expected_interval|
+        card = @deck.flashcards.create!(front: "F", back: "B")
+        card.review!(difficulty, @user)
+        
+        assert_equal expected_interval, card.interval, "Falhou para dificuldade: #{difficulty}"
+      end
+    end
+
+    it "increases stability and interval significantly on the second successful review" do
+      @user.profile.update!(rigor_factor: 9.0) # Normal
+      
+      @flashcard.review!("easy", @user) 
+      initial_interval  = @flashcard.interval 
+      initial_stability = @flashcard.stability
+      
+      travel_to @flashcard.next_review do
+        @flashcard.review!("easy", @user)
+        
+        assert @flashcard.stability > initial_stability
+        assert @flashcard.interval > initial_interval
+        assert_equal Date.current + @flashcard.interval.days, @flashcard.next_review.to_date
+      end
+    end
+
+    it "resets repetition and stability when 'again' is chosen" do
+      @flashcard.update!(repetition: 5, interval: 30, stability: 5.0, last_reviewed_at: 1.month.ago)
+      
+      @flashcard.review!("again", @user)
+      
+      assert_equal 0, @flashcard.repetition
+      assert @flashcard.stability < 5.0
+      assert_equal 0, @flashcard.interval
+    end
   end
 end
