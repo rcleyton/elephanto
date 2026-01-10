@@ -35,12 +35,12 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?
       assert_includes @user.errors[:password], I18n.t("errors.messages.too_short", count: 8)
     end
-
+focus
     it "confirmation must match password" do
       @user.password = "Diferent!"
       @user.password_confirmation = "Different1!"
       assert_not @user.valid?
-      assert_includes @user.errors[:password_confirmation], I18n.t("errors.messages.confirmation", attribute: User.human_attribute_name(:password))
+      assert_includes @user.errors[:password_confirmation], "as senhas não são iguais"
     end
 
     it "cannot contain spaces" do
