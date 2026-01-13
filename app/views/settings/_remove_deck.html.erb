@@ -1,4 +1,4 @@
-<turbo-frame id="remove_deck_form">
+<%= turbo_frame_tag "remove_deck_form" do %>
   <% if current_user.decks.any? %>
     <%= form_with url: remove_deck_settings_path, method: :delete do |form| %>
       <div>
@@ -19,4 +19,4 @@
   <% else %>
     <p class="text-sm text-muted-foreground">Você não possui nenhum deck para apagar.</p>
   <% end %>
-</turbo-frame>
+<% end %>

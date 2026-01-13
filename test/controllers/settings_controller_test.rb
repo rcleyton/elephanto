@@ -6,7 +6,7 @@ require "test_helper"
 class SettingsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
-    post session_url, params: {  email_address: @user.email_address, password: "P@ssword1" }
+    post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
   end
 
   context "Update rigor factor" do
@@ -75,7 +75,7 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
         }
       end
 
-      assert_equal "Deck apagado!", flash[:success]
+      assert_equal "Deck apagado!", flash[:notice]
     end
 
     it "must prevent deletion if deck belongs to other user" do

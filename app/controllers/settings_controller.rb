@@ -4,14 +4,15 @@
 class SettingsController < ApplicationController
   include ProfileRequired
 
-  before_action :set_profile, only: [ :show, :rigor_factor, :daily_limit ]
+  before_action :required_profile, only: [ :show ]
+  before_action :load_profile, only: %i[ rigor_factor daily_limit ]
 
   def show; end
 
   def update_password
     if current_user.authenticate(params[:current_password])
       if current_user.update(password_params)
-        success_update("Senha alterada com sucesso.", "password_settings_form")
+        success_update("Senha alterada com sucesso.", "password_settings_form", partial: "settings/password_form")
       else
         error_update(current_user.errors.full_messages.join(", "), "password_settings_form")
       end
@@ -22,15 +23,15 @@ class SettingsController < ApplicationController
 
   def rigor_factor
     if @profile.update(rigor_factor_params)
-      success_update("Configuração de velocidade alterada com sucesso!", "rigor_factor_form")
+      success_update("Configuração de velocidade alterada com sucesso!", "rigor_factor")
     else
-      error_update("Erro ao alterar configuração.", "rigor_factor_form")
+      error_update("Erro ao alterar configuração.", "rigor_factor")
     end
   end
 
   def daily_limit
     if @profile.update(review_settings_params)
-      success_update("Limites diários atualizados!", "review_settings_form")
+      success_update("Limites diários atualizados!", "review_settings_form", partial: "settings/review_settings")
     else
       error_update("Erro ao atualizar limites diários.", "review_settings_form")
     end
@@ -58,7 +59,7 @@ class SettingsController < ApplicationController
 
   private
 
-  def set_profile
+  def load_profile
     @profile = current_user.profile
   end
 
@@ -73,8 +74,6 @@ class SettingsController < ApplicationController
   def review_settings_params
     params.require(:profile).permit(:daily_new_limit, :daily_review_limit, :rigor_factor)
   end
-
-  # Métodos auxiliares para reduzir duplicação
 
   def success_update(notice_message, form_id, partial: "settings/#{form_id}")
     flash.now[:notice] = notice_message
