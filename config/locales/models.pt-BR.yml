@@ -42,6 +42,8 @@ pt-BR:
         username: Username
         bio: Bio
         rigor_factor: Fator de rigor
+        daily_new_limit: Limite de novos flashcards diários
+        daily_review_limit: Limite de revisão diária
     errors:
       models:
         user:

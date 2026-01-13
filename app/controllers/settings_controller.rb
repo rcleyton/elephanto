@@ -4,92 +4,63 @@
 class SettingsController < ApplicationController
   include ProfileRequired
 
-  before_action :required_profile, only: [ :show ]
+  before_action :set_profile, only: [ :show, :rigor_factor, :daily_limit ]
 
-  def show
-    @profile = current_user.profile
-  end
+  def show; end
 
   def update_password
     if current_user.authenticate(params[:current_password])
       if current_user.update(password_params)
-        flash.now[:notice] = "Senha alterada com sucesso."
-
-        render turbo_stream: [
-          turbo_stream.update("flash", partial: "shared/flash"),
-          turbo_stream.replace("password_settings_form", partial: "settings/password_form", locals: { user: current_user })
-        ]
+        success_update("Senha alterada com sucesso.", "password_settings_form")
       else
-        flash.now[:alert] = "Erro ao alterar senha: " + current_user.errors.full_messages.join(", ")
-        render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: :unprocessable_entity
+        error_update(current_user.errors.full_messages.join(", "), "password_settings_form")
       end
     else
-      flash.now[:alert] = "Senha atual incorreta."
-      render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: :unprocessable_entity
+      error_message("Senha atual incorreta.")
     end
   end
 
   def rigor_factor
-    @profile = current_user.profile
-
     if @profile.update(rigor_factor_params)
-      flash.now[:notice] = "Configuração de velocidade alterada com sucesso!"
-      render turbo_stream: [
-        turbo_stream.update("flash", partial: "shared/flash"),
-        turbo_stream.replace("rigor_factor_form", partial: "settings/rigor_factor", locals: { user: current_user })
-      ]
+      success_update("Configuração de velocidade alterada com sucesso!", "rigor_factor_form")
     else
-      flash.now[:alert] = "Erro ao alterar configuração."
-      render turbo_stream: [
-        turbo_stream.update("flash", partial: "shared/flash"),
-        turbo_stream.replace("rigor_factor_form", partial: "settings/rigor_factor", locals: { user: current_user })
-      ], status: :unprocessable_entity
+      error_update("Erro ao alterar configuração.", "rigor_factor_form")
+    end
+  end
+
+  def daily_limit
+    if @profile.update(review_settings_params)
+      success_update("Limites diários atualizados!", "review_settings_form")
+    else
+      error_update("Erro ao atualizar limites diários.", "review_settings_form")
     end
   end
 
   def delete_account
-    if current_user.profile.username == params[:username]
-      if current_user.authenticate(params[:current_password])
-        current_user.destroy
-        flash[:success] = "Conta excluída com sucesso!"
-        redirect_to root_path
-      else
-        flash.now[:alert] = "Senha incorreta."
-        render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: :unprocessable_entity
-      end
+    if username_matches? && current_user.authenticate(params[:current_password])
+      current_user.destroy
+      flash[:success] = "Conta excluída com sucesso!"
+      redirect_to root_path
     else
-      flash.now[:alert] = "Nome de usuário incorreto."
-      render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: :unprocessable_entity
+      error_message(error_message_for_delete_account)
     end
   end
 
   def remove_deck
-    deck = current_user.decks.find(params[:deck_id])
+    deck = current_user.decks.find_by(id: params[:deck_id])
 
-    if deck.destroy
-      flash.now[:success] = "Deck apagado!"
-
-      render turbo_stream: [
-        turbo_stream.update("flash", partial: "shared/flash"),
-        turbo_stream.replace(
-          "remove_deck_form",
-          partial: "settings/remove_deck",
-          locals: { user: current_user }
-        )
-      ]
+    if deck&.destroy
+      success_update("Deck apagado!", "remove_deck_form", partial: "settings/remove_deck")
     else
-      flash.now[:alert] = "Erro ao excluir deck"
-
-      render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"),
-            status: :unprocessable_entity
+      error_message(deck ? "Erro ao excluir deck" : "Deck inválido", status: deck ? :unprocessable_entity : :not_found)
     end
-  rescue ActiveRecord::RecordNotFound
-    flash.now[:alert] = "Deck inválido"
-    render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"),
-           status: :not_found
   end
 
   private
+
+  def set_profile
+    @profile = current_user.profile
+  end
 
   def password_params
     params.permit(:password, :password_confirmation)
@@ -97,5 +68,41 @@ class SettingsController < ApplicationController
 
   def rigor_factor_params
     params.require(:profile).permit(:rigor_factor)
+  end
+
+  def review_settings_params
+    params.require(:profile).permit(:daily_new_limit, :daily_review_limit, :rigor_factor)
+  end
+
+  # Métodos auxiliares para reduzir duplicação
+
+  def success_update(notice_message, form_id, partial: "settings/#{form_id}")
+    flash.now[:notice] = notice_message
+    render_turbo_updates(form_id, partial)
+  end
+
+  def error_update(alert_message, form_id, partial: "settings/#{form_id}")
+    flash.now[:alert] = alert_message
+    render_turbo_updates(form_id, partial, status: :unprocessable_entity)
+  end
+
+  def error_message(alert_message, status: :unprocessable_entity)
+    flash.now[:alert] = alert_message
+    render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: status
+  end
+
+  def render_turbo_updates(form_id, partial_path, status: :ok)
+    render turbo_stream: [
+      turbo_stream.update("flash", partial: "shared/flash"),
+      turbo_stream.replace(form_id, partial: partial_path, locals: { user: current_user })
+    ], status: status
+  end
+
+  def username_matches?
+    current_user.profile.username == params[:username]
+  end
+
+  def error_message_for_delete_account
+    username_matches? ? "Senha incorreta." : "Nome de usuário incorreto."
   end
 end

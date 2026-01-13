@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       patch   :update_password
       patch   :rigor_factor
       delete  :delete_account
+      patch   :daily_limit
 
       collection do
         delete :remove_deck

@@ -18,19 +18,19 @@ class Flashcard < ApplicationRecord
 
   def review!(user_difficulty, user)
     rigor = user.profile&.rigor_factor || 9.0
-    
+
     results = SpacedRepetitionService.calculate(
-      user_difficulty, 
-      { 
-        stability:        stability, 
-        difficulty_score: difficulty_score, 
+      user_difficulty,
+      {
+        stability:        stability,
+        difficulty_score: difficulty_score,
         last_reviewed_at: last_reviewed_at,
         repetition:       repetition,
         interval:         interval
       },
       rigor
     )
-    
+
     update!(
       difficulty:       user_difficulty,
       stability:        results[:stability],

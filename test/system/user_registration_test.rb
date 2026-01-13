@@ -5,7 +5,7 @@ require "application_system_test_case"
 
 class UserRegistrationTest < ApplicationSystemTestCase
   it "user can sign up with valid data" do
-    visit sign_up_path
+    visit sign_up_url
 
     fill_in  I18n.t("placeholders.user.email_address"), with: "test2@example.com"
     fill_in  I18n.t("placeholders.user.password"), with: "p@ssword1"
