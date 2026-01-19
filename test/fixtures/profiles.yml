@@ -4,4 +4,6 @@ one:
   username: silvaclu
   bio: Desenvolvedor de Software e jogador de futebol amador
   rigor_factor: 9.0
+  daily_new_limit: 20
+  daily_review_limit: 100
   user: one

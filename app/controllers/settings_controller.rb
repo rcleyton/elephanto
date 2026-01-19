@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
   include ProfileRequired
 
   before_action :required_profile, only: [ :show ]
-  before_action :load_profile, only: %i[ rigor_factor daily_limit ]
+  before_action :load_profile, only: %i[ show rigor_factor daily_limit ]
 
   def show; end
 
@@ -33,7 +33,7 @@ class SettingsController < ApplicationController
     if @profile.update(review_settings_params)
       success_update("Limites diários atualizados!", "review_settings_form", partial: "settings/review_settings")
     else
-      error_update("Erro ao atualizar limites diários.", "review_settings_form")
+      error_update("Erro ao atualizar limites diários.", "review_settings_form", partial: "settings/review_settings")
     end
   end
 
@@ -76,11 +76,13 @@ class SettingsController < ApplicationController
   end
 
   def success_update(notice_message, form_id, partial: "settings/#{form_id}")
+    p form_id
     flash.now[:notice] = notice_message
     render_turbo_updates(form_id, partial)
   end
 
   def error_update(alert_message, form_id, partial: "settings/#{form_id}")
+    p form_id
     flash.now[:alert] = alert_message
     render_turbo_updates(form_id, partial, status: :unprocessable_entity)
   end
