@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   validates :email_address,         presence: true, uniqueness: true, email: true
   validates :password,              presence: true, length: { minimum: 8 }, password: true
-  validates :password_confirmation, presence: true
+  validates :password_confirmation, presence: true, length: { minimum: 8 }, password: true
   validates :terms_of_service,      acceptance: true, on: :create
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }

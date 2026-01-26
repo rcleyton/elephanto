@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :profiles, only: %i[new create show edit update]
 
     resource :settings, only: [ :show ] do
-      patch   :update_password
+      patch   :change_password
       patch   :rigor_factor
       delete  :delete_account
       patch   :daily_limit

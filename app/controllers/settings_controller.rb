@@ -9,15 +9,18 @@ class SettingsController < ApplicationController
 
   def show; end
 
-  def update_password
+  def change_password
     if current_user.authenticate(params[:current_password])
       if current_user.update(password_params)
-        success_update("Senha alterada com sucesso.", "password_settings_form", partial: "settings/password_form")
+        success_update("Senha alterada com sucesso.", "change_password_form", partial: "settings/change_password")
       else
-        error_update(current_user.errors.full_messages.join(", "), "password_settings_form")
+        flash.now[:error] = "Erro ao alterar a senha."
+        render_turbo_updates("change_password_form", "settings/change_password", status: :unprocessable_entity)
       end
     else
-      error_message("Senha atual incorreta.")
+      current_user.errors.add(:current_password, "está incorreta")
+      flash.now[:error] = "Senha atual incorreta."
+      render_turbo_updates("change_password_form", "settings/change_password", status: :unprocessable_entity)
     end
   end
 
@@ -75,27 +78,25 @@ class SettingsController < ApplicationController
     params.require(:profile).permit(:daily_new_limit, :daily_review_limit, :rigor_factor)
   end
 
-  def success_update(notice_message, form_id, partial: "settings/#{form_id}")
-    p form_id
-    flash.now[:notice] = notice_message
+  def success_update(success_message, form_id, partial: "settings/#{form_id}")
+    flash.now[:success] = success_message
     render_turbo_updates(form_id, partial)
   end
 
   def error_update(alert_message, form_id, partial: "settings/#{form_id}")
-    p form_id
-    flash.now[:alert] = alert_message
+    flash.now[:error] = alert_message
     render_turbo_updates(form_id, partial, status: :unprocessable_entity)
   end
 
   def error_message(alert_message, status: :unprocessable_entity)
-    flash.now[:alert] = alert_message
+    flash.now[:error] = alert_message
     render turbo_stream: turbo_stream.update("flash", partial: "shared/flash"), status: status
   end
 
   def render_turbo_updates(form_id, partial_path, status: :ok)
     render turbo_stream: [
       turbo_stream.update("flash", partial: "shared/flash"),
-      turbo_stream.replace(form_id, partial: partial_path, locals: { user: current_user })
+      turbo_stream.replace(form_id, partial: partial_path, locals: { current_user: current_user })
     ], status: status
   end
 
