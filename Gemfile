@@ -28,7 +28,6 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 group :development, :test do
   gem "brakeman", require: false
-  gem "byebug", "~> 12.0"
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "rubocop-rails-omakase", require: false
 end
@@ -38,14 +37,14 @@ group :development do
   gem "capistrano-rails", require: false
   gem "capistrano-rvm", require: false
   gem "capistrano", require: false
+  gem "guard"
+  gem "guard-minitest"
   gem "letter_opener"
   gem "web-console"
 end
 
 group :test do
   gem "capybara"
-  gem "guard"
-  gem "guard-minitest"
   gem "minitest-focus"
   gem "minitest-rails", "~> 8.0.0"
   gem "minitest-reporters"

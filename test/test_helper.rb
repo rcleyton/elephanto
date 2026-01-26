@@ -1,12 +1,11 @@
-require_relative "simplecov_helper"
+require "simplecov"
+SimpleCov.start
 
 ENV["RAILS_ENV"] ||= "test"
 
 require_relative "../config/environment"
 require "rails/test_help"
 require "minitest/rails"
-require "minitest/reporters"
-require "simplecov"
 
 Minitest::Reporters.use! Minitest::Reporters::ProgressReporter.new
 
@@ -27,5 +26,3 @@ class ActionDispatch::IntegrationTest
     host! "app.lvh.me"
   end
 end
-
-Minitest.after_run { SimpleCov.result.format! }
