@@ -40,6 +40,7 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
       assert_equal "Conta excluída com sucesso!", flash[:success]
     end
 
+    focus
     it "fails with wrong username" do
       assert_no_difference("User.count") do
         delete delete_account_settings_path(@user), params: {
