@@ -40,7 +40,6 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
       assert_equal "Conta excluída com sucesso!", flash[:success]
     end
 
-    focus
     it "fails with wrong username" do
       assert_no_difference("User.count") do
         delete delete_account_settings_path(@user), params: {
@@ -50,7 +49,7 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_response :unprocessable_entity
-      assert_equal "Nome de usuário incorreto.", flash[:alert]
+      assert_equal "Nome de usuário incorreto.", flash[:error]
     end
 
     it "fails with wrong password" do
@@ -62,7 +61,7 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
       end
 
       assert_response :unprocessable_entity
-      assert_equal "Senha incorreta.", flash[:alert]
+      assert_equal "Senha incorreta.", flash[:error]
     end
   end
 
@@ -76,7 +75,7 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
         }
       end
 
-      assert_equal "Deck apagado!", flash[:notice]
+      assert_equal "Deck apagado!", flash[:success]
     end
 
     it "must prevent deletion if deck belongs to other user" do
@@ -87,7 +86,7 @@ class SettingsControllerTest < ActionDispatch::IntegrationTest
         deck_id: other_deck.id
       }
 
-      assert_equal "Deck inválido", flash[:alert]
+      assert_equal "Deck inválido", flash[:error]
       assert_response :not_found
       assert_equal deck_count_before, Deck.count
     end

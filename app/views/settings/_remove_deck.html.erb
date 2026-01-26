@@ -4,7 +4,7 @@
       <div>
         <%= form.label "Selecione um deck para excluir", class: "ui-label" %>
         <%= form.select :deck_id,
-                    user.decks.order(:name).pluck(:name, :id),
+                    current_user.decks.order(:name).pluck(:name, :id),
                     {},
                     class: "ui-input md:w-48 appearance-none mt-2" %>
       </div>

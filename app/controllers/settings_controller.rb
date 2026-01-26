@@ -101,7 +101,7 @@ class SettingsController < ApplicationController
   end
 
   def username_matches?
-    p current_user.profile.username == params[:username]
+    current_user.profile.username == params[:username]
   end
 
   def error_message_for_delete_account
