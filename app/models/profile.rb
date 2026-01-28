@@ -6,7 +6,7 @@ class Profile < ApplicationRecord
 
   has_one_attached :avatar
 
-  before_create :initialize_daily_limits
+  before_validation :initialize_daily_limits, on: :create
 
   validates :first_name,         presence: true
   validates :last_name,          presence: true

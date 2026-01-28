@@ -19,7 +19,15 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   context "profile" do
     it "create" do
       assert_difference("Profile.count", 1) do
-        post profiles_url, params: { profile: { first_name: "Jane", last_name: "Doe", username: "jane", bio: "No bio" } }
+        post profiles_url, params: { profile: {
+          first_name: "Jane",
+          last_name: "Doe",
+          username: "jane",
+          bio: "No bio"
+             # daily_new_limit: 20,
+             # daily_review_limit: 100
+           }
+        }
       end
 
       assert_redirected_to profile_url(@user.profile)
