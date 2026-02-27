@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_12_124123) do
+ActiveRecord::Schema[8.0].define(version: 2026_02_24_014316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -55,16 +55,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_12_124123) do
   create_table "flashcards", force: :cascade do |t|
     t.text "front"
     t.text "back"
-    t.integer "difficulty"
-    t.datetime "last_reviewed_at"
     t.bigint "deck_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "interval"
-    t.integer "repetition"
-    t.date "next_review"
-    t.float "stability", default: 0.1, null: false
-    t.float "difficulty_score", default: 5.0, null: false
+    t.json "fsrs_state"
     t.index ["deck_id"], name: "index_flashcards_on_deck_id"
   end
 

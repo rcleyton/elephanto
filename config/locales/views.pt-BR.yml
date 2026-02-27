@@ -6,7 +6,7 @@ pt-BR:
     updated: "%{model} atualizado com sucesso!"
     deleted: "%{model} apagado com sucesso!"
     completed_review: Você revisou todos os flashcards disponíveis hoje!
-    no_revision_today: Nenhum flashcard disponível para revisão hoje!
+    no_revision_today: Nada para revisar no momento!
     create_account: Cadastro realizado! Verifique seu e-mail para confirmar a conta.
     render_not_found: Recurso não encontrado ou não autorizado.
     already_exists: Você já tem um perfil. Edite-o aqui.

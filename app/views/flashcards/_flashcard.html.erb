@@ -35,17 +35,17 @@
             <div class="text-[#676F7E] text-sm mb-4">Como foi sua resposta?</div>
             <div class="grid grid-cols-2 gap-3">
               <%= button_to review_deck_flashcard_path(@deck, flashcard),
-                params: { difficulty: "again" }, method: :post, class: "btn btn-default-size btn-destructive w-full" do %>
+                params: { rating: Fsrs::Rating::AGAIN }, method: :post, class: "btn btn-default-size btn-destructive w-full" do %>
                 <%= t("buttons.general.again") %>
               <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "hard" }, method: :post, class: "btn btn-default-size btn-outline w-full" do %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::HARD }, method: :post, class: "btn btn-default-size btn-outline w-full" do %>
                 <%= t("buttons.general.hard") %>
               <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "medium" },
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::GOOD },
                 method: :post, class: "btn btn-default-size btn-secondary w-full" do %>
                 <%= t("buttons.general.medium") %>
               <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { difficulty: "easy" }, method: :post, class: "btn btn-default-size btn-cta w-full" do %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::EASY }, method: :post, class: "btn btn-default-size btn-cta w-full" do %>
                 <%= t("buttons.general.easy") %>
               <% end %>
             </div>

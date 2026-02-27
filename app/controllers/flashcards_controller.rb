@@ -4,7 +4,6 @@
 class FlashcardsController < ApplicationController
   before_action :set_deck
   before_action :set_flashcard, only: %i[show edit update destroy review]
-  before_action :check_review_period, only: [ :show ]
 
   def show; end
 
@@ -43,33 +42,32 @@ class FlashcardsController < ApplicationController
   end
 
   def start_review
-    service = ReviewSessionService.new(current_user, @deck)
-    review_session = service.start
+    due_ids = @deck.flashcards.all.select(&:due?).map(&:id)
 
-    if review_session
-      flashcards = @deck.flashcards.due.order(:next_review).pluck(:id)
+    if due_ids.any?
+      session[:review_queue] = due_ids
 
-      session[:review_queue]       = flashcards
-      session[:review_total]       = review_session.total_count
-      session[:review_session_id]  = review_session.id
+      review_session = @deck.review_sessions.create!(
+        user: current_user,
+        total_count: due_ids.size,
+        started_at: Time.current
+      )
+      session[:review_session_id] = review_session.id
+      session[:total_review]      = review_session.total_count
 
-      redirect_to deck_flashcard_path(@deck, flashcards.first)
+      redirect_to deck_flashcard_path(@deck, due_ids.first)
     else
-      flash[:notice] = t("messages.no_revision_today")
-      redirect_to deck_path(@deck)
+      redirect_to deck_path(@deck), notice: t("messages.no_revision_today")
     end
   end
 
   def review
-    queue                  = session[:review_queue] || []
-    service                = ReviewSessionService.new(current_user, @deck)
-    updated_queue          = service.process_review(@flashcard, params[:difficulty], queue, session)
-    session[:review_queue] = updated_queue
+    service       = ReviewSessionService.new(current_user, @deck)
+    updated_queue = service.process_review(@flashcard, params[:rating], session)
 
     if updated_queue.any?
-      redirect_to deck_flashcard_path(@deck, queue.first)
+      redirect_to deck_flashcard_path(@deck, updated_queue.first)
     else
-      session.delete(:review_queue)
       redirect_to reviewed_completed_deck_path(@deck)
     end
   end
@@ -87,12 +85,6 @@ class FlashcardsController < ApplicationController
   end
 
   def flashcard_params
-    params.require(:flashcard).permit(:front, :back, :difficulty, :last_reviewed_at)
-  end
-
-  def check_review_period
-    unless @flashcard.next_review <= Time.current
-      redirect_to deck_path(@deck), alert: "Flashcard fora do período de revisão"
-    end
+    params.require(:flashcard).permit(:front, :back)
   end
 end

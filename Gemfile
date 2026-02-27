@@ -5,6 +5,7 @@ gem "bcrypt", "~> 3.1"
 gem "bootsnap", require: false
 gem "chartkick"
 gem "erb-formatter", "~> 0.7.3"
+gem "fsrs", git: "https://github.com/open-spaced-repetition/rb-fsrs"
 gem "groupdate"
 gem "importmap-rails"
 gem "jbuilder"

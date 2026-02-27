@@ -7,54 +7,36 @@ class ReviewSessionService
     @deck = deck
   end
 
-  def start
-    flashcards = @deck.flashcards.due.order(:next_review)
-    return if flashcards.empty?
+  def process_review(flashcard, rating, session_store)
+    queue = session_store[:review_queue] || []
 
-    session = ReviewSession.create!(
-      user: @user,
-      deck: @deck,
-      total_count: flashcards.size,
-      reviewed_count: 0,
-      started_at: Time.current
-    )
+    flashcard.rate!(rating)
 
-    session
-  end
+    queue.delete(flashcard.id)
 
-  def process_review(flashcard, difficulty, review_queue, session)
-    raise ArgumentError, "Dificuldade inválida" unless Flashcard.difficulties.key?(difficulty)
+    queue << flashcard.id if rating.to_i == Fsrs::Rating::AGAIN
 
-    flashcard.review!(difficulty, @user)
+    if (review_session = ReviewSession.find_by(id: session_store[:review_session_id]))
+      review_session.increment!(:reviewed_count)
 
-    review_queue.delete(flashcard.id)
-    review_queue << flashcard.id if difficulty == "again"
-
-    review_session_id = session[:review_session_id]
-
-    if review_session_id
-      review_session = ReviewSession.find_by(id: review_session_id)
-      increment(review_session) if review_session
+      if queue.empty?
+        complete_session(review_session)
+        session_store.delete(:review_session_id)
+        session_store.delete(:review_queue)
+      end
     end
 
-    if review_queue.empty?
-      complete_session(review_session)
-    end
-
-    review_queue
+    session_store[:review_queue] = queue
+    queue
   end
 
   private
 
   def complete_session(review_session)
     @deck.update!(last_reviewed_at: Time.current)
-    review_session&.update!(
+    review_session.update!(
       completed_at: Time.current,
-      duration_seconds: (Time.current - review_session.created_at).to_i
+      duration_seconds: (Time.current - review_session.started_at).to_i
     )
-  end
-
-  def increment(session)
-    session.increment!(:reviewed_count)
   end
 end

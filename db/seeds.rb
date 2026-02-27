@@ -79,31 +79,31 @@ Flashcard.create([
 # Math Formulas Flashcards
 math_deck = Deck.find_by(name: "Math Formulas")
 Flashcard.create([
-  { front: "Area of a Circle",          back: "A = πr²",                    difficulty: "medium", deck: math_deck },
-  { front: "Pythagorean Theorem",       back: "a² + b² = c²",               difficulty: "medium", deck: math_deck },
-  { front: "Quadratic Formula",         back: "x = (-b ± √(b²-4ac))/(2a)",  difficulty: "hard",   deck: math_deck },
-  { front: "Area of a Rectangle",       back: "A = length × width",         difficulty: "easy",   deck: math_deck },
-  { front: "Circumference of a Circle", back: "C = 2πr",                    difficulty: "medium", deck: math_deck },
-  { front: "Slope Formula",             back: "m = (y₂-y₁)/(x₂-x₁)",        difficulty: "medium", deck: math_deck },
-  { front: "Volume of a Cube",          back: "V = s³",                     difficulty: "easy",   deck: math_deck },
-  { front: "Distance Formula",          back: "d = √((x₂-x₁)² + (y₂-y₁)²)", difficulty: "hard",   deck: math_deck },
-  { front: "Area of a Triangle",        back: "A = (base × height)/2",      difficulty: "medium", deck: math_deck },
-  { front: "Perimeter of a Square",     back: "P = 4s",                     difficulty: "easy",   deck: math_deck }
+  { front: "Area of a Circle",          back: "A = πr²",                    deck: math_deck },
+  { front: "Pythagorean Theorem",       back: "a² + b² = c²",               deck: math_deck },
+  { front: "Quadratic Formula",         back: "x = (-b ± √(b²-4ac))/(2a)",  deck: math_deck },
+  { front: "Area of a Rectangle",       back: "A = length × width",         deck: math_deck },
+  { front: "Circumference of a Circle", back: "C = 2πr",                    deck: math_deck },
+  { front: "Slope Formula",             back: "m = (y₂-y₁)/(x₂-x₁)",        deck: math_deck },
+  { front: "Volume of a Cube",          back: "V = s³",                     deck: math_deck },
+  { front: "Distance Formula",          back: "d = √((x₂-x₁)² + (y₂-y₁)²)", deck: math_deck },
+  { front: "Area of a Triangle",        back: "A = (base × height)/2",      deck: math_deck },
+  { front: "Perimeter of a Square",     back: "P = 4s",                     deck: math_deck }
 ])
 
 # History Dates Flashcards
 history_deck = Deck.find_by(name: "History Dates")
 Flashcard.create([
-  { front: "Fall of the Berlin Wall", back: "1989", difficulty: "medium", deck: history_deck },
-  { front: "American Independence", back: "1776", difficulty: "easy", deck: history_deck },
-  { front: "World War II End", back: "1945", difficulty: "medium", deck: history_deck },
-  { front: "French Revolution Start", back: "1789", difficulty: "medium", deck: history_deck },
-  { front: "Moon Landing", back: "1969", difficulty: "easy", deck: history_deck },
-  { front: "World War I Start", back: "1914", difficulty: "medium", deck: history_deck },
-  { front: "Discovery of America", back: "1492", difficulty: "easy", deck: history_deck },
-  { front: "Russian Revolution", back: "1917", difficulty: "hard", deck: history_deck },
-  { front: "Civil Rights Act", back: "1964", difficulty: "medium", deck: history_deck },
-  { front: "End of Cold War", back: "1991", difficulty: "hard", deck: history_deck }
+  { front: "Fall of the Berlin Wall", back: "1989", deck: history_deck },
+  { front: "American Independence", back: "1776",   deck: history_deck },
+  { front: "World War II End", back: "1945",        deck: history_deck },
+  { front: "French Revolution Start", back: "1789", deck: history_deck },
+  { front: "Moon Landing", back: "1969",            deck: history_deck },
+  { front: "World War I Start", back: "1914",       deck: history_deck },
+  { front: "Discovery of America", back: "1492",    deck: history_deck },
+  { front: "Russian Revolution", back: "1917",      deck: history_deck },
+  { front: "Civil Rights Act", back: "1964",        deck: history_deck },
+  { front: "End of Cold War", back: "1991",         deck: history_deck }
 ])
 
 # Programming Concepts Flashcards
@@ -124,14 +124,14 @@ Flashcard.create([
 # Science Terms Flashcards
 science_deck = Deck.find_by(name: "Science Terms")
 Flashcard.create([
-  { front: "Photosynthesis", back: "Process by which plants make food using sunlight",      difficulty: "medium", deck: science_deck },
-  { front: "Gravity",        back: "Force that attracts objects towards each other",        difficulty: "easy",   deck: science_deck },
-  { front: "Atom",           back: "Smallest unit of a chemical element",                   difficulty: "medium", deck: science_deck },
-  { front: "DNA",            back: "Molecule that carries genetic information",             difficulty: "hard",   deck: science_deck },
-  { front: "Ecosystem",      back: "A community of living organisms and their environment", difficulty: "medium", deck: science_deck },
-  { front: "Energy",         back: "The capacity to do work",                               difficulty: "easy",   deck: science_deck },
-  { front: "Molecule",       back: "A group of atoms bonded together",                      difficulty: "medium", deck: science_deck },
-  { front: "Evolution",      back: "Change in species over time",                           difficulty: "hard",   deck: science_deck },
-  { front: "Force",          back: "A push or pull on an object",                           difficulty: "easy", deck: science_deck },
-  { front: "Cell",           back: "The basic unit of life",                                difficulty: "medium", deck: science_deck }
+  { front: "Photosynthesis", back: "Process by which plants make food using sunlight",      deck: science_deck },
+  { front: "Gravity",        back: "Force that attracts objects towards each other",        deck: science_deck },
+  { front: "Atom",           back: "Smallest unit of a chemical element",                   deck: science_deck },
+  { front: "DNA",            back: "Molecule that carries genetic information",             deck: science_deck },
+  { front: "Ecosystem",      back: "A community of living organisms and their environment", deck: science_deck },
+  { front: "Energy",         back: "The capacity to do work",                               deck: science_deck },
+  { front: "Molecule",       back: "A group of atoms bonded together",                      deck: science_deck },
+  { front: "Evolution",      back: "Change in species over time",                           deck: science_deck },
+  { front: "Force",          back: "A push or pull on an object",                           deck: science_deck },
+  { front: "Cell",           back: "The basic unit of life",                                deck: science_deck }
 ])

@@ -17,10 +17,11 @@ module ApplicationHelper
   end
 
   def flashcard_progress(deck)
-    queue = session[:review_queue] || []
-    total = session[:review_total] || queue.size
-    completed = total - queue.size
-    current = completed + 1
+    queue      = session[:review_queue] || []
+    total      = session[:total_review] || queue.size
+    completed  = total - queue.size
+    current    = completed + 1
+
     percent = total.positive? ? ((completed.to_f / total) * 100).round : 0
 
     {

@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/open-spaced-repetition/rb-fsrs
+  revision: 6909e728a10618cfb919d0ff5cae08a681e42f09
+  specs:
+    fsrs (0.9.0)
+      activesupport (>= 7.0, < 9.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -506,6 +513,7 @@ DEPENDENCIES
   debug
   dotenv-rails
   erb-formatter (~> 0.7.3)
+  fsrs!
   groupdate
   guard
   guard-minitest
