@@ -12,7 +12,13 @@ class DecksController < ApplicationController
   end
 
   def show
-    @flashcards = @deck.flashcards.page(params[:page]).per(10)
+    @flashcards    = @deck.flashcards.page(params[:page]).per(10)
+    @status_counts = {
+      new:        @deck.flashcards.new_state,
+      learning:   @deck.flashcards.learning_state,
+      review:     @deck.flashcards.review_state,
+      relearning: @deck.flashcards.relearning_state
+    }
   end
 
   def new

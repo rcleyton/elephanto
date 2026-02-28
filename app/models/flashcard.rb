@@ -7,6 +7,19 @@ class Flashcard < ApplicationRecord
 
   after_initialize :set_default_fsrs_state, if: :new_record?
 
+  scope :new_state,        -> { where("fsrs_state->>'state' = '0'").count }
+  scope :learning_state,   -> { where("fsrs_state->>'state' = '1'").count }
+  scope :review_state,     -> { where("fsrs_state->>'state' = '2'").count }
+  scope :relearning_state, -> { where("fsrs_state->>'state' = '3'").count }
+
+  scope :due, -> {
+    now_str = Time.current.utc.iso8601
+    where(
+      "(fsrs_state->>'due' LIKE '-%') OR (fsrs_state->>'due' <= ?)",
+      now_str
+    )
+  }
+
   def fsrs_card
     data = fsrs_state.deep_symbolize_keys
 
