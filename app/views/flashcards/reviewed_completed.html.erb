@@ -13,7 +13,7 @@
       <h2 class="text-2xl font-bold mb-4">Revisão concluída!</h2>
       <% progress = flashcard_progress(@deck) %>
       <p class="text-[#676F7E] mb-6">Você revisou
-        <%= progress[:total] %>rds do Deck:
+        <%= progress[:total] %> cards do Deck:
         <%= @deck.name %></p>
       <%= link_to "Voltar para o deck",
       deck_path(@deck),
