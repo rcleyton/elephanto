@@ -56,4 +56,21 @@ module ApplicationHelper
   def error_class(model, field)
     input_error?(model, field) ? "ui-input-error" : ""
   end
+
+  def format_fsrs_interval(card_options)
+    due             = card_options.due
+    now             = Time.current.utc
+    diff_in_seconds = (due - now).to_i
+
+    if diff_in_seconds < 60
+      "agora"
+    elsif diff_in_seconds < 3600
+      "#{diff_in_seconds / 60} min"
+    elsif diff_in_seconds < 86400
+      "#{diff_in_seconds / 3600} h"
+    else
+      days = card_options.scheduled_days
+      days >= 30 ? "#{(days / 30.0).round(1)} mes" : "#{days} d"
+    end
+  end
 end

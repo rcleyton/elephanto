@@ -44,6 +44,18 @@ class Flashcard < ApplicationRecord
     update!(fsrs_state: info.card.to_h)
   end
 
+  def review_options
+    scheduler        = Fsrs::Scheduler.new
+    scheduling_cards = scheduler.repeat(fsrs_card, Time.current.utc)
+
+    {
+      again: scheduling_cards[Fsrs::Rating::AGAIN].card,
+      hard:  scheduling_cards[Fsrs::Rating::HARD].card,
+      good:  scheduling_cards[Fsrs::Rating::GOOD].card,
+      easy:  scheduling_cards[Fsrs::Rating::EASY].card
+    }
+  end
+
   private
 
   def ensure_time(value)

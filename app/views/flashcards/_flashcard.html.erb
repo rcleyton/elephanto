@@ -33,20 +33,43 @@
           <div class="text-xl font-semibold mb-8 text-[#594DE6]"><%= simple_format(flashcard.back) %></div>
           <div class="space-y-4">
             <div class="text-[#676F7E] text-sm mb-4">Como foi sua resposta?</div>
-            <div class="grid grid-cols-2 gap-3">
-              <%= button_to review_deck_flashcard_path(@deck, flashcard),
-                params: { rating: Fsrs::Rating::AGAIN }, method: :post, class: "btn btn-default-size btn-destructive w-full" do %>
-                <%= t("buttons.general.again") %>
+            <% options = flashcard.review_options %>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::AGAIN }, method: :post, class: "btn btn-default-size btn-destructive w-full h-auto" do %>
+                <div class="flex flex-col">
+                  <span><%= t("buttons.general.again") %></span>
+                  <div class="text-xs font-normal">
+                    Previsão de revisão em
+                    <strong><%= format_fsrs_interval(options[:again]) %></strong>
+                  </div>
+                </div>
               <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::HARD }, method: :post, class: "btn btn-default-size btn-outline w-full" do %>
-                <%= t("buttons.general.hard") %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::HARD }, method: :post, class: "btn btn-default-size btn-outline w-full h-auto" do %>
+                <div class="flex flex-col">
+                  <span><%= t("buttons.general.hard") %></span>
+                  <div class="text-xs font-normal opacity-80">
+                    Previsão de revisão em
+                    <strong><%= format_fsrs_interval(options[:hard]) %></strong>
+                  </div>
+                </div>
               <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::GOOD },
-                method: :post, class: "btn btn-default-size btn-secondary w-full" do %>
-                <%= t("buttons.general.medium") %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::GOOD }, method: :post, class: "btn btn-default-size btn-secondary w-full h-auto" do %>
+                <div class="flex flex-col">
+                  <span><%= t("buttons.general.medium") %></span>
+                  <div class="text-xs font-normal opacity-80">
+                    Previsão de revisão em
+                    <strong><%= format_fsrs_interval(options[:good]) %></strong>
+                  </div>
+                </div>
               <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::EASY }, method: :post, class: "btn btn-default-size btn-cta w-full" do %>
-                <%= t("buttons.general.easy") %>
+              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::EASY }, method: :post, class: "btn btn-default-size btn-cta w-full h-auto" do %>
+                <div class="flex flex-col">
+                  <span><%= t("buttons.general.easy") %></span>
+                  <div class="text-xs font-normal opacity-80">
+                    Previsão de revisão em
+                    <strong><%= format_fsrs_interval(options[:easy]) %></strong>
+                  </div>
+                </div>
               <% end %>
             </div>
           </div>
