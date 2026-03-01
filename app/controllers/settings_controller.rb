@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
   include ProfileRequired
 
   before_action :required_profile, only: [ :show ]
-  before_action :load_profile, only: %i[ show rigor_factor daily_limit ]
+  before_action :load_profile, only: %i[ show daily_limit ]
 
   def show; end
 
@@ -24,18 +24,11 @@ class SettingsController < ApplicationController
     end
   end
 
-  def rigor_factor
-    if @profile.update(rigor_factor_params)
-      success_update("Configuração de velocidade alterada com sucesso!", "rigor_factor")
-    else
-      error_update("Erro ao alterar configuração.", "rigor_factor")
-    end
-  end
-
   def daily_limit
     if @profile.update(review_settings_params)
       success_update("Limites diários atualizados!", "review_settings_form", partial: "settings/review_settings")
     else
+      p @profile.errors.full_messages
       error_update("Erro ao atualizar limites diários.", "review_settings_form", partial: "settings/review_settings")
     end
   end
@@ -70,12 +63,8 @@ class SettingsController < ApplicationController
     params.permit(:password, :password_confirmation)
   end
 
-  def rigor_factor_params
-    params.require(:profile).permit(:rigor_factor)
-  end
-
   def review_settings_params
-    params.require(:profile).permit(:daily_new_limit, :daily_review_limit, :rigor_factor)
+    params.require(:profile).permit(:daily_new_limit, :daily_review_limit)
   end
 
   def success_update(success_message, form_id, partial: "settings/#{form_id}")

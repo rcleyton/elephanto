@@ -14,7 +14,6 @@ class Profile < ApplicationRecord
   validates :bio,                presence: true
   validates :daily_new_limit,    presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :daily_review_limit, presence: true, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 100 }
-  validates :rigor_factor, inclusion: { in: [ 2.5, 4.0, 9.0, 32.3 ] }
 
   private
 

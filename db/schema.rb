@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_24_014316) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_01_024033) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -70,7 +70,6 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_24_014316) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "rigor_factor", precision: 5, scale: 2, default: "9.0", null: false
     t.integer "daily_new_limit"
     t.integer "daily_review_limit"
     t.index ["user_id"], name: "index_profiles_on_user_id"
