@@ -59,7 +59,7 @@
     data-controller="automatic-margin-top"
     class="container mx-auto px-6 py-8"
   >
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
       <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
         <div class="p-4 text-center">
           <svg
@@ -123,11 +123,19 @@
       </div>
       <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
         <div class="p-4 text-center">
-          <div class="text-2xl font-bold text-[#594CE6]"><%= t("general.last_studied") %></div>
-          <div class="text-sm"><%= if @deck.last_reviewed_at.nil?
+          <div class="text-2xl font-bold text-[#594CE6] mb-2">Para revisar agora</div>
+          <div class="text-xl font-bold">
+            <%= @deck.flashcards.due.count %>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
+        <div class="p-4 text-center">
+          <div class="text-2xl font-bold text-[#594CE6] mb-2"><%= t("general.last_studied") %></div>
+          <div class="text-xl font-bold"><%= if @deck.last_reviewed_at.nil?
               "Nunca revisado"
             else
-              (l @deck.last_reviewed_at, format: :long)
+              (l @deck.last_reviewed_at, format: :only_date)
             end %></div>
         </div>
       </div>
