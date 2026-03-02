@@ -42,9 +42,9 @@
         z-10 hidden opacity-0 pointer-events-none
       "
     >
-      <div class="px-4 py-2 text-sm font-normal border-b-1 border-gray-200">
+      <div class="px-4 py-2 text-sm font-normal border-b border-gray-200">
         <div class="flex flex-col space-y-1">
-          <p class="text-sm font-medium leading-none">Minha conta</p>
+          <p class="text-sm font-medium leading-none">minha conta</p>
           <p class="text-xs leading-none text-muted-foreground"><%= current_user.email_address %></p>
         </div>
       </div>
@@ -53,27 +53,27 @@
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
-          viewBox="0 0 24 24"
+          viewbox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke="currentcolor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
           class="lucide lucide-user mr-2 h-4 w-4"
         >
-          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+          <path d="m19 21v-2a4 4 0 0 0-4-4h9a4 4 0 0 0-4 4v2"></path>
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
-        Meu perfil
+        meu perfil
       <% end %>
       <%= link_to statistics_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
-          viewBox="0 0 24 24"
+          viewbox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke="currentcolor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
@@ -81,30 +81,30 @@
             lucide lucide-chart-spline-icon lucide-chart-spline mr-2 h-4 w-4
           "
         >
-          <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
-          <path d="M7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7"/>
+          <path d="m3 3v16a2 2 0 0 0 2 2h16"/>
+          <path d="m7 16c.5-2 1.5-7 4-7 2 0 2 3 4 3 2.5 0 4.5-5 5-7"/>
         </svg>
-        Estatísticas
+        estatísticas
       <% end %>
       <%= link_to settings_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
-          viewBox="0 0 24 24"
+          viewbox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke="currentcolor"
           stroke-width="2"
           stroke-linecap="round"
           stroke-linejoin="round"
           class="lucide lucide-settings mr-2 h-4 w-4"
         >
           <path
-            d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"
+            d="m12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73v20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73v4a2 2 0 0 0-2-2z"
           ></path>
           <circle cx="12" cy="12" r="3"></circle>
         </svg>
-        Configurações
+        configurações
       <% end %>
       <% if current_user.admin? %>
         <%= link_to admin_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
@@ -112,9 +112,9 @@
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            viewBox="0 0 24 24"
+            viewbox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="currentcolor"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -125,28 +125,28 @@
             <rect width="7" height="9" x="14" y="12" rx="1"></rect>
             <rect width="7" height="5" x="3" y="16" rx="1"></rect>
           </svg>
-          Dashboard
+          dashboard
         <% end %>
       <% end %>
-      <div class="border-t-1 border-gray-200">
+      <div class="border-t border-gray-200">
         <%= link_to session_path, data: { turbo_method: :delete }, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            viewBox="0 0 24 24"
+            viewbox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="currentcolor"
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
             class="lucide lucide-log-out mr-2 h-4 w-4"
           >
-            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <path d="m9 21h5a2 2 0 0 1-2-2v5a2 2 0 0 1 2-2h4"></path>
             <polyline points="16 17 21 12 16 7"></polyline>
             <line x1="21" x2="9" y1="12" y2="12"></line>
           </svg>
-          Sair
+          sair
         <% end %>
       </div>
     </div>

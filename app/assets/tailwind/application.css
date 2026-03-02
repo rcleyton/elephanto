@@ -58,6 +58,19 @@
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   --radius: 0.5rem;
+
+  /* Google stitch style */
+
+  /* colors */
+  --color-primary: #460df2;
+  --color-background-light: #f6f5f8;
+  --color-background-dark: #141022;
+
+  /* Radius */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
 }
 
 .dark {
