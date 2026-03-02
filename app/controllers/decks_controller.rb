@@ -62,6 +62,6 @@ class DecksController < ApplicationController
   end
 
   def deck_params
-    params.expect(deck: [ :name, :description ])
+    params.expect(deck: [ :name, :description, :tag, :cover_image, :cover_color ])
   end
 end

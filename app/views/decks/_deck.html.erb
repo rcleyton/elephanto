@@ -12,21 +12,21 @@
     "
   >
     <div class="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
-    <img
-      class="
-        h-full w-full object-cover transition-transform duration-500
-        group-hover:scale-110
-      "
-      data-alt="Mathematical equations and formulas on chalkboard"
-      src="https://lh3.googleusercontent.com/aida-public/AB6AXuD60lQ2Qi0O3MiNblfz0mZkX2FCwK3bWaR2TmDSx8VawyzXR94c4FmQlcqAju_THNddXYZE__bNjl1DVQgMRtRVRcOjeq4VzJFlBXtJzt4tXn4KCRR-hwdILFaZlLHuzRS2m7siw6XsOThIsCuVf61Fu8l9V93SIMVLHFNwC3DrEfuMYQo03KV2a7jsr2RUjE09ZjcZzVtTWpXtI4O76wtQHWw5_6exYam09DtNWps5EgPv7OGS554sYPYzRfolFNcEcBwhjW1ZTe0"
-    />
+    <% if deck.cover_image.attached? %>
+      <%= image_tag deck.cover_image,
+      class:
+        "h-full w-full object-cover transition-transform duration-500
+                    group-hover:scale-110" %>
+    <% else %>
+      <div class="absolute inset-0" style="background: <%= deck.cover_color %>"></div>
+    <% end %>
     <div
       class="
         absolute top-3 right-3 rounded-lg bg-white/90 dark:bg-slate-900/90 px-2 py-1
         text-[10px] font-bold uppercase tracking-wider text-primary
       "
     >
-      Matemática</div>
+      <%= deck.tag %></div>
   </div>
   <div class="flex flex-1 flex-col p-5">
     <h3 class="text-lg font-bold text-slate-900 dark:text-white line-clamp-1"><%= deck.name %></h3>
