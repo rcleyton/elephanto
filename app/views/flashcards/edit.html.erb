@@ -5,28 +5,51 @@
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<div class="min-h-screen bg-background">
-  <%= page_header(
-    show_back_button: true,
-    back_path: deck_path(@deck),
-    title: "#{t("actions.edit")} #{Flashcard.model_name.human.downcase}",
-    subtitle: "Edite seu flashcard",
-    show_profile_menu: false,
-  ) %>
-
-  <main
-    data-controller="automatic-margin-top"
-    class="container mx-auto px-6 py-8"
-  >
-    <div class="max-w-2xl mx-auto">
-      <div class="rounded-lg border bg-card text-card-foreground">
-        <div class="flex flex-col space-y-1.5 p-6">
-          <h3 class="text-2xl font-semibold leading-none tracking-tight">Editar flashcard</h3>
-        </div>
-        <div class="p-6 pt-0">
-          <%= render "form", flashcard: @flashcard %>
-        </div>
+<main class="flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40">
+  <div class="layout-content-container flex flex-col max-w-[800px] flex-1">
+    <!-- Title Section -->
+    <div class="flex flex-col gap-2 pb-8">
+      <h1
+        class="
+          text-slate-900 dark:text-white text-3xl md:text-4xl font-extrabold
+          tracking-tight
+        "
+      >
+        <%= t("actions.edit") %>
+        <%= Flashcard.model_name.human.downcase %></h1>
+      <p class="text-slate-500 dark:text-slate-400 text-base">Edite seu flashcard.</p>
+    </div>
+    <div
+      class="
+        overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800
+        bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/50 dark:shadow-none
+      "
+    >
+      <div class="p-8">
+        <%= render "form", flashcard: @flashcard %>
+      </div>
+      <div
+        class="
+          bg-slate-50 dark:bg-slate-800/50 px-8 py-4 border-t border-slate-100
+          dark:border-slate-800 flex items-center justify-center gap-2 text-xs
+          text-slate-500
+        "
+      >
+        <span class="material-symbols-outlined text-sm">info</span>
+        <span>Você poderá adicionar os flashcards logo após criar o deck.</span>
       </div>
     </div>
-  </main>
-</div>
+    <div
+      class="
+        mt-8 p-4 rounded-xl bg-primary/5 border border-primary/10 flex gap-4 items-start
+      "
+    >
+      <span class="material-symbols-outlined text-primary">lightbulb</span>
+      <div class="flex flex-col gap-1">
+        <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">Dica de Estudo</p>
+        <p class="text-sm text-slate-500 dark:text-slate-400">Tente manter as respostas curtas e objetivas para facilitar a
+          memorização ativa.</p>
+      </div>
+    </div>
+  </div>
+</main>

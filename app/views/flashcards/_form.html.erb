@@ -1,34 +1,62 @@
 <%= form_with model: [ @deck, @flashcard ], class: "space-y-6" do |form| %>
-  <div>
-    <%= form.label :front, class: "ui-label" %>
+  <div class="space-x-2">
+    <div class="flex flex-col gap-1 mb-1">
+      <%= form.label :front,
+                 class:
+                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+      <span class="text-xs text-slate-400">A pergunta ou o termo que você verá primeiro</span>
+    </div>
+    <div class="relative">
+      <div
+        class="
+          pointer-events-none absolute left-0 top-4 flex items-start pl-4 text-slate-400
+        "
+      >
+        <span class="material-symbols-outlined text-xl">flip_to_front</span>
+      </div>
 
-    <%= form.text_field :front,
-                    placeholder: t("placeholders.flashcard.front_flashcard"),
-                    class: "ui-input #{error_class(flashcard, :front)} mt-2" %>
-
+      <%= form.text_field :front,
+                      placeholder: t("placeholders.flashcard.front_flashcard"),
+                      class:
+                        "block w-full rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(flashcard, :front)}" %>
+    </div>
     <% if flashcard.errors[:front].any? %>
       <p class="ui-error"><%= Flashcard.human_attribute_name(:front) %>
         <%= flashcard.errors[:front].first %></p>
     <% end %>
   </div>
+  <div class="space-x-2">
+    <div class="flex flex-col gap-1 mb-1">
+      <%= form.label :back,
+                 class:
+                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+      <span class="text-xs text-slate-400">A resposta ou explicação detalhada</span>
+    </div>
+    <div class="relative">
+      <div
+        class="
+          pointer-events-none absolute left-0 top-4 flex items-start pl-4 text-slate-400
+        "
+      >
+        <span class="material-symbols-outlined text-xl">flip_to_back</span>
+      </div>
 
-  <div>
-    <%= form.label :back, class: "ui-label" %>
-
-    <%= form.text_area :back,
-                   placeholder: t("placeholders.flashcard.back_flashcard"),
-                   class: "ui-textarea #{error_class(flashcard, :back)} mt-2" %>
-
+      <%= form.text_area :back,
+                     placeholder: t("placeholders.flashcard.back_flashcard"),
+                     class:
+                       "block w-full rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all resize-none #{error_class(flashcard, :back)}" %>
+    </div>
     <% if flashcard.errors[:back].any? %>
       <p class="ui-error"><%= Flashcard.human_attribute_name(:back) %>
         <%= flashcard.errors[:back].first %></p>
     <% end %>
   </div>
-
-  <div class="flex gap-4 pt-4">
+  <div class="pt-4 flex flex-col sm:flex-row gap-4">
     <%= link_to t("buttons.general.back_to_deck"),
     deck_path(@deck),
-    class: "btn btn-default-size btn-outline flex-1" %>
-    <%= form.submit class: "btn btn-default-size btn-cta flex-1" %>
+    class:
+      "flex flex-1 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-4 text-base font-bold text-slate-700 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700 active:scale-[0.98]" %>
+    <%= form.submit class:
+                  "flex-1 rounded-lg bg-primary px-6 py-4 text-base font-bold text-white shadow-lg shadow-primary/30 transition-all hover:bg-primary/90 hover:shadow-primary/40 active:scale-[0.98]" %>
   </div>
 <% end %>

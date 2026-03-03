@@ -56,8 +56,8 @@ pt-BR:
       deck_name: "Ex: Inglês Básico, História do Brasil..."
       deck_description: Descreva o conteúdo do seu deck...
     flashcard:
-      front_flashcard: Digite o conteúdo da frente do flashcard... 
-      back_flashcard: Digite o conteúdo do verso do flashcard... 
+      front_flashcard: "Ex: Qual é a capital da França?" 
+      back_flashcard: "Paris é a capital e a cidade mais populosa da França." 
     user: 
       email_address: Digite seu email 
       password: Digite sua senha
