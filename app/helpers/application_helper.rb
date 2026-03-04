@@ -73,4 +73,28 @@ module ApplicationHelper
       days >= 30 ? "#{(days / 30.0).round(1)} mes" : "#{days} d"
     end
   end
+
+  def fsrs_state_badge(flashcard)
+    state = flashcard.fsrs_card.state
+
+    label, classes =
+      case state
+      when 0
+        [ "Novo", "bg-slate-100 dark:bg-slate-800 text-slate-500" ]
+      when 1
+        [ "Aprendendo", "bg-amber-500/10 text-amber-600" ]
+      when 2
+        [ "Aprendido", "bg-emerald-100 text-emerald-700" ]
+      else
+        [ "Esquecido", "bg-rose-100 text-rose-700" ]
+      end
+
+    content_tag(:span, label,
+      class: "
+        px-2 py-1 rounded
+        #{classes}
+        text-[10px] font-bold uppercase tracking-wider
+      "
+    )
+  end
 end

@@ -4,64 +4,140 @@
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<div class="min-h-screen bg-background">
-  <% right_buttons = capture do %>
-    <div class="flex gap-2 w-full">
-      <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta w-full" do %>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-plus-icon lucide-plus h-4 w-4"
-        >
-          <path d="M5 12h14"/>
-          <path d="M12 5v14"/></svg>
+<main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  <div
+    class="
+      mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between
+    "
+  >
+    <div>
+      <h1
+        class="
+          text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl
+        "
+      >Meus
+        <%= @deck.name %>
+      </h1>
+      <p class="mt-2 text-base text-slate-600 dark:text-slate-400"><%= @deck.description %></p>
+    </div>
+    <div class="flex gap-2">
+      <%= link_to new_deck_flashcard_path(@deck), class: "flex-1 md:flex-none flex items-center justify-center gap-2 bg-primary text-white px-4 py-2.5 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity" do %>
+        <span class="material-symbols-outlined text-sm">add</span>
         <%= t("buttons.submit.new_flashcard") %>
       <% end %>
-
-      <%= link_to review_deck_path(@deck), class: "btn btn-default-size btn-cta btn-default-variant w-full" do %>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-play-icon lucide-play h-4 w-4"
-        >
-          <path
-            d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"
-          /></svg>
+      <%= link_to review_deck_path(@deck), class: "flex-1 md:flex-none flex items-center justify-center gap-2 bg-primary/10 dark:bg-primary/20 text-primary px-4 py-2.5 rounded-lg font-bold text-sm hover:bg-primary/20 transition-colors" do %>
+        <span class="material-symbols-outlined text-sm">play_arrow</span>
         <%= t("buttons.general.start_studying") %>
       <% end %>
     </div>
-  <% end %>
-
-  <%= page_header(
-    show_back_button: true,
-    back_path: decks_path,
-    title: "#{@deck.name}",
-    subtitle: "#{@deck.description}",
-    show_profile_menu: false,
-    right_buttons: right_buttons,
-  ) %>
-
-  <main
-    data-controller="automatic-margin-top"
-    class="container mx-auto px-6 py-8"
-  >
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-      <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
-        <div class="p-4 text-center">
+  </div>
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+    <!-- Total Card -->
+    <div
+      class="
+        bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200
+        dark:border-slate-700 shadow-sm
+      "
+    >
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Total de flashcards</span>
+        <span class="material-symbols-outlined text-primary/60">style</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-bold"><%= @deck.flashcards.count %></span>
+        <span class="text-xs font-semibold text-emerald-500">+2 esta semana</span>
+      </div>
+    </div>
+    <!-- Status Card -->
+    <div
+      class="
+        bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200
+        dark:border-slate-700 shadow-sm col-span-1 md:col-span-2 lg:col-span-1
+      "
+    >
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Estados</span>
+        <span class="material-symbols-outlined text-primary/60">monitoring</span>
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <span
+          class="
+            px-2 py-1 rounded bg-slate-100 dark:bg-slate-700 text-[10px] font-bold uppercase
+            tracking-wider
+          "
+        >Novo(s):
+          <%= @status_counts[:new] %></span>
+        <span
+          class="
+            px-2 py-1 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30
+            dark:text-amber-400 text-[10px] font-bold uppercase tracking-wider
+          "
+        >Aprendendo:
+          <%= @status_counts[:learning] %></span>
+        <span
+          class="
+            px-2 py-1 rounded bg-rose-100 text-rose-700 dark:bg-rose-900/30
+            dark:text-rose-400 text-[10px] font-bold uppercase tracking-wider
+          "
+        >Esquecido:
+          <%= @status_counts[:relearning] %></span>
+        <span
+          class="
+            px-2 py-1 rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30
+            dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider
+          "
+        >Aprendido:
+          <%= @status_counts[:review] %></span>
+      </div>
+    </div>
+    <!-- Review Card -->
+    <div
+      class="
+        bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200
+        dark:border-slate-700 shadow-sm
+      "
+    >
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Para revisar agora</span>
+        <span class="material-symbols-outlined text-primary/60">schedule</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-3xl font-bold text-primary"><%= @deck.flashcards.due.count %></span>
+        <span class="text-xs font-semibold text-slate-400">pendente(s)</span>
+      </div>
+    </div>
+    <!-- Last Review Card -->
+    <div
+      class="
+        bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200
+        dark:border-slate-700 shadow-sm
+      "
+    >
+      <div class="flex items-center justify-between mb-4">
+        <span class="text-sm font-medium text-slate-500 dark:text-slate-400">Última revisão</span>
+        <span class="material-symbols-outlined text-primary/60">history</span>
+      </div>
+      <div class="flex items-baseline gap-2">
+        <span class="text-xl font-bold"><%= if @deck.last_reviewed_at.nil?
+            "Nunca revisado"
+          else
+            (l @deck.last_reviewed_at, format: :only_date)
+          end %></span>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-2xl font-semibold">Flashcards</h2>
+      <span class="text-gray-500"><%= @deck.flashcards.count %>
+        cards</span>
+    </div>
+    <% if @deck.flashcards.any? %>
+      <%= render partial: "flashcards", locals: { flashcards: @flashcards, deck: @deck } %>
+    <% else %>
+      <div class="rounded-lg border bg-card text-card-foreground">
+        <div class="p-8 text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -72,85 +148,18 @@
             stroke-width="2"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="lucide lucide-book-open w-8 h-8 text-[#594CE6] mx-auto mb-2"
+            class="
+              lucide lucide-book-open w-12 h-12 text-muted-foreground mx-auto mb-4
+            "
           >
-            <path d="M12 7v14"/>
+            <path d="M12 7v14"></path>
             <path
               d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
-            /></svg>
-          <div class="text-2xl font-bold text-[#21242C]"><%= @deck.flashcards.count %></div>
-          <div class="text-sm">Flashcards</div>
-        </div>
-      </div>
-      <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
-        <div class="p-4 text-center">
-          <div class="text-2xl font-bold text-[#8C5AF2]">Estados dos flashcards</div>
-          <div class="flex flex-wrap justify-between gap-2 my-4">
-            <span
-              class="
-                px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800
-              "
-            >
-              Novo(s):
-              <%= @status_counts[:new] %>
-            </span>
-            <span
-              class="
-                px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800
-              "
-            >
-              Aprendendo:
-              <%= @status_counts[:learning] %>
-            </span>
-            <span
-              class="
-                px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800
-              "
-            >
-              Esquecido(s):
-              <%= @status_counts[:relearning] %>
-            </span>
-            <span
-              class="
-                px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800
-              "
-            >
-              Aprendido(s):
-              <%= @status_counts[:review] %>
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
-        <div class="p-4 text-center">
-          <div class="text-2xl font-bold text-[#594CE6] mb-2">Para revisar agora</div>
-          <div class="text-xl font-bold">
-            <%= @deck.flashcards.due.count %>
-          </div>
-        </div>
-      </div>
-      <div class="rounded-lg border border-gray-200 bg-white text-gray-500">
-        <div class="p-4 text-center">
-          <div class="text-2xl font-bold text-[#594CE6] mb-2"><%= t("general.last_studied") %></div>
-          <div class="text-xl font-bold"><%= if @deck.last_reviewed_at.nil?
-              "Nunca revisado"
-            else
-              (l @deck.last_reviewed_at, format: :only_date)
-            end %></div>
-        </div>
-      </div>
-    </div>
-    <div class="space-y-4">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-semibold">Flashcards</h2>
-        <span class="text-gray-500"><%= @deck.flashcards.count %>
-          cards</span>
-      </div>
-      <% if @deck.flashcards.any? %>
-        <%= render partial: "flashcards", locals: { flashcards: @flashcards, deck: @deck } %>
-      <% else %>
-        <div class="rounded-lg border bg-card text-card-foreground">
-          <div class="p-8 text-center">
+            ></path>
+          </svg>
+          <h3 class="text-lg font-semibold mb-2">Nenhum flashcard encontrado</h3>
+          <p class="text-muted-foreground mb-6">Adicione flashcards para começar a estudar</p>
+          <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta" do %>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -161,38 +170,15 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="
-                lucide lucide-book-open w-12 h-12 text-muted-foreground mx-auto mb-4
-              "
+              class="lucide lucide-plus w-4 h-4"
             >
-              <path d="M12 7v14"></path>
-              <path
-                d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
-              ></path>
+              <path d="M5 12h14"></path>
+              <path d="M12 5v14"></path>
             </svg>
-            <h3 class="text-lg font-semibold mb-2">Nenhum flashcard encontrado</h3>
-            <p class="text-muted-foreground mb-6">Adicione flashcards para começar a estudar</p>
-            <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta" do %>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-plus w-4 h-4"
-              >
-                <path d="M5 12h14"></path>
-                <path d="M12 5v14"></path>
-              </svg>
-              Adicionar primeiro flashcard
-            <% end %>
-          </div>
+            Adicionar primeiro flashcard
+          <% end %>
         </div>
-      <% end %>
-    </div>
-  </main>
-</div>
+      </div>
+    <% end %>
+  </div>
+</main>

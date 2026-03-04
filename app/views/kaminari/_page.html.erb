@@ -7,7 +7,12 @@
     per_page:      number of items to fetch per page
     remote:        data-remote -%>
   <% if page.current? %>
-    <span class="px-3 py-1 border rounded bg-violet-500 text-white font-semibold">
+    <span
+      class="
+        size-10 flex items-center justify-center rounded-lg bg-primary text-white
+        font-bold
+      "
+    >
       <%= page.number %>
     </span>
   <% else %>
@@ -15,5 +20,6 @@
     url,
     remote: remote,
     rel: page.rel,
-    class: "px-3 py-1 border rounded bg-white text-violet-700 hover:bg-violet-100" %>
+    class:
+      "size-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" %>
   <% end %>
