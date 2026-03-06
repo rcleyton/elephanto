@@ -5,7 +5,9 @@ class FlashcardsController < ApplicationController
   before_action :set_deck
   before_action :set_flashcard, only: %i[show edit update destroy review]
 
-  def show; end
+  def show
+    render layout: "flashcard"
+  end
 
   def new
     @flashcard = @deck.flashcards.build

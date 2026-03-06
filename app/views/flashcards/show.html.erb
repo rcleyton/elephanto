@@ -1,27 +1,53 @@
 <% content_for :title,
 "#{t("actions.showing")} #{Flashcard.model_name.human.downcase}" %>
 
-<div class="min-h-screen bg-background">
-  <% progress = flashcard_progress(@deck) %>
-  <% right_button = capture do %>
-    <div>
-      <p class="text-muted-foreground"><%= progress[:percent] %>%</p>
+<% progress = flashcard_progress(@deck) %>
+<nav
+  class="
+    sticky top-0 z-10 bg-white dark:bg-surface-dark border-b border-gray-200
+    dark:border-gray-800 px-6 py-4
+  "
+>
+  <div class="max-w-5xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <%= link_to deck_path(@deck),
+        class: "
+          flex p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors
+          text-gray-600 dark:text-gray-300
+        " do %>
+        <span class="material-symbols-outlined block">arrow_back</span>
+      <% end %>
+      <div>
+        <h1 class="text-xl font-bold text-primary">Revisão:
+          <%= @deck.name %></h1>
+        <p class="text-xs font-medium text-gray-500 dark:text-gray-400">Flashcard
+          <%= progress[:current] %>
+          de
+          <%= progress[:total] %>
+        </p>
+      </div>
     </div>
-  <% end %>
-
-  <%= page_header(
-    show_back_button: true,
-    back_path: deck_path(@deck),
-    title: "Revisão: #{@deck.name}",
-    subtitle: "Flashcard #{progress[:current]} de #{progress[:total]}",
-    show_profile_menu: false,
-    right_buttons: right_button,
-  ) %>
-
-  <main
-    data-controller="automatic-margin-top"
-    class="container mx-auto px-6 py-8"
-  >
-    <%= render @flashcard %>
-  </main>
-  <div>
+    <div class="flex items-center gap-4 min-w-[200px]">
+      <div class="flex-1">
+        <div class="flex justify-between items-center mb-1">
+          <span
+            class="
+              text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider
+            "
+          >Progresso</span>
+          <span class="text-xs font-bold text-primary"><%= progress[:percent] %>%</span>
+        </div>
+        <div
+          class="
+            w-full bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden
+          "
+        >
+          <div class="bg-primary h-full progress-transition" style="width: <%= progress[:percent] %>%"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<main class="max-w-3xl mx-auto px-6 py-12">
+  <%= render @flashcard %>
+</main>

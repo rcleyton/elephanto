@@ -1,85 +1,126 @@
+<% options = flashcard.review_options %>
 <div
   id="<%= dom_id flashcard %>"
   data-controller="reveal"
   class="max-w-2xl mx-auto"
 >
+
   <div
     class="
-      rounded-lg border bg-white border-gray-200 text-card-foreground min-h-[400px]
+      bg-white dark:bg-surface-dark shadow-xl shadow-gray-200/50 dark:shadow-none
+      border border-gray-100 dark:border-gray-800 p-8 md:p-12
     "
   >
+    <div class="mb-10">
+      <span
+        class="
+          text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]
+          mb-2 block
+        "
+      >Pergunta</span>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white leading-tight">
+        <%= flashcard.front %>
+      </h2>
+    </div>
+    <div class="mb-8" id="show-answer-container">
+      <button
+        data-action="reveal#show"
+        data-hide-button-target="button"
+        type="button"
+        class="
+          w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl
+          shadow-lg shadow-primary/25 transition-all active:scale-[0.98] flex items-center
+          justify-center gap-2 button-hide
+        "
+      >
+        <span class="material-symbols-outlined">visibility</span>
+        <%= t("buttons.general.show_answer") %>
+      </button>
+    </div>
     <div
-      class="
-        p-8 flex flex-col justify-center items-center text-left min-h-[400px]
-      "
+      data-reveal-target="item"
+      class="hidden animate-in fade-in slide-in-from-bottom-4 duration-500"
+      id="answer-section"
     >
-      <div class="w-full">
-        <div class="mb-8">
-          <h3 class="text-sm font-medium text-[#676F7E] mb-2">Pergunta</h3>
-          <p class="text-2xl font-bold mb-8 text-[#21242C]"><%= flashcard.front %></p>
-
-          <button
-            data-action="reveal#show"
-            data-hide-button-target="button"
-            type="button"
-            class="btn btn-default-size btn-cta w-full"
-          >
-            <%= t("buttons.general.show_answer") %>
-          </button>
+      <div class="mb-12">
+        <span
+          class="
+            text-xs font-bold text-gray-400 dark:text-gray-500 uppercase tracking-[0.2em]
+            mb-2 block w-full
+          "
+        >Resposta</span>
+        <div
+          class="
+            p-6 bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20
+          "
+        >
+          <p class="text-2xl font-bold text-primary text-center">
+            <%= flashcard.back %>
+          </p>
         </div>
+      </div>
+      <div>
+        <div class="text-center mb-6">
+          <p class="text-sm font-medium text-gray-500 dark:text-gray-400 italic">Como foi sua resposta?</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::AGAIN }, method: :post, class: "group flex flex-col items-center justify-center p-4 rounded-xl bg-red-50
+              dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 hover:bg-red-500
+              hover:text-white transition-all duration-200" do %>
+            <span
+              class="
+                text-sm font-bold text-red-600 dark:text-red-400 group-hover:text-white
+              "
+            ><%= t("buttons.general.again") %></span>
+            <span
+              class="
+                text-[10px] mt-1 text-red-500/70 dark:text-red-400/70 group-hover:text-white/80
+              "
+            >Revisão em
+              <strong><%= format_fsrs_interval(options[:again]) %></strong>
+            </span>
+          <% end %>
 
-        <div data-reveal-target="item" class="mb-8 hidden">
-          <h3 class="text-sm font-medium text-[#676F7E] mb-2">Resposta</h3>
-          <div class="text-xl font-semibold mb-8 text-[#594DE6]"><%= simple_format(flashcard.back) %></div>
-          <div class="space-y-4">
-            <div class="text-[#676F7E] text-sm mb-4">Como foi sua resposta?</div>
-            <% options = flashcard.review_options %>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::AGAIN }, method: :post, class: "btn btn-default-size btn-destructive w-full h-auto" do %>
-                <div class="flex flex-col">
-                  <span><%= t("buttons.general.again") %></span>
-                  <div class="text-xs font-normal">
-                    Previsão de revisão em
-                    <strong><%= format_fsrs_interval(options[:again]) %></strong>
-                  </div>
-                </div>
-              <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::HARD }, method: :post, class: "btn btn-default-size btn-outline w-full h-auto" do %>
-                <div class="flex flex-col">
-                  <span><%= t("buttons.general.hard") %></span>
-                  <div class="text-xs font-normal opacity-80">
-                    Previsão de revisão em
-                    <strong><%= format_fsrs_interval(options[:hard]) %></strong>
-                  </div>
-                </div>
-              <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::GOOD }, method: :post, class: "btn btn-default-size btn-secondary w-full h-auto" do %>
-                <div class="flex flex-col">
-                  <span><%= t("buttons.general.medium") %></span>
-                  <div class="text-xs font-normal opacity-80">
-                    Previsão de revisão em
-                    <strong><%= format_fsrs_interval(options[:good]) %></strong>
-                  </div>
-                </div>
-              <% end %>
-              <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::EASY }, method: :post, class: "btn btn-default-size btn-cta w-full h-auto" do %>
-                <div class="flex flex-col">
-                  <span><%= t("buttons.general.easy") %></span>
-                  <div class="text-xs font-normal opacity-80">
-                    Previsão de revisão em
-                    <strong><%= format_fsrs_interval(options[:easy]) %></strong>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          </div>
+          <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::HARD }, method: :post, class: "group flex flex-col items-center justify-center p-4 rounded-xl bg-gray-50
+              dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:bg-gray-200
+              dark:hover:bg-gray-700 transition-all duration-200" do %>
+            <span class="text-sm font-bold text-gray-700 dark:text-gray-200"><%= t("buttons.general.hard") %></span>
+            <span class="text-[10px] mt-1 text-gray-500 dark:text-gray-400">Revisão em
+              <strong><%= format_fsrs_interval(options[:hard]) %></strong>
+            </span>
+          <% end %>
+
+          <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::GOOD }, method: :post, class: "group flex flex-col items-center justify-center p-4 rounded-xl bg-gray-50
+              dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:bg-gray-200
+              dark:hover:bg-gray-700 transition-all duration-200" do %>
+            <span class="text-sm font-bold text-gray-700 dark:text-gray-200"><%= t("buttons.general.medium") %></span>
+            <span class="text-[10px] mt-1 text-gray-500 dark:text-gray-400">Revisão em
+              <strong><%= format_fsrs_interval(options[:good]) %></strong>
+            </span>
+          <% end %>
+
+          <%= button_to review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::EASY }, method: :post, class: "group flex flex-col items-center justify-center p-4 rounded-xl bg-primary/10
+              dark:bg-primary/20 border border-primary/20 hover:bg-primary hover:text-white
+              transition-all duration-200" do %>
+            <span
+              class="
+                text-sm font-bold text-primary dark:text-primary group-hover:text-white
+              "
+            ><%= t("buttons.general.easy") %></span>
+            <span
+              class="
+                text-[10px] mt-1 text-primary/70 dark:text-primary group-hover:text-white/80
+              "
+            >Revisão em
+              <strong><%= format_fsrs_interval(options[:easy]) %></strong>
+            </span>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<script>
+  <script>
   function initHideButton() {
     const btn = document.querySelector('.button-hide');
     if (!btn) return;
@@ -93,4 +134,4 @@
 
   document.addEventListener('DOMContentLoaded', initHideButton);
   document.addEventListener('turbo:load', initHideButton);
-</script>
+  </script>
