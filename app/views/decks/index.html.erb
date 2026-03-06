@@ -71,5 +71,25 @@
         <%= render deck %>
       <% end %>
     </div>
+  <% else %>
+    <div
+      class="
+        group flex flex-col items-center justify-center rounded-2xl border-2
+        border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50
+        dark:bg-slate-900/50 p-8 transition-all hover:bg-slate-100
+        dark:hover:bg-slate-800
+      "
+    >
+      <%= link_to new_deck_path,
+        class: "
+          mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-200
+          dark:bg-slate-700 text-slate-400 group-hover:bg-primary group-hover:text-white
+          transition-all
+        " do %>
+        <span class="material-symbols-outlined text-3xl">add</span>
+      <% end %>
+      <p class="text-base font-bold text-slate-900 dark:text-white">Criar novo deck</p>
+      <p class="mt-1 text-center text-xs text-slate-500 dark:text-slate-400">Comece um novo tópico e acelere seu aprendizado</p>
+    </div>
   <% end %>
 </main>
