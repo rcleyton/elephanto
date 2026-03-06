@@ -136,47 +136,24 @@
     <% if @deck.flashcards.any? %>
       <%= render partial: "flashcards", locals: { flashcards: @flashcards, deck: @deck } %>
     <% else %>
-      <div class="rounded-lg border bg-card text-card-foreground">
-        <div class="p-8 text-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="
-              lucide lucide-book-open w-12 h-12 text-muted-foreground mx-auto mb-4
-            "
-          >
-            <path d="M12 7v14"></path>
-            <path
-              d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"
-            ></path>
-          </svg>
-          <h3 class="text-lg font-semibold mb-2">Nenhum flashcard encontrado</h3>
-          <p class="text-muted-foreground mb-6">Adicione flashcards para começar a estudar</p>
-          <%= link_to new_deck_flashcard_path(@deck), class: "btn btn-default-size btn-cta" do %>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-plus w-4 h-4"
-            >
-              <path d="M5 12h14"></path>
-              <path d="M12 5v14"></path>
-            </svg>
-            Adicionar primeiro flashcard
+      <div
+          class="
+            group flex flex-col items-center justify-center rounded-2xl border-2
+            border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50
+            dark:bg-slate-900/50 p-8 transition-all hover:bg-slate-100
+            dark:hover:bg-slate-800
+          "
+        >
+          <%= link_to new_deck_flashcard_path(@deck),
+            class: "
+              mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-200
+              dark:bg-slate-700 text-slate-400 group-hover:bg-primary group-hover:text-white
+              transition-all
+            " do %>
+            <span class="material-symbols-outlined text-3xl">add</span>
           <% end %>
+          <p class="text-base font-bold text-slate-900 dark:text-white">Criar primeiro flashcard</p>
+          <p class="mt-1 text-center text-xs text-slate-500 dark:text-slate-400">Adicione flashcards para começar a estudar</p>
         </div>
       </div>
     <% end %>
