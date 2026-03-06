@@ -46,7 +46,7 @@
       </div>
       <div class="flex items-baseline gap-2">
         <span class="text-3xl font-bold"><%= @deck.flashcards.count %></span>
-        <span class="text-xs font-semibold text-emerald-500">+2 esta semana</span>
+        <span class="text-xs font-semibold text-emerald-500">+<%= @deck.flashcards.created_this_week.count %> esta semana</span>
       </div>
     </div>
     <!-- Status Card -->

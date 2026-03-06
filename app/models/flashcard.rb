@@ -20,6 +20,10 @@ class Flashcard < ApplicationRecord
     )
   }
 
+  scope :created_this_week, -> {
+    where(created_at: Time.current.beginning_of_week(:sunday)..Time.current.end_of_week(:sunday))
+  }
+
   def fsrs_card
     data = fsrs_state.deep_symbolize_keys
 
