@@ -21,6 +21,8 @@ class ReviewSessionService
 
       if queue.empty?
         complete_session(review_session)
+
+        session_store[:last_review_session_id] = review_session.id
         session_store.delete(:review_session_id)
         session_store.delete(:review_queue)
       end

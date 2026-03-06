@@ -1,23 +1,118 @@
+<% progress = flashcard_progress(@deck) %>
 <div
   class="p-4 md:p-0 min-h-screen bg-gray-100 flex items-center justify-center"
 >
-  <div
-    class="
-      rounded-lg border border-[#DCDFE5] bg-white text-[21242C] w-full max-w-md
-    "
-  >
-    <div class="p-8 text-center">
-      <div class="text-6xl mb-6">
-        🎉
+  <div class="max-w-4xl w-full flex flex-col gap-8 py-12">
+    <!-- Celebratory Card -->
+    <div
+      class="
+        bg-white dark:bg-slate-900 rounded-3xl p-12 text-center shadow-xl
+        shadow-slate-200/50 dark:shadow-none relative overflow-hidden
+      "
+    >
+      <!-- Background Decoration -->
+      <div
+        class="
+          absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary/20 via-primary
+          to-primary/20
+        "
+      ></div>
+      <div class="mb-8 relative inline-block">
+        <div
+          class="
+            size-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto
+          "
+        >
+          <span class="material-symbols-outlined text-primary text-5xl">celebration</span>
+        </div>
+        <!-- Floating icons -->
+        <span
+          class="
+            material-symbols-outlined absolute -top-2 -right-4 text-primary/40
+            animate-bounce
+          "
+        >stars</span>
+        <span
+          class="
+            material-symbols-outlined absolute top-10 -left-6 text-primary/30 rotate-12
+          "
+        >auto_awesome</span>
       </div>
-      <h2 class="text-2xl font-bold mb-4">Revisão concluída!</h2>
-      <% progress = flashcard_progress(@deck) %>
-      <p class="text-[#676F7E] mb-6">Você revisou
-        <%= progress[:total] %> cards do Deck:
-        <%= @deck.name %></p>
-      <%= link_to "Voltar para o deck",
-      deck_path(@deck),
-      class: "btn btn-default-size btn-default-variant w-full" %>
+      <h2 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">Parabéns!</h2>
+      <p
+        class="
+          text-slate-500 dark:text-slate-400 text-lg max-w-lg mx-auto leading-relaxed
+        "
+      >
+        Você concluiu com sucesso sua sessão de revisão. Sua sequência diária
+        está melhor do que nunca!
+      </p>
+    </div>
+    <!-- Stats Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div
+        class="
+          bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-100
+          dark:border-slate-800 flex items-center gap-6 shadow-sm
+        "
+      >
+        <div
+          class="
+            size-14 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center
+            justify-center
+          "
+        >
+          <span class="material-symbols-outlined text-primary">style</span>
+        </div>
+        <div>
+          <p
+            class="
+              text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider
+            "
+          >Flashcards revisados</p>
+          <p class="text-3xl font-bold text-slate-900 dark:text-white"><%= progress[:total] %></p>
+        </div>
+      </div>
+      <div
+        class="
+          bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-100
+          dark:border-slate-800 flex items-center gap-6 shadow-sm
+        "
+      >
+        <div
+          class="
+            size-14 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center
+            justify-center
+          "
+        >
+          <span class="material-symbols-outlined text-primary">timer</span>
+        </div>
+        <div>
+          <p
+            class="
+              text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider
+            "
+          >Tempo gasto</p>
+          <p class="text-3xl font-bold text-slate-900 dark:text-white"><%= seconds_to_str(@duration) %></p>
+        </div>
+      </div>
+    </div>
+    <!-- Action Area -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
+      <%= link_to decks_path,
+        class: "
+          flex justify-center w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-white rounded-xl
+          font-bold text-lg shadow-xl shadow-primary/25 hover:translate-y-[-2px]
+          transition-all active:translate-y-0
+        " do %>
+        Voltar para meus decks
+      <% end %>
+    </div>
+    <!-- Quote of the day (Subtle addition for premium feel) -->
+    <div class="mt-8 text-center">
+      <p class="text-slate-400 dark:text-slate-500 text-sm italic">
+        "A consistência é a chave para a maestria. Até breve!"
+      </p>
     </div>
   </div>
 </div>

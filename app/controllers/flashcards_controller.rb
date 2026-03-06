@@ -74,7 +74,15 @@ class FlashcardsController < ApplicationController
     end
   end
 
-  def reviewed_completed; end
+  def reviewed_completed
+    review_session = ReviewSession.find_by(id: session[:last_review_session_id])
+
+    @duration = review_session&.duration_seconds
+
+    session.delete(:last_review_session_id)
+
+    render layout: "flashcard"
+  end
 
   private
 
