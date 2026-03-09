@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_03_02_164557) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_06_225750) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,6 +51,8 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_02_164557) do
     t.datetime "last_reviewed_at"
     t.string "tag"
     t.string "cover_color"
+    t.boolean "archived", default: false
+    t.boolean "favorite", default: false
     t.index ["user_id"], name: "index_decks_on_user_id"
   end
 
@@ -74,6 +76,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_03_02_164557) do
     t.datetime "updated_at", null: false
     t.integer "daily_new_limit"
     t.integer "daily_review_limit"
+    t.string "country"
+    t.string "state"
+    t.string "city"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 

@@ -15,6 +15,14 @@ class Deck < ApplicationRecord
   validates :description, presence: true
   validates :tag, presence: true
 
+  scope :recent,    -> { order(created_at: :desc).limit(2) }
+  scope :favorites, -> { where(favorite: true) }
+  scope :archived,  -> { where(archived: true) }
+
+  def toggle_favorite!
+    update!(favorite: !favorite)
+  end
+
   private
 
   def assign_random_cover_color

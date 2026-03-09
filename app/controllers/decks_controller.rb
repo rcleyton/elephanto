@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 class DecksController < ApplicationController
+  include ActionView::RecordIdentifier
   include ProfileRequired
 
   before_action :required_profile, only: [ :new, :create ]
@@ -9,6 +10,17 @@ class DecksController < ApplicationController
 
   def index
     @decks = current_user.decks.order(:created_at)
+
+    case params[:filter]
+    when "recent"
+      @decks = @decks.recent
+    when "favorites"
+      @decks = @decks.favorites
+    when "archived"
+      @decks = @decks.archived
+    else
+      @decks = @decks.where(archived: false)
+    end
   end
 
   def show
@@ -52,6 +64,39 @@ class DecksController < ApplicationController
     if @deck.destroy!
       flash[:success] = t("messages.deleted", model: Deck.model_name.human)
       redirect_to decks_path, status: :see_other
+    end
+  end
+
+  def toggle_favorite
+    @deck = Deck.find(params[:id])
+    @deck.toggle_favorite!
+
+    respond_to do |format|
+      format.turbo_stream do
+        streams = []
+
+        if params[:filter] == "favorites" && !@deck.favorite?
+          streams << turbo_stream.remove(helpers.dom_id(@deck))
+
+          if Deck.favorites.none?
+            streams << turbo_stream.replace(
+              "decks_list",
+              partial: "decks/empty_state",
+              locals: { filter: "favorites" }
+            )
+          end
+        else
+          streams << turbo_stream.replace(
+            "#{helpers.dom_id(@deck)}_favorite_icon",
+            partial: "decks/favorite_icon",
+            locals: { deck: @deck }
+          )
+        end
+
+        render turbo_stream: streams
+      end
+
+      format.html { redirect_to decks_path(filter: params[:filter]) }
     end
   end
 

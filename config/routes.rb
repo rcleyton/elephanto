@@ -45,6 +45,7 @@ Rails.application.routes.draw do
       member do
         get :review,             to: "flashcards#start_review"
         get :reviewed_completed, to: "flashcards#reviewed_completed"
+        patch :toggle_favorite
       end
     end
 

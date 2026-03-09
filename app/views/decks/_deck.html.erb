@@ -11,12 +11,15 @@
       aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800 relative
     "
   >
+    <div id="<%= dom_id deck %>_favorite_button" class="absolute top-3 left-3 z-10">
+      <%= render "decks/favorite_button", deck: deck, filter: params[:filter] %>
+    </div>
     <div class="absolute inset-0 bg-linear-to-t from-black/40 to-transparent"></div>
     <% if deck.cover_image.attached? %>
       <%= image_tag deck.cover_image,
       class:
         "h-full w-full object-cover transition-transform duration-500
-                          group-hover:scale-110" %>
+                                                  group-hover:scale-110" %>
     <% else %>
       <div class="absolute inset-0" style="background: <%= deck.cover_color %>"></div>
     <% end %>
@@ -51,7 +54,7 @@
       </div>
     </div>
     <div class="mt-6 flex gap-2">
-      <%= link_to deck, class: "flex justify-center items-center flex-1 rounded-lg bg-primary py-2.5 text-xs font-bold text-white transition-colors hover:bg-primary/90" do %>
+      <%= link_to deck, class: "flex justify-center items-center flex-1 rounded-lg bg-primary py-2.5 text-xs font-bold text-white transition-colors hover:bg-primary/90", data: { turbo_frame: "_top" } do %>
         Estudar
       <% end %>
       <%= link_to edit_deck_path(deck), class: "
