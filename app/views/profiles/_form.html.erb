@@ -3,6 +3,9 @@
   <p class="text-sm text-muted-foreground">Gerencia suas informações pessoais e preferências</p>
   <%= form_with model: @profile, class: "space-y-6" do |form| %>
     <div class="mt-4">
+      <%= form.file_field :cover_profile %>
+    </div>
+    <div class="mt-4">
       <div data-controller="dropzone" data-dropzone-target="dropArea">
         <div
           data-dropzone-target="dropArea"

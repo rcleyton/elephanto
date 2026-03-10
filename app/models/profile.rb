@@ -5,6 +5,7 @@ class Profile < ApplicationRecord
   belongs_to :user
 
   has_one_attached :avatar
+  has_one_attached :cover_profile
 
   before_validation :initialize_daily_limits, on: :create
 

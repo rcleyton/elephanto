@@ -40,7 +40,7 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.require(:profile).permit(:first_name, :last_name, :username, :bio, :avatar,
-                                    :daily_new_limit, :daily_review_limit)
+                                    :daily_new_limit, :daily_review_limit, :cover_profile)
   end
 
   def set_profile
