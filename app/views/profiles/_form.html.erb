@@ -1,72 +1,243 @@
-<div class="flex flex-col space-y-1.5 p-6">
-  <h3 class="text-2xl font-semibold leading-none tracking-tight">Informações do perfil</h3>
-  <p class="text-sm text-muted-foreground">Gerencia suas informações pessoais e preferências</p>
-  <%= form_with model: @profile, class: "space-y-6" do |form| %>
-    <div class="mt-4">
-      <%= form.file_field :cover_profile %>
-    </div>
-    <div class="mt-4">
-      <div data-controller="dropzone" data-dropzone-target="dropArea">
+<%= form_with model: @profile, data: { controller: "image-upload", image_upload_autosave_value: false }, class: "w-full" do |form| %>
+  <div
+    class="
+      w-full h-48 sm:h-64 overflow-hidden rounded-t-xl relative mb-[-4rem] group
+      cursor-pointer
+    "
+  >
+    <label class="block w-full h-full">
+      <% if profile.persisted? && profile.cover_profile.attached? %>
+        <img
+          src="<%= url_for(profile.cover_profile) %>"
+          class="w-full h-full object-cover"
+          data-image-upload-target="preview"
+        />
+      <% else %>
+        <img
+          src="https://placehold.net/6-600x800.png"
+          class="w-full h-full object-cover"
+          data-image-upload-target="preview"
+        />
+      <% end %>
+
+      <div
+        class="
+          absolute inset-0 flex items-center justify-center bg-black/40 opacity-0
+          group-hover:opacity-100 transition
+        "
+      >
+        <span class="text-white font-semibold flex items-center gap-2">
+          <span class="material-symbols-outlined">photo_camera</span>
+          Alterar capa
+        </span>
+      </div>
+
+      <%= form.file_field :cover_profile,
+                      class: "hidden",
+                      accept: "image/*",
+                      data: {
+                        image_upload_target: "input",
+                        action: "change->image-upload#previewImage",
+                      } %>
+
+    </label>
+  </div>
+
+  <div class="flex flex-col items-center w-full mt-8 z-10">
+    <div class="relative group cursor-pointer">
+      <label>
         <div
-          data-dropzone-target="dropArea"
           class="
-            border-2 border-dashed bg-color bg-background rounded-lg p-6 text-center
-            cursor-pointer
+            size-32 rounded-full border-4 border-white dark:border-background-dark p-1
+            bg-white dark:bg-background-dark shadow-xl
           "
         >
-          <p class="text-gray-600"><%= t("general.drag_and_drop") %></p>
-          <%= form.file_field :avatar, class: "hidden", data: { dropzone_target: "input" } %>
-          <img
-            data-dropzone-target="preview"
-            class="hidden mx-auto mt-4 max-h-32 rounded-full"
-          />
+          <% if profile.persisted? && profile.avatar.attached? %>
+            <img
+              src="<%= url_for(profile.avatar) %>"
+              class="w-full h-full rounded-full object-cover"
+              data-image-upload-target="preview"
+            />
+          <% else %>
+            <div
+              data-image-upload-target="preview"
+              class="
+                w-full h-full rounded-full bg-primary/10 flex items-center justify-center
+              "
+            >
+              <span class="material-symbols-outlined text-3xl text-primary">
+                person
+              </span>
+            </div>
+          <% end %>
         </div>
-      </div>
+        <div
+          class="
+            absolute inset-0 rounded-full bg-black/40 flex items-center justify-center
+            opacity-0 group-hover:opacity-100 transition
+          "
+        >
+          <span class="material-symbols-outlined text-white text-xl">
+            photo_camera
+          </span>
+
+        </div>
+
+        <%= form.file_field :avatar,
+                        class: "hidden",
+                        accept: "image/*",
+                        data: {
+                          image_upload_target: "input",
+                          action: "change->image-upload#previewImage",
+                        } %>
+
+      </label>
     </div>
-    <div class="grid grid-cols-2 gap-4">
+  </div>
+
+  <div class="space-y-6 p-8">
+    <div class="grid grid-col md:grid-cols-2 gap-4">
       <div>
-        <%= form.label :first_name, class: "ui-label" %>
-        <%= form.text_field :first_name,
-                        placeholder: t("placeholders.profile.first_name"),
-                        class: "ui-input #{error_class(profile, :first_name)} mt-2" %>
+        <%= form.label :first_name,
+                   class:
+                     "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+        <div class="relative">
+          <div
+            class="
+              pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
+              text-slate-400
+            "
+          >
+            <span class="material-symbols-outlined text-xl">id_card</span>
+          </div>
+          <%= form.text_field :first_name,
+                          placeholder: t("placeholders.profile.first_name"),
+                          class:
+                            "block w-full rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(profile, :first_name)}" %>
+        </div>
         <% if profile.errors[:first_name].any? %>
-          <p class="ui-error"><%= Profile.human_attribute_name(:first_name) %>
-            <%= profile.errors[:first_name].first %></p>
+          <p class="ui-error"><%= Profile.human_attribute_name(:first_name) %><%= profile.errors[:first_name].first %></p>
         <% end %>
       </div>
+
       <div>
-        <%= form.label :last_name, class: "ui-label" %>
-        <%= form.text_field :last_name,
-                        placeholder: t("placeholders.profile.last_name"),
-                        class: "ui-input #{error_class(profile, :last_name)} mt-2" %>
+        <%= form.label :last_name,
+                   class:
+                     "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+        <div class="relative">
+          <div
+            class="
+              pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
+              text-slate-400
+            "
+          >
+            <span class="material-symbols-outlined text-xl">id_card</span>
+          </div>
+          <%= form.text_field :last_name,
+                          placeholder: t("placeholders.profile.last_name"),
+                          class:
+                            "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(profile, :last_name)}" %>
+        </div>
         <% if profile.errors[:last_name].any? %>
           <p class="ui-error"><%= Profile.human_attribute_name(:last_name) %>
             <%= profile.errors[:last_name].first %></p>
         <% end %>
       </div>
     </div>
+
+    <div
+      data-controller="location-autocomplete"
+      data-mapbox-key="<%= ENV.fetch("MAPBOX_PUBLIC_KEY") %>"
+    >
+      <%= form.label :location,
+                 "Localização",
+                 class:
+                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+      <div class="relative">
+        <div
+          class="
+            pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
+            text-slate-400
+          "
+        >
+          <span class="material-symbols-outlined text-xl">location_on</span>
+        </div>
+        <%= form.text_field :location,
+                        placeholder: "Digite a cidade onde mora",
+                        data: {
+                          location_autocomplete_target: "input",
+                          action:
+                            "input->location-autocomplete#search keydown->location-autocomplete#keydown",
+                        },
+                        class:
+                          "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" %>
+
+        <%= form.hidden_field :location_country,
+                          data: {
+                            location_autocomplete_target: "country",
+                          } %>
+
+        <ul
+          data-location-autocomplete-target="results"
+          class="
+            absolute w-full bg-white dark:bg-slate-800 border rounded-lg mt-1 shadow hidden
+            z-50
+          "
+        >
+        </ul>
+      </div>
+    </div>
+
     <div>
-      <%= form.label :username, class: "ui-label" %>
-      <%= form.text_field :username,
-                      placeholder: t("placeholders.profile.username"),
-                      class: "ui-input #{error_class(profile, :username)} mt-2" %>
+      <%= form.label :username,
+                 class:
+                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+      <div class="relative">
+        <div
+          class="
+            pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
+            text-slate-400
+          "
+        >
+          <span class="material-symbols-outlined text-xl">sticker</span>
+        </div>
+        <%= form.text_field :username,
+                        placeholder: t("placeholders.profile.username"),
+                        class:
+                          "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(profile, :username)}" %>
+      </div>
       <% if profile.errors[:username].any? %>
         <p class="ui-error"><%= Profile.human_attribute_name(:username) %>
           <%= profile.errors[:username].first %></p>
       <% end %>
     </div>
+
     <div>
-      <%= form.label :bio, class: "ui-label" %>
-      <%= form.textarea :bio,
-                    placeholder: t("placeholders.profile.bio"),
-                    class: "ui-textarea #{error_class(profile, :bio)} mt-2" %>
+      <%= form.label :bio,
+                 class:
+                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+      <div class="relative">
+        <div
+          class="
+            pointer-events-none absolute left-0 top-4 flex items-start pl-4 text-slate-400
+          "
+        >
+          <span class="material-symbols-outlined text-xl">info</span>
+        </div>
+        <%= form.textarea :bio,
+                      placeholder: t("placeholders.profile.bio"),
+                      class:
+                        "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all resize-none #{error_class(profile, :bio)}" %>
+      </div>
       <% if profile.errors[:bio].any? %>
         <p class="ui-error"><%= Profile.human_attribute_name(:bio) %>
           <%= profile.errors[:bio].first %></p>
       <% end %>
     </div>
-    <div class="flex justify-end">
-      <%= form.submit class: "btn btn-default-size btn-default-variant" %>
+
+    <div class="flex justify-end pt-10">
+      <%= form.submit class:
+                    "flex-1 flex items-center justify-center gap-2 h-11 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 transition-all shadow-md show-primary/20" %>
     </div>
-  <% end %>
-</div>
+  </div>
+<% end %>

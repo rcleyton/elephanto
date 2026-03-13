@@ -22,6 +22,8 @@ Rails.application.routes.draw do
     resources :passwords, param: :token
     resources :profiles, only: %i[new create show edit update]
 
+    get "locations/search", to: "locations#search"
+
     resource :settings, only: [ :show ] do
       patch   :change_password
       patch   :rigor_factor

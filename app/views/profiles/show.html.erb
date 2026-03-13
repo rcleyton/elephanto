@@ -5,153 +5,171 @@
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<main
-  class="
-    flex flex-1 flex-col items-center py-8 px-4 sm:px-10 lg:px-40 max-w-[960px]
-    mx-auto w-full gap-8
-  "
->
-  <%= form_with model: @profile, url: profile_path(@profile), method: :patch, multipart: true, data: { controller: "image-upload" }, class: "w-full" do |f| %>
+<main class="flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40">
+  <div class="layout-content-container flex flex-col max-w-[800px] flex-1">
+    <div class="flex flex-col gap-2 pb-8">
+      <h1
+        class="
+          text-slate-900 dark:text-white text-3xl md:text-4xl font-extrabold
+          tracking-tight
+        "
+      >
+        Meu perfil</h1>
+      <p class="text-slate-500 dark:text-slate-400 text-base">Gerenciar perfil</p>
+    </div>
+
     <div
       class="
-        w-full h-48 sm:h-64 overflow-hidden rounded-b-3xl relative -mt-8 mb-[-4rem]
-        group cursor-pointer
+        overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800
+        bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/50 dark:shadow-none
       "
     >
-      <label class="block w-full h-full">
-        <% if @profile.cover_profile.attached? %>
-          <img
-            src="<%= url_for(@profile.cover_profile) %>"
-            class="w-full h-full object-cover"
-            data-image-upload-target="preview"
-          />
-        <% else %>
-          <img
-            src="https://placeholder.pics/svg/1200x300"
-            class="w-full h-full object-cover"
-            data-image-upload-target="preview"
-          />
-        <% end %>
-
+      <%= form_with model: @profile, url: profile_path(@profile), method: :patch, multipart: true, data: { controller: "image-upload", image_upload_autosave_value: true }, class: "w-full" do |f| %>
         <div
           class="
-            absolute inset-0 flex items-center justify-center bg-black/40 opacity-0
-            group-hover:opacity-100 transition
+            w-full h-48 sm:h-64 overflow-hidden rounded-t-xl relative mb-[-4rem] group
+            cursor-pointer
           "
         >
-          <span class="text-white font-semibold flex items-center gap-2">
-            <span class="material-symbols-outlined">photo_camera</span>
-            Alterar capa
-          </span>
-        </div>
-
-        <%= f.file_field :cover_profile,
-                     hidden: true,
-                     accept: "image/*",
-                     data: {
-                       image_upload_target: "input",
-                       action: "change->image-upload#previewImage",
-                     } %>
-      </label>
-    </div>
-  <% end %>
-  <!-- Profile Info Card -->
-  <div class="flex flex-col items-center w-full gap-4 z-10">
-    <%= form_with model: @profile, url: profile_path(@profile), method: :patch, multipart: true, data: { controller: "image-upload" } do |f| %>
-      <div class="relative group cursor-pointer">
-        <label>
-          <div
-            class="
-              size-32 rounded-full border-4 border-white dark:border-background-dark p-1
-              bg-white dark:bg-background-dark shadow-xl
-            "
-          >
-            <% if @profile.avatar.attached? %>
+          <label class="block w-full h-full">
+            <% if @profile.cover_profile.attached? %>
               <img
-                src="<%= url_for(@profile.avatar) %>"
-                class="w-full h-full rounded-full object-cover"
+                src="<%= url_for(@profile.cover_profile) %>"
+                class="w-full h-full object-cover"
                 data-image-upload-target="preview"
               />
             <% else %>
+              <img
+                src="https://placehold.net/6-600x800.png"
+                class="w-full h-full object-cover"
+                data-image-upload-target="preview"
+              />
+            <% end %>
+
+            <div
+              class="
+                absolute inset-0 flex items-center justify-center bg-black/40 opacity-0
+                group-hover:opacity-100 transition
+              "
+            >
+              <span class="text-white font-semibold flex items-center gap-2">
+                <span class="material-symbols-outlined">photo_camera</span>
+                Alterar capa
+              </span>
+            </div>
+
+            <%= f.file_field :cover_profile,
+                         hidden: true,
+                         accept: "image/*",
+                         data: {
+                           image_upload_target: "input",
+                           action: "change->image-upload#previewImage",
+                         } %>
+          </label>
+        </div>
+      <% end %>
+      <!-- Profile Info Card -->
+      <div class="flex flex-col items-center w-full px-8 gap-4 z-10">
+        <%= form_with model: @profile, url: profile_path(@profile), method: :patch, multipart: true, data: { controller: "image-upload", image_upload_autosave_value: true} do |f| %>
+          <div class="relative group cursor-pointer">
+            <label>
               <div
                 class="
-                  w-full h-full rounded-full bg-primary/10 flex items-center justify-center
+                  size-32 rounded-full border-4 border-white dark:border-background-dark p-1
+                  bg-white dark:bg-background-dark shadow-xl
                 "
-                data-image-upload-target="preview"
               >
-                <span class="material-symbols-outlined text-3xl text-primary">
-                  person
+                <% if @profile.avatar.attached? %>
+                  <img
+                    src="<%= url_for(@profile.avatar) %>"
+                    class="w-full h-full rounded-full object-cover"
+                    data-image-upload-target="preview"
+                  />
+                <% else %>
+                  <div
+                    class="
+                      w-full h-full rounded-full bg-primary/10 flex items-center justify-center
+                    "
+                    data-image-upload-target="preview"
+                  >
+                    <span class="material-symbols-outlined text-3xl text-primary">
+                      person
+                    </span>
+                  </div>
+                <% end %>
+              </div>
+              <div
+                class="
+                  absolute inset-0 flex items-center justify-center bg-black/40 rounded-full
+                  opacity-0 group-hover:opacity-100 transition
+                "
+              >
+                <span class="material-symbols-outlined text-white text-xl">
+                  photo_camera
                 </span>
+              </div>
+
+              <%= f.file_field :avatar,
+                           hidden: true,
+                           accept: "image/*",
+                           data: {
+                             image_upload_target: "input",
+                             action: "change->image-upload#previewImage",
+                           } %>
+            </label>
+          </div>
+        <% end %>
+
+        <div class="text-center">
+          <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100"><%= @profile.first_name %>
+            <%= @profile.last_name %></h1>
+          <div class="flex items-center justify-center gap-2 mt-1">
+            <p class="text-primary font-semibold">@<%= @profile.username %></p>
+            <% if @profile.location.present? %>
+              <span class="text-slate-400">•</span>
+              <div class="flex items-center gap-1 text-slate-500 text-sm">
+                <span class="material-symbols-outlined text-sm">location_on</span>
+                <span><%= @profile.location %>,
+                  <%= @profile.location_country %></span>
               </div>
             <% end %>
           </div>
-          <div
-            class="
-              absolute inset-0 flex items-center justify-center bg-black/40 rounded-full
-              opacity-0 group-hover:opacity-100 transition
-            "
-          >
-            <span class="material-symbols-outlined text-white text-xl">
-              photo_camera
-            </span>
-          </div>
-
-          <%= f.file_field :avatar,
-                       hidden: true,
-                       accept: "image/*",
-                       data: {
-                         image_upload_target: "input",
-                         action: "change->image-upload#previewImage",
-                       } %>
-        </label>
-      </div>
-    <% end %>
-
-    <div class="text-center">
-      <h1 class="text-3xl font-bold text-slate-900 dark:text-slate-100"><%= @profile.first_name %>
-        <%= @profile.last_name %></h1>
-      <div class="flex items-center justify-center gap-2 mt-1">
-        <p class="text-primary font-semibold">@<%= @profile.username %></p>
-        <span class="text-slate-400">•</span>
-        <div class="flex items-center gap-1 text-slate-500 text-sm">
-          <span class="material-symbols-outlined text-sm">location_on</span>
-          <span>São Paulo, Brasil</span>
         </div>
-      </div>
-    </div>
 
-    <div class="flex gap-3 w-full max-w-xs mt-2">
-      <%= link_to edit_profile_path(@profile),
+        <div class="flex gap-3 w-full max-w-xs mt-2">
+          <%= link_to edit_profile_path(@profile),
         class: "
           flex-1 flex items-center justify-center gap-2 h-11 bg-primary text-white
           rounded-lg font-bold hover:bg-primary/90 transition-all shadow-md
           shadow-primary/20" do %>
-        <span class="material-symbols-outlined text-lg">person_edit</span>
-        <span class="text-sm">Editar Perfil</span>
-      <% end %>
-    </div>
-  </div>
-  <div class="w-full flex flex-col gap-6">
-    <div class="flex flex-col gap-2">
-      <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Sobre</h3>
-      <p
-        class="
-          text-slate-600 dark:text-slate-400 leading-relaxed bg-white
-          dark:bg-background-dark p-4 rounded-xl border border-primary/10
-        "
-      >
-        <%= @profile.bio %>
-      </p>
-    </div>
-  </div>
-  <!-- Settings Section --> <!-- Logout Button -->
-  <div class="w-full pb-10">
-    <%= link_to session_path, data: { turbo_method: :delete },
+            <span class="material-symbols-outlined text-lg">person_edit</span>
+            <span class="text-sm">Editar Perfil</span>
+          <% end %>
+        </div>
+      </div>
+      <div class="w-full flex flex-col p-8 gap-6">
+        <div class="flex flex-col gap-2">
+          <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100">Sobre</h3>
+          <p
+            class="
+              text-slate-600 dark:text-slate-400 leading-relaxed bg-white
+              dark:bg-background-dark p-4 rounded-xl border border-primary/10
+            "
+          >
+            <%= @profile.bio %>
+          </p>
+        </div>
+      </div>
+      <!-- Settings Section --> <!-- Logout Button -->
+      <div class="w-full p-8">
+        <%= link_to session_path, data: { turbo_method: :delete },
       class: "
         w-full flex items-center justify-center gap-2 h-12 rounded-xl border-2
         border-primary/20 text-primary font-bold hover:bg-primary/5 transition-colors" do %>
-      <span class="material-symbols-outlined">logout</span>
-      <span>Sair da Conta</span>
-    <% end %>
+          <span class="material-symbols-outlined">logout</span>
+          <span>Sair da Conta</span>
+        <% end %>
+      </div>
+    </div>
   </div>
 </main>

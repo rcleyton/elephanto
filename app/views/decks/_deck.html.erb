@@ -19,7 +19,7 @@
       <%= image_tag deck.cover_image,
       class:
         "h-full w-full object-cover transition-transform duration-500
-                                                              group-hover:scale-110" %>
+                                                                    group-hover:scale-110" %>
     <% else %>
       <div class="absolute inset-0" style="background: <%= deck.cover_color %>"></div>
     <% end %>
@@ -60,7 +60,7 @@
       <%= link_to edit_deck_path(deck), class: "
           rounded-lg border border-slate-200 dark:border-slate-700 px-4 py-2.5 text-xs
           font-bold text-slate-700 dark:text-slate-300 hover:bg-slate-50
-          dark:hover:bg-slate-800" do %>
+          dark:hover:bg-slate-800", data: { turbo_frame: "_top" } do %>
         <span class="material-symbols-outlined text-lg">edit</span>
       <% end %>
     </div>
