@@ -53,83 +53,123 @@
       <div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
       <div class="relative">
         <div class="flex items-center gap-3">
+
           <div class="text-right hidden sm:block">
-            <p class="text-xs font-semibold">
+            <p class="text-xs font-semibold text-slate-800 dark:text-slate-200">
               <% if current_user.profile.persisted? %>
                 <%= current_user.profile.first_name %>
               <% else %>
                 <%= current_user.email_address %>
               <% end %>
             </p>
-            <p class="text-[10px] text-primary">Free</p>
+            <p class="text-[10px] text-primary dark:text-slate-400">Free</p>
           </div>
+
           <div
             class="
-              h-10 w-10 rounded-full border-2 border-primary/20 bg-primary/10 flex
-              items-center justify-center overflow-hidden relative
+              h-10 w-10 rounded-full border-2 border-primary/20 bg-primary/10
+              dark:border-slate-600 dark:bg-slate-700 flex items-center justify-center
+              overflow-hidden relative
             "
             data-action="click->header#toggleProfileDropdown"
           >
+
             <% profile = current_user.profile %>
+
             <% if profile&.persisted? && profile.avatar.attached? %>
               <%= image_tag profile.avatar,
               class: "w-full h-full object-cover",
               alt: "Avatar do usuário" %>
             <% else %>
+
               <svg
                 viewBox="0 0 24 24"
-                fill="none"
+                fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg"
-                class="w-full h-full"
+                class="w-full h-full text-slate-700 dark:text-slate-300"
               >
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
                   d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z"
-                  fill="#000000"
                 />
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
                   d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z"
-                  fill="#000000"
                 />
               </svg>
+
             <% end %>
           </div>
+
           <div
             data-header-target="profileDropdownMenu"
             class="
-              absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-md
-              shadow-lg z-50 hidden opacity-0 pointer-events-none
+              absolute right-0 top-full mt-2 w-48 bg-white dark:bg-slate-800 border
+              border-gray-200 dark:border-slate-700 rounded-md shadow-lg z-50 hidden opacity-0
+              pointer-events-none
             "
           >
-            <div class="px-4 py-2 text-sm font-normal border-b border-gray-200">
+
+            <div
+              class="
+                px-4 py-2 text-sm font-normal border-b border-gray-200 dark:border-slate-700
+              "
+            >
               <div class="flex flex-col space-y-1">
-                <p class="text-sm font-medium leading-none">minha conta</p>
-                <p class="text-xs leading-none text-muted-foreground"><%= current_user.email_address %></p>
+                <p class="text-sm font-medium leading-none text-slate-900 dark:text-slate-100">
+                  minha conta
+                </p>
+                <p class="text-xs leading-none text-muted-foreground dark:text-slate-400">
+                  <%= current_user.email_address %>
+                </p>
               </div>
             </div>
-            <%= link_to path_to_profile, class: "flex items-center select-none rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
+
+            <%= link_to path_to_profile,
+      class: "flex items-center select-none rounded-sm px-2.5 py-2 m-1
+      hover:bg-accent dark:hover:bg-slate-700
+      hover:text-white dark:text-slate-200
+      text-sm outline-none transition-colors cursor-pointer" do %>
               <div class="material-symbols-outlined mr-2">person</div>
               meu perfil
             <% end %>
-            <%= link_to statistics_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
+
+            <%= link_to statistics_path,
+      class: "flex items-center rounded-sm px-2.5 py-2 m-1
+      hover:bg-accent dark:hover:bg-slate-700
+      hover:text-white dark:text-slate-200
+      text-sm transition-colors cursor-pointer" do %>
               <div class="material-symbols-outlined mr-2">leaderboard</div>
               estatísticas
             <% end %>
-            <%= link_to settings_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
+            <%= link_to settings_path,
+      class: "flex items-center rounded-sm px-2.5 py-2 m-1
+      hover:bg-accent dark:hover:bg-slate-700
+      hover:text-white dark:text-slate-200
+      text-sm transition-colors cursor-pointer" do %>
               <div class="material-symbols-outlined mr-2">settings</div>
               configurações
             <% end %>
             <% if current_user.admin? %>
-              <%= link_to admin_path, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
+              <%= link_to admin_path,
+        class: "flex items-center rounded-sm px-2.5 py-2 m-1
+        hover:bg-accent dark:hover:bg-slate-700
+        hover:text-white dark:text-slate-200
+        text-sm transition-colors cursor-pointer" do %>
                 <div class="material-symbols-outlined mr-2">dashboard</div>
                 dashboard
               <% end %>
             <% end %>
-            <div class="border-t border-gray-200">
-              <%= link_to session_path, data: { turbo_method: :delete }, class: "relative flex select-none items-center rounded-sm px-2.5 py-2 m-1 hover:bg-accent hover:text-white text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground cursor-pointer" do %>
+
+            <div class="border-t border-gray-200 dark:border-slate-700">
+              <%= link_to session_path,
+        data: { turbo_method: :delete },
+        class: "flex items-center rounded-sm px-2.5 py-2 m-1
+        hover:bg-accent dark:hover:bg-slate-700
+        hover:text-white dark:text-slate-200
+        text-sm transition-colors cursor-pointer" do %>
                 <div class="material-symbols-outlined mr-2">logout</div>
                 sair
               <% end %>
