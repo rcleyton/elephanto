@@ -1,29 +1,37 @@
 <%= turbo_frame_tag "review_settings_form" do %>
-  <%= form_with model: @profile, url: daily_limit_settings_path, method: :patch, data: { turbo_frame: "settings_form" } do |form| %>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+  <%= form_with model: @profile, url: daily_limit_settings_path, method: :patch, class: "p-6 space-y-6", data: { turbo_frame: "settings_form" } do |form| %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
-        <%= form.label :daily_new_limit, class: "ui-label" %>
+        <%= form.label :daily_new_limit,
+                   class:
+                     "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
         <%= form.number_field :daily_new_limit,
                           class:
-                            "ui-input #{error_class(@profile, :daily_new_limit)} mt-2" %>
+                            "w-full rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:ring-primary focus:border-primary text-sm py-3 px-4 #{error_class(@profile, :daily_new_limit)}" %>
+        <p class="text-xs text-slate-500 mt-2 italic">Recomendado: 15-30 para manter o ritmo.</p>
         <% if @profile.errors[:daily_new_limit].any? %>
           <p class="ui-error"><%= Profile.human_attribute_name(:daily_new_limit) %>
             <%= @profile.errors[:daily_new_limit].first %></p>
         <% end %>
       </div>
       <div>
-        <%= form.label :daily_review_limit, class: "ui-label" %>
+        <%= form.label :daily_review_limit,
+                   class:
+                     "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
         <%= form.number_field :daily_review_limit,
                           class:
-                            "ui-input #{error_class(@profile, :daily_review_limit)} mt-2" %>
+                            "w-full rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:ring-primary focus:border-primary text-sm py-3 px-4 #{error_class(@profile, :daily_review_limit)}" %>
+        <p class="text-xs text-slate-500 mt-2 italic">Recomendado: 5x o número de novos cartões.</p>
         <% if @profile.errors[:daily_review_limit].any? %>
           <p class="ui-error"><%= Profile.human_attribute_name(:daily_review_limit) %>
             <%= @profile.errors[:daily_review_limit].first %></p>
         <% end %>
       </div>
     </div>
-    <%= form.submit "Atualizar limites",
-                class:
-                  "btn btn-default-size btn-default-variant mt-2.5 w-full md:w-auto" %>
+    <div class="flex justify-end pt-2">
+      <%= form.submit "Salvar preferências",
+                  class:
+                    "bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 font-semibold py-2.5 px-6 rounded-lg transition-all" %>
+    </div>
   <% end %>
 <% end %>

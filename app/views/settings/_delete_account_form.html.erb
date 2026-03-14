@@ -1,0 +1,86 @@
+<%= form_with url: delete_account_settings_path,
+  method: :delete,
+  class: "space-y-6",
+  data: { controller: "password-form" } do |form| %>
+
+  <div class="flex items-start gap-4">
+
+    <!-- Icon -->
+<span class="material-symbols-outlined text-red-500">warning</span>
+
+    <div>
+      <h3 class="text-lg font-semibold text-white">
+        Confirmar exclusão da conta
+      </h3>
+
+      <p class="text-sm text-slate-400 mt-1">
+        Esta ação é permanente. Todos os seus decks, progresso e dados serão
+        removidos e não poderão ser recuperados. Digite <strong class="font-bold text-red-500"><%= current_user.profile.username %></strong> e senha para confirmar a exclusão da sua conta.
+      </p>
+    </div>
+
+  </div>
+
+
+  <!-- Username -->
+  <div>
+    <%= form.label :username,
+      class: "block text-sm font-medium text-slate-300 mb-1" %>
+
+    <%= form.text_field :username,
+      required: true,
+      placeholder: "Digite seu nome de usuário",
+      class: "w-full rounded-lg border border-slate-700 bg-slate-900
+              text-sm py-3 px-4 text-white
+              focus:ring-2 focus:ring-red-500 focus:border-red-500",
+      data: {
+        password_form_target: "username",
+        action: "input->password-form#toggleDeleteAccountButton"
+      } %>
+  </div>
+
+
+  <!-- Password -->
+  <div>
+    <%= form.label :current_password, "Senha",
+      class: "block text-sm font-medium text-slate-300 mb-1" %>
+
+    <%= form.password_field :current_password,
+      id: "current_password_delete",
+      required: true,
+      placeholder: "Digite sua senha",
+      class: "w-full rounded-lg border border-slate-700 bg-slate-900
+              text-sm py-3 px-4 text-white
+              focus:ring-2 focus:ring-red-500 focus:border-red-500",
+      data: {
+        password_form_target: "currentPassword",
+        action: "input->password-form#toggleDeleteAccountButton"
+      } %>
+  </div>
+
+
+  <!-- Buttons -->
+  <div class="flex items-center justify-end gap-3 pt-2">
+
+    <button
+      type="button"
+      command="close"
+      commandfor="dialog"
+      class="px-4 py-2 rounded-lg text-sm font-medium
+             bg-slate-700 hover:bg-slate-600 text-white transition">
+      Cancelar
+    </button>
+
+    <%= form.submit "Excluir conta",
+      disabled: true,
+      class: "px-5 py-2.5 rounded-lg text-sm font-semibold
+              bg-red-600 hover:bg-red-700
+              disabled:opacity-50 disabled:cursor-not-allowed
+              text-white shadow-md transition",
+      data: {
+        password_form_target: "submit"
+      } %>
+
+  </div>
+
+<% end %>
