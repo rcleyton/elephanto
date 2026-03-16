@@ -1,37 +1,83 @@
 <%= turbo_frame_tag "review_settings_form" do %>
-  <%= form_with model: @profile, url: daily_limit_settings_path, method: :patch, class: "p-6 space-y-6", data: { turbo_frame: "settings_form" } do |form| %>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      <div>
+  <%= form_with model: @profile, url: daily_limit_settings_path, method: :patch, class: "space-y-8", data: { turbo_frame: "settings_form" } do |form| %>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <%# Limite de Novos Cards %>
+      <div class="space-y-3">
         <%= form.label :daily_new_limit,
+                   "Novos Cards / Dia",
                    class:
-                     "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
-        <%= form.number_field :daily_new_limit,
-                          class:
-                            "w-full rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:ring-primary focus:border-primary text-sm py-3 px-4 #{error_class(@profile, :daily_new_limit)}" %>
-        <p class="text-xs text-slate-500 mt-2 italic">Recomendado: 15-30 para manter o ritmo.</p>
+                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+        <div class="relative group">
+          <span
+            class="
+              material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2
+              text-slate-400 group-focus-within:text-[#60c2a6] transition-colors
+            "
+          >speed</span>
+          <%= form.number_field :daily_new_limit,
+                            placeholder: "Ex: 20",
+                            class:
+                              "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-black placeholder:text-slate-300 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all #{error_class(@profile, :daily_new_limit)}" %>
+        </div>
+        <div class="flex items-center gap-2 px-1">
+          <span class="material-symbols-outlined text-amber-500 text-sm">lightbulb</span>
+          <p class="text-[11px] font-bold text-slate-400 leading-tight">
+            Sugestão:
+            <span class="text-slate-600 dark:text-slate-200">15-30</span>
+            para manter o ritmo sem sobrecarregar.
+          </p>
+        </div>
         <% if @profile.errors[:daily_new_limit].any? %>
-          <p class="ui-error"><%= Profile.human_attribute_name(:daily_new_limit) %>
-            <%= @profile.errors[:daily_new_limit].first %></p>
+          <p class="text-[11px] font-bold text-red-500 mt-1 ml-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span>
+            <%= @profile.errors[:daily_new_limit].first %>
+          </p>
         <% end %>
       </div>
-      <div>
+
+      <%# Limite de Revisões %>
+      <div class="space-y-3">
         <%= form.label :daily_review_limit,
+                   "Máximo de Revisões / Dia",
                    class:
-                     "block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1" %>
-        <%= form.number_field :daily_review_limit,
-                          class:
-                            "w-full rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 focus:ring-primary focus:border-primary text-sm py-3 px-4 #{error_class(@profile, :daily_review_limit)}" %>
-        <p class="text-xs text-slate-500 mt-2 italic">Recomendado: 5x o número de novos cartões.</p>
+                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+        <div class="relative group">
+          <span
+            class="
+              material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2
+              text-slate-400 group-focus-within:text-[#60c2a6] transition-colors
+            "
+          >rebase_edit</span>
+          <%= form.number_field :daily_review_limit,
+                            placeholder: "Ex: 100",
+                            class:
+                              "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-black placeholder:text-slate-300 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all #{error_class(@profile, :daily_review_limit)}" %>
+        </div>
+        <div class="flex items-center gap-2 px-1">
+          <span class="material-symbols-outlined text-indigo-500 text-sm">info</span>
+          <p class="text-[11px] font-bold text-slate-400 leading-tight">
+            Sugestão:
+            <span class="text-slate-600 dark:text-slate-200">5x</span>
+            o número de novos cartões.
+          </p>
+        </div>
         <% if @profile.errors[:daily_review_limit].any? %>
-          <p class="ui-error"><%= Profile.human_attribute_name(:daily_review_limit) %>
-            <%= @profile.errors[:daily_review_limit].first %></p>
+          <p class="text-[11px] font-bold text-red-500 mt-1 ml-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span>
+            <%= @profile.errors[:daily_review_limit].first %>
+          </p>
         <% end %>
       </div>
+
     </div>
-    <div class="flex justify-end pt-2">
-      <%= form.submit "Salvar preferências",
+
+    <%# Botão Salvar %>
+    <div class="flex justify-end pt-4">
+      <%= form.submit "Salvar Preferências",
                   class:
-                    "bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-900 dark:text-slate-100 font-semibold py-2.5 px-6 rounded-lg transition-all" %>
+                    "w-full sm:w-auto px-10 py-4 bg-slate-900 dark:bg-[#60c2a6] text-white dark:text-slate-900 rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xl shadow-slate-200 dark:shadow-none cursor-pointer" %>
     </div>
   <% end %>
 <% end %>
