@@ -3,14 +3,23 @@
 english:
   name: Curso de Inglês
   description: Cards para aumentar vocabulário em inglês
+  tag: "English"
+  favorite: false
+  archived: false
   user: one
 
 chemical:
   name: Química
   description: Cards para decorar o elementos da tabela periódica
+  tag: "Science"
+  favorite: false
+  archived: false
   user: two
 
 development:
   name: Programming Concepts
   description: Fundamental programming concepts and definitions
+  tag: "Development"
+  favorite: false
+  archived: false
   user: one
