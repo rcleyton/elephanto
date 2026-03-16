@@ -4,47 +4,78 @@
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<div class="min-h-screen bg-background">
-  <%= page_header(
-    show_back_button: true,
-    back_path: decks_path,
-    title: "Estatísticas de aprendizado",
-    subtitle: "Acompanhe sua evolução nas revisões",
-    show_profile_menu: false,
-  ) %>
-
-  <main
-    data-controller="automatic-margin-top"
-    class="container md:mx-auto px-6 py-8"
+<main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  <div
+    class="
+      mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between
+    "
   >
-    <div class="grid gap-6 md:grid-cols-4 mb-6">
-      <div class="rounded-lg border bg-card text-card-foreground">
-        <div class="flex flex-col space-y-1.5 p-6 pb-2">
-          <p class="text-sm text-muted-foreground">Total de decks</p>
-          <h3 class="font-semibold tracking-tight text-3xl"><%= @total_decks %></h3>
-        </div>
-      </div>
-      <div class="rounded-lg border bg-card text-card-foreground">
-        <div class="flex flex-col space-y-1.5 p-6 pb-2">
-          <p class="text-sm text-muted-foreground">Total de flashcards</p>
-          <h3 class="font-semibold tracking-tight text-3xl"><%= current_user.flashcards.count %></h3>
-        </div>
-      </div>
-      <div class="rounded-lg border bg-card text-card-foreground">
-        <div class="flex flex-col space-y-1.5 p-6 pb-2">
-          <p class="text-sm text-muted-foreground">Total de revisões</p>
-          <h3 class="font-semibold tracking-tight text-3xl"><%= @total_review_sessions %></h3>
-        </div>
-      </div>
-      <div class="rounded-lg border bg-card text-card-foreground">
-        <div class="flex flex-col space-y-1.5 p-6 pb-2">
-          <p class="text-sm text-muted-foreground">Tempo total de estudo</p>
-          <h3 class="font-semibold tracking-tight text-3xl"><%= seconds_to_str(@total_study_time) %></h3>
-        </div>
-      </div>
+    <div>
+      <h1
+        class="
+          text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl
+        "
+      >
+        Estatísticas de aprendizado
+      </h1>
+      <p class="mt-2 text-base text-slate-600 dark:text-slate-400">Acompanhe seu progresso e desempenho nos estudos com insights
+        detalhados sobre suas revisões.</p>
     </div>
-    <%= render "overview_stats",
-    review_sessions: @review_sessions,
-    flashcards: @flashcards %>
-  </main>
-</div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div
+      class="
+        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
+        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+      "
+    >
+      <div class="flex items-center justify-between">
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total de Decks</p>
+        <span class="material-symbols-outlined text-primary/40">layers</span>
+      </div>
+      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= @total_decks %></p>
+    </div>
+    <div
+      class="
+        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
+        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+      "
+    >
+      <div class="flex items-center justify-between">
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Flashcards</p>
+        <span class="material-symbols-outlined text-primary/40">style</span>
+      </div>
+      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= current_user.flashcards.count %></p>
+    </div>
+    <div
+      class="
+        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
+        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+      "
+    >
+      <div class="flex items-center justify-between">
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Revisões</p>
+        <span class="material-symbols-outlined text-primary/40">history</span>
+      </div>
+      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= @total_review_sessions %></p>
+    </div>
+    <div
+      class="
+        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
+        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+      "
+    >
+      <div class="flex items-center justify-between">
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Tempo Total</p>
+        <span class="material-symbols-outlined text-primary/40">schedule</span>
+      </div>
+      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= seconds_to_str(@total_study_time) %></p>
+      <p class="text-primary text-xs font-semibold">Foco: 92%</p>
+    </div>
+  </div>
+
+  <%= render "overview_stats",
+  review_sessions: @review_sessions,
+  flashcards: @flashcards %>
+</main>

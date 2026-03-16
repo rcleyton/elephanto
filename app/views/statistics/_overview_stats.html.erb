@@ -1,5 +1,9 @@
-<div class="grid gap-6 md:grid-cols-2 mb-6">
-  <div class="rounded-lg border bg-card text-card-foreground">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 py-8">
+  <div
+    class="
+      rounded-xl bg-white dark:bg-background-dark border border-primary/10 shadow-sm
+    "
+  >
     <div class="flex flex-col space-y-1.5 p-6">
       <h3 class="text-2xl font-semibold leading-none tracking-tight">
         Você tem
@@ -11,7 +15,11 @@
       <%= pie_chart @due_flashcards_by_deck, height: "250px", suffix: " flashcards" %>
     </div>
   </div>
-  <div class="rounded-lg border bg-card text-card-foreground">
+  <div
+    class="
+      rounded-xl bg-white dark:bg-background-dark border border-primary/10 shadow-sm
+    "
+  >
     <div class="flex flex-col space-y-1.5 p-6">
       <h3 class="text-2xl font-semibold leading-none tracking-tight">
         Quantidade de revisões por dia
