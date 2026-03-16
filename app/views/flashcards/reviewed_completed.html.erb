@@ -1,118 +1,180 @@
 <% progress = flashcard_progress(@deck) %>
+
 <div
-  class="p-4 md:p-0 min-h-screen bg-gray-100 flex items-center justify-center"
+  class="
+    min-h-screen bg-slate-50 dark:bg-black flex items-center justify-center p-6
+  "
 >
-  <div class="max-w-4xl w-full flex flex-col gap-8 py-12">
-    <!-- Celebratory Card -->
+  <div
+    class="
+      max-w-3xl w-full flex flex-col gap-8 animate-in fade-in zoom-in duration-700
+    "
+  >
+
+    <%# Card de Celebração Principal %>
     <div
       class="
-        bg-white dark:bg-slate-900 rounded-3xl p-12 text-center shadow-xl
-        shadow-slate-200/50 dark:shadow-none relative overflow-hidden
+        bg-white dark:bg-slate-900 rounded-[3rem] p-12 text-center shadow-2xl
+        shadow-slate-200/50 dark:shadow-none relative overflow-hidden border
+        border-slate-100 dark:border-slate-800
       "
     >
-      <!-- Background Decoration -->
+
+      <%# Decoração de Fundo (Brilho Sutil) %>
       <div
         class="
-          absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary/20 via-primary
-          to-primary/20
+          absolute -top-24 -right-24 size-64 bg-[#60c2a6]/10 rounded-full blur-3xl
         "
       ></div>
-      <div class="mb-8 relative inline-block">
+      <div
+        class="
+          absolute -bottom-24 -left-24 size-64 bg-indigo-500/10 rounded-full blur-3xl
+        "
+      ></div>
+
+      <%# Ícone Central com Animação %>
+      <div class="mb-8 relative inline-flex">
         <div
           class="
-            size-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto
+            size-28 bg-[#60c2a6]/10 rounded-[2rem] flex items-center justify-center mx-auto
+            rotate-12 group-hover:rotate-0 transition-transform duration-500
           "
         >
-          <span class="material-symbols-outlined text-primary text-5xl">celebration</span>
+          <span class="material-symbols-outlined text-[#60c2a6] text-6xl font-light">task_alt</span>
         </div>
-        <!-- Floating icons -->
+
+        <%# Elementos Flutuantes %>
         <span
           class="
-            material-symbols-outlined absolute -top-2 -right-4 text-primary/40
-            animate-bounce
+            material-symbols-outlined absolute -top-4 -right-6 text-orange-400
+            animate-bounce delay-100
           "
         >stars</span>
         <span
           class="
-            material-symbols-outlined absolute top-10 -left-6 text-primary/30 rotate-12
+            material-symbols-outlined absolute top-12 -left-8 text-indigo-400 animate-pulse
           "
         >auto_awesome</span>
       </div>
-      <h2 class="text-4xl font-bold text-slate-900 dark:text-white mb-4">Parabéns!</h2>
-      <p
+
+      <div class="space-y-4 relative z-10">
+        <h2 class="text-5xl font-black text-slate-900 dark:text-white tracking-tighter">
+          Missão Cumprida!
+        </h2>
+        <p
+          class="
+            text-slate-500 dark:text-slate-400 text-lg max-w-md mx-auto leading-relaxed
+            font-medium
+          "
+        >
+          Sua mente está
+          <span class="text-[#60c2a6] font-bold">mais afiada</span>
+          agora. Você revisou todos os cards programados para este deck.
+        </p>
+      </div>
+
+      <%# Barra de Progresso Visual Sutil no Rodapé do Card %>
+      <div
         class="
-          text-slate-500 dark:text-slate-400 text-lg max-w-lg mx-auto leading-relaxed
+          absolute bottom-0 left-0 w-full h-1.5 bg-slate-100 dark:bg-slate-800
         "
       >
-        Você concluiu com sucesso sua sessão de revisão. Sua sequência diária
-        está melhor do que nunca!
-      </p>
+        <div class="h-full bg-gradient-to-r from-[#60c2a6] to-emerald-400 w-full"></div>
+      </div>
     </div>
-    <!-- Stats Row -->
+
+    <%# Grade de Stats (Estilo Glassmorphism) %>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <%# Cards Revisados %>
       <div
         class="
-          bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-100
-          dark:border-slate-800 flex items-center gap-6 shadow-sm
+          bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100
+          dark:border-slate-800 flex items-center gap-6 shadow-xl shadow-slate-200/30
+          dark:shadow-none group hover:border-[#60c2a6]/30 transition-colors
         "
       >
         <div
           class="
-            size-14 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center
-            justify-center
+            size-16 bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center
+            justify-center group-hover:scale-110 transition-transform
           "
         >
-          <span class="material-symbols-outlined text-primary">style</span>
+          <span class="material-symbols-outlined text-[#60c2a6] text-3xl">style</span>
         </div>
         <div>
           <p
             class="
-              text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider
+              text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1
             "
-          >Flashcards revisados</p>
-          <p class="text-3xl font-bold text-slate-900 dark:text-white"><%= progress[:total] %></p>
+          >Total de Cards</p>
+          <p class="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">
+            <%= progress[:total] %>
+          </p>
         </div>
       </div>
+
+      <%# Tempo de Foco %>
       <div
         class="
-          bg-white dark:bg-slate-900 rounded-2xl p-8 border border-slate-100
-          dark:border-slate-800 flex items-center gap-6 shadow-sm
+          bg-white dark:bg-slate-900 rounded-[2rem] p-8 border border-slate-100
+          dark:border-slate-800 flex items-center gap-6 shadow-xl shadow-slate-200/30
+          dark:shadow-none group hover:border-indigo-500/30 transition-colors
         "
       >
         <div
           class="
-            size-14 bg-slate-50 dark:bg-slate-800 rounded-xl flex items-center
-            justify-center
+            size-16 bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center
+            justify-center group-hover:scale-110 transition-transform
           "
         >
-          <span class="material-symbols-outlined text-primary">timer</span>
+          <span class="material-symbols-outlined text-indigo-500 text-3xl">timer</span>
         </div>
         <div>
           <p
             class="
-              text-slate-500 dark:text-slate-400 text-sm font-medium uppercase tracking-wider
+              text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1
             "
-          >Tempo gasto</p>
-          <p class="text-3xl font-bold text-slate-900 dark:text-white"><%= seconds_to_str(@duration) %></p>
+          >Tempo de Foco</p>
+          <p class="text-4xl font-black text-slate-900 dark:text-white tracking-tighter">
+            <%= seconds_to_str(@duration) %>
+          </p>
         </div>
       </div>
     </div>
-    <!-- Action Area -->
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-4">
-      <%= link_to decks_path,
-        class: "
-          flex justify-center w-full sm:w-auto min-w-[240px] px-8 py-4 bg-primary text-white rounded-xl
-          font-bold text-lg shadow-xl shadow-primary/25 hover:translate-y-[-2px]
-          transition-all active:translate-y-0
-        " do %>
-        Voltar para meus decks
+
+    <%# Ações Finalizadoras %>
+    <div class="flex flex-col items-center gap-8 mt-4">
+      <%= link_to decks_path, class: "group relative inline-flex items-center justify-center" do %>
+        <%# Efeito de brilho atrás do botão %>
+        <div
+          class="
+            absolute -inset-1 bg-gradient-to-r from-[#60c2a6] to-indigo-500 rounded-2xl blur
+            opacity-25 group-hover:opacity-50 transition duration-1000
+            group-hover:duration-200
+          "
+        ></div>
+
+        <div
+          class="
+            relative flex items-center gap-3 px-12 py-5 bg-slate-900 dark:bg-[#60c2a6]
+            text-white dark:text-slate-900 rounded-2xl font-black uppercase tracking-[0.1em]
+            text-sm hover:scale-[1.02] active:scale-[0.98] transition-all
+          "
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          Voltar para Decks
+        </div>
       <% end %>
-    </div>
-    <!-- Quote of the day (Subtle addition for premium feel) -->
-    <div class="mt-8 text-center">
-      <p class="text-slate-400 dark:text-slate-500 text-sm italic">
-        "A consistência é a chave para a maestria. Até breve!"
-      </p>
+
+      <%# Quote de Saída %>
+      <div class="flex items-center gap-4 text-slate-400 dark:text-slate-600">
+        <div class="h-px w-8 bg-slate-200 dark:bg-slate-800"></div>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] italic">
+          "A repetição é a mãe da retenção"
+        </p>
+        <div class="h-px w-8 bg-slate-200 dark:bg-slate-800"></div>
+      </div>
     </div>
   </div>
 </div>
