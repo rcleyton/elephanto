@@ -3,6 +3,7 @@
 
 class ConfirmationsController < ApplicationController
   allow_unauthenticated_access only: [ :show, :new, :create ]
+  layout "signup"
 
   def show
     @user = User.find_by(email_address: params[:email])

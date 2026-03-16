@@ -2,129 +2,154 @@
   <turbo-frame id="flash">
     <%= render "shared/flash" %>
   </turbo-frame>
+
+  <%# Painel Lateral Esquerdo (Branding) %>
   <div
     class="
-      hidden lg:flex lg:w-1/2 bg-gradient-primary items-center justify-center p-8
-      bg-gradient-primary
+      hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-slate-800
+      to-[#60c2a6] items-center justify-center p-12
     "
   >
-    <div class="text-center text-white">
-      <h1 class="text-4xl font-bold mb-4">Bem-vindo(a) ao Elephanto</h1>
-      <p class="text-xl opacity-90">
-        Aprenda com inteligência usando repetição espaçada
+    <div class="text-center text-white max-w-md">
+      <h1 class="text-5xl font-extrabold mb-6 tracking-tight">Bem-vindo(a) ao Elephanto</h1>
+      <p class="text-xl text-emerald-50 opacity-90 leading-relaxed">
+        Aprenda com inteligência usando repetição espaçada e domine qualquer
+        assunto.
       </p>
-      <div class="mt-8">
+      <div class="mt-12">
         <%= image_tag "logo_ligth.svg",
-        class: "w-48 h-48 mx-auto filter brightness-0 invert" %>
+        class: "w-48 h-48 mx-auto filter brightness-0 invert opacity-90" %>
       </div>
     </div>
   </div>
 
-  <div class="flex-1 flex items-center justify-center p-8 bg-gray-100">
-    <div
-      class="
-        rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full
-        max-w-md
-      "
-    >
-      <div class="flex flex-col space-y-1.5 p-6 text-center">
-        <div>
-          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t("general.create_account") %></h3>
-          <p class="text-sm text-gray-500 mt-2">Crie sua conta para começar a aprender</p>
+  <%# Painel de Formulário %>
+  <div
+    class="
+      flex-1 flex items-center justify-center p-6 bg-gradient-to-br from-slate-900
+      via-slate-800 to-[#60c2a6] md:bg-none md:bg-slate-50
+    "
+  >
+    <div class="w-full max-w-md">
+      <div
+        class="
+          bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl md:shadow-xl p-8
+          md:p-10
+        "
+      >
+
+        <div class="text-center mb-10">
+          <h3 class="text-3xl font-bold text-slate-900 tracking-tight">
+            <%= t("general.create_account") %>
+          </h3>
+          <p class="text-slate-500 mt-2">Crie sua conta para começar a aprender</p>
         </div>
-      </div>
-      <div class="p-6 pt-0">
-        <%= form_with(model: @user, url: sign_up_path, class: "space-y-4") do |f| %>
+
+        <%= form_with(model: @user, url: sign_up_path, class: "space-y-5") do |f| %>
+
+          <%# Email %>
           <div class="space-y-2">
-            <%= f.label :email_address, class: "ui-label" %>
+            <%= f.label :email_address, class: "block text-sm font-semibold text-slate-700 ml-1" %>
             <%= f.email_field :email_address,
                           placeholder: t("placeholders.user.email_address"),
                           required: true,
-                          class: "ui-input mt-2 #{error_class(@user, :email_address)}" %>
+                          class:
+                            "w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#60c2a6] focus:border-transparent outline-none transition-all placeholder:text-slate-400 #{"border-red-500" if @user.errors[:email_address].any?}" %>
             <% if @user.errors[:email_address].any? %>
-              <p class="ui-error"><%= @user.errors[:email_address].first %></p>
+              <p class="text-xs text-red-500 font-medium mt-1 ml-1"><%= @user.errors[:email_address].first %></p>
             <% end %>
           </div>
+
+          <%# Senha %>
           <div class="space-y-2" data-controller="password-visibility">
-            <%= f.label :password, class: "ui-label" %>
+            <%= f.label :password, class: "block text-sm font-semibold text-slate-700 ml-1" %>
             <div class="relative">
               <%= f.password_field :password,
                                placeholder: t("placeholders.user.password"),
-                               class: "ui-input mt-2 #{error_class(@user, :password)}",
+                               class:
+                                 "w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#60c2a6] focus:border-transparent outline-none transition-all placeholder:text-slate-400 #{"border-red-500" if @user.errors[:password].any?}",
                                data: {
-                                 "password-visibility-target": "input",
+                                 password_visibility_target: "input",
                                } %>
 
               <button
                 type="button"
                 data-action="password-visibility#toggle"
                 class="
-                  text-gray-500 absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer
+                  absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400
+                  hover:text-[#60c2a6] transition-colors
                 "
               >
                 <span data-password-visibility-target="icon">
                   <svg
-                    data-password-visibility-target="icon"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="size-6"
+                    class="size-5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                  ><path
+                  >
+                    <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path><path
+                    />
+                    <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path></svg>
+                    />
+                  </svg>
                 </span>
                 <span data-password-visibility-target="icon" class="hidden">
                   <svg
-                    data-password-visibility-target="icon"
                     xmlns="http://www.w3.org/2000/svg"
-                    class="size-6 hidden"
+                    class="size-5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
-                  ><path
+                  >
+                    <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                    ></path></svg>
+                    />
+                  </svg>
                 </span>
               </button>
             </div>
             <% if @user.errors[:password].any? %>
-              <p class="ui-error"><%= @user.errors[:password].first %></p>
+              <p class="text-xs text-red-500 font-medium mt-1 ml-1"><%= @user.errors[:password].first %></p>
             <% end %>
           </div>
+
+          <%# Confirmação de Senha %>
           <div class="space-y-2" data-controller="password-visibility">
-            <%= f.label :password_confirmation, class: "ui-label" %>
+            <%= f.label :password_confirmation,
+                    class: "block text-sm font-semibold text-slate-700 ml-1" %>
             <div class="relative">
               <%= f.password_field :password_confirmation,
                                placeholder: t("placeholders.user.password_confirmation"),
                                class:
-                                 "ui-input mt-2 #{error_class(@user, :password_confirmation)}",
+                                 "w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#60c2a6] focus:border-transparent outline-none transition-all placeholder:text-slate-400 #{"border-red-500" if @user.errors[:password_confirmation].any?}",
                                data: {
-                                 "password-visibility-target": "input",
+                                 password_visibility_target: "input",
                                } %>
+
               <button
                 type="button"
                 data-action="password-visibility#toggle"
                 class="
-                  text-gray-500 absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer
+                  absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400
+                  hover:text-[#60c2a6] transition-colors
                 "
               >
-                <span data-password-visibility-target="icon">
-                  <svg
-                    data-password-visibility-target="icon"
+                <%# Reutilizando ícones do bloco anterior %>
+                <span data-password-visibility-target="icon"><svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="size-6"
+                    class="size-5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -133,18 +158,15 @@
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path><path
+                    /><path
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path></svg>
-                </span>
-                <span data-password-visibility-target="icon" class="hidden">
-                  <svg
-                    data-password-visibility-target="icon"
+                    /></svg></span>
+                <span data-password-visibility-target="icon" class="hidden"><svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="size-6 hidden"
+                    class="size-5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -153,38 +175,48 @@
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                    ></path></svg>
-                </span>
+                    /></svg></span>
               </button>
-
             </div>
             <% if @user.errors[:password_confirmation].any? %>
-              <p class="ui-error"><%= @user.errors[:password_confirmation].to_sentence %></p>
+              <p class="text-xs text-red-500 font-medium mt-1 ml-1"><%= @user.errors[:password_confirmation].to_sentence %></p>
             <% end %>
           </div>
-          <div class="flex flex-col">
-            <div class="space-x-4 flex items-center">
+
+          <%# Termos de Serviço %>
+          <div class="py-2">
+            <div class="flex items-start gap-3">
               <%= f.check_box :terms_of_service,
-                          class: "h-4 w-4 focus:ring-blue-500 border-gray-300 rounded" %>
-              Eu li e aceito os
-              <%= link_to "Termos de Uso",
-              terms_url(host: Rails.env.development? ? "localhost" : "getelephanto.com"),
-              target: "_blank",
-              class: "text-blue-600 font-medium hover:underline ml-1" %>
+                          class:
+                            "h-4 w-4 text-[#60c2a6] focus:ring-[#60c2a6] border-slate-300 rounded transition-all cursor-pointer" %>
+              <label for="user_terms_of_service" class="text-sm text-slate-600 leading-tight">
+                Eu li e aceito os
+                <%= link_to "Termos de Uso",
+                terms_url(host: Rails.env.development? ? "localhost" : "getelephanto.com"),
+                target: "_blank",
+                class: "text-[#60c2a6] font-bold hover:underline" %>
+              </label>
             </div>
             <% if @user.errors[:terms_of_service].any? %>
-              <p class="ui-error"><%= User.human_attribute_name(:terms_of_service) %>
-                <%= @user.errors[:terms_of_service].first %></p>
+              <p class="text-xs text-red-500 font-medium mt-2 ml-7">
+                <%= User.human_attribute_name(:terms_of_service) %>
+                <%= @user.errors[:terms_of_service].first %>
+              </p>
             <% end %>
           </div>
+
           <%= f.submit t("buttons.submit.create_account"),
-                   class: "btn btn-default-variant btn-default-size w-full" %>
+                   class:
+                     "w-full py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all shadow-lg active:scale-[0.98] cursor-pointer" %>
         <% end %>
-        <div class="mt-4 text-center">
+
+        <div class="mt-8 text-center border-t border-slate-100 pt-6">
           <%= link_to "Já tem uma conta? Entre aqui",
           new_session_path,
-          class: "text-sm text-blue-600 hover:underline" %>
+          class:
+            "text-sm font-semibold text-slate-500 hover:text-[#60c2a6] transition-colors" %>
         </div>
+
       </div>
     </div>
   </div>

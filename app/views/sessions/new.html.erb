@@ -1,125 +1,158 @@
-<% content_for :title, "Elephanto | Iniciar sessão" %>
-
-<turbo-frame id="flash">
-  <%= render "shared/flash" %>
-</turbo-frame>
-
 <div class="min-h-screen flex overflow-hidden">
+  <turbo-frame id="flash">
+    <%= render "shared/flash" %>
+  </turbo-frame>
+
   <div
     class="
-      hidden lg:flex lg:w-1/2 bg-gradient-third items-center justify-center p-8
-      bg-gradient-primary
+      hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-900 via-slate-800
+      to-[#60c2a6] items-center justify-center p-12
     "
   >
-    <div class="text-center text-white">
-      <h1 class="text-4xl font-bold mb-4">Bem-vindo(a) de volta ao Elephanto</h1>
-      <p class="text-xl opacity-90">
+    <div class="text-center text-white max-w-md">
+      <h1 class="text-5xl font-extrabold mb-6 tracking-tight">Bem-vindo(a) de volta ao Elephanto</h1>
+      <p class="text-xl text-emerald-50 opacity-90 leading-relaxed">
         Aprenda com inteligência usando repetição espaçada
       </p>
-      <div class="mt-8">
+      <div class="mt-12">
         <%= image_tag "logo_ligth.svg",
-        class: "w-48 h-48 mx-auto filter brightness-0 invert" %>
+        class: "w-48 h-48 mx-auto filter brightness-0 invert opacity-90" %>
       </div>
     </div>
   </div>
-  <div class="flex-1 flex items-center justify-center p-8 bg-gray-100">
-    <div
-      class="
-        rounded-lg border border-gray-300 bg-white text-gray-900 shadow-sm w-full
-        max-w-md
-      "
-    >
-      <div class="flex flex-col space-y-1.5 p-6 text-center">
-        <div>
-          <h3 class="text-2xl font-semibold leading-none tracking-tight"><%= t("general.signin") %></h3>
-          <p class="text-sm text-gray-500 mt-2">Entre e aprenda um pouco mais ainda hoje</p>
+  <div
+    class="
+      flex-1 flex items-center justify-center p-6 bg-gradient-to-br from-slate-900
+      via-slate-800 to-[#60c2a6] md:bg-none md:bg-slate-50
+    "
+  >
+    <div class="w-full max-w-md">
+      <div
+        class="
+          bg-white rounded-[2.5rem] border border-slate-200 shadow-2xl md:shadow-xl p-8
+          md:p-10
+        "
+      >
+
+        <%# Cabeçalho do Card %>
+        <div class="text-center mb-10">
+          <h3 class="text-3xl font-bold text-slate-900 tracking-tight">
+            <%= t("general.signin") %>
+          </h3>
+          <p class="text-slate-500 mt-2">Entre e aprenda um pouco mais ainda hoje</p>
         </div>
-      </div>
-      <div class="p-6 pt-0">
-        <%= form_with url: session_url, class: "space-y-4" do |form| %>
-          <div class="space-y-2">
-            <%= form.label "Email", class: "ui-label" %>
-            <%= form.email_field :email_address,
-                             required: true,
-                             autofocus: true,
-                             autocomplete: "username",
-                             placeholder: t("placeholders.user.email_address"),
-                             value: params[:email_address],
-                             class: "ui-input mt-2" %>
-          </div>
-          <div class="space-y-2" data-controller="password-visibility">
-            <%= form.label "Senha", class: "ui-label" %>
-            <div class="relative">
-              <%= form.password_field :password,
-                                  required: true,
-                                  autocomplete: "current-password",
-                                  placeholder: t("placeholders.user.password"),
-                                  maxlength: 72,
-                                  class: "ui-input mt-2",
-                                  data: {
-                                    "password-visibility-target": "input",
-                                  } %>
 
-              <button
-                type="button"
-                data-action="password-visibility#toggle"
-                class="
-                  text-gray-500 absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer
-                "
-              >
-                <span data-password-visibility-target="icon">
-                  <svg
-                    data-password-visibility-target="icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="size-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                    ></path><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                    ></path></svg>
-                </span>
-                <span data-password-visibility-target="icon" class="hidden">
-                  <svg
-                    data-password-visibility-target="icon"
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="size-6 hidden"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  ><path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
-                    ></path></svg>
-                </span>
-              </button>
+        <div class="pt-0">
+          <%= form_with url: session_url, class: "space-y-6" do |form| %>
+
+            <%# Campo de E-mail %>
+            <div class="space-y-2">
+              <%= form.label :email_address,
+                         "Email",
+                         class: "block text-sm font-semibold text-slate-700 ml-1" %>
+              <%= form.email_field :email_address,
+                               required: true,
+                               autofocus: true,
+                               autocomplete: "username",
+                               placeholder: t("placeholders.user.email_address"),
+                               value: params[:email_address],
+                               class:
+                                 "w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#60c2a6] focus:border-transparent outline-none transition-all placeholder:text-slate-400" %>
             </div>
-          </div>
-          <%= form.submit t("buttons.general.enter"),
-                      class: "btn btn-default-variant btn-default-size w-full" %>
 
-          <div class="text-center flex flex-col">
-            <%= link_to t("buttons.general.forgot_password"),
-            new_password_path,
-            class: "text-sm text-blue-600 hover:underline" %>
-            <%= link_to "Ainda não tenho conta?",
-            sign_up_path,
-            class: "text-sm text-blue-600 hover:underline" %>
-            <%= link_to "Reenviar e-mail de confirmação",
-            new_confirmation_path,
-            class: "text-sm text-blue-600 hover:underline" %>
-          </div>
-        <% end %>
+            <%# Campo de Senha %>
+            <div class="space-y-2" data-controller="password-visibility">
+              <div class="flex justify-between items-center ml-1">
+                <%= form.label :password,
+                           "Senha",
+                           class: "block text-sm font-semibold text-slate-700" %>
+                <%= link_to t("buttons.general.forgot_password"),
+                new_password_path,
+                class: "text-xs font-semibold text-[#60c2a6] hover:underline" %>
+              </div>
+
+              <div class="relative">
+                <%= form.password_field :password,
+                                    required: true,
+                                    autocomplete: "current-password",
+                                    placeholder: t("placeholders.user.password"),
+                                    maxlength: 72,
+                                    class:
+                                      "w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-[#60c2a6] focus:border-transparent outline-none transition-all placeholder:text-slate-400",
+                                    data: {
+                                      "password-visibility-target": "input",
+                                    } %>
+
+                <button
+                  type="button"
+                  data-action="password-visibility#toggle"
+                  class="
+                    absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400
+                    hover:text-[#60c2a6] transition-colors
+                  "
+                >
+                  <span data-password-visibility-target="icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="size-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                      />
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                      />
+                    </svg>
+                  </span>
+                  <span data-password-visibility-target="icon" class="hidden">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="size-5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            <%# Botão Entrar %>
+            <%= form.submit t("buttons.general.enter"),
+                        class:
+                          "w-full py-4 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all shadow-lg active:scale-[0.98] cursor-pointer" %>
+
+            <%# Links de Ajuda / Navegação %>
+            <div class="mt-8 text-center border-t border-slate-100 pt-6 space-y-3">
+              <p class="text-sm text-slate-500">
+                Ainda não tem conta?
+                <%= link_to "Cadastre-se",
+                sign_up_path,
+                class: "font-bold text-[#60c2a6] hover:underline" %>
+              </p>
+              <%= link_to "Reenviar e-mail de confirmação",
+              new_confirmation_path,
+              class:
+                "block text-xs font-medium text-slate-400 hover:text-slate-600 transition-colors" %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
