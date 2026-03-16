@@ -1,20 +1,14 @@
 one:
   front: English
   back: Inglês
-  difficulty: Easy
-  last_reviewed_at: Time.now - 5
   deck: chemical
 
 two:
   front: Dog
   back: Cachorro
-  difficulty: Easy
-  last_reviewed_at: Time.now - 5
   deck: english
 
 three:
   front: Conditional
   back: A statement that performs different actions based on a condition
-  difficulty: Medium
-  last_reviewed_at: Time.now - 5
   deck: development

@@ -6,7 +6,7 @@ describe Deck do
     @deck = decks(:english)
   end
 
-  describe "validations" do
+  context "validations" do
     it "requires name, description, and tag" do
       deck = Deck.new(user: @user)
 
@@ -20,7 +20,7 @@ describe Deck do
     end
   end
 
-  describe "scopes" do
+  context "scopes" do
     it "returns only favorite decks" do
       favorite_deck = Deck.create!(
         name: "Favoritos",
@@ -62,7 +62,7 @@ describe Deck do
     end
   end
 
-  describe "#toggle_favorite!" do
+  context "#toggle_favorite!" do
     it "flips the favorite flag" do
       @deck.update!(favorite: false)
 
@@ -74,7 +74,7 @@ describe Deck do
     end
   end
 
-  describe "cover color assignment" do
+  context "cover color assignment" do
     it "runs the gradient picker when cover color is blank" do
       Deck.stub(:random_gradient, "linear-gradient(90deg, #000, #fff)") do
         gradient_deck = Deck.create!(
