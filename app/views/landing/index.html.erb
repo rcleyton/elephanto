@@ -5,7 +5,7 @@
 <section
   class="
     relative min-h-screen flex items-center justify-center overflow-hidden
-    bg-gradient-hero
+    bg-gradient-to-br from-slate-900 via-slate-800 to-[#60c2a6]
   "
 >
   <div class="container mx-auto px-6 py-20 relative z-10">
@@ -16,123 +16,46 @@
             Memorize
             <span
               class="
-                block bg-gradient-to-r from-accent to-third bg-clip-text text-transparent
+                block bg-gradient-to-r from-[#60c2a6] to-emerald-400 bg-clip-text
+                text-transparent
               "
             >Qualquer coisa</span>
             <span class="block text-white">Para sempre</span>
           </h1>
-          <p class="text-xl text-white/80 max-w-lg leading-relaxed">
+          <p class="text-xl text-slate-300 max-w-lg leading-relaxed">
             Domine qualquer assunto com o Elephanto, sistema inteligente de
             repetição espaçada. Crie decks e flashcards, e deixe nosso
             algoritmo otimizar seu cronograma de aprendizado.
           </p>
         </div>
         <div class="flex flex-col sm:flex-row gap-4">
-          <%= link_to sign_up_url, class: "btn btn-lg btn-outline text-lg px-8 bg-white/10 text-white border-white/30 hover:bg-white/20" do %>
+          <%= link_to sign_up_url, class: "inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-white bg-white/10 backdrop-blur-md border border-white/30 rounded-xl hover:bg-white/20 transition-all shadow-xl" do %>
             Começar a aprender agora
           <% end %>
         </div>
       </div>
+
       <div class="relative">
-        <div class="relative">
-          <%= image_tag "hero-flashcards.png",
-          alt: "Imagem hero",
-          class: "w-full h-auto rounded-2xl shadow-glow" %>
-        </div>
+        <%= image_tag "hero-flashcards.png",
+        alt: "Interface do Elephanto",
+        class: "w-full h-auto rounded-2xl shadow-2xl border border-white/10" %>
+
         <div
           class="
-            rounded-lg text-card-foreground shadow-sm absolute -left-6 top-20 p-4 bg-card/90
-            backdrop-blur-sm shadow-card-soft border-0 hidden md:block
+            absolute -left-6 top-20 p-4 bg-white/90 backdrop-blur-md rounded-xl shadow-lg
+            border border-white hidden md:block
           "
         >
           <div class="flex items-center gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-brain w-8 h-8 text-primary"
-            >
-              <path
-                d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
-              ></path>
-              <path
-                d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
-              ></path>
-              <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
-              <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
-              <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
-              <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
-              <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
-              <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
-              <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
-            </svg>
+            <div class="text-[#60c2a6]"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                ></path></svg></div>
             <div>
-              <div class="font-semibold text-sm">Algoritmo inteligente</div>
-              <div class="text-xs text-muted-foreground">Avisos de revisão</div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="
-            rounded-lg text-card-foreground shadow-sm absolute -right-6 top-40 p-4
-            bg-card/90 backdrop-blur-sm shadow-card-soft border-0 hidden md:block
-          "
-        >
-          <div class="flex items-center gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-repeat w-8 h-8 text-accent"
-            >
-              <path d="m17 2 4 4-4 4"></path>
-              <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
-              <path d="m7 22-4-4 4-4"></path>
-              <path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
-            </svg>
-            <div>
-              <div class="font-semibold text-sm">Revisão espaçada</div>
-              <div class="text-xs text-muted-foreground">Comprovado cientificamente</div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="
-            rounded-lg text-card-foreground shadow-sm absolute -left-4 bottom-20 p-4
-            bg-card/90 backdrop-blur-sm shadow-card-soft border-0 hidden md:block
-          "
-        >
-          <div class="flex items-center gap-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-trending-up w-8 h-8 text-primary"
-            >
-              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-              <polyline points="16 7 22 7 22 13"></polyline>
-            </svg>
-            <div>
-              <div class="font-semibold text-sm">Acompanhe o progresso</div>
-              <div class="text-xs text-muted-foreground">Análise detalhada</div>
+              <div class="font-bold text-sm text-slate-900">Algoritmo inteligente</div>
+              <div class="text-xs text-slate-500">Avisos de revisão</div>
             </div>
           </div>
         </div>
@@ -140,43 +63,62 @@
     </div>
   </div>
 </section>
-<section class="py-20 bg-background" id="resources">
+
+<section class="py-24 bg-white" id="resources">
   <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl lg:text-5xl font-bold mb-6">Recursos poderosos para
-        <span class="block bg-gradient-primary bg-clip-text text-transparent pb-2">uma aprendizagem eficaz</span>
+
+    <%# Cabeçalho da Seção %>
+    <div class="text-center mb-20">
+      <h2
+        class="
+          text-4xl lg:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight
+        "
+      >
+        Recursos poderosos para
+        <span
+          class="
+            block bg-gradient-to-r from-[#60c2a6] to-emerald-500 bg-clip-text
+            text-transparent pb-2
+          "
+        >
+          uma aprendizagem eficaz
+        </span>
       </h2>
-      <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+      <p class="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
         O Elephanto combina ciência de aprendizagem comprovada com tecnologia
         moderna para ajudar você a memorizar qualquer coisa, de forma mais
         rápida e eficaz.
       </p>
     </div>
+
+    <%# Grid de Cards %>
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <%# Card 1 - Algoritmo %>
       <div
         class="
-          rounded-lg text-card-foreground shadow-sm group hover:shadow-card
-          transition-smooth border-0 bg-gradient-card
+          group relative p-8 rounded-3xl bg-slate-50 border border-slate-100
+          hover:bg-white hover:shadow-2xl hover:shadow-[#60c2a6]/10 hover:-translate-y-2
+          transition-all duration-300
         "
       >
-        <div class="flex flex-col p-6 space-y-4">
+        <div class="flex flex-col space-y-4">
           <div
             class="
-              w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3
-              group-hover:scale-110 transition-smooth
+              w-14 h-14 rounded-2xl bg-gradient-to-br from-[#60c2a6] to-emerald-500 p-3.5
+              shadow-lg shadow-[#60c2a6]/20 group-hover:scale-110 transition-transform
+              duration-300
             "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-brain w-6 h-6 text-white"
+              class="w-full h-full text-white"
             >
               <path
                 d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
@@ -185,190 +127,216 @@
                 d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"
               ></path>
               <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
-              <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
-              <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
-              <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
-              <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
-              <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
-              <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
             </svg>
           </div>
-          <h3 class="font-semibold tracking-tight text-xl">Algoritmo inteligente</h3>
-        </div>
-        <div class="p-6 pt-0">
-          <p class="text-muted-foreground text-base leading-relaxed">
+          <h3 class="font-bold text-2xl text-slate-900 pt-2">Algoritmo inteligente</h3>
+          <p class="text-slate-600 text-base leading-relaxed">
             Nosso algoritmo se adapta aos seus padrões de aprendizagem,
             otimizando os intervalos de revisão para máxima retenção.
           </p>
         </div>
       </div>
+
+      <%# Card 2 - Intervalo %>
       <div
         class="
-          rounded-lg text-card-foreground shadow-sm group hover:shadow-card
-          transition-smooth border-0 bg-gradient-card
+          group relative p-8 rounded-3xl bg-slate-50 border border-slate-100
+          hover:bg-white hover:shadow-2xl hover:shadow-[#60c2a6]/10 hover:-translate-y-2
+          transition-all duration-300
         "
       >
-        <div class="flex flex-col p-6 space-y-4">
+        <div class="flex flex-col space-y-4">
           <div
             class="
-              w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3
-              group-hover:scale-110 transition-smooth
+              w-14 h-14 rounded-2xl bg-gradient-to-br from-[#60c2a6] to-emerald-500 p-3.5
+              shadow-lg shadow-[#60c2a6]/20 group-hover:scale-110 transition-transform
+              duration-300
             "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-clock w-6 h-6 text-white"
+              class="w-full h-full text-white"
             >
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
           </div>
-          <h3 class="font-semibold tracking-tight text-xl">Intervalo de tempo</h3>
-        </div>
-        <div class="p-6 pt-0">
-          <p class="text-muted-foreground text-base leading-relaxed">
+          <h3 class="font-bold text-2xl text-slate-900 pt-2">Intervalo de tempo</h3>
+          <p class="text-slate-600 text-base leading-relaxed">
             O Elephanto identifica os momentos ideais para revisar o conteúdo,
             maximizando retenção sem esforço excessivo.
           </p>
         </div>
       </div>
+
+      <%# Card 3 - Criação %>
       <div
         class="
-          rounded-lg text-card-foreground shadow-sm group hover:shadow-card
-          transition-smooth border-0 bg-gradient-card
+          group relative p-8 rounded-3xl bg-slate-50 border border-slate-100
+          hover:bg-white hover:shadow-2xl hover:shadow-[#60c2a6]/10 hover:-translate-y-2
+          transition-all duration-300
         "
       >
-        <div class="flex flex-col p-6 space-y-4">
+        <div class="flex flex-col space-y-4">
           <div
             class="
-              w-12 h-12 rounded-lg bg-gradient-to-br from-primary to-accent p-3
-              group-hover:scale-110 transition-smooth
+              w-14 h-14 rounded-2xl bg-gradient-to-br from-[#60c2a6] to-emerald-500 p-3.5
+              shadow-lg shadow-[#60c2a6]/20 group-hover:scale-110 transition-transform
+              duration-300
             "
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-zap w-6 h-6 text-white"
+              class="w-full h-full text-white"
             >
               <path
                 d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
               ></path>
             </svg>
           </div>
-          <h3 class="font-semibold tracking-tight text-xl">Criação rápida</h3>
-        </div>
-        <div class="p-6 pt-0">
-          <p class="text-muted-foreground text-base leading-relaxed">
+          <h3 class="font-bold text-2xl text-slate-900 pt-2">Criação rápida</h3>
+          <p class="text-slate-600 text-base leading-relaxed">
             Crie flashcards em segundos com nossa interface intuitiva e
             recursos de importação em massa.
           </p>
         </div>
       </div>
+
     </div>
   </div>
 </section>
-<section class="py-20 bg-muted/30" id="how_work">
+
+<section class="py-24 bg-slate-50" id="how_work">
   <div class="container mx-auto px-6">
-    <div class="text-center mb-16">
-      <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+
+    <%# Cabeçalho %>
+    <div class="text-center mb-20">
+      <h2
+        class="
+          text-4xl lg:text-5xl font-extrabold mb-6 text-slate-900 tracking-tight
+        "
+      >
         Como o
-        <span class="bg-gradient-primary bg-clip-text text-transparent">Elephanto</span>
+        <span
+          class="
+            bg-gradient-to-r from-[#60c2a6] to-emerald-500 bg-clip-text text-transparent
+          "
+        >Elephanto</span>
         funciona
       </h2>
-      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">Nossa abordagem com base científica torna o aprendizado mais eficiente
-        e agradável.</p>
+      <p class="text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+        Nossa abordagem com base científica torna o aprendizado mais eficiente
+        e agradável.
+      </p>
     </div>
+
+    <%# Grid de Passos %>
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="relative">
+
+      <%# Passo 01 %>
+      <div class="relative group">
+        <%# Linha conectora %>
         <div
           class="
             hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r
-            from-primary/30 to-accent/30 z-0
+            from-[#60c2a6]/20 to-emerald-500/20 z-0
           "
         ></div>
+
         <div
           class="
-            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
-            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+            relative z-10 p-8 rounded-3xl bg-white border border-slate-200 shadow-sm
+            hover:shadow-xl transition-all duration-300 h-full flex flex-col
           "
         >
-          <div class="p-6 text-center flex flex-col h-full">
+          <%# Número do Passo - Posicionado no topo/direita de forma sutil %>
+          <div
+            class="
+              absolute top-6 right-8 text-4xl font-black text-slate-100
+              group-hover:text-[#60c2a6]/10 transition-colors
+            "
+          >01</div>
+
+          <div class="text-center flex flex-col h-full pt-4">
             <div class="mb-6">
-              <div class="text-6xl font-bold text-primary opacity-20 mb-4">01</div>
               <div
                 class="
-                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                  relative w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#60c2a6]
+                  to-emerald-500 p-4 shadow-lg shadow-[#60c2a6]/20 group-hover:rotate-6
+                  transition-transform
                 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="lucide lucide-plus w-8 h-8 text-white"
+                  class="w-full h-full text-white"
                 >
-                  <path d="M5 12h14"></path>
-                  <path d="M12 5v14"></path>
+                  <path d="M5 12h14"></path><path d="M12 5v14"></path>
                 </svg>
               </div>
             </div>
-            <h3 class="text-xl font-semibold mb-3">Crie seu deck</h3>
-            <p class="text-muted-foreground leading-relaxed">Comece criando um novo deck e adicionando flashcards.</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Crie seu deck</h3>
+            <p class="text-slate-600 leading-relaxed text-sm">Comece criando um novo deck e adicionando seus flashcards
+              personalizados.</p>
           </div>
         </div>
       </div>
-      <div class="relative">
+
+      <%# Passo 02 %>
+      <div class="relative group">
         <div
           class="
             hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r
-            from-primary/30 to-accent/30 z-0
+            from-[#60c2a6]/20 to-emerald-500/20 z-0
           "
         ></div>
         <div
           class="
-            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
-            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+            relative z-10 p-8 rounded-3xl bg-white border border-slate-200 shadow-sm
+            hover:shadow-xl transition-all duration-300 h-full flex flex-col
           "
         >
-          <div class="p-6 text-center flex flex-col h-full">
+          <div
+            class="
+              absolute top-6 right-8 text-4xl font-black text-slate-100
+              group-hover:text-[#60c2a6]/10 transition-colors
+            "
+          >02</div>
+          <div class="text-center flex flex-col h-full pt-4">
             <div class="mb-6">
-              <div class="text-6xl font-bold text-primary opacity-20 mb-4">02</div>
               <div
                 class="
-                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                  relative w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#60c2a6]
+                  to-emerald-500 p-4 shadow-lg shadow-[#60c2a6]/20 group-hover:rotate-6
+                  transition-transform
                 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="lucide lucide-layers w-8 h-8 text-white"
+                  class="w-full h-full text-white"
                 >
                   <path
                     d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"
@@ -378,166 +346,223 @@
                 </svg>
               </div>
             </div>
-            <h3 class="text-xl font-semibold mb-3">Estude seus cards</h3>
-            <p class="text-muted-foreground leading-relaxed">Comece a estudar seus flashcards. Avalie o quão bem você se
-              lembra de cada cartão para ajudar nosso algoritmo a aprender.</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Estude seus cards</h3>
+            <p class="text-slate-600 leading-relaxed text-sm">Avalie o quão bem você se lembra de cada cartão para alimentar
+              nosso algoritmo.</p>
           </div>
         </div>
       </div>
-      <div class="relative">
+
+      <%# Passo 03 %>
+      <div class="relative group">
         <div
           class="
             hidden lg:block absolute top-16 left-full w-full h-0.5 bg-gradient-to-r
-            from-primary/30 to-accent/30 z-0
+            from-[#60c2a6]/20 to-emerald-500/20 z-0
           "
         ></div>
         <div
           class="
-            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
-            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+            relative z-10 p-8 rounded-3xl bg-white border border-slate-200 shadow-sm
+            hover:shadow-xl transition-all duration-300 h-full flex flex-col
           "
         >
-          <div class="p-6 text-center flex flex-col h-full">
+          <div
+            class="
+              absolute top-6 right-8 text-4xl font-black text-slate-100
+              group-hover:text-[#60c2a6]/10 transition-colors
+            "
+          >03</div>
+          <div class="text-center flex flex-col h-full pt-4">
             <div class="mb-6">
-              <div class="text-6xl font-bold text-primary opacity-20 mb-4">03</div>
               <div
                 class="
-                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                  relative w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#60c2a6]
+                  to-emerald-500 p-4 shadow-lg shadow-[#60c2a6]/20 group-hover:rotate-6
+                  transition-transform
                 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="lucide lucide-repeat w-8 h-8 text-white"
+                  class="w-full h-full text-white"
                 >
-                  <path d="m17 2 4 4-4 4"></path>
-                  <path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
-                  <path d="m7 22-4-4 4-4"></path>
-                  <path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
+                  <path d="m17 2 4 4-4 4"></path><path d="M3 11v-1a4 4 0 0 1 4-4h14"></path>
+                  <path d="m7 22-4-4 4-4"></path><path d="M21 13v1a4 4 0 0 1-4 4H3"></path>
                 </svg>
               </div>
             </div>
-            <h3 class="text-xl font-semibold mb-3">Repetição inteligente</h3>
-            <p class="text-muted-foreground leading-relaxed">Nosso algoritmo agenda a próxima repetição com base no seu
-              desempenho, mostrando cartas difíceis com mais frequência.</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Repetição inteligente</h3>
+            <p class="text-slate-600 leading-relaxed text-sm">O algoritmo agenda a revisão ideal com base no seu desempenho
+              individual.</p>
           </div>
         </div>
       </div>
-      <div class="relative">
+
+      <%# Passo 04 %>
+      <div class="relative group">
         <div
           class="
-            rounded-lg text-card-foreground shadow-sm relative z-10 hover:shadow-card
-            transition-smooth border-0 bg-gradient-card h-full flex flex-col
+            relative z-10 p-8 rounded-3xl bg-white border border-slate-200 shadow-sm
+            hover:shadow-xl transition-all duration-300 h-full flex flex-col
           "
         >
-          <div class="p-6 text-center flex flex-col h-full">
+          <div
+            class="
+              absolute top-6 right-8 text-4xl font-black text-slate-100
+              group-hover:text-[#60c2a6]/10 transition-colors
+            "
+          >04</div>
+          <div class="text-center flex flex-col h-full pt-4">
             <div class="mb-6">
-              <div class="text-6xl font-bold text-primary opacity-20 mb-4">04</div>
               <div
                 class="
-                  w-16 h-16 mx-auto rounded-full bg-gradient-to-br from-primary to-accent p-4 mb-4
+                  relative w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-[#60c2a6]
+                  to-emerald-500 p-4 shadow-lg shadow-[#60c2a6]/20 group-hover:rotate-6
+                  transition-transform
                 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="lucide lucide-trophy w-8 h-8 text-white"
+                  class="w-full h-full text-white"
                 >
-                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                  <path d="M4 22h16"></path>
-                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                  <path d="M4 22h16"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
                 </svg>
               </div>
             </div>
-            <h3 class="text-xl font-semibold mb-3">Acompanhe o progresso</h3>
-            <p class="text-muted-foreground leading-relaxed">Observe suas taxas de retenção melhorarem à medida que você
-              domina cada cartão por meio de repetição espaçada.</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-3">Domine o assunto</h3>
+            <p class="text-slate-600 leading-relaxed text-sm">Observe sua retenção atingir 100% enquanto você domina novos
+              conhecimentos.</p>
           </div>
         </div>
       </div>
+
     </div>
-    <div class="text-center mt-16">
-      <%= link_to sign_up_url, class: "btn btn-lg btn-cta text-lg px-8" do %>
+
+    <%# CTA Inferior %>
+    <div class="text-center mt-20">
+      <%= link_to sign_up_url, class: "inline-flex items-center gap-2 px-10 py-4 bg-slate-900 text-white font-bold text-lg rounded-2xl hover:bg-slate-800 transition-all shadow-xl hover:shadow-[#60c2a6]/20 active:scale-95" do %>
         Iniciar jornada de aprendizado
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+          />
+        </svg>
       <% end %>
     </div>
   </div>
 </section>
-<section class="py-20 bg-gradient-hero relative overflow-hidden">
+
+<section class="py-24 relative overflow-hidden" id="final-cta">
+  <%# Background com o gradiente da marca %>
+  <div
+    class="
+      absolute inset-0 bg-gradient-to-br from-[#1a1c1e] via-slate-900 to-[#0f172a]
+    "
+  ></div>
+
+  <%# Elementos decorativos de luz (Glow) %>
+  <div
+    class="
+      absolute top-0 left-1/4 w-96 h-96 bg-[#60c2a6]/10 rounded-full blur-[120px]
+    "
+  ></div>
+  <div
+    class="
+      absolute bottom-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full
+      blur-[120px]
+    "
+  ></div>
+
   <div class="container mx-auto px-6 relative z-10">
     <div
       class="
-        rounded-lg border text-card-foreground shadow-sm max-w-4xl mx-auto bg-white/10
-        backdrop-blur-lg border-white/20 shadow-glow
+        max-w-4xl mx-auto rounded-[2.5rem] p-1 border border-white/10 bg-white/5
+        backdrop-blur-2xl shadow-2xl
       "
     >
-      <div class="p-12 text-center">
-        <div class="mb-8">
-          <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+      <div class="p-8 md:p-16 text-center">
+
+        <%# Conteúdo %>
+        <div class="mb-10">
+          <h2 class="text-4xl lg:text-6xl font-extrabold text-white mb-6 tracking-tight">
             Pronto para transformar
-            <span class="block">sua aprendizagem?</span>
+            <span
+              class="
+                block bg-gradient-to-r from-[#60c2a6] to-emerald-400 bg-clip-text
+                text-transparent
+              "
+            >
+              sua aprendizagem?
+            </span>
           </h2>
-          <p class="text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-            Junte-se a milhares de alunos que já melhoraram sua memória e
-            retenção com o Elephanto.
+          <p class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Junte-se a milhares de alunos que já utilizam o método de repetição
+            espaçada do Elephanto para dominar novos conhecimentos.
           </p>
         </div>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-          <%= link_to sign_up_url, class: "btn btn-lg btn-hero text-lg px-8 bg-white text-primary hover:bg-white/90" do %>
+
+        <%# Ações %>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <%= link_to sign_up_url, class: "group flex items-center gap-2 px-8 py-4 bg-white text-slate-900 font-bold text-lg rounded-2xl hover:bg-[#60c2a6] hover:text-white transition-all duration-300 shadow-xl" do %>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
+              stroke-width="2.5"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-zap w-5 h-5"
+              class="w-5 h-5 group-hover:fill-current"
             >
               <path
                 d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
               ></path>
             </svg>
-            Começar agora
+            Começar agora gratuitamente
           <% end %>
-          <%= link_to new_session_url, class: "btn btn-lg btn-outline text-lg px-8 bg-transparent text-white border-white/30 hover:bg-white/10" do %>
-            Já estou por aqui
+          <%= link_to new_session_url, class: "flex items-center gap-2 px-8 py-4 bg-transparent text-white font-semibold text-lg rounded-2xl border border-white/20 hover:bg-white/10 transition-all duration-300" do %>
+            Já tenho uma conta
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="lucide lucide-arrow-right w-5 h-5"
+              class="w-5 h-5"
             >
-              <path d="M5 12h14"></path>
-              <path d="m12 5 7 7-7 7"></path>
+              <path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path>
             </svg>
           <% end %>
         </div>
+
+        <%# Prova Social Rápida %>
+        <p class="mt-8 text-sm text-slate-500 font-medium">
+          Sem cartão de crédito • Teste gratuito ilimitado
+        </p>
       </div>
     </div>
   </div>

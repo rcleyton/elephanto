@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <title><%= content_for(:title) || "Elephanto" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,9 +10,6 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <%= favicon_link_tag "favicon.ico", type: "image/png" %>
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -22,26 +18,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin=""/>
     <link
       rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&amp;family=Lexend%3Awght%40400%3B500%3B700%3B900&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&family=Playwrite+HU:wght@100..400&display=swap"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap"
-      rel="stylesheet"
-    >
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
+  <body class="bg-white text-slate-900">
     <header>
       <nav
         class="
-          fixed top-0 w-full z-50 bg-background/80 backdrop-blur-lg border-b
-          border-border/50
+          fixed top-0 w-full z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50
         "
         data-controller="dropdown"
       >
@@ -49,45 +37,44 @@
           <div class="flex items-center justify-between h-16">
             <div class="flex items-center gap-3">
               <%= link_to root_path do %>
-                <div class="flex items-center gap-4 text-[#111418]">
+                <div class="flex items-center gap-4 text-slate-900">
                   <%= image_tag "logo_dark.svg", class: "w-10 h-10" %>
                   <h1
                     class="
-                      text-[#60c2a6] text-lg font-extrabold leading-tight tracking-[-0.015em]
+                      text-[#60c2a6] text-lg font-extrabold leading-tight tracking-tight
                     "
-                    ,
                     style='font-family: "Playwrite HU", cursive;'
-                  >Elephanto</h1>
+                  >
+                    Elephanto
+                  </h1>
                 </div>
               <% end %>
             </div>
+
             <div class="hidden md:flex items-center gap-8">
               <%= link_to "Recursos",
               root_path(anchor: "resources"),
-              class:
-                "text-foreground/80 hover:text-foreground transition-all duration-300 ease-in-out" %>
+              class: "text-slate-600 hover:text-slate-900 transition-colors duration-300" %>
               <%= link_to "Como funciona",
               root_path(anchor: "how_work"),
-              class:
-                "text-foreground/80 hover:text-foreground transition-all duration-300 ease-in-out" %>
+              class: "text-slate-600 hover:text-slate-900 transition-colors duration-300" %>
             </div>
+
             <div class="hidden md:flex items-center gap-4">
-              <%= link_to new_session_url, class: "btn btn-default-size btn-ghost" do %>
-                Entrar
-              <% end %>
-              <%= link_to sign_up_url, class: "btn btn-default-size btn-cta" do %>
-                Registrar
-              <% end %>
+              <%= link_to "Entrar",
+              new_session_url,
+              class:
+                "px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" %>
+              <%= link_to "Registrar",
+              sign_up_url,
+              class:
+                "px-4 py-2 text-sm font-bold text-white bg-[#60c2a6] hover:bg-[#4eb095] rounded-lg shadow-md hover:shadow-lg transition-all" %>
             </div>
+
             <button
               data-action="dropdown#toggle"
               class="
-                inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md
-                text-sm font-medium ring-offset-background transition-colors
-                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring
-                focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50
-                [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent
-                hover:text-accent-foreground h-10 w-10 md:hidden
+                p-2 rounded-md md:hidden hover:bg-slate-100 text-slate-600
               "
             >
               <svg
@@ -101,33 +88,38 @@
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                class="lucide w-5 h-5"
+                class="w-6 h-6"
               >
+                <line x1="4" x1="20" y1="12" y2="12"></line>
+                <line x1="4" x1="20" y1="6" y2="6"></line>
+                <line x1="4" x1="20" y1="18" y2="18"></line>
               </svg>
             </button>
           </div>
 
-          <div class="hidden py-4 border-t border-border/50" data-dropdown-target="menu">
-            <div class="flex flex-col gap-4">
+          <div class="hidden py-4 border-t border-gray-100" data-dropdown-target="menu">
+            <div class="flex flex-col gap-2">
               <%= link_to "Recursos",
               root_path(anchor: "resources"),
               data: {
                 action: "dropdown#close",
               },
-              class: "text-foreground/80 hover:text-foreground transition-smooth py-2" %>
+              class: "text-slate-600 hover:text-slate-900 py-2 transition-colors" %>
               <%= link_to "Como funciona",
               root_path(anchor: "how_work"),
               data: {
                 action: "dropdown#close",
               },
-              class: "text-foreground/80 hover:text-foreground transition-smooth py-2" %>
-              <div class="flex flex-col gap-2 pt-4">
-                <%= link_to new_session_url, data: { action: "dropdown#close" }, class: "inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 justify-start" do %>
-                  Entrar
-                <% end %>
-                <%= link_to sign_up_url, data: { action: "dropdown#close" }, class: "inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-accent text-accent-foreground hover:bg-accent/90 shadow-elegant hover:shadow-glow transition-smooth font-semibold h-10 px-4 py-2 justify-start" do %>
-                  Registrar
-                <% end %>
+              class: "text-slate-600 hover:text-slate-900 py-2 transition-colors" %>
+              <div class="flex flex-col gap-2 pt-4 border-t border-gray-100">
+                <%= link_to "Entrar",
+                new_session_url,
+                class:
+                  "flex items-center px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 rounded-lg" %>
+                <%= link_to "Registrar",
+                sign_up_url,
+                class:
+                  "flex items-center px-4 py-2 text-sm font-bold text-white bg-[#60c2a6] rounded-lg shadow-sm" %>
               </div>
             </div>
           </div>
@@ -135,111 +127,112 @@
       </nav>
     </header>
 
-    <%= yield %>
+    <main class="pt-16">
+      <%= yield %>
+    </main>
 
-    <footer class="bg-background border-t border-border">
+    <footer class="bg-slate-50 border-t border-gray-200">
       <div class="container mx-auto px-6 py-12">
         <div class="grid md:grid-cols-4 gap-8">
           <div class="space-y-4">
             <div class="flex items-center gap-3">
-              <%= image_tag "logo_dark.svg", class: "w-8 h-8", alt: "Logo" %>
+              <%= image_tag "logo_dark.svg", class: "w-8 h-8" %>
               <span
-                class="text-xl font-bold text-primary bg-clip-text"
+                class="text-xl font-bold text-[#60c2a6]"
                 style='font-family: "Playwrite HU", cursive;'
               >Elephanto</span>
             </div>
-            <p class="text-muted-foreground leading-relaxed">
+            <p class="text-slate-500 text-sm leading-relaxed">
               O sistema inteligente de repetição espaçada que ajuda você a
               memorizar qualquer coisa, para sempre.
             </p>
           </div>
           <div class="space-y-4">
-            <h3 class="font-semibold">Produto</h3>
+            <h3 class="font-semibold text-slate-900">Produto</h3>
             <div class="space-y-2">
               <a
                 href="#resources"
                 class="
-                  block text-muted-foreground hover:text-foreground transition-smooth
+                  block text-slate-500 hover:text-[#60c2a6] transition-colors text-sm
                 "
               >Recursos</a>
               <a
                 href="#how_work"
                 class="
-                  block text-muted-foreground hover:text-foreground transition-smooth
+                  block text-slate-500 hover:text-[#60c2a6] transition-colors text-sm
                 "
               >Como funciona</a>
             </div>
           </div>
           <div class="space-y-4">
-            <h3 class="font-semibold">Suporte</h3>
+            <h3 class="font-semibold text-slate-900">Suporte</h3>
             <div class="space-y-2">
               <%= mail_to "cleyton.silva@getelephanto.com",
               "Contato",
               encode: "hex",
-              class: "block text-muted-foreground hover:text-foreground transition-smooth" %>
+              class: "block text-slate-500 hover:text-[#60c2a6] transition-colors text-sm" %>
             </div>
           </div>
           <div class="space-y-4">
-            <h3 class="font-semibold">Empresa</h3>
-            <%= link_to privacy_url(host: Rails.env.development? ? 'localhost' : 'getelephanto.com'), class: "block text-muted-foreground hover:text-foreground transition-smooth" do %>
-              Política de Privacidade
-            <% end %>
-            <%= link_to terms_url(host: Rails.env.development? ? 'localhost' : 'getelephanto.com'), class: "block text-muted-foreground hover:text-foreground transition-smooth" do %>
-              Termos de Uso
-            <% end %>
+            <h3 class="font-semibold text-slate-900">Empresa</h3>
+            <div class="space-y-2">
+              <%= link_to "Privacidade",
+              privacy_path,
+              class: "block text-slate-500 hover:text-[#60c2a6] transition-colors text-sm" %>
+              <%= link_to "Termos",
+              terms_path,
+              class: "block text-slate-500 hover:text-[#60c2a6] transition-colors text-sm" %>
+            </div>
           </div>
         </div>
-        <div class="border-t border-border mt-12 pt-8">
-          <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-muted-foreground text-center md:text-left">©
-              <%= Date.today.year %>
-              Elephanto. Todos os direitos reservados.</p>
-            <div class="flex items-center gap-2 text-muted-foreground">
-              <span>Feito com</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide lucide-heart w-4 h-4 text-red-500 fill-current"
-              >
-                <path
-                  d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
-                ></path>
-              </svg>
-              <span>para aprender em qualquer lugar</span>
-            </div>
+        <div
+          class="
+            border-t border-gray-200 mt-12 pt-8 flex flex-col md:flex-row justify-between
+            items-center gap-4 text-slate-500 text-sm
+          "
+        >
+          <p>©
+            <%= Date.today.year %>
+            Elephanto. Todos os direitos reservados.</p>
+          <div class="flex items-center gap-2">
+            <span>Feito com</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 text-red-500 fill-current"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+              ></path>
+            </svg>
+            <span>para aprender em qualquer lugar</span>
           </div>
         </div>
       </div>
     </footer>
+
     <div
       data-controller="cookie-consent"
       data-cookie-consent-target="banner"
       class="
-        hidden fixed inset-x-0 bottom-0 bg-gray-900 text-white px-6 py-4 flex
-        items-center justify-between z-50
+        hidden fixed inset-x-0 bottom-0 bg-slate-900 text-white px-6 py-4 flex flex-col
+        md:flex-row items-center justify-between z-50 gap-4
       "
     >
-      <span class="text-sm">
-        Usamos cookies essenciais para garantir o bom funcionamento do sistema.
-        Ao continuar, você concorda com isso.
-      </span>
+      <span class="text-sm">Usamos cookies essenciais para garantir o bom funcionamento do
+        sistema.</span>
       <button
         data-action="cookie-consent#accept"
         class="
-          ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm
-          font-medium
+          px-6 py-2 bg-[#60c2a6] hover:bg-[#4eb095] text-white rounded-lg text-sm
+          font-bold transition-colors
         "
       >
         Aceitar
       </button>
     </div>
   </body>
-
 </html>
