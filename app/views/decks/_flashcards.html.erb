@@ -2,36 +2,70 @@
   <% flashcards.each do |flashcard| %>
     <div
       class="
-        group bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-200
+        group bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-100
         dark:border-slate-800 shadow-sm flex items-center justify-between transition-all
-        hover:border-primary/30
+        duration-200 hover:shadow-md hover:border-[#60c2a6]/40 hover:-translate-x-1
       "
     >
       <div class="flex items-center gap-4">
-        <!-- Action buttons moved to LEFT -->
-        <div class="flex items-center gap-1">
+        <%# Grupo de Ações (Esquerda) %>
+        <div
+          class="
+            flex items-center gap-1 opacity-60 group-hover:opacity-100 transition-opacity
+          "
+        >
           <%= link_to edit_deck_flashcard_path(deck, flashcard),
-            class: "
-              flex p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded text-slate-400
-              hover:text-primary transition-colors
-            ", title: "Editar" do %>
+              class: "flex p-2 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 rounded-xl text-slate-400 hover:text-[#60c2a6] transition-all", 
+              title: "Editar" do %>
             <span class="material-symbols-outlined text-[20px]">edit</span>
           <% end %>
-          <%= button_to deck_flashcard_path(deck, flashcard), method: :delete,
-            class: "
-              flex p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded text-slate-400
-              hover:text-red-500 transition-colors
-            ", title: "Deletar" do %>
+
+          <%= button_to deck_flashcard_path(deck, flashcard), 
+              method: :delete,
+              form: { data: { turbo_confirm: "Excluir este flashcard?" } },
+              class: "flex p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-xl text-slate-400 hover:text-red-500 transition-all", 
+              title: "Deletar" do %>
             <span class="material-symbols-outlined text-[20px]">delete</span>
           <% end %>
         </div>
-        <div class="h-8 w-px bg-slate-100 dark:bg-slate-800 mx-1"></div>
+
+        <%# Divisor sutil %>
+        <div class="h-10 w-px bg-slate-100 dark:bg-slate-800 mx-1"></div>
+
+        <%# Conteúdo do Card %>
         <div class="flex flex-col">
-          <span class="text-slate-900 dark:text-slate-100 font-medium"><%= flashcard.front.truncate(60) %></span>
+          <span
+            class="
+              text-slate-700 dark:text-slate-200 font-semibold text-sm leading-tight
+              group-hover:text-slate-900 dark:group-hover:text-white transition-colors
+            "
+          >
+            <%= flashcard.front.truncate(80) %>
+          </span>
+          <% if flashcard.back.present? %>
+            <span
+              class="
+                text-[11px] text-slate-400 dark:text-slate-500 font-medium mt-0.5 line-clamp-1
+              "
+            >
+              <%= strip_tags(flashcard.back).truncate(100) %>
+            </span>
+          <% end %>
         </div>
       </div>
-      <div class="hidden md:flex items-center gap-2">
-        <%= fsrs_state_badge(flashcard) %>
+
+      <%# Status (Direita) %>
+      <div class="flex items-center gap-4">
+        <%# Badge de Estado (FSRS) %>
+        <div class="hidden sm:flex">
+          <%= fsrs_state_badge(flashcard) %>
+        </div>
+
+        <%# Indicador de Revisão Sutil %>
+        <div
+          class="h-2 w-2 rounded-full <%= flashcard.due? ? 'bg-[#60c2a6] animate-pulse' : 'bg-slate-200 dark:bg-slate-700' %>"
+          title="<%= flashcard.due? ? 'Pendente para hoje' : 'Revisão em dia' %>"
+        ></div>
       </div>
     </div>
   <% end %>

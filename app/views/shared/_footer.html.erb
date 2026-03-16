@@ -1,0 +1,68 @@
+<footer
+  class="
+    mt-auto border-t border-slate-100 dark:border-slate-900 bg-white
+    dark:bg-slate-950 transition-colors duration-300
+  "
+>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="flex flex-col items-center justify-between gap-8 md:flex-row">
+
+      <%# Lado Esquerdo: Branding & Copyright %>
+      <div class="flex flex-col items-center md:items-start gap-2">
+        <div
+          class="
+            flex items-center gap-2 opacity-50 grayscale hover:grayscale-0 transition-all
+            cursor-default
+          "
+        >
+          <div
+            class="
+              h-6 w-6 rounded bg-slate-900 dark:bg-[#60c2a6] flex items-center justify-center
+              p-1
+            "
+          >
+            <%= image_tag "logo_ligth.svg", class: "w-full h-full" %>
+          </div>
+          <span
+            class="
+              text-sm font-black tracking-tighter text-slate-900 dark:text-white
+            "
+          >Elephanto</span>
+        </div>
+        <p class="text-xs font-medium text-slate-400 dark:text-slate-600">
+          ©
+          <%= Date.current.year %>
+          Elephanto.
+          <span class="hidden sm:inline">Todos os direitos reservados.</span>
+        </p>
+      </div>
+
+      <%# Lado Direito: Links Úteis %>
+      <nav class="flex flex-wrap justify-center gap-x-8 gap-y-4">
+        <% link_style =
+          "text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-[#60c2a6] dark:text-slate-500 dark:hover:text-[#60c2a6] transition-colors flex items-center gap-2" %>
+
+        <%= link_to privacy_url(host: Rails.env.development? ? "localhost:3000" : "getelephanto.com"), class: link_style do %>
+          <span class="material-symbols-outlined text-[18px]">fingerprint</span>
+          Privacidade
+        <% end %>
+
+        <%= link_to terms_url(host: Rails.env.development? ? "localhost:3000" : "getelephanto.com"), class: link_style do %>
+          <span class="material-symbols-outlined text-[18px]">gavel</span>
+          Termos
+        <% end %>
+
+        <%= mail_to "cleyton.silva@getelephanto.com", encode: "hex", class: link_style do %>
+          <span class="material-symbols-outlined text-[18px]">alternate_email</span>
+          Contato
+        <% end %>
+      </nav>
+
+    </div>
+
+    <%# Linha Decorativa (Sutil) %>
+    <div class="mt-8 flex justify-center">
+      <div class="h-1 w-12 rounded-full bg-slate-100 dark:bg-slate-900"></div>
+    </div>
+  </div>
+</footer>

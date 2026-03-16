@@ -4,75 +4,83 @@
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<main class="flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40">
-  <div class="layout-content-container flex flex-col max-w-[800px] flex-1">
-    <!-- Title Section -->
-    <div class="flex flex-col gap-2 pb-8">
-      <h1
-        class="
-          text-slate-900 dark:text-white text-3xl md:text-4xl font-extrabold
-          tracking-tight
-        "
-      >
-        <%= t("actions.edit") %>
-        <%= Deck.model_name.human.downcase %></h1>
-      <p class="text-slate-500 dark:text-slate-400 text-base">Edite o seu deck para organizar seus flashcards.</p>
+<main class="flex flex-1 justify-center py-12 px-4 md:px-10 lg:px-40">
+  <div class="flex flex-col max-w-[700px] flex-1">
+
+    <%# Cabeçalho com Ação de Excluir %>
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-10">
+      <div class="text-center md:text-left">
+        <h1
+          class="
+            text-slate-900 dark:text-white text-3xl md:text-4xl font-black tracking-tight
+          "
+        >
+          <%= t("actions.edit") %>
+          <%= Deck.model_name.human.downcase %>
+        </h1>
+        <p class="text-slate-500 dark:text-slate-400 text-base mt-2">Atualize as informações do seu deck.</p>
+      </div>
+
+      <%# Botão de Excluir sutil %>
+      <div class="flex justify-center">
+        <%= button_to deck_path(@deck), 
+            method: :delete, 
+            data: { confirm: "Tem certeza que deseja excluir este deck e todos os seus cards?" },
+            class: "flex items-center gap-2 px-4 py-2 rounded-xl text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-all text-sm font-bold" do %>
+          <span class="material-symbols-outlined text-xl">delete</span>
+          Excluir Deck
+        <% end %>
+      </div>
     </div>
+
+    <%# Card do Formulário %>
     <div
       class="
-        overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800
-        bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/50 dark:shadow-none
+        overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800
+        bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-none
       "
     >
-      <div class="p-8">
+      <div class="p-8 md:p-12">
         <%= render "form", deck: @deck %>
       </div>
+
+      <%# Info Footer %>
       <div
         class="
-          bg-slate-50 dark:bg-slate-800/50 px-8 py-4 border-t border-slate-100
-          dark:border-slate-800 flex items-center justify-center gap-2 text-xs
-          text-slate-500
+          bg-slate-50 dark:bg-slate-800/30 px-8 py-5 border-t border-slate-100
+          dark:border-slate-800 flex items-center justify-center gap-3 text-sm
+          text-slate-500 dark:text-slate-400
         "
       >
-        <span class="material-symbols-outlined text-sm">info</span>
-        <span>Você poderá adicionar os flashcards logo após criar o deck.</span>
+        <span class="material-symbols-outlined text-lg text-[#60c2a6]">history</span>
+        <span class="font-medium">As alterações serão aplicadas imediatamente a todos os seus
+          flashcards.</span>
       </div>
     </div>
-    <div class="mt-12 flex justify-center">
-      <div class="flex -space-x-2">
-        <img
-          class="
-            h-10 w-10 rounded-full border-2 border-white dark:border-slate-900 object-cover
-          "
-          data-alt="User profile picture of a woman smiling"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgEKqe08v_MSXpc2r00bvGCryMuSgMerkHg-S722uaH-CcSvNXGAPH9599sGW7HuopVzH1CUlIWrKDtjPNAkgI429gZKnBv8vJJL0ZcdqTYH23yGWo9hoaDD1vdUFf0NBa7w_rbBRIG5QQUVs9evscAAY_TtTg-0yir79NBO44UEuFHBjnvh8q2Hgua7DzHMO1ii8OislpHP9-A-vu-SaUgUIeboYla_CMY_7gGAb7u1g8rJGKFbt8O159K-W2p0hl20YZun5JWNE"
-        />
-        <img
-          class="
-            h-10 w-10 rounded-full border-2 border-white dark:border-slate-900 object-cover
-          "
-          data-alt="User profile picture of a man smiling"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoUAHprzJfPUtrv8xWO7JG9wJTQeqAisGYE1sQoov6TrU_hVZ2EKM45MFZuXsQuYukseXHIyc88Oo30y4QrNmr0UN5ueR9PWku_-Y75dpt-4coufMGfobAVFuoiQv21WwVhaj19Gwi8un3X4596hmFNxaD76_96dFrH2HUItM_wlL6HqrlFI0bPcsQOEl2xBIuYgQWudaeGUrclvBMUyBwHe47MAfssZge8UBO8VP-dCM8BUBe9-THimhrDXY0a8O5tQ5LRBgFBk4"
-        />
-        <img
-          class="
-            h-10 w-10 rounded-full border-2 border-white dark:border-slate-900 object-cover
-          "
-          data-alt="User profile picture of a young woman"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRjwvxqZsHHoSxU9J-LglviYr9uOH3U0j-kWqAYaSUJYNRBY84bSl3w1BMS9Df_Eo4mpfHpbAInDVtdXqQP_a0M8raVjk9D9wMwtzWdHPv-9uXE6sEzcnLflC2dvBw6wg0zSJRp2cDlQP286e6cGmWG-A-foNGhbZ8S1_hg4geOTnMmRb2f8ZrXxXwJ1Tx7ffcckueMgn1fOORR2Mo5WiACRlaYm-QQKyk3TTiOrISRDe2Rf1S-DYn9u3NtR-9qXHqmyG3VQet8wk"
-        />
+
+    <%# Social Proof (Mantido para consistência visual) %>
+    <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
+      <div class="flex -space-x-3">
+        <% 3.times do |i| %>
+          <img
+            class="
+              h-11 w-11 rounded-full border-4 border-white dark:border-slate-950 object-cover
+              shadow-sm
+            "
+            src="https://i.pravatar.cc/150?u=<%= i + 10 %>"
+          />
+        <% end %>
         <div
           class="
-            flex h-10 w-10 items-center justify-center rounded-full border-2 border-white
-            dark:border-slate-900 bg-slate-100 dark:bg-slate-800 text-[10px] font-bold
+            flex h-11 w-11 items-center justify-center rounded-full border-4 border-white
+            dark:border-slate-950 bg-slate-100 dark:bg-slate-800 text-[10px] font-black
+            shadow-sm dark:text-white
           "
         >
           +12k
         </div>
       </div>
-      <div class="ml-4 flex flex-col justify-center">
-        <p class="text-xs font-semibold text-slate-600 dark:text-slate-400">Junte-se a milhares de estudantes</p>
-      </div>
+      <p class="text-sm font-bold text-slate-600 dark:text-slate-400 tracking-tight">Estudantes evoluindo todos os dias</p>
     </div>
   </div>
 </main>

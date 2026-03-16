@@ -1,10 +1,11 @@
-<% content_for :title, "Decks" %>
+<% content_for :title, "Meus Decks" %>
 
 <turbo-frame id="flash">
   <%= render "shared/flash" %>
 </turbo-frame>
 
 <main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+  <%# Header da Página %>
   <div
     class="
       mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between
@@ -15,59 +16,61 @@
         class="
           text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl
         "
-      >Meus
+      >
+        Meus
         <%= Deck.model_name.human.pluralize %>
       </h1>
-      <p class="mt-2 text-base text-slate-600 dark:text-slate-400">Gerencie seus decks de flashcards e continue seu aprendizado
-        personalizado.</p>
+      <p class="mt-2 text-base text-slate-600 dark:text-slate-400">
+        Gerencie seus decks de flashcards e continue seu aprendizado
+        personalizado.
+      </p>
     </div>
+
     <%= link_to new_deck_path, 
-      class: "
-        inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3
-        text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all
-        hover:bg-primary/90 hover:shadow-primary/40 active:scale-95
-      " do %>
+        class: "inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-[#60c2a6] px-6 py-3 text-sm font-bold text-white dark:text-slate-900 shadow-lg shadow-slate-200 dark:shadow-emerald-900/20 transition-all hover:opacity-90 active:scale-95" do %>
       <span class="material-symbols-outlined text-xl">add_circle</span>
       Novo deck
     <% end %>
   </div>
-  <!-- Tabs/Filters -->
+
+  <%# Tabs/Filters %>
   <%= turbo_frame_tag "decks", data: { turbo_action: "advance" } do %>
-    <% base_classes = "px-6 py-3 text-sm transition-all duration-200"
-    active_class = "border-b-2 border-primary font-bold text-primary"
+    <% base_classes = "px-6 py-3 text-sm transition-all duration-200 border-b-2"
+    active_class = "border-[#60c2a6] font-bold text-[#60c2a6]"
     inactive_class =
-      "border-b-2 border-transparent font-medium text-slate-500 hover:text-slate-700 dark:hover:text-slate-300" %>
+      "border-transparent font-medium text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200" %>
 
     <div
       class="
         mb-8 flex items-center gap-1 border-b border-slate-200 dark:border-slate-800
+        overflow-x-auto no-scrollbar
       "
     >
       <%# Aba: Todos %>
       <%= link_to decks_path, 
-      data: { turbo_action: "advance" },
-      class: "#{base_classes} #{params[:filter].blank? ? active_class : inactive_class}" do %>
+          data: { turbo_action: "advance" },
+          class: "#{base_classes} #{params[:filter].blank? ? active_class : inactive_class}" do %>
         Todos
       <% end %>
 
       <%# Aba: Recentes %>
       <%= link_to decks_path(filter: "recent"), 
-      data: { turbo_action: "advance" },
-      class: "#{base_classes} #{params[:filter] == 'recent' ? active_class : inactive_class}" do %>
+          data: { turbo_action: "advance" },
+          class: "#{base_classes} #{params[:filter] == 'recent' ? active_class : inactive_class}" do %>
         Recentes
       <% end %>
 
       <%# Aba: Favoritos %>
       <%= link_to decks_path(filter: "favorites"), 
-      data: { turbo_action: "advance" },
-      class: "#{base_classes} #{params[:filter] == 'favorites' ? active_class : inactive_class}" do %>
+          data: { turbo_action: "advance" },
+          class: "#{base_classes} #{params[:filter] == 'favorites' ? active_class : inactive_class}" do %>
         Favoritos
       <% end %>
 
       <%# Aba: Arquivados %>
       <%= link_to decks_path(filter: "archived"), 
-      data: { turbo_action: "advance" },
-      class: "#{base_classes} #{params[:filter] == 'archived' ? active_class : inactive_class}" do %>
+          data: { turbo_action: "advance" },
+          class: "#{base_classes} #{params[:filter] == 'archived' ? active_class : inactive_class}" do %>
         Arquivados
       <% end %>
     </div>
@@ -84,68 +87,73 @@
           <% end %>
         </div>
       <% else %>
-        <% if params[:filter].blank? || params[:filter] == 'recent' %>
-          <%= link_to new_deck_path, data: { turbo_frame: "_top" }, class: "mt-4 btn-primary" do %>
+        <%# Empty States %>
+        <div class="mt-4">
+          <% if params[:filter].blank? || params[:filter] == 'recent' %>
+            <%= link_to new_deck_path, data: { turbo_frame: "_top" }, class: "block group" do %>
+              <div
+                class="
+                  flex flex-col items-center justify-center rounded-[2rem] border-2 border-dashed
+                  border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 p-12
+                  transition-all hover:border-[#60c2a6] hover:bg-white dark:hover:bg-slate-800
+                "
+              >
+                <div
+                  class="
+                    mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-slate-100
+                    dark:bg-slate-800 text-slate-400 group-hover:bg-[#60c2a6] group-hover:text-white
+                    transition-all shadow-sm
+                  "
+                >
+                  <span class="material-symbols-outlined text-4xl">add</span>
+                </div>
+                <p class="text-lg font-bold text-slate-900 dark:text-white">Criar seu primeiro deck</p>
+                <p class="mt-2 text-center text-sm text-slate-500 dark:text-slate-400 max-w-xs">Escolha um tópico e comece a aprender com repetição espaçada
+                  agora mesmo.</p>
+              </div>
+            <% end %>
+          <% else %>
+            <%# Filtros vazios (Favoritos/Arquivados) %>
             <div
               class="
-                group flex flex-col items-center justify-center rounded-2xl border-2
-                border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50
-                dark:bg-slate-900/50 p-8 transition-all hover:bg-slate-100
-                dark:hover:bg-slate-800
+                flex flex-col items-center justify-center rounded-[2rem] border-2 border-dashed
+                border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 p-12
               "
             >
               <div
                 class="
-                  mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-200
-                  dark:bg-slate-700 text-slate-400 group-hover:bg-primary group-hover:text-white
-                  transition-all
+                  mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-slate-100
+                  dark:bg-slate-800 text-slate-300
                 "
               >
-                <span class="material-symbols-outlined text-3xl">add</span>
+                <span class="material-symbols-outlined text-4xl">
+                  <%= case params[:filter]
+                  when "archived"
+                    "archive"
+                  when "favorites"
+                    "star"
+                  else
+                    "folder_open"
+                  end %>
+                </span>
               </div>
-              <p class="text-base font-bold text-slate-900 dark:text-white">Criar novo deck</p>
-              <p class="mt-1 text-center text-xs text-slate-500 dark:text-slate-400">Comece um novo tópico e acelere seu aprendizado</p>
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                <%= if params[:filter] == "archived"
+                  "Nenhum deck arquivado"
+                else
+                  "Você não tem favoritos"
+                end %>
+              </h3>
+              <p class="mt-2 text-center text-sm text-slate-500 dark:text-slate-400 max-w-xs">
+                <%= if params[:filter] == "archived"
+                  "Decks concluídos aparecerão aqui para consulta futura."
+                else
+                  "Clique na estrela em um deck para facilitar o acesso."
+                end %>
+              </p>
             </div>
           <% end %>
-        <% else %>
-          <div
-            class="
-              group flex flex-col items-center justify-center rounded-2xl border-2
-              border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50
-              dark:bg-slate-900/50 p-8 transition-all hover:bg-slate-100
-              dark:hover:bg-slate-800
-            "
-          >
-            <div
-              class="
-                mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-200
-                dark:bg-slate-700 text-slate-400
-              "
-            >
-              <span class="material-symbols-outlined text-3xl">
-                <%= if params[:filter] == "archived"
-                  "archive"
-                else
-                  (params[:filter] == "favorites" ? "star" : "add")
-                end %>
-              </span>
-            </div>
-            <h3 class="text-base font-bold text-slate-900 dark:text-white">
-              <%= if params[:filter] == "archived"
-                "Nenhum deck arquivado"
-              else
-                "Você não tem favoritos"
-              end %>
-            </h3>
-            <p class="mt-1 text-center text-xs text-slate-500 dark:text-slate-400">
-              <%= if params[:filter] == "archived"
-                "Decks que você terminar ficarão guardados aqui."
-              else
-                "Clique na estrela em um deck para salvá-lo como favorito."
-              end %>
-            </p>
-          </div>
-        <% end %>
+        </div>
       <% end %>
     </div>
   <% end %>
