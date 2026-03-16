@@ -1,35 +1,42 @@
-<%= form_with model: @profile, data: { controller: "image-upload", image_upload_autosave_value: false }, class: "w-full" do |form| %>
+<%= form_with model: profile, data: { controller: "image-upload", image_upload_autosave_value: false }, class: "w-full" do |form| %>
+
+  <%# 1. Seção de Capa (Header do Form) %>
   <div
     class="
-      w-full h-48 sm:h-64 overflow-hidden rounded-t-xl relative mb-[-4rem] group
-      cursor-pointer
+      w-full h-48 sm:h-64 overflow-hidden relative group cursor-pointer bg-slate-100
+      dark:bg-slate-800
     "
   >
-    <label class="block w-full h-full">
+    <label class="block w-full h-full cursor-pointer">
       <% if profile.persisted? && profile.cover_profile.attached? %>
-        <img
-          src="<%= url_for(profile.cover_profile) %>"
-          class="w-full h-full object-cover"
-          data-image-upload-target="preview"
-        />
+        <%= image_tag profile.cover_profile,
+        class: "w-full h-full object-cover",
+        data: {
+          image_upload_target: "preview",
+        } %>
       <% else %>
         <img
-          src="https://placehold.net/6-600x800.png"
-          class="w-full h-full object-cover"
+          src="https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1000"
+          class="w-full h-full object-cover opacity-20 grayscale"
           data-image-upload-target="preview"
         />
       <% end %>
 
       <div
         class="
-          absolute inset-0 flex items-center justify-center bg-black/40 opacity-0
-          group-hover:opacity-100 transition
+          absolute inset-0 flex items-center justify-center bg-slate-900/40 opacity-0
+          group-hover:opacity-100 transition-all duration-300 backdrop-blur-sm
         "
       >
-        <span class="text-white font-semibold flex items-center gap-2">
-          <span class="material-symbols-outlined">photo_camera</span>
-          Alterar capa
-        </span>
+        <div
+          class="
+            flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full border
+            border-white/30 text-white font-black text-[10px] uppercase tracking-widest
+          "
+        >
+          <span class="material-symbols-outlined text-sm">photo_camera</span>
+          Trocar Capa
+        </div>
       </div>
 
       <%= form.file_field :cover_profile,
@@ -39,50 +46,46 @@
                         image_upload_target: "input",
                         action: "change->image-upload#previewImage",
                       } %>
-
     </label>
   </div>
 
-  <div class="flex flex-col items-center w-full mt-8 z-10">
+  <%# 2. Seção do Avatar (Sobreposta) %>
+  <div class="flex flex-col items-center -mt-16 sm:-mt-20 z-10 relative">
     <div class="relative group cursor-pointer">
-      <label>
+      <label class="cursor-pointer block">
         <div
           class="
-            size-32 rounded-full border-4 border-white dark:border-background-dark p-1
-            bg-white dark:bg-background-dark shadow-xl
+            size-32 sm:size-40 rounded-[2.5rem] border-[6px] border-white
+            dark:border-slate-900 bg-slate-100 dark:bg-slate-800 shadow-2xl overflow-hidden
+            relative
           "
         >
           <% if profile.persisted? && profile.avatar.attached? %>
-            <img
-              src="<%= url_for(profile.avatar) %>"
-              class="w-full h-full rounded-full object-cover"
-              data-image-upload-target="preview"
-            />
+            <%= image_tag profile.avatar,
+            class: "w-full h-full object-cover",
+            data: {
+              image_upload_target: "preview",
+            } %>
           <% else %>
             <div
-              data-image-upload-target="preview"
               class="
-                w-full h-full rounded-full bg-primary/10 flex items-center justify-center
+                w-full h-full flex items-center justify-center bg-slate-50 dark:bg-slate-950
               "
+              data-image-upload-target="preview"
             >
-              <span class="material-symbols-outlined text-3xl text-primary">
-                person
-              </span>
+              <span class="material-symbols-outlined text-4xl text-[#60c2a6]">person</span>
             </div>
           <% end %>
-        </div>
-        <div
-          class="
-            absolute inset-0 rounded-full bg-black/40 flex items-center justify-center
-            opacity-0 group-hover:opacity-100 transition
-          "
-        >
-          <span class="material-symbols-outlined text-white text-xl">
-            photo_camera
-          </span>
 
+          <div
+            class="
+              absolute inset-0 bg-slate-900/60 opacity-0 group-hover:opacity-100
+              transition-all duration-300 flex items-center justify-center text-white
+            "
+          >
+            <span class="material-symbols-outlined">add_a_photo</span>
+          </div>
         </div>
-
         <%= form.file_field :avatar,
                         class: "hidden",
                         accept: "image/*",
@@ -90,154 +93,140 @@
                           image_upload_target: "input",
                           action: "change->image-upload#previewImage",
                         } %>
-
       </label>
     </div>
   </div>
 
-  <div class="space-y-6 p-8">
-    <div class="grid grid-col md:grid-cols-2 gap-4">
-      <div>
+  <%# 3. Campos de Dados %>
+  <div class="p-8 sm:p-12 space-y-8">
+
+    <%# Nome e Sobrenome na mesma linha %>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="space-y-2">
         <%= form.label :first_name,
                    class:
-                     "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
-        <div class="relative">
-          <div
+                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+        <div class="relative group">
+          <span
             class="
-              pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
-              text-slate-400
+              material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2
+              text-slate-400 group-focus-within:text-[#60c2a6] transition-colors
             "
-          >
-            <span class="material-symbols-outlined text-xl">id_card</span>
-          </div>
+          >badge</span>
           <%= form.text_field :first_name,
-                          placeholder: t("placeholders.profile.first_name"),
+                          placeholder: "Ex: Cleyton",
                           class:
-                            "block w-full rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(profile, :first_name)}" %>
+                            "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold placeholder:text-slate-300 dark:placeholder:text-slate-700 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
         </div>
-        <% if profile.errors[:first_name].any? %>
-          <p class="ui-error"><%= Profile.human_attribute_name(:first_name) %><%= profile.errors[:first_name].first %></p>
-        <% end %>
+        <%= if profile.errors[:first_name].any?
+          render "shared/field_error", model: profile, field: :first_name
+        end %>
       </div>
 
-      <div>
+      <div class="space-y-2">
         <%= form.label :last_name,
                    class:
-                     "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
-        <div class="relative">
-          <div
+                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+        <div class="relative group">
+          <span
             class="
-              pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
-              text-slate-400
+              material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2
+              text-slate-400 group-focus-within:text-[#60c2a6] transition-colors
             "
-          >
-            <span class="material-symbols-outlined text-xl">id_card</span>
-          </div>
+          >subtitles</span>
           <%= form.text_field :last_name,
-                          placeholder: t("placeholders.profile.last_name"),
+                          placeholder: "Ex: Silva",
                           class:
-                            "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(profile, :last_name)}" %>
+                            "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold placeholder:text-slate-300 dark:placeholder:text-slate-700 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
         </div>
-        <% if profile.errors[:last_name].any? %>
-          <p class="ui-error"><%= Profile.human_attribute_name(:last_name) %>
-            <%= profile.errors[:last_name].first %></p>
-        <% end %>
       </div>
     </div>
 
+    <%# Username %>
+    <div class="space-y-2">
+      <%= form.label :username,
+                 class:
+                   "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+      <div class="relative group">
+        <span
+          class="
+            material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2
+            text-slate-400 group-focus-within:text-[#60c2a6] transition-colors
+          "
+        >alternate_email</span>
+        <%= form.text_field :username,
+                        placeholder: "seu_nome",
+                        class:
+                          "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
+      </div>
+    </div>
+
+    <%# Localização (Mapbox) %>
     <div
+      class="space-y-2"
       data-controller="location-autocomplete"
       data-mapbox-key="<%= ENV.fetch("MAPBOX_PUBLIC_KEY") %>"
     >
       <%= form.label :location,
                  "Localização",
                  class:
-                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
-      <div class="relative">
-        <div
+                   "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+      <div class="relative group">
+        <span
           class="
-            pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
-            text-slate-400
+            material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2
+            text-slate-400 group-focus-within:text-[#60c2a6] transition-colors
           "
-        >
-          <span class="material-symbols-outlined text-xl">location_on</span>
-        </div>
+        >location_on</span>
         <%= form.text_field :location,
-                        placeholder: "Digite a cidade onde mora",
+                        placeholder: "Onde você estuda?",
                         data: {
                           location_autocomplete_target: "input",
                           action:
                             "input->location-autocomplete#search keydown->location-autocomplete#keydown",
                         },
                         class:
-                          "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all" %>
-
+                          "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
         <%= form.hidden_field :location_country,
                           data: {
                             location_autocomplete_target: "country",
                           } %>
-
         <ul
           data-location-autocomplete-target="results"
           class="
-            absolute w-full bg-white dark:bg-slate-800 border rounded-lg mt-1 shadow hidden
-            z-50
+            absolute w-full bg-white dark:bg-slate-800 border border-slate-100
+            dark:border-slate-700 rounded-2xl mt-2 shadow-2xl hidden z-50 overflow-hidden
+            font-bold text-sm text-slate-600 dark:text-slate-300
           "
-        >
-        </ul>
+        ></ul>
       </div>
     </div>
 
-    <div>
-      <%= form.label :username,
-                 class:
-                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
-      <div class="relative">
-        <div
-          class="
-            pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4
-            text-slate-400
-          "
-        >
-          <span class="material-symbols-outlined text-xl">sticker</span>
-        </div>
-        <%= form.text_field :username,
-                        placeholder: t("placeholders.profile.username"),
-                        class:
-                          "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(profile, :username)}" %>
-      </div>
-      <% if profile.errors[:username].any? %>
-        <p class="ui-error"><%= Profile.human_attribute_name(:username) %>
-          <%= profile.errors[:username].first %></p>
-      <% end %>
-    </div>
-
-    <div>
+    <%# Bio %>
+    <div class="space-y-2">
       <%= form.label :bio,
                  class:
-                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
-      <div class="relative">
-        <div
+                   "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+      <div class="relative group">
+        <span
           class="
-            pointer-events-none absolute left-0 top-4 flex items-start pl-4 text-slate-400
+            material-symbols-outlined absolute left-4 top-4 text-slate-400
+            group-focus-within:text-[#60c2a6] transition-colors
           "
-        >
-          <span class="material-symbols-outlined text-xl">info</span>
-        </div>
-        <%= form.textarea :bio,
-                      placeholder: t("placeholders.profile.bio"),
-                      class:
-                        "block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all resize-none #{error_class(profile, :bio)}" %>
+        >notes</span>
+        <%= form.text_area :bio,
+                       rows: 4,
+                       placeholder: "Conte um pouco sobre seus objetivos de estudo...",
+                       class:
+                         "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all resize-none" %>
       </div>
-      <% if profile.errors[:bio].any? %>
-        <p class="ui-error"><%= Profile.human_attribute_name(:bio) %>
-          <%= profile.errors[:bio].first %></p>
-      <% end %>
     </div>
 
-    <div class="flex justify-end pt-10">
-      <%= form.submit class:
-                    "flex-1 flex items-center justify-center gap-2 h-11 bg-primary text-white rounded-lg font-bold hover:bg-primary/90 transition-all shadow-md show-primary/20" %>
+    <%# Botão de Ação %>
+    <div class="pt-6">
+      <%= form.submit "Salvar Alterações",
+                  class:
+                    "w-full h-14 bg-slate-900 dark:bg-[#60c2a6] text-white dark:text-slate-900 rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-[1.01] active:scale-[0.99] transition-all shadow-xl shadow-slate-200 dark:shadow-emerald-900/20 cursor-pointer" %>
     </div>
   </div>
 <% end %>

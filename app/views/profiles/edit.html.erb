@@ -1,28 +1,71 @@
-<% content_for :title, "#{t("actions.edit")} #{Profile.model_name.human.downcase}" %>
+<% content_for :title,
+"#{t("actions.edit")} #{Profile.model_name.human.downcase} • Elephanto" %>
 
 <turbo-frame id="flash">
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<main class=" flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40 ">
-  <div class="layout-content-container flex flex-col max-w-[800px] flex-1">
-    <div class="flex flex-col gap-2 pb-8">
-      <h1
-        class="
-          text-slate-900 dark:text-white text-3xl md:text-4xl font-extrabold
-          tracking-tight
-        "
-      >
-        <%= "#{t("actions.edit")} #{Profile.model_name.human.downcase}" %></h1>
-      <p class="text-slate-500 dark:text-slate-400 text-base">Atualizar minhas informações</p>
+<main class="flex flex-1 justify-center py-12 px-4 sm:px-6">
+  <div class="max-w-[750px] flex-1">
+
+    <%# Cabeçalho com Botão de Voltar %>
+    <div class="flex flex-col gap-6 pb-10">
+      <div class="flex items-center justify-between">
+        <div class="flex flex-col gap-1">
+          <h1 class="text-slate-900 dark:text-white text-4xl font-black tracking-tighter">
+            <%= t("actions.edit") %>
+            Perfil
+          </h1>
+          <p
+            class="
+              text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-widest
+            "
+          >
+            Mantenha seus dados atualizados
+          </p>
+        </div>
+
+        <%= link_to profile_path(@profile), 
+            class: "flex h-12 w-12 items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 text-slate-400 hover:text-[#60c2a6] hover:border-[#60c2a6]/30 transition-all shadow-sm active:scale-90",
+            title: "Cancelar e voltar" do %>
+          <span class="material-symbols-outlined">close</span>
+        <% end %>
+      </div>
     </div>
+
+    <%# Container do Formulário %>
     <div
       class="
-        overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800
-        bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/50 dark:shadow-none
+        overflow-hidden rounded-[2.5rem] border border-slate-100 dark:border-slate-800
+        bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-none
+        transition-all
       "
     >
-      <%= render "form", profile: @profile %>
+
+      <%# Indicador visual de Edição %>
+      <div
+        class="
+          bg-slate-50 dark:bg-slate-800/50 px-8 py-4 border-b border-slate-100
+          dark:border-slate-800 flex items-center gap-3
+        "
+      >
+        <span class="material-symbols-outlined text-[#60c2a6]">edit_square</span>
+        <span class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Formulário de Edição</span>
+      </div>
+
+      <div class="p-8 sm:p-12">
+        <%# Renderiza o _form.html.erb %>
+        <%= render "form", profile: @profile %>
+      </div>
+
+    </div>
+
+    <%# Dica de Privacidade %>
+    <div class="mt-8 flex items-center justify-center gap-2 text-slate-400">
+      <span class="material-symbols-outlined text-sm">lock</span>
+      <p class="text-xs font-medium">
+        Seus dados estão protegidos e não serão compartilhados.
+      </p>
     </div>
   </div>
 </main>

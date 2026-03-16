@@ -1,28 +1,70 @@
-<% content_for :title, "#{t("actions.new")} #{Profile.model_name.human.downcase}" %>
+<% content_for :title,
+"#{t("actions.new")} #{Profile.model_name.human.downcase} • Elephanto" %>
 
 <turbo-frame id="flash">
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<main class=" flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40 ">
-  <div class="layout-content-container flex flex-col max-w-[800px] flex-1">
-    <div class="flex flex-col gap-2 pb-8">
-      <h1
+<main class="flex flex-1 justify-center py-12 px-4 sm:px-6">
+  <div class="max-w-[700px] flex-1">
+
+    <%# Cabeçalho de Boas-vindas %>
+    <div class="flex flex-col items-center text-center gap-3 pb-12">
+      <div
         class="
-          text-slate-900 dark:text-white text-3xl md:text-4xl font-extrabold
-          tracking-tight
+          inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-[#60c2a6]/10
+          text-[#60c2a6] mb-2 animate-bounce-slow
         "
       >
-        <%= "#{t("actions.new")} #{Profile.model_name.human.downcase}" %></h1>
-      <p class="text-slate-500 dark:text-slate-400 text-base">Criar meu perfil</p>
+        <span class="material-symbols-outlined text-4xl">celebration</span>
+      </div>
+      <h1 class="text-slate-900 dark:text-white text-4xl font-black tracking-tighter">
+        Quase lá!
+      </h1>
+      <p
+        class="
+          text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-[0.2em]
+        "
+      >
+        Crie seu perfil para começar a estudar
+      </p>
     </div>
+
+    <%# Container do Formulário %>
     <div
       class="
-        overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800
-        bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/50 dark:shadow-none
+        overflow-hidden rounded-[2.5rem] border border-slate-100 dark:border-slate-800
+        bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-none
+        transition-all
       "
     >
-      <%= render "form", profile: @profile %>
+
+      <%# Banner Decorativo Superior %>
+      <div class="h-3 bg-gradient-to-r from-[#60c2a6] via-emerald-400 to-[#60c2a6]"></div>
+
+      <div class="p-8 sm:p-12">
+        <%# Aqui renderizamos o _form.html.erb %>
+        <%= render "form", profile: @profile %>
+      </div>
+
+    </div>
+
+    <%# Footer Auxiliar %>
+    <div class="mt-8 text-center">
+      <p class="text-xs text-slate-400 font-medium">
+        Suas informações podem ser alteradas a qualquer momento nas
+        configurações.
+      </p>
     </div>
   </div>
 </main>
+
+<style>
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+  }
+</style>
