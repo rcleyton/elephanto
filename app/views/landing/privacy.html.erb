@@ -1,101 +1,299 @@
-<main
-  class="
-    flex flex-1 justify-center mt-16 px-6 md:px-0 py-0 md:py-5 bg-muted/30
-  "
->
-  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-    <h1 class="text-2xl py-4">Política de Privacidade do Elephanto</h1>
+<main class="min-h-screen bg-slate-50 pt-32 pb-20 px-6">
+  <div class="max-w-4xl mx-auto">
 
-    <p class="pb-2">Última atualização: 26 de agosto de 2025</p>
+    <%# Cabeçalho da Página %>
+    <div class="mb-12 text-center md:text-left">
+      <h1
+        class="
+          text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight
+        "
+      >
+        Política de Privacidade do
+        <span class="text-[#60c2a6]">Elephanto</span>
+      </h1>
+      <div
+        class="
+          flex items-center justify-center md:justify-start gap-2 text-slate-500
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <p class="font-medium text-sm">Última atualização: 26 de agosto de 2025</p>
+      </div>
+    </div>
 
-    <p class="pb-8">A sua privacidade é importante para nós. Esta Política de Privacidade
-      explica como coletamos, usamos e protegemos as informações que você
-      fornece ao usar o Elephanto, nosso aplicativo de aprendizado por
-      repetição espaçada (“Serviço”).</p>
+    <%# Conteúdo em Card Principal %>
+    <div
+      class="
+        bg-white rounded-[2.5rem] border border-slate-200 shadow-sm p-8 md:p-12
+      "
+    >
 
-    <ol class="list-decimal list-inside">
-      <li class="pb-4"><strong>Informações que coletamos</strong>
-        <ol>
-          <li>Ao utilizar o Elephanto, podemos coletar:</li>
-        </ol>
-        <ol class="list-disc list-inside">
-          <li><strong>Dados de cadastro:</strong>
-            nome, e-mail e senha.</li>
-          <li><strong>Dados de uso:</strong>
-            flashcards, anotações e demais conteúdos criados por você.</li>
-          <li><strong>Dados técnicos:</strong>
-            informações sobre o dispositivo e navegador, coletados
-            automaticamente para melhorar a experiência (ex.: tipo de
-            dispositivo, sistema operacional, endereço IP).</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Como usamos os dados</strong>
-        <ol>
-          <li>As informações coletadas são utilizadas para:</li>
-        </ol>
-        <ol class="list-disc list-inside pb-2">
-          <li>Fornecer, manter e melhorar o funcionamento do Serviço.</li>
-          <li>Personalizar sua experiência de aprendizado.</li>
-          <li>Garantir a segurança da sua conta.</li>
-          <li>Cumprir obrigações legais, quando aplicável.</li>
-        </ol>
-        <p>Não vendemos, alugamos ou compartilhamos suas informações pessoais
-          com terceiros para fins de marketing.</p>
-      </li>
-      <li class="pb-4"><strong>Compartilhamento de informações</strong>
-        <ol>
-          <li>Podemos compartilhar seus dados apenas nas seguintes situações:</li>
-        </ol>
-        <ol class="list-disc list-inside">
-          <li><strong>Cumprimento legal:</strong>
-            quando exigido por autoridades competentes.</li>
-          <li><strong>Prestadores de serviço:</strong>
-            parceiros que nos ajudam a operar o Elephanto (ex.: hospedagem,
-            armazenamento de dados), sempre sujeitos a obrigações de
-            confidencialidade.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Armazenamento e segurança</strong>
-        <ol class="list-disc list-inside">
-          <li>Suas informações são armazenadas em servidores seguros.</li>
-          <li>Utilizamos práticas razoáveis de segurança para proteger seus dados
-            contra acessos não autorizados.</li>
-          <li>Apesar disso, nenhum sistema é 100% seguro. O uso do Serviço é
-            feito por sua conta e risco.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Seus direitos</strong>
-        <ol>
-          <li>Você pode:</li>
-        </ol>
-        <ol class="list-disc list-inside">
-          <li>Acessar e atualizar suas informações pessoais a qualquer momento
-            através das configurações de conta.</li>
-          <li>Solicitar a exclusão da sua conta e dos dados associados enviando
-            um pedido para suporte@elephanto.com.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Cookies</strong>
-        <ol class="list-inside">
-          <li>Utilizamos cookies essenciais para garantir o bom funcionamento do
-            Serviço. Ao continuar utilizando o Elephanto, você concorda com o
-            uso desses cookies.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Alterações nesta política</strong>
-        <ol class="list-inside">
-          <li>Podemos atualizar esta Política de Privacidade periodicamente. A
-            data de “Última atualização” será revisada. Recomendamos que você
-            consulte esta página regularmente.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Contato</strong>
-        <ol class="list-inside">
-          <li>Se tiver dúvidas sobre esta Política ou sobre o tratamento de seus
-            dados, entre em contato:
-            <%= mail_to "cleyton.silva@getelephanto.com", nil, encode: "hex" %>.</li>
-        </ol>
-      </li>
-    </ol>
+      <p
+        class="
+          text-lg text-slate-600 mb-12 leading-relaxed italic border-l-4 border-[#60c2a6]
+          pl-6
+        "
+      >
+        A sua privacidade é importante para nós. Esta Política de Privacidade
+        explica como coletamos, usamos e protegemos as informações que você
+        fornece ao usar o Elephanto, nosso aplicativo de aprendizado por
+        repetição espaçada (“Serviço”).
+      </p>
+
+      <div class="space-y-16 text-slate-700 leading-relaxed">
+
+        <%# 01. Informações que coletamos %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >01</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Informações que coletamos</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <p>Ao utilizar o Elephanto, podemos coletar:</p>
+            <ul class="space-y-4">
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span><strong>Dados de cadastro:</strong>
+                  nome, e-mail e senha.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span><strong>Dados de uso:</strong>
+                  flashcards, anotações e demais conteúdos criados por você.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span><strong>Dados técnicos:</strong>
+                  informações sobre o dispositivo e navegador, coletados
+                  automaticamente para melhorar a experiência (ex.: tipo de
+                  dispositivo, sistema operacional, endereço IP).</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <%# 02. Como usamos os dados %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >02</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Como usamos os dados</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <p>As informações coletadas são utilizadas para:</p>
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-center gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#60c2a6]"></div>
+                Fornecer, manter e melhorar o funcionamento do Serviço.
+              </li>
+              <li class="flex items-center gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#60c2a6]"></div>
+                Personalizar sua experiência de aprendizado.
+              </li>
+              <li class="flex items-center gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#60c2a6]"></div>
+                Garantir a segurança da sua conta.
+              </li>
+              <li class="flex items-center gap-3">
+                <div class="w-1.5 h-1.5 rounded-full bg-[#60c2a6]"></div>
+                Cumprir obrigações legais, quando aplicável.
+              </li>
+            </ul>
+            <div
+              class="
+                bg-emerald-50 text-emerald-800 p-5 rounded-2xl font-medium text-sm flex
+                items-start gap-3
+              "
+            >
+              <span class="text-xl leading-none">🛡️</span>
+              <p>Não vendemos, alugamos ou compartilhamos suas informações
+                pessoais com terceiros para fins de marketing.</p>
+            </div>
+          </div>
+        </section>
+
+        <%# 03. Compartilhamento %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >03</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Compartilhamento de informações</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <p>Podemos compartilhar seus dados apenas nas seguintes situações:</p>
+            <ul class="space-y-4">
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span><strong>Cumprimento legal:</strong>
+                  quando exigido por autoridades competentes.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span><strong>Prestadores de serviço:</strong>
+                  parceiros que nos ajudam a operar o Elephanto (ex.:
+                  hospedagem, armazenamento de dados), sempre sujeitos a
+                  obrigações de confidencialidade.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <%# 04. Armazenamento %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >04</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Armazenamento e segurança</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <ul class="space-y-4">
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span>Suas informações são armazenadas em servidores seguros.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span>Utilizamos práticas razoáveis de segurança para proteger seus
+                  dados contra acessos não autorizados.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span class="text-slate-500 italic">Apesar disso, nenhum sistema é 100% seguro. O uso do Serviço
+                  é feito por sua conta e risco.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <%# 05. Direitos %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >05</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Seus direitos</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <p>Você pode:</p>
+            <ul class="space-y-4">
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span>Acessar e atualizar suas informações pessoais a qualquer
+                  momento através das configurações de conta.</span>
+              </li>
+              <li class="flex gap-3">
+                <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#60c2a6] shrink-0"></span>
+                <span>Solicitar a exclusão da sua conta e dos dados associados
+                  enviando um pedido para suporte@elephanto.com.</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <%# 06. Cookies %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >06</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Cookies</h2>
+          </div>
+          <div class="pl-0 md:pl-11">
+            <p>Utilizamos cookies essenciais para garantir o bom funcionamento
+              do Serviço. Ao continuar utilizando o Elephanto, você concorda
+              com o uso desses cookies.</p>
+          </div>
+        </section>
+
+        <%# 07. Alterações %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >07</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Alterações nesta política</h2>
+          </div>
+          <div class="pl-0 md:pl-11">
+            <p>Podemos atualizar esta Política de Privacidade periodicamente. A
+              data de “Última atualização” será revisada. Recomendamos que você
+              consulte esta página regularmente.</p>
+          </div>
+        </section>
+
+        <%# 08. Contato %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-[#60c2a6] text-white
+                text-sm font-bold
+              "
+            >08</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Contato</h2>
+          </div>
+          <div class="pl-0 md:pl-11">
+            <p class="mb-8">Se tiver dúvidas sobre esta Política ou sobre o tratamento de
+              seus dados, entre em contato:</p>
+
+            <div
+              class="
+                bg-slate-900 rounded-3xl p-8 text-center md:flex md:items-center
+                md:justify-between md:text-left
+              "
+            >
+              <div>
+                <h3 class="text-white font-bold text-lg mb-1">Cleyton Silva</h3>
+                <p class="text-slate-400 text-sm italic">Responsável pelo tratamento de dados</p>
+              </div>
+              <div class="mt-6 md:mt-0">
+                <%= mail_to "cleyton.silva@getelephanto.com", class: "inline-flex items-center px-6 py-3 bg-[#60c2a6] text-white font-bold rounded-xl hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-500/20", encode: "hex" do %>
+                  Enviar E-mail
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
   </div>
 </main>

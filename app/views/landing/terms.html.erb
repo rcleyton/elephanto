@@ -1,90 +1,231 @@
-<main
-  class="
-    flex flex-1 justify-center mt-16 px-6 md:px-0 py-0 md:py-5 bg-muted/30
-  "
->
-  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-    <h1 class="text-2xl py-4">Termos de Uso do Elephanto</h1>
+<main class="min-h-screen bg-slate-50 pt-32 pb-20 px-6">
+  <div class="max-w-4xl mx-auto">
 
-    <p class="pb-2">Última atualização: 26 de agosto de 2025</p>
+    <%# Cabeçalho da Página %>
+    <div class="mb-12 text-center md:text-left">
+      <h1
+        class="
+          text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight
+        "
+      >
+        Termos de Uso do
+        <span class="text-[#60c2a6]">Elephanto</span>
+      </h1>
+      <div
+        class="
+          flex items-center justify-center md:justify-start gap-2 text-slate-500
+        "
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-5 h-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        <p class="font-medium text-sm">Última atualização: 26 de agosto de 2025</p>
+      </div>
+    </div>
 
-    <p class="pb-8">Bem-vindo(a) ao Elephanto! Estes Termos de Uso (“Termos”) regulam o uso
-      do nosso aplicativo de aprendizado por repetição espaçada (“Serviço”). Ao
-      acessar ou usar o Elephanto, você concorda com estes Termos. Se não
-      concordar, não utilize o Serviço.</p>
+    <%# Conteúdo em Card Principal %>
+    <div
+      class="
+        bg-white rounded-[2.5rem] border border-slate-200 shadow-sm p-8 md:p-12
+      "
+    >
 
-    <ol class="list-decimal list-inside">
-      <li class="pb-4"><strong>Uso do Serviço</strong>
-        <ol class="ml-4">
-          <li class="pb-2"><strong>1.1. Conta do Usuário.</strong>
-            Para utilizar o Elephanto, você deve criar uma conta. Você é
-            responsável por manter sua senha segura e por todas as atividades
-            realizadas através dela.</li>
-          <li class="pb-2"><strong>1.2. Conteúdo do Usuário.</strong>
-            Você pode criar, salvar e compartilhar flashcards, anotações e
-            outros conteúdos (“Conteúdo do Usuário”). Esse conteúdo é de sua
-            responsabilidade e não pode infringir direitos de terceiros (como
-            direitos autorais ou de imagem). Ao utilizar o Serviço, você nos
-            autoriza a armazenar, processar e exibir seu Conteúdo do Usuário
-            apenas no contexto do funcionamento do Elephanto.</li>
-          <li class="pb-2"><strong>1.3. Conduta.</strong>
-            Você concorda em não:
-            <ol>
-              <li>a) Usar o Serviço para atividades ilegais ou fraudulentas.</li>
-              <li>b) Publicar ou transmitir conteúdo ofensivo, difamatório ou que
-                viole direitos de terceiros.</li>
-              <li>c) Tentar acessar contas de outros usuários ou sistemas do
-                Elephanto sem autorização.</li>
-              <li>d) Interferir ou prejudicar o funcionamento normal do Serviço.</li>
-            </ol>
-          </li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Propriedade Intelectual</strong>
-        <ol class="ml-4">
-          <li>O design, logotipo, código e tecnologia do Elephanto pertencem
-            exclusivamente a nós e são protegidos por lei. Estes Termos não
-            concedem a você o direito de usar nossas marcas comerciais ou
-            identidade visual sem autorização.</li>
-          <li>O Conteúdo do Usuário criado por você continua sendo seu.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Privacidade e Dados</strong>
-        <ol class="ml-4">
-          <li>O Elephanto coleta apenas os dados necessários para oferecer o
-            Serviço, como informações de cadastro (ex.: nome, e-mail, senha) e
-            o seu Conteúdo do Usuário.</li>
-          <li>Esses dados não são vendidos ou compartilhados com terceiros, salvo
-            se exigido por lei.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Limitação de Responsabilidade</strong>
-        <ol class="ml-4">
-          <li>O Elephanto é fornecido “como está” e “conforme disponível”, sem
-            garantias de funcionamento ininterrupto ou livre de erros.</li>
-          <li>Na máxima extensão permitida por lei, não nos responsabilizamos por
-            perdas ou danos decorrentes do uso ou da incapacidade de usar o
-            Serviço.</li>
-        </ol>
-      </li>
-      <li class="pb-4"><strong>Disposições Finais</strong>
-        <ol class="ml-4">
-          <li class="pb-2"><strong>5.1. Encerramento.</strong>
-            Podemos suspender ou encerrar sua conta se você violar estes
-            Termos.</li>
-          <li class="pb-2"><strong>5.2. Alterações.</strong>
-            Podemos atualizar estes Termos periodicamente. A data de “Última
-            atualização” será revisada e recomendamos que você consulte esta
-            página regularmente.</li>
-          <li class="pb-2"><strong>5.3. Lei Aplicável.</strong>
-            Estes Termos são regidos pelas leis da República Federativa do
-            Brasil. Qualquer disputa será resolvida no foro da Comarca de São
-            Paulo – SP.</li>
-          <li class="pb-2"><strong>5.4. Contato.</strong>
-            Para dúvidas ou solicitações, entre em contato:
-            <%= mail_to "cleyton.silva@getelephanto.com", nil, encode: "hex" %>.</li>
-        </ol>
-      </li>
-    </ol>
+      <p
+        class="
+          text-lg text-slate-600 mb-12 leading-relaxed italic border-l-4 border-[#60c2a6]
+          pl-6
+        "
+      >
+        Bem-vindo(a) ao Elephanto! Estes Termos de Uso (“Termos”) regulam o uso
+        do nosso aplicativo de aprendizado por repetição espaçada (“Serviço”).
+        Ao acessar ou usar o Elephanto, você concorda com estes Termos.
+      </p>
+
+      <div class="space-y-16 text-slate-700 leading-relaxed">
+
+        <%# 01. Uso do Serviço %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >01</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Uso do Serviço</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-6">
+            <div>
+              <h3 class="font-bold text-slate-900 mb-2">1.1. Conta do Usuário</h3>
+              <p>Para utilizar o Elephanto, você deve criar uma conta. Você é
+                responsável por manter sua senha segura e por todas as
+                atividades realizadas através dela.</p>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-slate-900 mb-2">1.2. Conteúdo do Usuário</h3>
+              <p>Você pode criar, salvar e compartilhar flashcards, anotações e
+                outros conteúdos (“Conteúdo do Usuário”). Esse conteúdo é de
+                sua responsabilidade e não pode infringir direitos de terceiros
+                (como direitos autorais ou de imagem). Ao utilizar o Serviço,
+                você nos autoriza a armazenar, processar e exibir seu Conteúdo
+                do Usuário apenas no contexto do funcionamento do Elephanto.</p>
+            </div>
+
+            <div>
+              <h3 class="font-bold text-slate-900 mb-2">1.3. Conduta</h3>
+              <p class="mb-3">Você concorda em não:</p>
+              <ul class="space-y-2">
+                <li class="flex gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <span class="text-[#60c2a6] font-bold">a)</span>
+                  <span>Usar o Serviço para atividades ilegais ou fraudulentas.</span>
+                </li>
+                <li class="flex gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <span class="text-[#60c2a6] font-bold">b)</span>
+                  <span>Publicar ou transmitir conteúdo ofensivo, difamatório ou
+                    que viole direitos de terceiros.</span>
+                </li>
+                <li class="flex gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <span class="text-[#60c2a6] font-bold">c)</span>
+                  <span>Tentar acessar contas de outros usuários ou sistemas do
+                    Elephanto sem autorização.</span>
+                </li>
+                <li class="flex gap-3 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <span class="text-[#60c2a6] font-bold">d)</span>
+                  <span>Interferir ou prejudicar o funcionamento normal do
+                    Serviço.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <%# 02. Propriedade Intelectual %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >02</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Propriedade Intelectual</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <p>O design, logotipo, código e tecnologia do Elephanto pertencem
+              exclusivamente a nós e são protegidos por lei. Estes Termos não
+              concedem a você o direito de usar nossas marcas comerciais ou
+              identidade visual sem autorização.</p>
+            <p class="p-4 bg-emerald-50 rounded-xl text-emerald-800 font-medium">
+              ✨ O Conteúdo do Usuário criado por você continua sendo seu.
+            </p>
+          </div>
+        </section>
+
+        <%# 03. Privacidade e Dados %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >03</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Privacidade e Dados</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <p>O Elephanto coleta apenas os dados necessários para oferecer o
+              Serviço, como informações de cadastro (ex.: nome, e-mail, senha)
+              e o seu Conteúdo do Usuário.</p>
+            <p>Esses dados não são vendidos ou compartilhados com terceiros,
+              salvo se exigido por lei.</p>
+          </div>
+        </section>
+
+        <%# 04. Limitação de Responsabilidade %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-slate-900 text-white
+                text-sm font-bold
+              "
+            >04</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Limitação de Responsabilidade</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-4">
+            <p>O Elephanto é fornecido
+              <span class="font-mono text-sm bg-slate-100 px-1 rounded">“como está”</span>
+              e
+              <span class="font-mono text-sm bg-slate-100 px-1 rounded">“conforme disponível”</span>, sem garantias de funcionamento ininterrupto ou livre de erros.</p>
+            <p>Na máxima extensão permitida por lei, não nos responsabilizamos
+              por perdas ou danos decorrentes do uso ou da incapacidade de usar
+              o Serviço.</p>
+          </div>
+        </section>
+
+        <%# 05. Disposições Finais %>
+        <section>
+          <div class="flex items-center gap-3 mb-6">
+            <span
+              class="
+                flex items-center justify-center w-8 h-8 rounded-lg bg-[#60c2a6] text-white
+                text-sm font-bold
+              "
+            >05</span>
+            <h2 class="text-xl font-bold text-slate-900 uppercase tracking-wide">Disposições Finais</h2>
+          </div>
+          <div class="pl-0 md:pl-11 space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="p-5 border border-slate-100 rounded-2xl bg-slate-50">
+                <h3 class="font-bold text-slate-900 mb-1">5.1. Encerramento</h3>
+                <p class="text-sm">Podemos suspender ou encerrar sua conta se você violar estes
+                  Termos.</p>
+              </div>
+              <div class="p-5 border border-slate-100 rounded-2xl bg-slate-50">
+                <h3 class="font-bold text-slate-900 mb-1">5.2. Alterações</h3>
+                <p class="text-sm">Podemos atualizar estes Termos periodicamente. Recomendamos a
+                  consulta regular.</p>
+              </div>
+            </div>
+
+            <div class="p-5 border border-slate-100 rounded-2xl bg-slate-50">
+              <h3 class="font-bold text-slate-900 mb-1">5.3. Lei Aplicável</h3>
+              <p class="text-sm">Estes Termos são regidos pelas leis da República Federativa do
+                Brasil. Foro da Comarca de São Paulo – SP.</p>
+            </div>
+
+            <div
+              class="
+                bg-slate-900 rounded-3xl p-8 text-center md:flex md:items-center
+                md:justify-between md:text-left mt-8
+              "
+            >
+              <div>
+                <h3 class="text-white font-bold text-lg mb-1 text-center md:text-left">Dúvidas sobre os Termos?</h3>
+                <p class="text-slate-400 text-sm">Entre em contato diretamente com nossa equipe.</p>
+              </div>
+              <div class="mt-6 md:mt-0">
+                <%= mail_to "cleyton.silva@getelephanto.com", class: "inline-flex items-center px-6 py-3 bg-[#60c2a6] text-white font-bold rounded-xl hover:bg-emerald-500 transition-colors shadow-lg shadow-emerald-500/20", encode: "hex" do %>
+                  Falar Conosco
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
   </div>
 </main>
