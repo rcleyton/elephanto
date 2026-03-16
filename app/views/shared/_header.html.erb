@@ -1,105 +1,185 @@
 <header
   class="
-    fixed top-0 right-0 left-0 md:static border-b border-border/50 bg-background/80
-    backdrop-blur-lg
+    sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800
+    bg-white/80 dark:bg-background-dark/80 backdrop-blur-md
   "
   data-controller="header mobile-menu"
 >
-  <div class="container mx-auto px-6 py-6">
-    <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-      <div class="flex items-start justify-between">
-        <div class="flex items-center gap-4">
-          <% if show_back_button %>
-            <%= link_to back_path, class: "icon-arrow-left inline-flex items-center justify-center ring-offset-backgrond transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:accent-foreground rounded-md h-10 w-10" do %>
-              <%= image_tag "arrow-left.svg", class: "h-4 w-4" %>
-            <% end %>
-          <% end %>
-          <div>
-            <h1
-              class="
-                text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent
-              "
-            >
-              <%= title %>
-            </h1>
-            <% if subtitle %>
-              <p class="text-muted-foreground mt-2">
-                <%= subtitle %>
-              </p>
-            <% end %>
-          </div>
+  <div
+    class="
+      mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 h-16
+    "
+  >
+    <%= link_to decks_path do %>
+      <div class="flex items-center gap-3">
+        <div
+          class="
+            flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white
+          "
+        >
+          <%= image_tag "logo_ligth.svg" %>
         </div>
-        <% if show_profile_menu %>
-          <div class="md:hidden">
-            <button
-              data-action="mobile-menu#toggleMobileMenu"
-              class="
-                text-gray-900 p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500
-              "
-              aria-label="Abrir menu"
-            >
+        <h2 class="text-xl font-bold tracking-tight">Elephanto</h2>
+      </div>
+    <% end %>
+    <div class="hidden md:flex flex-1 max-w-md mx-8">
+      <div class="relative w-full">
+        <div
+          class="
+            pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3
+          "
+        >
+          <span class="material-symbols-outlined text-slate-400">search</span>
+        </div>
+        <input
+          class="
+            block w-full rounded-xl border-0 bg-slate-100 dark:bg-slate-800 py-2 pl-10 pr-3
+            text-sm focus:ring-2 focus:ring-primary
+          "
+          placeholder="Buscar decks ou tópicos..."
+          type="text"
+        />
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <button
+        class="
+          flex rounded-full p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-400
+          dark:hover:bg-slate-800
+        "
+      >
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+      <div class="relative">
+        <div class="flex items-center gap-3">
+
+          <div class="text-right hidden sm:block">
+            <p class="text-xs font-semibold text-slate-800 dark:text-slate-200">
+              <% if current_user.profile.persisted? %>
+                <%= current_user.profile.first_name %>
+              <% else %>
+                <%= current_user.email_address %>
+              <% end %>
+            </p>
+            <p class="text-[10px] text-primary dark:text-slate-400">Free</p>
+          </div>
+
+          <div
+            class="
+              h-10 w-10 rounded-full border-2 border-primary/20 bg-primary/10
+              dark:border-slate-600 dark:bg-slate-700 flex items-center justify-center
+              overflow-hidden relative
+            "
+            data-action="click->header#toggleProfileDropdown"
+          >
+
+            <% profile = current_user.profile %>
+
+            <% if profile&.persisted? && profile.avatar.attached? %>
+              <%= image_tag profile.avatar,
+              class: "w-full h-full object-cover",
+              alt: "Avatar do usuário" %>
+            <% else %>
+
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
                 viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="lucide-settings w-6 h-6"
+                fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg"
+                class="w-full h-full text-slate-700 dark:text-slate-300"
               >
                 <path
-                  d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M16 9C16 11.2091 14.2091 13 12 13C9.79086 13 8 11.2091 8 9C8 6.79086 9.79086 5 12 5C14.2091 5 16 6.79086 16 9ZM14 9C14 10.1046 13.1046 11 12 11C10.8954 11 10 10.1046 10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9Z"
                 />
-                <circle cx="12" cy="12" r="3"/>
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM3 12C3 14.0902 3.71255 16.014 4.90798 17.5417C6.55245 15.3889 9.14627 14 12.0645 14C14.9448 14 17.5092 15.3531 19.1565 17.4583C20.313 15.9443 21 14.0524 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12ZM12 21C9.84977 21 7.87565 20.2459 6.32767 18.9878C7.59352 17.1812 9.69106 16 12.0645 16C14.4084 16 16.4833 17.1521 17.7538 18.9209C16.1939 20.2191 14.1881 21 12 21Z"
+                />
               </svg>
-            </button>
+
+            <% end %>
           </div>
-        <% end %>
-      </div>
-      <div class="flex items-center gap-4 md:gap-8">
-        <% if show_new_deck_button %>
-          <%= link_to new_deck_path, class: "btn btn-default-size btn-default-variant w-full" do %>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide-plus w-4 h-4"
+          <div
+            data-header-target="profileDropdownMenu"
+            class="
+              absolute right-0 top-full mt-2 w-48
+              bg-white dark:bg-slate-800
+              border border-gray-200 dark:border-slate-700
+              rounded-md shadow-lg z-50
+              text-slate-800 dark:text-slate-200
+              hidden scale-95
+              transition-all duration-150 ease-out
+            "
+          >
+            <div
+              class="
+                px-4 py-2 text-sm font-normal border-b border-gray-200 dark:border-slate-700
+              "
             >
-              <path d="M5 12h14"/>
-              <path d="M12 5v14"/>
-            </svg>
-            <%= t("buttons.submit.new_deck") %>
-          <% end %>
-        <% end %>
+              <div class="flex flex-col space-y-1">
+                <p class="text-sm font-medium leading-none text-slate-900 dark:text-slate-100">
+                  minha conta
+                </p>
+                <p class="text-xs leading-none text-muted-foreground dark:text-slate-400">
+                  <%= current_user.email_address %>
+                </p>
+              </div>
+            </div>
 
-        <% if show_profile_menu %>
-          <%= render "shared/profile_menu" %>
-        <% end %>
+            <%= link_to path_to_profile,
+              class: "flex items-center rounded-sm px-2.5 py-2 m-1
+              hover:bg-slate-100 dark:hover:bg-slate-700
+              text-slate-700 dark:text-slate-200
+              text-sm transition-colors cursor-pointer" do %>
 
-        <% if right_buttons %>
-          <%= right_buttons %>
-        <% end %>
+              <div class="material-symbols-outlined mr-2">person</div>
+              meu perfil
+            <% end %>
+
+            <%= link_to statistics_path,
+      class: "flex items-center rounded-sm px-2.5 py-2 m-1
+      hover:bg-accent dark:hover:bg-slate-700
+      hover:text-white dark:text-slate-200
+      text-sm transition-colors cursor-pointer" do %>
+              <div class="material-symbols-outlined mr-2">leaderboard</div>
+              estatísticas
+            <% end %>
+            <%= link_to settings_path,
+      class: "flex items-center rounded-sm px-2.5 py-2 m-1
+      hover:bg-accent dark:hover:bg-slate-700
+      hover:text-white dark:text-slate-200
+      text-sm transition-colors cursor-pointer" do %>
+              <div class="material-symbols-outlined mr-2">settings</div>
+              configurações
+            <% end %>
+            <% if current_user.admin? %>
+              <%= link_to admin_path,
+        class: "flex items-center rounded-sm px-2.5 py-2 m-1
+        hover:bg-accent dark:hover:bg-slate-700
+        hover:text-white dark:text-slate-200
+        text-sm transition-colors cursor-pointer" do %>
+                <div class="material-symbols-outlined mr-2">dashboard</div>
+                dashboard
+              <% end %>
+            <% end %>
+
+            <div class="border-t border-gray-200 dark:border-slate-700">
+              <%= link_to session_path,
+        data: { turbo_method: :delete },
+        class: "flex items-center rounded-sm px-2.5 py-2 m-1
+        hover:bg-accent dark:hover:bg-slate-700
+        hover:text-white dark:text-slate-200
+        text-sm transition-colors cursor-pointer" do %>
+                <div class="material-symbols-outlined mr-2">logout</div>
+                sair
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <% if show_profile_menu %>
-    <%= render "shared/mobile_menu" %>
-  <% end %>
-
-  <% progress = flashcard_progress(@deck) %>
-
-  <% if controller_name == "flashcards" && controller.action_name == "show" %>
-    <div class="w-full bg-gray-200 h-2.5 dark:bg-gray-700">
-      <div class="bg-blue-600 h-2.5" style="width: <%= progress[:percent] %>%"></div>
-    </div>
-  <% end %>
 </header>

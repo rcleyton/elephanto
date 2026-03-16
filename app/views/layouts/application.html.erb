@@ -18,6 +18,18 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <script>
+      const theme = localStorage.getItem("theme")
+
+      if (theme === "dark") {
+        document.documentElement.classList.add("dark")
+      }
+
+      if (theme === "light") {
+        document.documentElement.classList.remove("dark")
+      }
+    </script>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap"
       rel="stylesheet"
@@ -36,19 +48,14 @@
     <%= javascript_importmap_tags %>
   </head>
 
-<body
-  class="
-    min-h-screen
-    bg-slate-50
-    dark:bg-slate-950
-    text-slate-900
-    dark:text-slate-100
-    font-display
-    antialiased
-  "
->
+  <body
+    class="
+      min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100
+      font-display antialiased
+    "
+  >
     <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-      <%= render "shared/new_header" %>
+      <%= render "shared/header" %>
       <%= yield %>
       <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 py-8">
         <div

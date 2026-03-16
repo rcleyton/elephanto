@@ -15,16 +15,6 @@ export default class extends Controller {
   }
 
   connect() {
-    const savedTheme = localStorage.getItem("theme")
-
-    if (savedTheme === "dark") {
-      document.documentElement.classList.add("dark")
-    }
-
-    if (savedTheme === "light") {
-      document.documentElement.classList.remove("dark")
-    }
-
     this.updateIcon()
   }
 
