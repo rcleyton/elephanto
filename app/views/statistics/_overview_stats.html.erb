@@ -1,35 +1,117 @@
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-4 py-8">
+<div
+  class="
+    grid grid-cols-1 lg:grid-cols-2 gap-8 py-8 animate-in fade-in
+    slide-in-from-bottom-6 duration-1000
+  "
+>
+
+  <%# Card 1: Distribuição de Revisões (Pie Chart) %>
   <div
     class="
-      rounded-xl bg-white dark:bg-background-dark border border-primary/10 shadow-sm
+      group rounded-[2.5rem] bg-white dark:bg-slate-900 border border-slate-100
+      dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-none
+      overflow-hidden transition-all duration-300
     "
   >
-    <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="text-2xl font-semibold leading-none tracking-tight">
+    <div class="flex flex-col space-y-2 p-8 sm:p-10">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="flex h-2 w-2 rounded-full bg-indigo-500"></span>
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Distribuição Atual</span>
+      </div>
+      <h3
+        class="
+          text-2xl font-black leading-tight tracking-tighter text-slate-900
+          dark:text-white
+        "
+      >
         Você tem
-        <%= @total_due_count %>
-        flashcards para revisar</h3>
-      <p class="text-sm text-muted-foreground">Flashcards para revisão por deck</p>
+        <span class="text-indigo-500"><%= @total_due_count %></span>
+        cards pendentes
+      </h3>
+      <p class="text-sm font-bold text-slate-400 uppercase tracking-wide">Volume de revisão por deck</p>
     </div>
-    <div class="p-6 pt-0">
-      <%= pie_chart @due_flashcards_by_deck, height: "250px", suffix: " flashcards" %>
+
+    <div class="px-8 pb-10 pt-0 flex justify-center">
+      <div class="w-full max-w-[400px]">
+        <%= pie_chart @due_flashcards_by_deck,
+        height: "280px",
+        suffix: " cards",
+        colors: %w[#60c2a6 #6366f1 #f59e0b #ec4899 #8b5cf6],
+        library: {
+          plugins: {
+            legend: {
+              position: "bottom",
+              labels: {
+                usePointStyle: true,
+                font: {
+                  weight: "bold",
+                  family: "Inter",
+                },
+              },
+            },
+          },
+        } %>
+      </div>
     </div>
   </div>
+
+  <%# Card 2: Atividade Diária (Line Chart) %>
   <div
     class="
-      rounded-xl bg-white dark:bg-background-dark border border-primary/10 shadow-sm
+      group rounded-[2.5rem] bg-white dark:bg-slate-900 border border-slate-100
+      dark:border-slate-800 shadow-xl shadow-slate-200/40 dark:shadow-none
+      overflow-hidden transition-all duration-300
     "
   >
-    <div class="flex flex-col space-y-1.5 p-6">
-      <h3 class="text-2xl font-semibold leading-none tracking-tight">
-        Quantidade de revisões por dia
+    <div class="flex flex-col space-y-2 p-8 sm:p-10">
+      <div class="flex items-center gap-2 mb-2">
+        <span class="flex h-2 w-2 rounded-full bg-[#60c2a6]"></span>
+        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-[#60c2a6]">Histórico de Esforço</span>
+      </div>
+      <h3
+        class="
+          text-2xl font-black leading-tight tracking-tighter text-slate-900
+          dark:text-white
+        "
+      >
+        Frequência de revisões
       </h3>
-      <p class="text-sm text-muted-foreground">Frequência revisões diárias</p>
+      <p class="text-sm font-bold text-slate-400 uppercase tracking-wide">Sua consistência nos últimos dias</p>
     </div>
-    <div class="p-6 pt-0">
+
+    <div class="px-8 pb-10 pt-0">
       <%= line_chart @review_sessions.group_by_day(:started_at).count,
-      height: "250px",
-      suffix: " Revisões" %>
+      height: "280px",
+      suffix: " sessões",
+      colors: ["#60c2a6"],
+      library: {
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            border: {
+              dash: [4, 4],
+            },
+            grid: {
+              color: "rgba(156, 163, 175, 0.1)",
+            },
+          },
+        },
+        elements: {
+          line: {
+            tension: 0.4,
+            borderWidth: 4,
+            capBezierPoints: true,
+          },
+          point: {
+            radius: 0,
+            hoverRadius: 6,
+          },
+        },
+      } %>
     </div>
   </div>
 </div>

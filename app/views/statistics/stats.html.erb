@@ -1,81 +1,191 @@
-<% content_for :title, "Estatísticas" %>
+<% content_for :title, "Estatísticas de Aprendizado • Elephanto" %>
 
 <turbo-frame id="flash">
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+<main class="mx-auto w-full max-w-7xl px-6 py-12">
+
+  <%# Cabeçalho de Performance %>
   <div
     class="
-      mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between
+      mb-12 flex flex-col gap-6 md:flex-row md:items-center md:justify-between
+      animate-in fade-in slide-in-from-top-4 duration-700
     "
   >
     <div>
+      <div class="flex items-center gap-3 mb-2">
+        <div class="h-1 w-10 bg-[#60c2a6] rounded-full"></div>
+        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#60c2a6]">Performance Hub</span>
+      </div>
       <h1
         class="
-          text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl
+          text-4xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white
         "
       >
-        Estatísticas de aprendizado
+        Seu cérebro em dados
       </h1>
-      <p class="mt-2 text-base text-slate-600 dark:text-slate-400">Acompanhe seu progresso e desempenho nos estudos com insights
-        detalhados sobre suas revisões.</p>
+      <p
+        class="
+          mt-3 text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed
+          font-medium
+        "
+      >
+        Insights detalhados sobre sua jornada de memorização e retenção.
+      </p>
+    </div>
+
+    <%# Badge de Streak ou Status Rápido %>
+    <div
+      class="
+        flex items-center gap-4 bg-white dark:bg-slate-900 p-2 pr-6 rounded-[2rem]
+        border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50
+        dark:shadow-none w-fit
+      "
+    >
+      <div
+        class="
+          h-12 w-12 rounded-full bg-orange-500 flex items-center justify-center text-white
+          shadow-lg shadow-orange-500/20
+        "
+      >
+        <span class="material-symbols-outlined font-bold">local_fire_department</span>
+      </div>
+      <div>
+        <p
+          class="
+            text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none
+            mb-1
+          "
+        >Ritmo de Estudo</p>
+        <p class="text-sm font-black text-slate-900 dark:text-white uppercase">Foco Ativo</p>
+      </div>
     </div>
   </div>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+  <%# Grade de Stats Principais %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+    <%# Card: Decks %>
     <div
       class="
-        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
-        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+        group relative overflow-hidden flex flex-col gap-4 rounded-[2.5rem] p-8 bg-white
+        dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl
+        shadow-slate-200/40 dark:shadow-none hover:scale-[1.02] transition-all
+        duration-300
       "
     >
       <div class="flex items-center justify-between">
-        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total de Decks</p>
-        <span class="material-symbols-outlined text-primary/40">layers</span>
+        <div
+          class="
+            p-3 rounded-2xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500
+            group-hover:scale-110 transition-transform duration-500
+          "
+        >
+          <span class="material-symbols-outlined text-2xl font-bold">layers</span>
+        </div>
+        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Total</span>
       </div>
-      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= @total_decks %></p>
+      <div>
+        <p class="text-4xl font-black text-slate-900 dark:text-white tracking-tighter"><%= @total_decks %></p>
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Decks Ativos</p>
+      </div>
     </div>
+
+    <%# Card: Flashcards %>
     <div
       class="
-        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
-        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+        group relative overflow-hidden flex flex-col gap-4 rounded-[2.5rem] p-8 bg-white
+        dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl
+        shadow-slate-200/40 dark:shadow-none hover:scale-[1.02] transition-all
+        duration-300
       "
     >
       <div class="flex items-center justify-between">
-        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Flashcards</p>
-        <span class="material-symbols-outlined text-primary/40">style</span>
+        <div
+          class="
+            p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 text-[#60c2a6]
+            group-hover:scale-110 transition-transform duration-500
+          "
+        >
+          <span class="material-symbols-outlined text-2xl font-bold">style</span>
+        </div>
+        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Items</span>
       </div>
-      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= current_user.flashcards.count %></p>
+      <div>
+        <p class="text-4xl font-black text-slate-900 dark:text-white tracking-tighter"><%= current_user.flashcards.count %></p>
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Cards Criados</p>
+      </div>
     </div>
+
+    <%# Card: Revisões %>
     <div
       class="
-        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
-        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+        group relative overflow-hidden flex flex-col gap-4 rounded-[2.5rem] p-8 bg-white
+        dark:bg-slate-900 border border-slate-100 dark:border-slate-800 shadow-xl
+        shadow-slate-200/40 dark:shadow-none hover:scale-[1.02] transition-all
+        duration-300
       "
     >
       <div class="flex items-center justify-between">
-        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Revisões</p>
-        <span class="material-symbols-outlined text-primary/40">history</span>
+        <div
+          class="
+            p-3 rounded-2xl bg-purple-50 dark:bg-purple-500/10 text-purple-500
+            group-hover:scale-110 transition-transform duration-500
+          "
+        >
+          <span class="material-symbols-outlined text-2xl font-bold">history</span>
+        </div>
+        <span class="text-[10px] font-black text-slate-300 uppercase tracking-widest">Sessões</span>
       </div>
-      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= @total_review_sessions %></p>
+      <div>
+        <p class="text-4xl font-black text-slate-900 dark:text-white tracking-tighter"><%= @total_review_sessions %></p>
+        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider mt-1">Revisões Feitas</p>
+      </div>
     </div>
+
+    <%# Card: Tempo (Destaque) %>
     <div
       class="
-        flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-background-dark border
-        border-primary/10 shadow-sm hover:shadow-md transition-shadow
+        group relative overflow-hidden flex flex-col gap-4 rounded-[2.5rem] p-8
+        bg-slate-900 dark:bg-[#60c2a6] border-none shadow-2xl shadow-[#60c2a6]/20
+        hover:scale-[1.02] transition-all duration-300
       "
     >
       <div class="flex items-center justify-between">
-        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Tempo Total</p>
-        <span class="material-symbols-outlined text-primary/40">schedule</span>
+        <div
+          class="
+            p-3 rounded-2xl bg-white/10 text-white dark:text-slate-900 group-hover:rotate-12
+            transition-transform duration-500
+          "
+        >
+          <span class="material-symbols-outlined text-2xl font-bold">schedule</span>
+        </div>
+        <div
+          class="
+            px-2 py-1 rounded-lg bg-white/20 text-white dark:text-slate-900 text-[9px]
+            font-black uppercase tracking-tighter
+          "
+        >Foco: 92%</div>
       </div>
-      <p class="text-slate-900 dark:text-slate-100 text-3xl font-bold"><%= seconds_to_str(@total_study_time) %></p>
-      <p class="text-primary text-xs font-semibold">Foco: 92%</p>
+      <div>
+        <p class="text-3xl font-black text-white dark:text-slate-900 tracking-tighter">
+          <%= seconds_to_str(@total_study_time) %>
+        </p>
+        <p
+          class="
+            text-xs font-bold text-white/60 dark:text-slate-900/60 uppercase tracking-wider
+            mt-1
+          "
+        >Tempo de Estudo</p>
+      </div>
     </div>
   </div>
 
-  <%= render "overview_stats",
-  review_sessions: @review_sessions,
-  flashcards: @flashcards %>
+  <%# Seção de Gráficos / Overview %>
+  <div class="animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-200">
+    <%= render "overview_stats",
+    review_sessions: @review_sessions,
+    flashcards: @flashcards %>
+  </div>
 </main>
