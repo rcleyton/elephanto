@@ -179,7 +179,7 @@
 
             <%# Dropdown Footer %>
             <div class="p-2 border-t border-slate-100 dark:border-slate-800">
-              <%= link_to session_path, data: { turbo_method: :delete }, class: "flex items-center gap-3 rounded-2xl px-4 py-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all text-sm font-bold" do %>
+              <%= button_to session_path, method: :delete, class: "w-full flex items-center gap-3 rounded-2xl px-4 py-3 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all text-sm font-bold cursor-pointer" do %>
                 <span class="material-symbols-outlined">logout</span>
                 Sair do Elephanto
               <% end %>

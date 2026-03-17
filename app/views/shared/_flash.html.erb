@@ -3,36 +3,45 @@
     data-controller="notification"
     data-notification-delay-value="5000"
     class="
-      fixed flex justify-between bottom-4 left-1/2 -translate-x-1/2
-      w-[calc(100%-2rem)] sm:w-auto sm:right-4 sm:left-auto sm:translate-x-0
-      <%= flash_class_for(type) %> p-4 rounded-sm transition transform
-      duration-1000 hidden z-50
+      fixed z-[100] bottom-6 left-4 right-4 sm:left-auto sm:right-8 sm:w-[400px] flex
+      items-center gap-4 p-4 rounded-[1.5rem] border backdrop-blur-xl shadow-2xl
+      transition-all duration-500 transform overflow-hidden
+      <%= flash_class_for(type) %>
     "
-    data-transition-enter-from="opacity-0 translate-y-4 sm:translate-x-6"
+    data-transition-enter-from="opacity-0 translate-y-8 sm:translate-x-12"
     data-transition-enter-to="opacity-100 translate-y-0 sm:translate-x-0"
     data-transition-leave-from="opacity-100 translate-y-0 sm:translate-x-0"
-    data-transition-leave-to="opacity-0 translate-y-4 sm:translate-x-6"
-    data-flash-target="message"
+    data-transition-leave-to="opacity-0 translate-y-8 sm:translate-x-12"
   >
-    <p class="text-sm opacity-90"><%= message %></p>
+    <%# Barra Lateral de Cor %>
+    <div
+      class="
+        absolute left-0 top-0 bottom-0 w-1.5 <%= type == 'success' ? 'bg-[#60c2a6]' : 'bg-current opacity-40' %>
+      "
+    ></div>
+
+    <%# Ícone %>
+    <div class="flex-shrink-0">
+      <span class="material-symbols-outlined font-bold text-2xl">
+        <%= flash_icon_for(type) %>
+      </span>
+    </div>
+
+    <%# Mensagem %>
+    <div class="flex-1">
+      <p class="text-[10px] font-black uppercase tracking-[0.2em] opacity-50 mb-0.5">Notificação</p>
+      <p class="text-sm font-bold tracking-tight leading-tight"><%= message %></p>
+    </div>
+
+    <%# Botão Fechar %>
     <button
       data-action="notification#hide"
-      class="ml-2 flex items-center justify-center"
+      class="
+        flex-shrink-0 size-8 rounded-xl flex items-center justify-center
+        hover:bg-black/5 dark:hover:bg-white/5 transition-colors
+      "
     >
-      <svg
-        class="w-3 h-3 sm:w-4 sm:h-4 <%= type == 'alert' ? 'text-gray-900 hover:text-gray-700' : 'text-white hover:text-gray-200' %>"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"
-        ></path>
-      </svg>
+      <span class="material-symbols-outlined text-lg">close</span>
     </button>
   </div>
 <% end %>
