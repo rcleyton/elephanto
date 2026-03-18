@@ -5,50 +5,41 @@
   <%= render "shared/flash" %>
 </turbo-frame>
 
-<main class="flex flex-1 justify-center py-8 px-4 md:px-10 lg:px-40">
-  <div class="layout-content-container flex flex-col max-w-[800px] flex-1">
+<main class="flex flex-1 justify-center py-12 px-4 md:px-10 lg:px-40">
+  <div class="flex flex-col max-w-[700px] flex-1">
+
     <!-- Title Section -->
-    <div class="flex flex-col gap-2 pb-8">
+    <div class="flex flex-col gap-2 pb-10 text-center md:text-left">
       <h1
         class="
-          text-slate-900 dark:text-white text-3xl md:text-4xl font-extrabold
-          tracking-tight
+          text-slate-900 dark:text-white text-3xl md:text-4xl font-black tracking-tight
         "
       >
         <%= t("actions.edit") %>
         <%= Flashcard.model_name.human.downcase %></h1>
       <p class="text-slate-500 dark:text-slate-400 text-base">Edite seu flashcard.</p>
     </div>
+
     <div
       class="
-        overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800
-        bg-white dark:bg-slate-900 shadow-xl shadow-slate-200/50 dark:shadow-none
+        overflow-hidden rounded-[2.5rem] border border-slate-200 dark:border-slate-800
+        bg-white dark:bg-slate-900 shadow-2xl shadow-slate-200/50 dark:shadow-none
       "
     >
-      <div class="p-8">
+      <div class="p-8 md:p-12">
         <%= render "form", flashcard: @flashcard %>
       </div>
+
       <div
         class="
-          bg-slate-50 dark:bg-slate-800/50 px-8 py-4 border-t border-slate-100
-          dark:border-slate-800 flex items-center justify-center gap-2 text-xs
-          text-slate-500
+          bg-slate-50 dark:bg-slate-800/30 px-8 py-5 border-t border-slate-100
+          dark:border-slate-800 flex items-center justify-center gap-3 text-sm
+          text-slate-500 dark:text-slate-400
         "
       >
-        <span class="material-symbols-outlined text-sm">info</span>
-        <span>Você poderá adicionar os flashcards logo após criar o deck.</span>
-      </div>
-    </div>
-    <div
-      class="
-        mt-8 p-4 rounded-xl bg-primary/5 border border-primary/10 flex gap-4 items-start
-      "
-    >
-      <span class="material-symbols-outlined text-primary">lightbulb</span>
-      <div class="flex flex-col gap-1">
-        <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">Dica de Estudo</p>
-        <p class="text-sm text-slate-500 dark:text-slate-400">Tente manter as respostas curtas e objetivas para facilitar a
-          memorização ativa.</p>
+        <span class="material-symbols-outlined text-lg text-blue-500">lightbulb</span>
+        <span class="font-medium">Tente manter as respostas curtas e objetivas para facilitar a
+          memorização ativa.</span>
       </div>
     </div>
   </div>

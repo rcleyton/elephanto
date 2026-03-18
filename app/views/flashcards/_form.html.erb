@@ -1,62 +1,62 @@
-<%= form_with model: [ @deck, @flashcard ], class: "space-y-6" do |form| %>
-  <div class="space-x-2">
-    <div class="flex flex-col gap-1 mb-1">
-      <%= form.label :front,
-                 class:
-                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+<%= form_with model: [ @deck, @flashcard ], class: "space-y-8" do |form| %>
+
+  <div class="space-y-2">
+    <div class="space-y-0">
+      <%= form.label :front, class: "form-label" %>
       <span class="text-xs text-slate-400">A pergunta ou o termo que você verá primeiro</span>
     </div>
-    <div class="relative">
+    <div class="relative group">
       <div
         class="
-          pointer-events-none absolute left-0 top-4 flex items-start pl-4 text-slate-400
+          absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400
+          group-focus-within:text-[#60c2a6] transition-colors
         "
       >
         <span class="material-symbols-outlined text-xl">flip_to_front</span>
       </div>
-
       <%= form.text_field :front,
                       placeholder: t("placeholders.flashcard.front_flashcard"),
-                      class:
-                        "block w-full rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all #{error_class(flashcard, :front)}" %>
+                      class: "form-input #{error_class(flashcard, :front)}" %>
     </div>
     <% if flashcard.errors[:front].any? %>
-      <p class="ui-error"><%= Flashcard.human_attribute_name(:front) %>
-        <%= flashcard.errors[:front].first %></p>
+      <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">error</span>
+        <%= flashcard.errors[:front].first %>
+      </p>
     <% end %>
   </div>
-  <div class="space-x-2">
-    <div class="flex flex-col gap-1 mb-1">
-      <%= form.label :back,
-                 class:
-                   "text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400" %>
+
+  <div class="space-y-2">
+    <div class="space-y-0">
+      <%= form.label :back, class: "form-label" %>
       <span class="text-xs text-slate-400">A resposta ou explicação detalhada</span>
     </div>
-    <div class="relative">
+
+    <div class="relative group">
       <div
-        class="
-          pointer-events-none absolute left-0 top-4 flex items-start pl-4 text-slate-400
-        "
-      >
+        class="absolute left-0 top-4 flex items-start pl-4 text-slate-400
+          group-focus-within:text-[#60c2a6] transition-colors">
         <span class="material-symbols-outlined text-xl">flip_to_back</span>
       </div>
-
       <%= form.text_area :back,
-                     placeholder: t("placeholders.flashcard.back_flashcard"),
-                     class:
-                       "block w-full rounded-lg border dark:border-slate-700 bg-slate-50 dark:bg-slate-800 py-4 pl-12 pr-4 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-all resize-none #{error_class(flashcard, :back)}" %>
+                      rows: 3,
+                      placeholder: t("placeholders.flashcard.back_flashcard"),
+                      class: "form-input #{error_class(flashcard, :back)}" %>
     </div>
     <% if flashcard.errors[:back].any? %>
-      <p class="ui-error"><%= Flashcard.human_attribute_name(:back) %>
-        <%= flashcard.errors[:back].first %></p>
+      <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">error</span>
+        <%= flashcard.errors[:back].first %>
+      </p>
     <% end %>
   </div>
-  <div class="pt-4 flex flex-col sm:flex-row gap-4">
+
+
+  <div class="pt-6 flex flex-col sm:flex-row gap-4">
     <%= link_to t("buttons.general.back_to_deck"),
     deck_path(@deck),
-    class:
-      "flex flex-1 items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-6 py-4 text-base font-bold text-slate-700 dark:text-slate-300 transition-all hover:bg-slate-50 dark:hover:bg-slate-700 active:scale-[0.98]" %>
+    class: "flex-1 flex items-center justify-center rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-4 text-sm font-black text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" %>
     <%= form.submit class:
-                  "flex-1 rounded-lg bg-primary px-6 py-4 text-base font-bold text-white shadow-lg shadow-primary/30 transition-all hover:bg-primary/90 hover:shadow-primary/40 active:scale-[0.98]" %>
+                  "flex-[2] rounded-2xl bg-slate-900 dark:bg-[#60c2a6] px-6 py-4 text-sm font-black text-white dark:text-slate-900 shadow-xl shadow-slate-200 dark:shadow-none transition-all hover:opacity-90 active:scale-[0.98] cursor-pointer uppercase tracking-widest" %>
   </div>
 <% end %>

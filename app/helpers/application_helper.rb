@@ -63,7 +63,7 @@ module ApplicationHelper
   end
 
   def error_class(model, field)
-    input_error?(model, field) ? "ui-input-error" : ""
+    input_error?(model, field) ? "input-error" : ""
   end
 
   def format_fsrs_interval(card_options)

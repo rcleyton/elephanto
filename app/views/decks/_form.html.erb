@@ -1,15 +1,8 @@
 <%= form_with model: deck, class: "space-y-8" do |form| %>
 
-  <%# Variáveis de Padronização %>
-  <% label_class =
-    "block text-xs font-black uppercase tracking-widest text-slate-500 dark:text-slate-400 ml-1 mb-2"
-  input_base =
-    "block w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 py-4 pl-12 pr-4 text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-4 focus:ring-[#60c2a6]/20 focus:border-[#60c2a6] focus:outline-none transition-all"
-  error_input = "border-red-500 focus:ring-red-500/10 focus:border-red-500" %>
-
   <%# Campo: Capa do Deck %>
   <div class="group">
-    <label class="<%= label_class %>">Capa do Deck (Opcional)</label>
+    <label class="form-label">Capa do Deck (Opcional)</label>
     <div class="mt-2 flex items-center justify-center w-full">
       <label
         class="
@@ -34,9 +27,8 @@
     </p>
   </div>
 
-  <%# Campo: Nome %>
-  <div class="space-y-2">
-    <%= form.label :name, class: label_class %>
+    <div class="space-y-2">
+    <%= form.label :name, class: "form-label" %>
     <div class="relative group">
       <div
         class="
@@ -49,7 +41,7 @@
       <%= form.text_field :name,
                       placeholder: t("placeholders.deck.deck_name"),
                       class:
-                        "#{input_base} #{deck.errors[:name].any? ? error_input : ""}" %>
+                        "form-input #{error_class(deck, :name)}" %>
     </div>
     <% if deck.errors[:name].any? %>
       <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
@@ -59,9 +51,8 @@
     <% end %>
   </div>
 
-  <%# Campo: Categoria/Tag %>
   <div class="space-y-2">
-    <%= form.label :tag, class: label_class %>
+    <%= form.label :tag, class: "form-label" %>
     <div class="relative group">
       <div
         class="
@@ -74,13 +65,18 @@
       <%= form.text_field :tag,
                       placeholder: "Ex: Idiomas, Programação...",
                       class:
-                        "#{input_base} #{deck.errors[:tag].any? ? error_input : ""}" %>
+                        "form-input #{error_class(deck, :tag)}" %>
     </div>
+    <% if deck.errors[:tag].any? %>
+      <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">error</span>
+        <%= deck.errors[:tag].first %>
+      </p>
+    <% end %>
   </div>
 
-  <%# Campo: Descrição %>
   <div class="space-y-2">
-    <%= form.label :description, class: label_class %>
+    <%= form.label :description, class: "form-label" %>
     <div class="relative group">
       <div
         class="
@@ -94,11 +90,16 @@
                      rows: 3,
                      placeholder: t("placeholders.deck.deck_description"),
                      class:
-                       "#{input_base} resize-none #{deck.errors[:description].any? ? error_input : ""}" %>
+                       "form-input resize-none #{error_class(deck, :description)}" %>
     </div>
+    <% if deck.errors[:description].any? %>
+      <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+        <span class="material-symbols-outlined text-sm">error</span>
+        <%= deck.errors[:description].first %>
+      </p>
+    <% end %>
   </div>
 
-  <%# Botões de Ação %>
   <div class="pt-6 flex flex-col sm:flex-row gap-4">
     <%= link_to t("buttons.general.cancel"),
     decks_path,
