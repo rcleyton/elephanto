@@ -13,6 +13,7 @@ class Profile < ApplicationRecord
   validates :last_name,          presence: true
   validates :username,           presence: true, uniqueness: true
   validates :bio,                presence: true
+  validates :location,           presence: true
   validates :daily_new_limit,    presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :daily_review_limit, presence: true, numericality: { only_integer: true, greater_than: 0, less_than_or_equal_to: 100 }
 

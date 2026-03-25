@@ -19,7 +19,7 @@ class ProfilesController < ApplicationController
     if @profile.save
       redirect_to profile_url(@profile), notice: t("messages.created", model: Profile.model_name.human)
     else
-      flash.now[:error] = @profile.errors.full_messages.to_sentence
+      flash.now[:error] = "Preencha todos os campos!"
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,7 +31,7 @@ class ProfilesController < ApplicationController
       redirect_to profile_url(@profile)
       flash[:notice] = t("messages.updated", model: Profile.model_name.human)
     else
-      flash.now[:error] = @profile.errors.full_messages.to_sentence
+      flash.now[:error] = "Preencha todos os campos!"
       render :edit, status: :unprocessable_entity
     end
   end

@@ -41,7 +41,7 @@
       <%= form.text_area :back,
                       rows: 3,
                       placeholder: t("placeholders.flashcard.back_flashcard"),
-                      class: "form-input #{error_class(flashcard, :back)}" %>
+                      class: "form-textarea #{error_class(flashcard, :back)}" %>
     </div>
     <% if flashcard.errors[:back].any? %>
       <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">

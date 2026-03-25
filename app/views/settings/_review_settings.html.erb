@@ -5,10 +5,7 @@
 
       <%# Limite de Novos Cards %>
       <div class="space-y-3">
-        <%= form.label :daily_new_limit,
-                   "Novos Cards / Dia",
-                   class:
-                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+        <%= form.label :daily_new_limit, "Novos Cards / Dia", class: "form-label" %>
         <div class="relative group">
           <span
             class="
@@ -18,8 +15,7 @@
           >speed</span>
           <%= form.number_field :daily_new_limit,
                             placeholder: "Ex: 20",
-                            class:
-                              "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-black placeholder:text-slate-300 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all #{error_class(@profile, :daily_new_limit)}" %>
+                            class: "form-input #{error_class(@profile, :daily_new_limit)}" %>
         </div>
         <div class="flex items-center gap-2 px-1">
           <span class="material-symbols-outlined text-amber-500 text-sm">lightbulb</span>
@@ -39,10 +35,7 @@
 
       <%# Limite de Revisões %>
       <div class="space-y-3">
-        <%= form.label :daily_review_limit,
-                   "Máximo de Revisões / Dia",
-                   class:
-                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+        <%= form.label :daily_review_limit, "Máximo de Revisões / Dia", class: "form-label" %>
         <div class="relative group">
           <span
             class="
@@ -53,7 +46,7 @@
           <%= form.number_field :daily_review_limit,
                             placeholder: "Ex: 100",
                             class:
-                              "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-black placeholder:text-slate-300 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all #{error_class(@profile, :daily_review_limit)}" %>
+                              "form-input #{error_class(@profile, :daily_review_limit)}" %>
         </div>
         <div class="flex items-center gap-2 px-1">
           <span class="material-symbols-outlined text-indigo-500 text-sm">info</span>

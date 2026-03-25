@@ -1,6 +1,4 @@
 <%= form_with model: profile, data: { controller: "image-upload", image_upload_autosave_value: false }, class: "w-full" do |form| %>
-
-  <%# 1. Seção de Capa (Header do Form) %>
   <div
     class="
       w-full h-48 sm:h-64 overflow-hidden relative group cursor-pointer bg-slate-100
@@ -49,7 +47,6 @@
     </label>
   </div>
 
-  <%# 2. Seção do Avatar (Sobreposta) %>
   <div class="flex flex-col items-center -mt-16 sm:-mt-20 z-10 relative">
     <div class="relative group cursor-pointer">
       <label class="cursor-pointer block">
@@ -97,15 +94,13 @@
     </div>
   </div>
 
-  <%# 3. Campos de Dados %>
   <div class="p-8 sm:p-12 space-y-8">
-
     <%# Nome e Sobrenome na mesma linha %>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div class="space-y-2">
         <%= form.label :first_name,
                    class:
-                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+                     "form-label" %>
         <div class="relative group">
           <span
             class="
@@ -116,17 +111,20 @@
           <%= form.text_field :first_name,
                           placeholder: "Ex: Cleyton",
                           class:
-                            "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold placeholder:text-slate-300 dark:placeholder:text-slate-700 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
+                            "form-input #{error_class(profile, :first_name)}" %>
         </div>
-        <%= if profile.errors[:first_name].any?
-          render "shared/field_error", model: profile, field: :first_name
-        end %>
+        <% if profile.errors[:first_name].any? %>
+            <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">error</span>
+              <%= profile.errors[:first_name].first %>
+            </p>
+        <% end %>
       </div>
 
       <div class="space-y-2">
         <%= form.label :last_name,
                    class:
-                     "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+                     "form-label" %>
         <div class="relative group">
           <span
             class="
@@ -137,16 +135,21 @@
           <%= form.text_field :last_name,
                           placeholder: "Ex: Silva",
                           class:
-                            "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold placeholder:text-slate-300 dark:placeholder:text-slate-700 focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
+                            "form-input #{error_class(profile, :last_name)}" %>
         </div>
+        <% if profile.errors[:last_name].any? %>
+            <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">error</span>
+              <%= profile.errors[:last_name].first %>
+            </p>
+        <% end %>
       </div>
     </div>
 
-    <%# Username %>
     <div class="space-y-2">
       <%= form.label :username,
                  class:
-                   "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+                   "form-label" %>
       <div class="relative group">
         <span
           class="
@@ -157,11 +160,16 @@
         <%= form.text_field :username,
                         placeholder: "seu_nome",
                         class:
-                          "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
+                          "form-input #{error_class(profile, :username)}" %>
       </div>
+      <% if profile.errors[:username].any? %>
+          <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span>
+            <%= profile.errors[:username].first %>
+          </p>
+      <% end %>
     </div>
 
-    <%# Localização (Mapbox) %>
     <div
       class="space-y-2"
       data-controller="location-autocomplete"
@@ -170,7 +178,7 @@
       <%= form.label :location,
                  "Localização",
                  class:
-                   "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+                   "form-label" %>
       <div class="relative group">
         <span
           class="
@@ -179,14 +187,14 @@
           "
         >location_on</span>
         <%= form.text_field :location,
-                        placeholder: "Onde você estuda?",
+                        placeholder: "Qual cidade você mora?",
                         data: {
                           location_autocomplete_target: "input",
                           action:
                             "input->location-autocomplete#search keydown->location-autocomplete#keydown",
                         },
                         class:
-                          "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all" %>
+                          "form-input #{error_class(profile, :location)}" %>
         <%= form.hidden_field :location_country,
                           data: {
                             location_autocomplete_target: "country",
@@ -200,13 +208,18 @@
           "
         ></ul>
       </div>
+      <% if profile.errors[:location].any? %>
+          <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span>
+            <%= profile.errors[:location].first %>
+          </p>
+      <% end %>
     </div>
 
-    <%# Bio %>
     <div class="space-y-2">
       <%= form.label :bio,
                  class:
-                   "text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1" %>
+                   "form-label" %>
       <div class="relative group">
         <span
           class="
@@ -218,11 +231,16 @@
                        rows: 4,
                        placeholder: "Conte um pouco sobre seus objetivos de estudo...",
                        class:
-                         "block w-full rounded-2xl border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 py-4 pl-12 pr-4 text-slate-900 dark:text-white font-bold focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6] transition-all resize-none" %>
+                         "form-textarea #{error_class(profile, :bio)}" %>
       </div>
+      <% if profile.errors[:bio].any? %>
+          <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span>
+            <%= profile.errors[:bio].first %>
+          </p>
+      <% end %>
     </div>
 
-    <%# Botão de Ação %>
     <div class="pt-6">
       <%= form.submit "Salvar Alterações",
                   class:

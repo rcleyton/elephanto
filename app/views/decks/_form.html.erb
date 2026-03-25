@@ -90,7 +90,7 @@
                      rows: 3,
                      placeholder: t("placeholders.deck.deck_description"),
                      class:
-                       "form-input resize-none #{error_class(deck, :description)}" %>
+                       "form-textarea resize-none #{error_class(deck, :description)}" %>
     </div>
     <% if deck.errors[:description].any? %>
       <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">

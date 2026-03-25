@@ -42,12 +42,30 @@
     @apply block text-xs font-black tracking-widest text-slate-500 dark:text-slate-400 ml-1;
   }
 
-  .form-input {
-    @apply block w-full rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 py-4 pl-12 pr-4 text-slate-900 dark:text-white placeholder:text-slate-400 focus:ring-4 focus:ring-[#60c2a6]/20 focus:border-[#60c2a6] focus:outline-none transition-all;
+.form-input {
+  @apply block w-full rounded-2xl border
+         border-slate-100 dark:border-slate-800
+         bg-slate-50 dark:bg-slate-950/50
+         py-4 pl-12 pr-4
+         text-slate-900 dark:text-white
+         font-bold placeholder:text-slate-300 dark:placeholder:text-slate-700
+         focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6]
+         transition-all;
   }
 
+.form-textarea {
+  @apply block w-full rounded-2xl border
+        border-slate-100 dark:border-slate-800
+        bg-slate-50 dark:bg-slate-950/50
+        py-4 pl-12 pr-4
+        text-slate-900 dark:text-white
+        font-bold placeholder:text-slate-300 dark:placeholder:text-slate-700
+        focus:ring-4 focus:ring-[#60c2a6]/10 focus:border-[#60c2a6]
+        transition-all;
+}
+
   .input-error {
-    @apply border-red-400 focus-visible:ring-red-600;
+    @apply border-red-400 focus:border-red-400 focus:ring-red-600/20;
   }
 }
 
