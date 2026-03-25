@@ -6,48 +6,25 @@
 
 <main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
   <%# Header da Página %>
-  <div
-    class="
-      mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between border-b
-      border-slate-100 dark:border-slate-800 pb-10
-    "
-  >
-    <div class="max-w-2xl">
-      <div class="flex items-center gap-3 mb-2">
-        <span
-          class="
-            px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-[#60c2a6]
-            text-[10px] font-black uppercase tracking-widest border border-emerald-100
-            dark:border-emerald-800/50
-          "
-        >
-          <%= @deck.tag %>
-        </span>
-      </div>
-      <h1
-        class="
-          text-4xl font-black tracking-tight text-slate-900 dark:text-white sm:text-5xl
-        "
-      >
-        <%= @deck.name %>
-      </h1>
-      <p class="mt-4 text-lg text-slate-500 dark:text-slate-400 leading-relaxed"><%= @deck.description %></p>
-    </div>
 
-    <div class="flex flex-col sm:flex-row gap-3">
-      <%= link_to new_deck_flashcard_path(@deck), 
-          class: "flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-3.5 rounded-2xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95" do %>
-        <span class="material-symbols-outlined text-xl">add_circle</span>
-        <%= t("buttons.submit.new_flashcard") %>
-      <% end %>
+  <% content_for :page_header_actions do %>
 
-      <%= link_to review_deck_path(@deck), 
-          class: "flex items-center justify-center gap-3 bg-slate-900 dark:bg-[#60c2a6] text-white dark:text-slate-900 px-8 py-3.5 rounded-2xl font-black text-sm shadow-xl shadow-emerald-500/20 hover:opacity-90 transition-all active:scale-95 uppercase tracking-widest" do %>
-        <span class="material-symbols-outlined text-xl">play_circle</span>
-        <%= t("buttons.general.start_studying") %>
-      <% end %>
-    </div>
-  </div>
+    <%= link_to new_deck_flashcard_path(@deck), class: "flex items-center justify-center gap-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-6 py-3.5 rounded-2xl font-bold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-all active:scale-95" do %>
+      <span class="material-symbols-outlined text-xl">add_circle</span>
+      <%= t("buttons.submit.new_flashcard") %>
+    <% end %>
+
+    <%= link_to review_deck_path(@deck), class: "flex items-center justify-center gap-3 bg-slate-900 dark:bg-[#60c2a6] text-white dark:text-slate-900 px-8 py-3.5 rounded-2xl font-black text-sm shadow-xl shadow-emerald-500/20 hover:opacity-90 transition-all active:scale-95 uppercase tracking-widest" do %>
+      <span class="material-symbols-outlined text-xl">play_circle</span>
+      <%= t("buttons.general.start_studying") %>
+    <% end %>
+
+  <% end %>
+
+  <%= render "shared/page_header",
+  eyebrow: "#{@deck.tag}",
+  title: "#{@deck.name}",
+  description: "#{@deck.description}" %>
 
   <%# Stats Grid %>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">

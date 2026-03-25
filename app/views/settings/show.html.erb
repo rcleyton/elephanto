@@ -7,23 +7,10 @@
 <main class="flex flex-1 justify-center py-12 px-4 sm:px-6">
   <div class="max-w-[800px] flex-1">
 
-    <%# Header de Configurações %>
-    <div
-      class="
-        flex flex-col gap-2 pb-12 animate-in fade-in slide-in-from-top-4 duration-700
-      "
-    >
-      <div class="flex items-center gap-3 mb-1">
-        <div class="h-1 w-8 bg-[#60c2a6] rounded-full"></div>
-        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#60c2a6]">User Preferences</span>
-      </div>
-      <h1 class="text-4xl font-black tracking-tighter text-slate-900 dark:text-white">
-        Configurações
-      </h1>
-      <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
-        Personalize sua experiência e gerencie sua segurança.
-      </p>
-    </div>
+    <%= render "shared/page_header",
+    eyebrow: "Preferências do usuário",
+    title: "Configurações",
+    description: "Personalize sua experiência e gerencie sua segurança." %>
 
     <div
       class="

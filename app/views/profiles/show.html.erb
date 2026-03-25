@@ -7,17 +7,11 @@
 <main class="flex flex-1 justify-center py-12 px-4 sm:px-6">
   <div class="max-w-[850px] flex-1">
 
-    <%# Cabeçalho da Página %>
-    <div class="flex flex-col gap-1 pb-10">
-      <h1 class="text-slate-900 dark:text-white text-4xl font-black tracking-tighter">Configurações</h1>
-      <p
-        class="
-          text-slate-500 dark:text-slate-400 text-sm font-bold uppercase tracking-widest
-        "
-      >Gerencie sua identidade no Elephanto</p>
-    </div>
+    <%= render "shared/page_header",
+    eyebrow: "Perfil do usuário",
+    title: "Perfil",
+    description: "Gerencie sua identidade no Elephanto." %>
 
-    <%# Container Principal %>
     <div
       class="
         overflow-hidden rounded-[2.5rem] border border-slate-100 dark:border-slate-800

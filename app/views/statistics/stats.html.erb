@@ -6,64 +6,11 @@
 
 <main class="mx-auto w-full max-w-7xl px-6 py-12">
 
-  <%# Cabeçalho de Performance %>
-  <div
-    class="
-      mb-12 flex flex-col gap-6 md:flex-row md:items-center md:justify-between
-      animate-in fade-in slide-in-from-top-4 duration-700
-    "
-  >
-    <div>
-      <div class="flex items-center gap-3 mb-2">
-        <div class="h-1 w-10 bg-[#60c2a6] rounded-full"></div>
-        <span class="text-[10px] font-black uppercase tracking-[0.3em] text-[#60c2a6]">Performance Hub</span>
-      </div>
-      <h1
-        class="
-          text-4xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white
-        "
-      >
-        Seu cérebro em dados
-      </h1>
-      <p
-        class="
-          mt-3 text-lg text-slate-500 dark:text-slate-400 max-w-2xl leading-relaxed
-          font-medium
-        "
-      >
-        Insights detalhados sobre sua jornada de memorização e retenção.
-      </p>
-    </div>
+  <%= render "shared/page_header",
+  eyebrow: "Performance",
+  title: "Seu cérebro em dados",
+  description: "Insights detalhados sobre sua jornada de memorização e retenção." %>
 
-    <%# Badge de Streak ou Status Rápido %>
-    <div
-      class="
-        flex items-center gap-4 bg-white dark:bg-slate-900 p-2 pr-6 rounded-[2rem]
-        border border-slate-100 dark:border-slate-800 shadow-xl shadow-slate-200/50
-        dark:shadow-none w-fit
-      "
-    >
-      <div
-        class="
-          h-12 w-12 rounded-full bg-orange-500 flex items-center justify-center text-white
-          shadow-lg shadow-orange-500/20
-        "
-      >
-        <span class="material-symbols-outlined font-bold">local_fire_department</span>
-      </div>
-      <div>
-        <p
-          class="
-            text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none
-            mb-1
-          "
-        >Ritmo de Estudo</p>
-        <p class="text-sm font-black text-slate-900 dark:text-white uppercase">Foco Ativo</p>
-      </div>
-    </div>
-  </div>
-
-  <%# Grade de Stats Principais %>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
 
     <%# Card: Decks %>

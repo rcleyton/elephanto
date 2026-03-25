@@ -5,33 +5,19 @@
 </turbo-frame>
 
 <main class="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-  <%# Header da Página %>
-  <div
-    class="
-      mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between
-    "
-  >
-    <div>
-      <h1
-        class="
-          text-3xl font-black tracking-tight text-slate-900 dark:text-white sm:text-4xl
-        "
-      >
-        Meus
-        <%= Deck.model_name.human.pluralize %>
-      </h1>
-      <p class="mt-2 text-base text-slate-600 dark:text-slate-400">
-        Gerencie seus decks de flashcards e continue seu aprendizado
-        personalizado.
-      </p>
-    </div>
 
-    <%= link_to new_deck_path, 
-        class: "inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-[#60c2a6] px-6 py-3 text-sm font-bold text-white dark:text-slate-900 shadow-lg shadow-slate-200 dark:shadow-emerald-900/20 transition-all hover:opacity-90 active:scale-95" do %>
+  <% content_for :page_header_actions do %>
+    <%= link_to new_deck_path, class: "inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 dark:bg-[#60c2a6] px-6 py-3 text-sm font-bold text-white dark:text-slate-900 shadow-lg shadow-slate-200 dark:shadow-emerald-900/20 transition-all hover:opacity-90 active:scale-95" do %>
       <span class="material-symbols-outlined text-xl">add_circle</span>
       Novo deck
     <% end %>
-  </div>
+  <% end %>
+
+  <%= render "shared/page_header",
+  eyebrow: "Minha biblioteca",
+  title: "Meus #{Deck.model_name.human.pluralize}",
+  description:
+    "Gerencie seus decks de flashcards e continue seu aprendizado personalizado." %>
 
   <%# Tabs/Filters %>
   <%= turbo_frame_tag "decks", data: { turbo_action: "advance" } do %>
