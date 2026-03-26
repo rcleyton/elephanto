@@ -1,6 +1,13 @@
 Rails.application.config.after_initialize do
+  default_host =
+    if Rails.env.test?
+      "app.lvh.me"
+    else
+      "localhost"
+    end
+
   host_config = {
-    host: ENV.fetch("APP_HOST", "localhost"),
+    host: ENV.fetch("APP_HOST", default_host),
     protocol: ENV.fetch("APP_PROTOCOL", "http")
   }
 
