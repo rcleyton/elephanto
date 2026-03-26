@@ -3,6 +3,7 @@ one:
   last_name: Silva
   username: silvaclu
   bio: Desenvolvedor de Software e jogador de futebol amador
+  location: São Paulo
   daily_new_limit: 20
   daily_review_limit: 100
   user: one

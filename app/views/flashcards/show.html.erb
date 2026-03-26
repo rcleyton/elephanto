@@ -99,7 +99,7 @@
   </div>
 
   <div class="w-full max-w-2xl animate-in fade-in zoom-in duration-300">
-    <%= render @flashcard %>
+    <%= render partial: "flashcard", locals: { flashcard: @flashcard } %>
   </div>
 
   <%# Dica de Teclado (Sutil no Rodapé) %>

@@ -23,7 +23,8 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
           first_name: "Jane",
           last_name: "Doe",
           username: "jane",
-          bio: "No bio"
+          bio: "No bio",
+          location: "São Paulo"
              # daily_new_limit: 20,
              # daily_review_limit: 100
            }
@@ -76,6 +77,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
         first_name: "Cleyton Roberto",
         last_name: "da Silva",
         username: "silvaclu",
+        location: "São Paulo",
         bio: "This is an updated bio."
       }
 
@@ -104,6 +106,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
         first_name: "Invasor",
         last_name: "Invisible",
         username: "ghost",
+        location: "São Paulo",
         bio: "Hacker"
       )
 
