@@ -6,16 +6,17 @@ class Flashcard < ApplicationRecord
   validates :front, :back, presence: true
 
   after_initialize :set_default_fsrs_state, if: :new_record?
+  before_validation :set_default_fsrs_state
 
-  scope :new_state,        -> { where("fsrs_state->>'state' = '0'").count }
-  scope :learning_state,   -> { where("fsrs_state->>'state' = '1'").count }
-  scope :review_state,     -> { where("fsrs_state->>'state' = '2'").count }
-  scope :relearning_state, -> { where("fsrs_state->>'state' = '3'").count }
+  scope :new_state,        -> { where("fsrs_state->>'state' = ?", "0") }
+  scope :learning_state,   -> { where("fsrs_state->>'state' = ?", "1") }
+  scope :review_state,     -> { where("fsrs_state->>'state' = ?", "2") }
+  scope :relearning_state, -> { where("fsrs_state->>'state' = ?", "3") }
 
   scope :due, -> {
     now_str = Time.current.utc.iso8601
     where(
-      "(fsrs_state->>'due' LIKE '-%') OR (fsrs_state->>'due' <= ?)",
+      "(COALESCE(fsrs_state->>'due', '') = '') OR (fsrs_state->>'due' LIKE '-%') OR (fsrs_state->>'due' <= ?)",
       now_str
     )
   }
@@ -25,12 +26,14 @@ class Flashcard < ApplicationRecord
   }
 
   def fsrs_card
-    data = fsrs_state.deep_symbolize_keys
+    signature = fsrs_state.to_json
+    return @fsrs_card if @fsrs_card_signature == signature
 
-    data[:due] = ensure_time(data[:due])
-    data[:last_review] = ensure_time(data[:last_review])
+    data = normalized_fsrs_state
 
-    Fsrs::Card.from_h(data)
+    @fsrs_card = Fsrs::Card.from_h(data)
+    @fsrs_card_signature = signature
+    @fsrs_card
   end
 
   def due?
@@ -46,6 +49,7 @@ class Flashcard < ApplicationRecord
     raise "Rating inválido: #{rating_int}" unless info
 
     update!(fsrs_state: info.card.to_h)
+    reset_fsrs_card_cache
   end
 
   def review_options
@@ -62,16 +66,44 @@ class Flashcard < ApplicationRecord
 
   private
 
-  def ensure_time(value)
-    return nil if value.blank?
-    return value if value.is_a?(Time)
+  def normalized_fsrs_state
+    defaults = default_fsrs_state
+    data = defaults.merge((fsrs_state || {}).deep_symbolize_keys)
 
-    value.is_a?(String) ? Time.zone.parse(value).utc : value.to_time.utc
-  rescue
-    Time.current.utc
+    data[:due] = parse_fsrs_time(data[:due], field_name: :due, fallback: defaults[:due])
+    data[:last_review] = parse_fsrs_time(data[:last_review], field_name: :last_review, fallback: defaults[:last_review], allow_nil: true)
+    data
+  end
+
+  def parse_fsrs_time(value, field_name:, fallback:, allow_nil: false)
+    return nil if allow_nil && value.blank?
+    return fallback if value.blank?
+    return value.utc if value.is_a?(Time)
+
+    if value.is_a?(String)
+      parsed_value = Time.zone.parse(value)
+      raise ArgumentError, "invalid time value" if parsed_value.nil?
+
+      return parsed_value.utc
+    end
+
+    value.to_time.utc
+  rescue ArgumentError, NoMethodError, TypeError => error
+    Rails.logger.warn("Invalid FSRS #{field_name} for Flashcard #{id || 'new'}: #{error.message}")
+    fallback
+  end
+
+  def default_fsrs_state
+    @default_fsrs_state ||= Fsrs::Card.new.to_h.deep_symbolize_keys
+  end
+
+  def reset_fsrs_card_cache
+    @fsrs_card = nil
+    @fsrs_card_signature = nil
   end
 
   def set_default_fsrs_state
-    self.fsrs_state ||= Fsrs::Card.new.to_h
+    self.fsrs_state ||= default_fsrs_state
+    reset_fsrs_card_cache
   end
 end

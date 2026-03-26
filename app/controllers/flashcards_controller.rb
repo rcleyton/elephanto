@@ -44,7 +44,10 @@ class FlashcardsController < ApplicationController
   end
 
   def start_review
-    due_ids = @deck.flashcards.all.select(&:due?).map(&:id)
+    due_ids = @deck.flashcards
+      .due
+      .order(Arel.sql("fsrs_state->>'due' ASC"))
+      .pluck(:id)
 
     if due_ids.any?
       session[:review_queue] = due_ids
