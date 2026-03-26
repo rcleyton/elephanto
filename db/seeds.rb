@@ -26,17 +26,16 @@ User.create(email_address: 'user5@elephanto.com', password: 'p@ssword1', passwor
             terms_of_service: true, verified: false, admin: false)
 
 # Creating profiles
-user1 = Profile.create(first_name: "Mariana", last_name: "Silva", username: "mari.silva.art", daily_new_limit: 20, daily_review_limit: 100,
+user1 = Profile.create(first_name: "Mariana", last_name: "Silva", username: "mari.silva.art", daily_new_limit: 20, daily_review_limit: 100, location: "SP",
                        bio: "Artista visual e ilustradora digital. Amante da natureza e do café. Compartilhando meu processo criativo e descobertas.", user_id: 1)
 
-user2 = Profile.create(first_name: "Rafael", last_name: "Costa", username: "rafatech.dev", daily_new_limit: 20, daily_review_limit: 100,
+user2 = Profile.create(first_name: "Rafael", last_name: "Costa", username: "rafatech.dev", daily_new_limit: 20, daily_review_limit: 100, location: "SP",
                        bio: "Desenvolvedor full-stack, entusiasta de código aberto e fotografia urbana. Sempre aprendendo e construindo coisas novas.", user_id: 2)
 
-
-user3 = Profile.create(first_name: "Beatriz", last_name: "Santos", username: "bia.sustainable.life", daily_new_limit: 20, daily_review_limit: 100,
+user3 = Profile.create(first_name: "Beatriz", last_name: "Santos", username: "bia.sustainable.life", daily_new_limit: 20, daily_review_limit: 100, location: "SP",
                        bio: "Educadora ambiental e defensora do consumo consciente. Aqui para compartilhar dicas de sustentabilidade no dia a dia.", user_id: 3)
 
-user4 = Profile.create(first_name: "Tiago", last_name: "Oliveira", username: "thiago.travelnotes", daily_new_limit: 20, daily_review_limit: 100,
+user4 = Profile.create(first_name: "Tiago", last_name: "Oliveira", username: "thiago.travelnotes", daily_new_limit: 20, daily_review_limit: 100, location: "SP",
                        bio: "Nômade digital e contador de histórias. Já visitei 37 países e ainda contando. Fotos e reflexões das estradas pelo mundo.", user_id: 4)
 
 images = %w[maria.jpg rafael.jpg beatriz.jpg tiago.jpg]
@@ -54,11 +53,11 @@ images.each_with_index do |image, index|
 end
 
 # Creating 5 decks with different themes
-Deck.create(name: "English Vocabulary",   description: "Basic English words and their meanings",              user_id: 1)
-Deck.create(name: "Math Formulas",        description: "Common mathematical formulas and their applications", user_id: 2)
-Deck.create(name: "History Dates",        description: "Important historical events and dates",               user_id: 3)
-Deck.create(name: "Programming Concepts", description: "Fundamental programming concepts and definitions",    user_id: 1)
-Deck.create(name: "Science Terms",        description: "Key scientific terms and their explanations",         user_id: 2)
+Deck.create(name: "English Vocabulary",   description: "Basic English words and their meanings",              tag: "Englis",      user_id: 1)
+Deck.create(name: "Math Formulas",        description: "Common mathematical formulas and their applications", tag: "Math",        user_id: 2)
+Deck.create(name: "History Dates",        description: "Important historical events and dates",               tag: "History",     user_id: 3)
+Deck.create(name: "Programming Concepts", description: "Fundamental programming concepts and definitions",    tag: "Programming", user_id: 1)
+Deck.create(name: "Science Terms",        description: "Key scientific terms and their explanations",         tag: "Science",     user_id: 2)
 
 # Creating 10 flashcards for each deck
 # English Vocabulary Flashcards
