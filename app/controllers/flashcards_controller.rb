@@ -4,6 +4,7 @@
 class FlashcardsController < ApplicationController
   before_action :set_deck
   before_action :set_flashcard, only: %i[show edit update destroy review]
+  before_action :ensure_review_flow!, only: %i[show review]
 
   def show
     render layout: "flashcard"
@@ -99,5 +100,19 @@ class FlashcardsController < ApplicationController
 
   def flashcard_params
     params.require(:flashcard).permit(:front, :back)
+  end
+
+  def ensure_review_flow!
+    queue = Array(session[:review_queue]).map(&:to_i)
+    return if queue.first == @flashcard.id
+
+    redirect_target =
+      if queue.any?
+        deck_flashcard_path(@deck, queue.first)
+      else
+        deck_path(@deck)
+      end
+
+    redirect_to redirect_target, alert: t("messages.manual_review_access_not_allowed")
   end
 end

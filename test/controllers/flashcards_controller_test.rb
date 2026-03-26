@@ -5,8 +5,8 @@ require "test_helper"
 
 class FlashcardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @deck = decks(:english)
     @user = users(:one)
+    @deck = @user.decks.create!(name: "Deck de teste #{SecureRandom.hex(4)}", description: "Deck isolado para testes", tag: "Teste")
 
     post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
     assert_response :redirect
@@ -37,6 +37,15 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "New", "Content" ], flashcard.reload.attributes.values_at("front", "back")
   end
 
+  test "blocks direct access to a flashcard without an active review queue" do
+    flashcard = @deck.flashcards.create!(front: "Locked", back: "Card")
+
+    get deck_flashcard_path(@deck, flashcard)
+
+    assert_redirected_to deck_path(@deck)
+    assert_equal I18n.t("messages.manual_review_access_not_allowed"), flash[:alert]
+  end
+
   test "deletes a flashcard" do
     flashcard = @deck.flashcards.create!(front: "Delete", back: "Me")
 
@@ -62,6 +71,21 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, ReviewSession.order(:id).last.total_count
   end
 
+  test "blocks access to a flashcard that is not the current item in the review queue" do
+    first_flashcard = @deck.flashcards.create!(front: "First", back: "Card")
+    second_flashcard = @deck.flashcards.create!(front: "Second", back: "Card")
+
+    first_flashcard.update_column(:fsrs_state, first_flashcard.fsrs_state.merge("due" => 2.hours.ago.utc.iso8601))
+    second_flashcard.update_column(:fsrs_state, second_flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+
+    get review_deck_path(@deck)
+
+    get deck_flashcard_path(@deck, second_flashcard)
+
+    assert_redirected_to deck_flashcard_path(@deck, first_flashcard)
+    assert_equal I18n.t("messages.manual_review_access_not_allowed"), flash[:alert]
+  end
+
   test "redirects back to the deck when there are no due flashcards" do
     flashcard = @deck.flashcards.create!(front: "Future", back: "Card")
     flashcard.update_column(:fsrs_state, flashcard.fsrs_state.merge("due" => 2.days.from_now.utc.iso8601))
@@ -85,6 +109,21 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to deck_flashcard_path(@deck, flashcard)
     assert_equal 0, review_session.reload.reviewed_count
     refute review_session.completed_at?
+  end
+
+  test "blocks manual review posts for flashcards outside the active queue position" do
+    first_flashcard = @deck.flashcards.create!(front: "First", back: "Card")
+    second_flashcard = @deck.flashcards.create!(front: "Second", back: "Card")
+
+    first_flashcard.update_column(:fsrs_state, first_flashcard.fsrs_state.merge("due" => 2.hours.ago.utc.iso8601))
+    second_flashcard.update_column(:fsrs_state, second_flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+
+    get review_deck_path(@deck)
+
+    post review_deck_flashcard_path(@deck, second_flashcard), params: { rating: Fsrs::Rating::GOOD }
+
+    assert_redirected_to deck_flashcard_path(@deck, first_flashcard)
+    assert_equal I18n.t("messages.manual_review_access_not_allowed"), flash[:alert]
   end
 
   test "completes the session after a successful final review" do
