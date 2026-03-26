@@ -90,6 +90,8 @@ jobs:
     env:
       CI: true
       RAILS_ENV: test
+      APP_HOST: app.lvh.me
+      APP_PROTOCOL: http
       PGHOST: localhost
       PGUSER: postgres
       PGPASSWORD: postgres
