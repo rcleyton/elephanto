@@ -2,9 +2,9 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV["ELEPHANTO_USERNAME"] %>
-  password: <%= ENV["ELEPHANTO_PASSWORD"] %>
-  host: localhost
+  username: <%= ENV["ELEPHANTO_USERNAME"] || ENV["PGUSER"] || "postgres" %>
+  password: <%= ENV["ELEPHANTO_PASSWORD"] || ENV["PGPASSWORD"] %>
+  host: <%= ENV["ELEPHANTO_HOST"] || ENV["PGHOST"] || "localhost" %>
 
 development:
   primary:

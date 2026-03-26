@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 class SpacedRepetitionService
-  W = [0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61]
+  W = [ 0.4, 0.6, 2.4, 5.8, 4.93, 0.94, 0.86, 0.01, 1.49, 0.14, 0.94, 2.18, 0.05, 0.34, 1.26, 0.29, 2.61 ]
 
   def self.calculate(difficulty_input, current_data, rigor_factor = 9.0)
     rigor_factor = rigor_factor.to_f
