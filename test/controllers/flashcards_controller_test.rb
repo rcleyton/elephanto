@@ -71,6 +71,25 @@ class FlashcardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 1, ReviewSession.order(:id).last.total_count
   end
 
+  test "does not create a second review session when one is already active" do
+    first_flashcard = @deck.flashcards.create!(front: "First", back: "Card")
+    second_flashcard = @deck.flashcards.create!(front: "Second", back: "Card")
+
+    first_flashcard.update_column(:fsrs_state, first_flashcard.fsrs_state.merge("due" => 2.hours.ago.utc.iso8601))
+    second_flashcard.update_column(:fsrs_state, second_flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+
+    assert_difference("ReviewSession.count", 1) do
+      get review_deck_path(@deck)
+    end
+
+    assert_no_difference("ReviewSession.count") do
+      get review_deck_path(@deck)
+    end
+
+    assert_redirected_to deck_flashcard_path(@deck, first_flashcard)
+    assert_equal I18n.t("messages.review_session_already_in_progress"), flash[:alert]
+  end
+
   test "blocks access to a flashcard that is not the current item in the review queue" do
     first_flashcard = @deck.flashcards.create!(front: "First", back: "Card")
     second_flashcard = @deck.flashcards.create!(front: "Second", back: "Card")

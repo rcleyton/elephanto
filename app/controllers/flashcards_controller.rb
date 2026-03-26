@@ -45,6 +45,12 @@ class FlashcardsController < ApplicationController
   end
 
   def start_review
+    active_queue = Array(session[:review_queue]).map(&:to_i)
+    if active_queue.any?
+      return redirect_to deck_flashcard_path(@deck, active_queue.first),
+        alert: t("messages.review_session_already_in_progress")
+    end
+
     due_ids = @deck.flashcards
       .due
       .order(Arel.sql("fsrs_state->>'due' ASC"))
