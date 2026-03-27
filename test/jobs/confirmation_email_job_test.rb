@@ -1,6 +1,5 @@
 require "test_helper"
 
-
 class ConfirmationEmailJobTest < ActiveJob::TestCase
   include ActionMailer::TestHelper
 
@@ -19,5 +18,11 @@ class ConfirmationEmailJobTest < ActiveJob::TestCase
     mail = ActionMailer::Base.deliveries.last
     assert_equal [ user.email_address ], mail.to
     assert_match /Confirme sua conta/i, mail.subject
+  end
+
+  test "falha quando usuario nao existe" do
+    assert_raises(ActiveRecord::RecordNotFound) do
+      ConfirmationEmailJob.perform_now(-1)
+    end
   end
 end
