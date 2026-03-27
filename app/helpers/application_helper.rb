@@ -54,6 +54,14 @@ module ApplicationHelper
       .select { |str| str =~ /[1-9]/ }.join(" ")
   end
 
+  def public_url_options
+    {
+      host: request.host.sub(/\Aapp\./, ""),
+      protocol: request.protocol.delete_suffix("://"),
+      port: request.optional_port
+    }.compact
+  end
+
   def page_header(options = {})
     HeaderPresenter.new(self, options).render
   end

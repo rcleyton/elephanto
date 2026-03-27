@@ -192,7 +192,7 @@
               <label for="user_terms_of_service" class="text-sm text-slate-600 leading-tight">
                 Eu li e aceito os
                 <%= link_to "Termos de Uso",
-                terms_url(host: Rails.env.development? ? "localhost" : "getelephanto.com"),
+                terms_url(**public_url_options),
                 target: "_blank",
                 class: "text-[#60c2a6] font-bold hover:underline" %>
               </label>

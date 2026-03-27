@@ -26,6 +26,17 @@ class UserTest < ActiveSupport::TestCase
       assert_not @user.valid?
       assert_includes @user.errors[:email_address], I18n.t("errors.messages.invalid")
     end
+
+    it "normalizes email before validation" do
+      user = User.create!(
+        email_address: "  NEWUSER@Example.COM ",
+        password: "Password@1",
+        password_confirmation: "Password@1",
+        terms_of_service: true
+      )
+
+      assert_equal "newuser@example.com", user.email_address
+    end
   end
 
   context "password" do
@@ -55,6 +66,38 @@ class UserTest < ActiveSupport::TestCase
       @user.password_confirmation = "Password1"
       assert_not @user.valid?
       assert_includes @user.errors[:password], I18n.t("errors.messages.password_not_complex")
+    end
+
+    it "does not require password on unrelated updates" do
+      @user.email_address = "updated@elephanto.com"
+
+      assert @user.valid?
+    end
+  end
+
+  context "confirmation" do
+    it "generates confirmation token on create" do
+      user = User.create!(
+        email_address: "confirm@elephanto.com",
+        password: "Password@1",
+        password_confirmation: "Password@1",
+        terms_of_service: true
+      )
+
+      assert user.confirmation_token.present?
+      assert user.confirmation_sent_at.present?
+      refute user.confirmed?
+    end
+
+    it "marks account as confirmed" do
+      @user.update_columns(verified: false, confirmed_at: nil, confirmation_token: "token")
+
+      @user.confirm!
+      @user.reload
+
+      assert @user.verified?
+      assert @user.confirmed_at.present?
+      assert_nil @user.confirmation_token
     end
   end
 end
