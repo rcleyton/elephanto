@@ -11,7 +11,8 @@ Minitest::Reporters.use! Minitest::Reporters::ProgressReporter.new
 
 module ActiveSupport
   class TestCase
-    parallelize(workers: :number_of_processors)
+    parallel_workers = ENV.fetch("PARALLEL_WORKERS", "1").to_i
+    parallelize(workers: parallel_workers) if parallel_workers > 1
 
     fixtures :all
 

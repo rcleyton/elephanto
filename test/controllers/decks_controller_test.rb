@@ -24,9 +24,10 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
   it "should create deck" do
     new_deck_name        = "Programming Concepts"
     new_deck_description = "Fundamental programming concepts and definitions"
+    new_deck_tag         = "Programming"
 
     assert_difference("Deck.count") do
-      post decks_url, params: { deck: { description: new_deck_description, name: new_deck_name, user_id: @user } }
+      post decks_url, params: { deck: { description: new_deck_description, name: new_deck_name, tag: new_deck_tag, user_id: @user } }
     end
 
     assert_redirected_to deck_url(Deck.last)
@@ -39,7 +40,7 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
 
   it "user cannot access another deck" do
     other_user = users(:two)
-    other_deck = other_user.decks.create!(name: "Private", description: "Access denied")
+    other_deck = other_user.decks.create!(name: "Private", description: "Access denied", tag: "Private")
 
     get deck_url(other_deck)
 

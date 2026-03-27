@@ -34,7 +34,26 @@ jobs:
           bundler-cache: true
 
       - name: Importmap audit
-        run: bin/importmap audit
+        run: |
+          for attempt in 1 2 3; do
+            output="$(bin/importmap audit 2>&1)"
+            status=$?
+            printf '%s\n' "$output"
+
+            if [ "$status" -eq 0 ]; then
+              exit 0
+            fi
+
+            if ! printf '%s\n' "$output" | grep -q "Unexpected transport error"; then
+              exit "$status"
+            fi
+
+            if [ "$attempt" -eq 3 ]; then
+              exit "$status"
+            fi
+
+            sleep 5
+          done
 
   lint:
     runs-on: ubuntu-latest
@@ -59,7 +78,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: app_test
+          POSTGRES_DB: elephanto_test
         ports:
           - 5432:5432
         options: >-
@@ -69,11 +88,16 @@ jobs:
           --health-retries=3
 
     env:
+      CI: true
       RAILS_ENV: test
+      APP_HOST: app.lvh.me
+      APP_PROTOCOL: http
       PGHOST: localhost
       PGUSER: postgres
       PGPASSWORD: postgres
-      DATABASE_URL: postgres://postgres:postgres@localhost:5432/app_test
+      ELEPHANTO_USERNAME: postgres
+      ELEPHANTO_PASSWORD: postgres
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/elephanto_test
 
     steps:
       - name: Install system dependencies
@@ -86,10 +110,18 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set up Chrome
+        id: setup-chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: stable
+
       - name: Prepare database
         run: bin/rails db:prepare
 
       - name: Run tests
+        env:
+          CHROME_BIN: ${{ steps.setup-chrome.outputs.chrome-path }}
         run: |
           bin/rails test
           bin/rails test:system

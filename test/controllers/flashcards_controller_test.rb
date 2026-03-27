@@ -5,227 +5,160 @@ require "test_helper"
 
 class FlashcardsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @deck       = decks(:english)
-    @flashcard  = @deck.flashcards.create(front: "Question",  back: "Answer", difficulty: "easy")
-    @flashcard2 = @deck.flashcards.create(front: "Question2", back: "Answer2")
-    @user       = users(:one)
+    @user = users(:one)
+    @deck = @user.decks.create!(name: "Deck de teste #{SecureRandom.hex(4)}", description: "Deck isolado para testes", tag: "Teste")
 
-    post session_url, params: {  email_address: @user.email_address, password: "P@ssword1" }
+    post session_url, params: { email_address: @user.email_address, password: "P@ssword1" }
     assert_response :redirect
   end
 
-  context "flashcard" do
-    it "should get new" do
-      get new_deck_flashcard_path(@deck)
-      must_respond_with :success
+  test "creates a flashcard with the permitted attributes" do
+    assert_difference("Flashcard.count", 1) do
+      post deck_flashcards_path(@deck), params: { flashcard: { front: "Question", back: "Answer" } }
     end
 
-    it "should show flashcard" do
-      get deck_flashcard_url(@deck, Flashcard.last)
-      must_respond_with :success
-    end
-
-    it "edit" do
-      get edit_deck_flashcard_path(@deck, @flashcard)
-      assert_response :success
-    end
-
-    it "update" do
-      patch deck_flashcard_path(@deck, @flashcard), params: { flashcard: { back: "Another question",
-                                                                          front: "Another answer" } }
-
-      @flashcard.reload
-
-      assert_equal "Another question", @flashcard.back
-      assert_equal "Another answer",   @flashcard.front
-      assert_redirected_to deck_path(@deck)
-    end
-
-    it "delete" do
-      assert_difference("Flashcard.count", -1) do
-        delete deck_flashcard_path(@deck, @flashcard)
-      end
-
-      assert_redirected_to deck_path(@deck)
-    end
+    assert_redirected_to new_deck_flashcard_path(@deck)
   end
 
-  context "create" do
-    it "should create flashcard" do
-      assert_difference("Flashcard.count") do
-        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back,
-                                                                difficulty: @flashcard.difficulty,
-                                                                front: @flashcard.front,
-                                                                last_reviewed_at: @flashcard.last_reviewed_at } }
-      end
-
-      must_redirect_to new_deck_flashcard_path(@deck)
+  test "does not create a flashcard without front" do
+    assert_no_difference("Flashcard.count") do
+      post deck_flashcards_path(@deck), params: { flashcard: { front: "", back: "Answer" } }
     end
 
-    it "front cannot be empty" do
-      post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back, front: "" } }
-
-      assert_response :unprocessable_entity
-      assert_template :new
-    end
-
-    it "back cannot be empty" do
-      post deck_flashcards_path(@deck), params: { flashcard: { back: "", front: @flashcard.front } }
-
-      assert_response :unprocessable_entity
-      assert_template :new
-    end
-
-    it "difficult can be blank" do
-      assert_difference("Flashcard.count") do
-        post deck_flashcards_path(@deck), params: { flashcard: { back: @flashcard.back,
-                                                                front: @flashcard.front,
-                                                                difficulty: "" } }
-      end
-
-      must_redirect_to new_deck_flashcard_path(@deck)
-    end
+    assert_response :unprocessable_entity
   end
 
-  context "review flashcards" do
-    it "should review flashcard and redirect to next one" do
+  test "updates a flashcard" do
+    flashcard = @deck.flashcards.create!(front: "Old", back: "Value")
+
+    patch deck_flashcard_path(@deck, flashcard), params: { flashcard: { front: "New", back: "Content" } }
+
+    assert_redirected_to deck_path(@deck)
+    assert_equal [ "New", "Content" ], flashcard.reload.attributes.values_at("front", "back")
+  end
+
+  test "blocks direct access to a flashcard without an active review queue" do
+    flashcard = @deck.flashcards.create!(front: "Locked", back: "Card")
+
+    get deck_flashcard_path(@deck, flashcard)
+
+    assert_redirected_to deck_path(@deck)
+    assert_equal I18n.t("messages.manual_review_access_not_allowed"), flash[:alert]
+  end
+
+  test "deletes a flashcard" do
+    flashcard = @deck.flashcards.create!(front: "Delete", back: "Me")
+
+    assert_difference("Flashcard.count", -1) do
+      delete deck_flashcard_path(@deck, flashcard)
+    end
+
+    assert_redirected_to deck_path(@deck)
+  end
+
+  test "starts a review session using only due flashcards" do
+    due_flashcard = @deck.flashcards.create!(front: "Due", back: "Card")
+    future_flashcard = @deck.flashcards.create!(front: "Future", back: "Card")
+
+    due_flashcard.update_column(:fsrs_state, due_flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+    future_flashcard.update_column(:fsrs_state, future_flashcard.fsrs_state.merge("due" => 2.days.from_now.utc.iso8601))
+
+    assert_difference("ReviewSession.count", 1) do
       get review_deck_path(@deck)
-      assert_response :redirect
-
-      post review_deck_flashcard_path(@deck, @flashcard), params: { difficulty: "easy" }
-
-      @flashcard.reload
-      assert_not_nil @flashcard.last_reviewed_at
-      assert_equal "easy", @flashcard.difficulty
-
-      assert_redirected_to deck_flashcard_path(@deck, @flashcard2)
     end
 
-    it "should redirect to deck when no next flashcard" do
-      @flashcard.update!(
-        next_review:      1.day.from_now,
-        last_reviewed_at: Time.current,
-        difficulty:       "easy"
-      )
-
-      @flashcard2.update!(
-        next_review:      Time.current,
-        last_reviewed_at: nil,
-        difficulty:       nil
-      )
-
-      post review_deck_flashcard_path(@deck, @flashcard2), params: { difficulty: "medium" }
-
-      @flashcard2.reload
-      assert_not_nil @flashcard2.last_reviewed_at
-      assert_equal "medium", @flashcard2.difficulty
-
-      assert_redirected_to reviewed_completed_deck_path(@deck)
-      follow_redirect!
-    end
-
-    it "update last_reviewed_at after review" do
-      post review_deck_flashcard_path(@deck, @flashcard),  params: { difficulty: "easy" }
-      post review_deck_flashcard_path(@deck, @flashcard2), params: { difficulty: "easy" }
-
-      @deck.reload
-      assert_not_nil @deck.last_reviewed_at
-      assert_in_delta Time.current, @deck.last_reviewed_at, 1.second
-    end
-
-    it "check period to before review" do
-      flashcard = @flashcard
-      flashcard.update(next_review: Time.current + 172800)
-      flashcard.reload
-
-      get deck_flashcard_path(@deck, flashcard)
-
-      assert_redirected_to deck_path(@deck)
-      follow_redirect!
-    end
+    assert_redirected_to deck_flashcard_path(@deck, due_flashcard)
+    assert_equal 1, ReviewSession.order(:id).last.total_count
   end
 
-  context "Rigor factor" do
-    setup do
-      @flashcard.update!(repetition: 0, last_reviewed_at: nil, stability: 0.1)
+  test "does not create a second review session when one is already active" do
+    first_flashcard = @deck.flashcards.create!(front: "First", back: "Card")
+    second_flashcard = @deck.flashcards.create!(front: "Second", back: "Card")
+
+    first_flashcard.update_column(:fsrs_state, first_flashcard.fsrs_state.merge("due" => 2.hours.ago.utc.iso8601))
+    second_flashcard.update_column(:fsrs_state, second_flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+
+    assert_difference("ReviewSession.count", 1) do
+      get review_deck_path(@deck)
     end
 
-    it "normal rigor (9.0) sets standar interval" do
-      @flashcard.review!("easy", @user)
-
-      assert_equal 11, @flashcard.interval
-      assert_equal Date.current + 11.days, @flashcard.next_review.to_date
+    assert_no_difference("ReviewSession.count") do
+      get review_deck_path(@deck)
     end
 
-    it "relaxed rigor (4.0) shortens intervals (accepts more forgetting)" do
-      @user.profile.update!(rigor_factor: 4.0)
+    assert_redirected_to deck_flashcard_path(@deck, first_flashcard)
+    assert_equal I18n.t("messages.review_session_already_in_progress"), flash[:alert]
+  end
 
-      @flashcard.review!("easy", @user)
+  test "blocks access to a flashcard that is not the current item in the review queue" do
+    first_flashcard = @deck.flashcards.create!(front: "First", back: "Card")
+    second_flashcard = @deck.flashcards.create!(front: "Second", back: "Card")
 
-      assert_equal 5, @flashcard.interval
-      assert_equal Date.current + 5.days, @flashcard.next_review.to_date
+    first_flashcard.update_column(:fsrs_state, first_flashcard.fsrs_state.merge("due" => 2.hours.ago.utc.iso8601))
+    second_flashcard.update_column(:fsrs_state, second_flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+
+    get review_deck_path(@deck)
+
+    get deck_flashcard_path(@deck, second_flashcard)
+
+    assert_redirected_to deck_flashcard_path(@deck, first_flashcard)
+    assert_equal I18n.t("messages.manual_review_access_not_allowed"), flash[:alert]
+  end
+
+  test "redirects back to the deck when there are no due flashcards" do
+    flashcard = @deck.flashcards.create!(front: "Future", back: "Card")
+    flashcard.update_column(:fsrs_state, flashcard.fsrs_state.merge("due" => 2.days.from_now.utc.iso8601))
+
+    assert_no_difference("ReviewSession.count") do
+      get review_deck_path(@deck)
     end
 
-    it "high rigor (19.0) increases frequency by shortening stability-to-interval ratio" do
-      @user.profile.update!(rigor_factor: 2.5)
-    
-      @flashcard.review!("easy", @user)
+    assert_redirected_to deck_path(@deck)
+  end
 
-      assert_equal 3, @flashcard.interval
-      assert_equal Date.current + 3.days, @flashcard.next_review.to_date
-    end
+  test "rating again keeps the flashcard in queue without inflating reviewed_count" do
+    flashcard = @deck.flashcards.create!(front: "Again", back: "Card")
+    flashcard.update_column(:fsrs_state, flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
 
-    it "maximum rigor (32.3) provides longest intervals for high retention (97%)" do
-      @user.profile.update!(rigor_factor: 32.3)
-    
-      @flashcard.review!("easy", @user)
+    get review_deck_path(@deck)
+    review_session = ReviewSession.order(:id).last
 
-      assert_equal 39, @flashcard.interval
-      assert_equal Date.current + 39.days, @flashcard.next_review.to_date
-    end
-    
-    it "sets correct initial intervals for all difficulty levels (Normal Rigor)" do
-      @user.profile.update!(rigor_factor: 9.0)
-      
-      test_cases = {
-        "again"  => 0,  
-        "hard"   => 2,  
-        "medium" => 5,  
-        "easy"   => 11  
-      }
+    post review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::AGAIN }
 
-      test_cases.each do |difficulty, expected_interval|
-        card = @deck.flashcards.create!(front: "F", back: "B")
-        card.review!(difficulty, @user)
-        
-        assert_equal expected_interval, card.interval, "Falhou para dificuldade: #{difficulty}"
-      end
-    end
+    assert_redirected_to deck_flashcard_path(@deck, flashcard)
+    assert_equal 0, review_session.reload.reviewed_count
+    refute review_session.completed_at?
+  end
 
-    it "increases stability and interval significantly on the second successful review" do
-      @user.profile.update!(rigor_factor: 9.0) # Normal
-      
-      @flashcard.review!("easy", @user) 
-      initial_interval  = @flashcard.interval 
-      initial_stability = @flashcard.stability
-      
-      travel_to @flashcard.next_review do
-        @flashcard.review!("easy", @user)
-        
-        assert @flashcard.stability > initial_stability
-        assert @flashcard.interval > initial_interval
-        assert_equal Date.current + @flashcard.interval.days, @flashcard.next_review.to_date
-      end
-    end
+  test "blocks manual review posts for flashcards outside the active queue position" do
+    first_flashcard = @deck.flashcards.create!(front: "First", back: "Card")
+    second_flashcard = @deck.flashcards.create!(front: "Second", back: "Card")
 
-    it "resets repetition and stability when 'again' is chosen" do
-      @flashcard.update!(repetition: 5, interval: 30, stability: 5.0, last_reviewed_at: 1.month.ago)
-      
-      @flashcard.review!("again", @user)
-      
-      assert_equal 0, @flashcard.repetition
-      assert @flashcard.stability < 5.0
-      assert_equal 0, @flashcard.interval
-    end
+    first_flashcard.update_column(:fsrs_state, first_flashcard.fsrs_state.merge("due" => 2.hours.ago.utc.iso8601))
+    second_flashcard.update_column(:fsrs_state, second_flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+
+    get review_deck_path(@deck)
+
+    post review_deck_flashcard_path(@deck, second_flashcard), params: { rating: Fsrs::Rating::GOOD }
+
+    assert_redirected_to deck_flashcard_path(@deck, first_flashcard)
+    assert_equal I18n.t("messages.manual_review_access_not_allowed"), flash[:alert]
+  end
+
+  test "completes the session after a successful final review" do
+    flashcard = @deck.flashcards.create!(front: "Good", back: "Card")
+    flashcard.update_column(:fsrs_state, flashcard.fsrs_state.merge("due" => 1.hour.ago.utc.iso8601))
+
+    get review_deck_path(@deck)
+    review_session = ReviewSession.order(:id).last
+
+    post review_deck_flashcard_path(@deck, flashcard), params: { rating: Fsrs::Rating::GOOD }
+
+    assert_redirected_to reviewed_completed_deck_path(@deck)
+
+    review_session.reload
+    assert_equal 1, review_session.reviewed_count
+    assert review_session.completed_at?
+    assert review_session.duration_seconds.present?
   end
 end

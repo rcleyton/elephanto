@@ -33,6 +33,8 @@ pt-BR:
     user_not_found_or_confirmed: Usuário não encontrado ou já confirmado.
     confirmation_email_recently_sent: Você já solicitou um e-mail de verificação recentemente. Tente novamente em alguns minutos.
     fill_all_fields: Preencha todos os campos!
+    manual_review_access_not_allowed: A revisão manual de flashcards fora da sequência não é permitida.
+    review_session_already_in_progress: Você já possui uma sessão de revisão em andamento neste navegador.
   actions:
     new: Novo
     edit: Editar

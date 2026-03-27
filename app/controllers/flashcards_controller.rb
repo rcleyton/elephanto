@@ -4,6 +4,7 @@
 class FlashcardsController < ApplicationController
   before_action :set_deck
   before_action :set_flashcard, only: %i[show edit update destroy review]
+  before_action :ensure_review_flow!, only: %i[show review]
 
   def show
     render layout: "flashcard"
@@ -44,7 +45,16 @@ class FlashcardsController < ApplicationController
   end
 
   def start_review
-    due_ids = @deck.flashcards.all.select(&:due?).map(&:id)
+    active_queue = Array(session[:review_queue]).map(&:to_i)
+    if active_queue.any?
+      return redirect_to deck_flashcard_path(@deck, active_queue.first),
+        alert: t("messages.review_session_already_in_progress")
+    end
+
+    due_ids = @deck.flashcards
+      .due
+      .order(Arel.sql("fsrs_state->>'due' ASC"))
+      .pluck(:id)
 
     if due_ids.any?
       session[:review_queue] = due_ids
@@ -96,5 +106,19 @@ class FlashcardsController < ApplicationController
 
   def flashcard_params
     params.require(:flashcard).permit(:front, :back)
+  end
+
+  def ensure_review_flow!
+    queue = Array(session[:review_queue]).map(&:to_i)
+    return if queue.first == @flashcard.id
+
+    redirect_target =
+      if queue.any?
+        deck_flashcard_path(@deck, queue.first)
+      else
+        deck_path(@deck)
+      end
+
+    redirect_to redirect_target, alert: t("messages.manual_review_access_not_allowed")
   end
 end

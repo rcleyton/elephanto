@@ -9,15 +9,16 @@ class ReviewSessionService
 
   def process_review(flashcard, rating, session_store)
     queue = session_store[:review_queue] || []
+    rating_value = rating.to_i
 
     flashcard.rate!(rating)
 
     queue.delete(flashcard.id)
 
-    queue << flashcard.id if rating.to_i == Fsrs::Rating::AGAIN
+    queue << flashcard.id if rating_value == Fsrs::Rating::AGAIN
 
     if (review_session = ReviewSession.find_by(id: session_store[:review_session_id]))
-      review_session.increment!(:reviewed_count)
+      review_session.increment!(:reviewed_count) unless rating_value == Fsrs::Rating::AGAIN
 
       if queue.empty?
         complete_session(review_session)
