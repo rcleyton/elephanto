@@ -18,6 +18,10 @@ Rails.application.routes.draw do
     get  "/sign_up", to: "users#new"
     post "/sign_up", to: "users#create"
 
+    namespace :admin do
+      get "logs", to: "logs#index"
+    end
+
     resource  :session
     resources :passwords, param: :token
     resources :profiles, only: %i[new create show edit update]
