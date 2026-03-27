@@ -1,0 +1,96 @@
+<div class="mx-auto max-w-7xl space-y-6">
+  <section class="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
+    <div class="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div class="space-y-2">
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">Observabilidade</p>
+        <h1 class="text-3xl font-semibold text-slate-900">Logs do servidor</h1>
+        <p class="max-w-3xl text-sm text-slate-600">
+          Painel enxuto para consulta rapida de erros. Em producao, a tela prioriza logs de falha da aplicacao e do
+          servidor web, evitando fontes menos relevantes para diagnostico imediato.
+        </p>
+      </div>
+      <div class="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs text-amber-900">
+        Restrito a administradores. Arquivos compactados sao listados, mas nao sao descompactados inline.
+      </div>
+    </div>
+  </section>
+
+  <section class="grid gap-4 md:grid-cols-3">
+    <% @log_groups.each do |group_name, logs| %>
+      <div class="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <p class="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500"><%= group_name %></p>
+        <p class="mt-2 text-2xl font-semibold text-slate-900"><%= logs.size %> fontes</p>
+        <p class="mt-1 text-sm text-slate-600"><%= logs.count { |log| log[:available] } %> disponiveis para leitura imediata</p>
+      </div>
+    <% end %>
+  </section>
+
+  <% @log_groups.each do |group_name, logs| %>
+    <section class="space-y-4">
+      <div>
+        <h2 class="text-xl font-semibold text-slate-900"><%= group_name %></h2>
+        <p class="text-sm text-slate-600">
+          Ambientes: <%= logs.map { |log| log[:environment] }.uniq.join(", ") %>
+        </p>
+      </div>
+
+      <div class="grid gap-4 lg:grid-cols-2">
+        <% logs.each do |log| %>
+          <article class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+            <div class="border-b border-slate-200 bg-slate-50 px-5 py-4">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <div class="mb-2 flex flex-wrap items-center gap-2">
+                    <h3 class="text-lg font-semibold text-slate-900"><%= log[:name] %></h3>
+                    <span class="rounded-full bg-sky-100 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-sky-800"><%= log[:environment] %></span>
+                  </div>
+                  <p class="text-sm text-slate-600"><%= log[:description] %></p>
+                </div>
+                <span class="<%= log[:available] ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-700' %> rounded-full px-3 py-1 text-xs font-semibold">
+                  <%= log[:available] ? "Disponivel" : "Indisponivel" %>
+                </span>
+              </div>
+
+              <dl class="mt-4 grid gap-3 text-xs text-slate-500 sm:grid-cols-3">
+                <div>
+                  <dt class="font-semibold uppercase tracking-wide text-slate-400">Arquivo em uso</dt>
+                  <dd class="mt-1 break-all text-slate-700"><%= log[:path] %></dd>
+                </div>
+                <div>
+                  <dt class="font-semibold uppercase tracking-wide text-slate-400">Atualizado</dt>
+                  <dd class="mt-1 text-slate-700">
+                    <%= log[:updated_at]&.strftime("%d/%m/%Y %H:%M:%S") || "Nao disponivel" %>
+                  </dd>
+                </div>
+                <div>
+                  <dt class="font-semibold uppercase tracking-wide text-slate-400">Tamanho</dt>
+                  <dd class="mt-1 text-slate-700">
+                    <%= log[:size] ? number_to_human_size(log[:size]) : "Nao disponivel" %>
+                  </dd>
+                </div>
+              </dl>
+
+              <div class="mt-4">
+                <h4 class="text-xs font-semibold uppercase tracking-wide text-slate-400">Arquivos encontrados</h4>
+                <div class="mt-2 space-y-2">
+                  <% log[:files].each do |file| %>
+                    <div class="flex flex-col gap-1 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-xs text-slate-600 sm:flex-row sm:items-center sm:justify-between">
+                      <span class="break-all font-medium text-slate-700"><%= file[:path] %></span>
+                      <span class="shrink-0">
+                        <%= [file[:compressed] ? "compactado" : "texto", (file[:size] ? number_to_human_size(file[:size]) : nil), file[:updated_at]&.strftime("%d/%m/%Y %H:%M:%S")].compact.join(" • ") %>
+                      </span>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-slate-950 p-0">
+              <pre class="h-[28rem] overflow-auto px-5 py-4 font-mono text-xs leading-6 text-slate-100"><%= log[:lines].join("\n") %></pre>
+            </div>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
+</div>
