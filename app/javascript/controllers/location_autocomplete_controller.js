@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ["input", "results", "country"]
 
   connect() {
-    this.mapboxKey = this.element.dataset.mapboxKey
+    this.mapboxKey = this.element.dataset.mapboxKey || ""
     this.timer = null
     this.selectedIndex = -1
     this.places = []
@@ -22,6 +22,11 @@ export default class extends Controller {
     const query = this.inputTarget.value.trim().toLowerCase()
 
     clearTimeout(this.timer)
+
+    if (!this.mapboxKey) {
+      this.hide()
+      return
+    }
 
     if (query.length < 2) {
       this.hide()

@@ -173,7 +173,7 @@
     <div
       class="space-y-2"
       data-controller="location-autocomplete"
-      data-mapbox-key="<%= ENV.fetch("MAPBOX_PUBLIC_KEY") %>"
+      data-mapbox-key="<%= ENV["MAPBOX_PUBLIC_KEY"] %>"
     >
       <%= form.label :location,
                  "Localização",
