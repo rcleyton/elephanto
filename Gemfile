@@ -9,7 +9,6 @@ gem "fsrs", git: "https://github.com/open-spaced-repetition/rb-fsrs"
 gem "groupdate"
 gem "importmap-rails"
 gem "jbuilder"
-gem "kamal", require: false
 gem "kaminari"
 gem "pg", "~> 1.1"
 gem "propshaft"
@@ -22,7 +21,6 @@ gem "stimulus-rails"
 gem "stringio", "3.1.1"
 gem "tailwindcss-rails", "~> 4.2"
 gem "tailwindcss-ruby", "~> 4.1"
-gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
