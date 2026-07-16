@@ -39,6 +39,8 @@ group :development do
   gem "guard-minitest"
   gem "letter_opener"
   gem "web-console"
+  gem "ed25519", "~> 1.3"
+  gem "bcrypt_pbkdf", "~> 1.1"
 end
 
 group :test do

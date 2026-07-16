@@ -89,6 +89,9 @@ GEM
     ast (2.4.3)
     base64 (0.3.0)
     bcrypt (3.1.20)
+    bcrypt_pbkdf (1.1.2)
+    bcrypt_pbkdf (1.1.2-arm64-darwin)
+    bcrypt_pbkdf (1.1.2-x86_64-darwin)
     benchmark (0.4.0)
     bigdecimal (3.1.9)
     bindex (0.8.1)
@@ -138,6 +141,7 @@ GEM
       dotenv (= 3.1.8)
       railties (>= 6.1)
     drb (2.2.1)
+    ed25519 (1.4.0)
     erb (5.0.1)
     erb-formatter (0.7.3)
       syntax_tree (~> 6.0)
@@ -479,6 +483,7 @@ PLATFORMS
 DEPENDENCIES
   actionview-encoded_mail_to
   bcrypt (~> 3.1)
+  bcrypt_pbkdf (~> 1.1)
   bootsnap
   brakeman
   capistrano
@@ -489,6 +494,7 @@ DEPENDENCIES
   chartkick
   debug
   dotenv-rails
+  ed25519 (~> 1.3)
   erb-formatter (~> 0.7.3)
   fsrs!
   groupdate
