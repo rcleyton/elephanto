@@ -6,6 +6,7 @@ class Flashcard < ApplicationRecord
   validates :front, :back, presence: true
 
   after_initialize :set_default_fsrs_state, if: :new_record?
+  before_validation :normalize_blank_back
   before_validation :set_default_fsrs_state
 
   scope :new_state,        -> { where("fsrs_state->>'state' = ?", "0") }
@@ -65,6 +66,11 @@ class Flashcard < ApplicationRecord
   end
 
   private
+
+  def normalize_blank_back
+    text = ActionView::Base.full_sanitizer.sanitize(back.to_s).delete("\u200B")
+    self.back = "" if text.blank?
+  end
 
   def normalized_fsrs_state
     defaults = default_fsrs_state

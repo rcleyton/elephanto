@@ -32,16 +32,49 @@
       <span class="text-xs text-slate-400">A resposta ou explicação detalhada</span>
     </div>
 
-    <div class="relative group">
-      <div
-        class="absolute left-0 top-4 flex items-start pl-4 text-slate-400
-          group-focus-within:text-[#60c2a6] transition-colors">
-        <span class="material-symbols-outlined text-xl">flip_to_back</span>
+    <div class="space-y-2" data-controller="rich-text">
+      <div class="flex flex-wrap gap-1 px-1" aria-label="Formatação do texto">
+        <button type="button" data-action="pointerdown->rich-text#rememberSelection click->rich-text#format" data-command="bold" class="rich-text-toolbar-button" title="Negrito" aria-label="Negrito">
+          <span class="material-symbols-outlined text-base">format_bold</span>
+        </button>
+        <button type="button" data-action="pointerdown->rich-text#rememberSelection click->rich-text#format" data-command="italic" class="rich-text-toolbar-button" title="Itálico" aria-label="Itálico">
+          <span class="material-symbols-outlined text-base">format_italic</span>
+        </button>
+        <button type="button" data-action="pointerdown->rich-text#rememberSelection click->rich-text#format" data-command="underline" class="rich-text-toolbar-button" title="Sublinhado" aria-label="Sublinhado">
+          <span class="material-symbols-outlined text-base">format_underlined</span>
+        </button>
+        <button type="button" data-action="pointerdown->rich-text#rememberSelection click->rich-text#format" data-command="strikeThrough" class="rich-text-toolbar-button" title="Tachado" aria-label="Tachado">
+          <span class="material-symbols-outlined text-base">format_strikethrough</span>
+        </button>
+        <button type="button" data-action="pointerdown->rich-text#rememberSelection click->rich-text#format" data-command="insertUnorderedList" class="rich-text-toolbar-button" title="Lista com marcadores" aria-label="Lista com marcadores">
+          <span class="material-symbols-outlined text-base">format_list_bulleted</span>
+        </button>
+        <button type="button" data-action="pointerdown->rich-text#rememberSelection click->rich-text#format" data-command="insertOrderedList" class="rich-text-toolbar-button" title="Lista numerada" aria-label="Lista numerada">
+          <span class="material-symbols-outlined text-base">format_list_numbered</span>
+        </button>
       </div>
-      <%= form.text_area :back,
-                      rows: 3,
-                      placeholder: t("placeholders.flashcard.back_flashcard"),
-                      class: "form-textarea #{error_class(flashcard, :back)}" %>
+
+      <div class="relative group">
+        <div
+          class="absolute left-0 top-4 z-10 flex items-start pl-4 text-slate-400 pointer-events-none
+            group-focus-within:text-[#60c2a6] transition-colors"
+        >
+          <span class="material-symbols-outlined text-xl">flip_to_back</span>
+        </div>
+        <%= form.text_area :back,
+                            data: { rich_text_target: "input" },
+                            class: "hidden" %>
+        <div
+          contenteditable="true"
+          role="textbox"
+          aria-multiline="true"
+          aria-label="<%= Flashcard.human_attribute_name(:back) %>"
+          data-rich-text-target="editor"
+          data-action="input->rich-text#sync blur->rich-text#sync keyup->rich-text#rememberSelection mouseup->rich-text#rememberSelection"
+          data-placeholder="<%= t("placeholders.flashcard.back_flashcard") %>"
+          class="form-input rich-text-editor min-h-32 <%= error_class(flashcard, :back) %>"
+        ></div>
+      </div>
     </div>
     <% if flashcard.errors[:back].any? %>
       <p class="text-xs font-bold text-red-500 ml-1 mt-1 flex items-center gap-1">

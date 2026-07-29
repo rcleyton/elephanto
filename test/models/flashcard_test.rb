@@ -14,6 +14,13 @@ describe Flashcard do
     assert flashcard.valid?
   end
 
+  it "rejects an answer containing only formatting markup" do
+    flashcard = Flashcard.new(deck: @deck, front: "Question", back: "<br>")
+
+    refute flashcard.valid?
+    assert_includes flashcard.errors[:back], "não pode ficar em branco"
+  end
+
   it "sets a default fsrs_state for new records" do
     flashcard = Flashcard.new(deck: @deck, front: "Question", back: "Answer")
 
