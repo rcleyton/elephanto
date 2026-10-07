@@ -53,6 +53,67 @@ class DecksControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "toggles the current user's own deck favorite on and off" do
+    patch toggle_favorite_deck_url(@deck)
+
+    assert_redirected_to decks_url
+    assert @deck.reload.favorite?
+
+    patch toggle_favorite_deck_url(@deck)
+
+    assert_redirected_to decks_url
+    refute @deck.reload.favorite?
+  end
+
+  test "rejects a forged favorite request for another user's deck" do
+    other_deck = decks(:chemical)
+
+    [ false, true ].each do |favorite|
+      other_deck.update!(favorite: favorite)
+
+      patch toggle_favorite_deck_url(other_deck)
+
+      assert_redirected_to decks_url
+      assert_equal I18n.t("messages.render_not_found"), flash[:alert]
+      assert_equal favorite, other_deck.reload.favorite?
+    end
+  end
+
+  test "rejects a forged Turbo favorite request for another user's deck" do
+    other_deck = decks(:chemical)
+
+    patch toggle_favorite_deck_url(other_deck), as: :turbo_stream
+
+    assert_redirected_to decks_url
+    assert_equal I18n.t("messages.render_not_found"), flash[:alert]
+    refute other_deck.reload.favorite?
+  end
+
+  test "shows the favorites empty state even when another user has favorites" do
+    @deck.update!(favorite: true)
+    decks(:chemical).update!(favorite: true)
+
+    patch toggle_favorite_deck_url(@deck), params: { filter: "favorites" }, as: :turbo_stream
+
+    assert_response :success
+    refute @deck.reload.favorite?
+    assert decks(:chemical).reload.favorite?
+    assert_select "turbo-stream[action='remove'][target='#{ActionView::RecordIdentifier.dom_id(@deck)}']"
+    assert_select "turbo-stream[action='replace'][target='decks_list']", count: 1
+  end
+
+  test "keeps the favorites list when the current user still has a favorite" do
+    @deck.update!(favorite: true)
+    decks(:development).update!(favorite: true)
+
+    patch toggle_favorite_deck_url(@deck), params: { filter: "favorites" }, as: :turbo_stream
+
+    assert_response :success
+    refute @deck.reload.favorite?
+    assert_select "turbo-stream[action='remove'][target='#{ActionView::RecordIdentifier.dom_id(@deck)}']"
+    assert_select "turbo-stream[action='replace'][target='decks_list']", count: 0
+  end
+
   it "should update deck" do
     patch deck_url(@deck), params: { deck: { description: @deck.description, name: @deck.name } }
     assert_redirected_to deck_url(@deck)

@@ -1,4 +1,4 @@
-server "64.227.52.217", user: "deploy", roles: %w[app db web]
+server ENV.fetch("DEPLOY_HOST"), user: ENV.fetch("DEPLOY_USER"), roles: %w[app db web]
 
 set :branch, "main"
 set :rails_env, "production"

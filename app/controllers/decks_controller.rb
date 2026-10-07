@@ -6,7 +6,7 @@ class DecksController < ApplicationController
   include ProfileRequired
 
   before_action :required_profile, only: [ :new, :create ]
-  before_action :set_deck, only: %i[ show edit update destroy ]
+  before_action :set_deck, only: %i[ show edit update destroy toggle_favorite ]
 
   def index
     @decks = current_user.decks.order(:created_at)
@@ -68,7 +68,6 @@ class DecksController < ApplicationController
   end
 
   def toggle_favorite
-    @deck = Deck.find(params[:id])
     @deck.toggle_favorite!
 
     respond_to do |format|
@@ -78,7 +77,7 @@ class DecksController < ApplicationController
         if params[:filter] == "favorites" && !@deck.favorite?
           streams << turbo_stream.remove(helpers.dom_id(@deck))
 
-          if Deck.favorites.none?
+          if current_user.decks.favorites.none?
             streams << turbo_stream.replace(
               "decks_list",
               partial: "decks/empty_state",

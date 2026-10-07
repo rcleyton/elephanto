@@ -5,7 +5,19 @@ require "test_helper"
 require "minitest/rails/capybara"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  # Capybara.app_host = 'http://app.lvh.me'
+  Capybara.app_host = "http://app.localhost"
+  Capybara.always_include_port = true
+
+  setup do
+    @original_url_options = ApplicationController.default_url_options
+    ApplicationController.default_url_options = @original_url_options.merge(
+      host: "app.localhost", port: Capybara.current_session.server.port
+    )
+  end
+
+  teardown do
+    ApplicationController.default_url_options = @original_url_options
+  end
 
   driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ] do |options|
     options.add_argument("--no-sandbox")
